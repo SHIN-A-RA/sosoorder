@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.storeorder.mapper.ReorderMapper">
+  
+<!-- 
+	<select id="getEmpList" resultType="empVO" parameterType="empVO">
+		SELECT * FROM employees
+		
+		<where>
+		<if test="departmentId != null">
+			department_id = #{departmentId}
+		</if>
+		<if test="employeeId != null">
+			and employee_id = #{employeeId}
+		</if>
+		<if test="salary != null">
+			<![CDATA[and salary < #{salary}]]> 부등호가 아니라 문자열로 처리
+		</if>
+		<if  test="firstName != null">
+			and upper(first_name) like '%' || upper(#{firstName}) || '%'
+		</if>
+		<if test="employeeIds != null">
+			and employee_id in
+				<foreach collection="employeeIds" item="id" open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+		</if>
+		</where>
+		
+		ORDER BY first_name
+	</select> -->
+
+	<insert id="mailInsert" parameterType="reorderVO">
+		INSERT INTO reorder (reorderNum, contents, storeId, reorderDate)
+						VALUES(
+						seq_reorderNum.nextval,
+						#{contents},
+						#{storeId},sysdate)
+								
+	</insert>
+
+ <select id="getmailList" parameterType="reorderVO" resultType="reorderVO">   
+      SELECT * 
+      FROM reorder
+      ORDER BY reorderNum
+   </select>
+
+	<!-- <update id="updateSomething" parameterType="#modelname">
+		UPDATE tablename1
+		SET
+		columnname1=#{param1}
+		WHERE
+		columnname2 = #{param2}
+	</update>
+
+	<delete id="deleteSomething" parameterType="int">
+		DELETE FROM tablename1 WHERE
+		columnname1 = #{param1}
+	</delete> -->
+<!-- 	<select id="getName" resultType="string" parameterType="integer">
+		SELECT first_name FROM employees WHERE employee_id = #{value}
+	</select>
+	
+	<select id="getCnt" resultType="int">
+		SELECT count(*) FROM employees
+	</select>
+		
+	<select id="getEmpMap" resultType="map">
+		SELECT * FROM employees ORDER BY first_name
+	</select>
+	
+	<select id="getDeptEmpCnt" resultType="map">
+		select nvl(to_char(department_id), 'no') "name", count(salary) "cnt"
+		from employees
+		group by department_id
+	</select> -->
+
+</mapper>

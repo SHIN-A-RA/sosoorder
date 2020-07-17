@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.admin.mapper.AdminMapper">
+
+
+
+	<!-- 현재 등록된 메뉴 조회 -->
+	<select id="getMenuList" parameterType="menuVO"
+		resultType="menuVO">
+		SELECT *
+		FROM menu
+		ORDER BY menuNum
+	</select>
+
+	<!-- 메뉴등록 -->
+	<insert id="menuInsert" parameterType="menuVO">
+		INSERT INTO menu
+		(menuNum,
+		menuName,
+		menuPrice,
+		menuImage,
+		menuCategory,
+		menuContents,
+		menuCheck,
+		storeId)
+		VALUES
+		((SELECT NVL(max(menuNum), 0)+1 FROM menu),
+		#{menuName},
+		#{menuPrice},
+		#{menuImage},
+		#{menuCategory},
+		#{menuContents},
+		#{menuCheck},
+		#{storeId})
+	</insert>
+
+	<!-- 메뉴 수정 -->
+	<update id="menuUpdate" parameterType="menuVO">
+		UPDATE menu
+		(menuNum,
+		menuName,
+		menuPrice,
+		menuImage,
+		menuCategory,
+		menuContents,
+		menuCheck,
+		storId)
+		VALUES
+		(#{menuName},
+		#{menuPrice},
+		#{menuImage},
+		#{menuCategory},
+		#{menuContents},
+		#{menuCheck})
+	</update>
+
+	<!-- 메뉴 삭제 -->
+	<delete id="menuDelete" parameterType="menuVO">
+	delete from menu where = "menuName"
+	</delete>
+
+
+</mapper>

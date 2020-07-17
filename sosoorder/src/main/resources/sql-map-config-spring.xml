@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--  	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" /> 
+		 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>  -->
+	<typeAliases>
+		 <typeAlias type="com.dbal.app.emp.EmpVO" alias="empVO"/>
+		 <typeAlias type="com.soso.app.member.service.MemberVO" alias="memberVO"/> 
+		 <typeAlias type="com.soso.app.admin.service.AdminVO" alias="adminVO"/>    
+		 <typeAlias type="com.soso.app.menu.service.MenuVO" alias="MenuVO"/>  
+		 <typeAlias type="com.soso.app.storeorder.service.ReorderVO" alias="ReorderVO"/>  
+	</typeAliases>
+
+</configuration>
