@@ -62,7 +62,7 @@ public class ReorderController {
 	}
 
 	@RequestMapping("sendMailAttach.do")
-	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request) {
+	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO) {
 		//발송이력저장
 		vo.setStoreId("test");
 		reorderService.mailInsert(vo);
@@ -90,10 +90,12 @@ public class ReorderController {
 
 		}
 		mailSender.send(preparators);
-		return "home";
+		
+		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
+		return "mail/mailList";
 	}
 	//목록조회
-	@RequestMapping("mailList")
+	@RequestMapping("mailList.do")
 	public String mailList(Model model, ReorderVO reorderVO) {
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
 		return "mail/mailList";
