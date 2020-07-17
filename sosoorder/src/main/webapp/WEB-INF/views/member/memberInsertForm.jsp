@@ -82,10 +82,12 @@
 				<input type="text" name="pwd" id="pwd" class="form-style"
 					autocomplete="off" onchange="passwordChack()" />
 			</div>
-			<!-- 		<div class="form-item">
-			<p class="formLabel">비밀번호 확인</p>
-			<input type="text" name="pwd2" id="pwd2" class="form-style" autocomplete="off" onchange="passwordChack()" />
-		</div> -->
+			<div class="form-item">
+				<p class="formLabel">비밀번호 확인</p>
+				<input type="text" name="pwd2" id="pwd2" class="form-style"
+					autocomplete="off" onchange="passwordChack()" onkeyup="checkPwd()" />
+			</div>
+			<p><span id="checkPwd"></span></p>
 			<div class="form-item">
 				<p class="formLabel">이메일</p>
 				<input type="email" name="email" id="email" class="form-style"
