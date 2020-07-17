@@ -60,7 +60,7 @@ public class ReorderController {
 
 		return "emp/empList";
 	}
-      
+	
 	@RequestMapping("sendMailAttach.do")
 	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO) {
 		//발송이력저장
