@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="resources/admin/scss/hw.css" rel="stylesheet" type="text/css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="resources/admin/scss/addcss/hw.css" rel="stylesheet" type="text/css">
 
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
@@ -34,6 +35,7 @@ function Show() {
 	}
 
 </script>
+
    <!-- 컨텐츠영역 -->
 
    <div class="div-tt">
@@ -46,13 +48,18 @@ function Show() {
 			     <th class="basic_tb_th_up">주문메뉴</th>
 			     <th class="basic_tb_th_up">수량</th>
 			     <th class="basic_tb_th_up">가격</th>
-			</tr>			
+			</tr>	
+		<%-- <c:forEach items="${menuList}" var="menu">		 --%>
 			<tr>
 			      <td class="basic_tb_td_up">떡볶이</td>
 			      <td class="basic_tb_td_up">1개</td>
 			      <td class="basic_tb_td_up">10,000</td>
+		<%-- 	  <td>${menu.menuName}</td>
+				  <td> ${menu.menuCount}</td> 
+				  <td>${menu.menuPrice}</td> --%>
 			      
-			</tr>			
+			</tr>
+		<%-- </c:forEach>		 --%>	
 				<tr>
 					<td class="basic_tb_td_down" colspan="3">총 추문금액: "#총주문값"</td>
 				</tr>						
@@ -62,7 +69,8 @@ function Show() {
 
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
-	<h5  style="margin-bottom:20px";>배달할거에요? <input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
+	<h5 style="margin-bottom:20px;"> <strong style="color: red;">배달할거에요?</strong>
+	<input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
 </div>
 <div class="basic"  id="delivery" style="display:none" >
 	<h3 class="basic_h3">배달정보</h3>
