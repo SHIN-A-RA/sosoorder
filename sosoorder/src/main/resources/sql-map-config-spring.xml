@@ -15,7 +15,6 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>  -->
 	<typeAliases>
-		 <typeAlias type="com.dbal.app.emp.EmpVO" alias="empVO"/>
 		 <typeAlias type="com.soso.app.member.service.MemberVO" alias="memberVO"/> 
 		 <typeAlias type="com.soso.app.admin.service.AdminVO" alias="adminVO"/>    
 		 <typeAlias type="com.soso.app.menu.service.MenuVO" alias="MenuVO"/>  

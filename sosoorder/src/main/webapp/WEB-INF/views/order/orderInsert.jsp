@@ -2,6 +2,38 @@
     pageEncoding="UTF-8"%>
 <link href="resources/admin/scss/hw.css" rel="stylesheet" type="text/css">
 
+<script language="javascript">
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+
+function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, reizable=yes"); 
+}
+
+
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+	
+}
+
+function Show() {
+	if (delivery.style.display == "") {
+		delivery.style.display = "none"
+	} else {
+		delivery.style.display = ""
+	}
+	}
+
+</script>
    <!-- 컨텐츠영역 -->
 
    <div class="div-tt">
@@ -30,19 +62,24 @@
 
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
-	<h5  style="margin-bottom:20px";>배달할거에요? <input type="checkbox"> 배달 주문시, 자동 회원가입 됩니다. </h5>
+	<h5  style="margin-bottom:20px";>배달할거에요? <input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
+</div>
+<div class="basic"  id="delivery" style="display:none" >
 	<h3 class="basic_h3">배달정보</h3>
+<form name="form" id="form" method="post">
+<div id="callBackDiv">
  <table class="basic_tb">
  <tr>
 	<th class="basic_tb_th">주소
     </th>
          <td class="basic_tb_td">
-             <input class="basic_input" id="" name="" fw-filter="isFill" fw-label="주문자 우편번호1"  placeholder="" size="6" maxlength="6" readonly="1" value="" type="text">  
-             <a class="btn_post">우편번호</a><br>
-             <input class="basic_input" id="" name="" fw-filter="isFill" fw-label="주문자 주소1"  placeholder="" size="60" readonly="1" value="" type="text"> <span class="txtInfo">기본주소</span><br>
-             <input class="basic_input" id="" name="" fw-label="주문자 주소2"  size="60" value="" type="text"> <span class="txtInfo">나머지주소</span><span class="grid displaynone">(선택입력가능)</span>
+             <input class="basic_input" id="zipNo"  name="zipNo"  size="6" maxlength="6" type="text" readonly="1">  <a onclick="goPopup()" class="btn_post">주소찾기</a><br>
+              <input class="basic_input" id="roadAddrPart1"  name="roadAddrPart1" fw-label="주문자 주소1"  size="60" readonly="1"  type="text"> <span>기본주소</span><br>
+              <input class="basic_input" id="addrDetail"  name="addrDetail"  size="60"  type="text"> <span class="txtInfo">나머지주소</span><span>(선택입력가능)</span>
          </td>
-</tr>                         
+</tr>   
+</form>
+                
 <tr >
 	<th class="basic_tb_th">휴대전화 <span class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></span>
 	</th>
@@ -57,6 +94,7 @@
 	</select>-<input class="basic_input"  maxlength="4" fw-label="주문자 핸드폰번호" size="4" value="" type="text">-<input class="basic_input" maxlength="4" fw-label="주문자 핸드폰번호"  size="4" value="" type="text"></td>
  </tr>
 </table>
+</div>  
 </div>
 
 <!-- 할인 및 포인트 -->
@@ -74,7 +112,7 @@
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
 		    	<p><input class="basic_input">원<button class="btn_post">전액사용</button>
-		    	(총 적립금:<strong>0</strong>원)</p>
+		    	(총 적립금:<strong style="color: #E91E63;">0</strong>원)</p>
 		    	<ul class="ul_info">
 					<li>- 적립금은 사용제한 없이 언제든 결제가 가능합니다.</li>                     
                 </ul>
@@ -119,8 +157,7 @@
 						<li id="rocketPayCardBox" class="type-selector-li selected-pay-type">
 							<input class="type-selector-radio" type="radio" name="payType" id="payType10" value="ROCKET_CARD">
 							<label class="type-selector-label type-selector-label--card" for="payType10" style="font-weight: bold;">
-								<span class="type-selector-label__text">신용/체크카드</span>
-								<img class="rpay-badge rpay-icon-instant-discount" src="https://image7.coupangcdn.com/image/rocketpay/order/icon_ccid_v2.png" width="66" height="14" alt="즉시 할인혜택">
+								<span class="type-selector-label__text">신용/체크카드</span>							
 							</label>
 						</li>
 			
@@ -139,7 +176,9 @@
 </div>
 
 <!-- 결제하기 -->
-
+<div style="margin: 20px; text-align: center; margin-bottom: 20px;">
+        위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
+    </div>
 <div class="div_pay">
 <button class="btn_pay"><span class="txt_payment">결제하기</span></button>
 </div>
