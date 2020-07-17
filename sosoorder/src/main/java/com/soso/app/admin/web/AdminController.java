@@ -29,7 +29,7 @@ public class AdminController {
 		adminService.adminInsert(vo);
 		//서비스 호출
 		
-		return "redirect:adminList";
+		return "redirect:memberLoginForm";
 		
 	}
 

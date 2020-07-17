@@ -1,39 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<script src="https:////cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
-
+<script src="resources/admin/scss/addcss/loginValued.js"></script>
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
-<head>
-
-<style>
-
-</style>
-
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
 
 
-<body>
-	<div id="formWrapper">
-<div id="form">
-<div class="logo">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-					viewBox="0 0 458.8 167.5" enable-background="new 0 0 458.8 167.5"
-					xml:space="preserve">
+<div id="formWrapper">
+	<div id="form">
+		<div class="logo">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 458.8 167.5" enable-background="new 0 0 458.8 167.5"
+				xml:space="preserve">
 <g>
 	<path
-						d="M71.9,53.3c0,4,5.4,7.3,12,7.3c6.6,0,12-3.3,12-7.3c0-4.1-5.4-7.3-12-7.3C77.2,46,71.9,49.2,71.9,53.3z"></path>
+					d="M71.9,53.3c0,4,5.4,7.3,12,7.3c6.6,0,12-3.3,12-7.3c0-4.1-5.4-7.3-12-7.3C77.2,46,71.9,49.2,71.9,53.3z"></path>
 	<path
-						d="M429.8,113.5c13.2-2.7,25.7-18.7,25.7-32.8c0-4.2-1.3-7.9-3.8-10.9c-0.5-0.6-0.7-0.8-0.7-0.8v0
+					d="M429.8,113.5c13.2-2.7,25.7-18.7,25.7-32.8c0-4.2-1.3-7.9-3.8-10.9c-0.5-0.6-0.7-0.8-0.7-0.8v0
 		c-0.6-0.7-1.3-1.1-2.1-1.1c-2.1,0-3.7,2.9-3.7,6.5c0,0.3,0,0.7,0.1,1c0,0,0,0,0,0c0,7-5,15.2-14.7,24.5c-5,4.9-9.9,8.9-12.9,11
 		l0.8-4.2c1.7-8.1,3.4-16.4,5-24.8c1.7-8.4,3.3-16.3,4.7-23.7c1.5-7.4,2.9-14.2,4.2-20.2c1.2-6,2.2-10.8,2.8-14.1
 		c0.3-1.9-0.3-3.1-1.8-3.6c-1.5-0.5-3.4-0.6-5.5-0.2c-2.2,0.4-4.2,1.3-6.1,2.7c-1.9,1.5-3,3.2-3.3,5.3c-0.3,1.7-1.1,5.9-2.4,12.6
@@ -71,35 +54,31 @@
 		c1.1-5.3,2.5-11.8,4-19.5l3.2-15.9c2.3,13.5,5.6,26.7,8.9,35.6c4.2,11.2,9.5,17.5,15.5,17.5c7.3,0,15-4.5,17-9
 		C443.3,146.8,434.3,128.8,429.8,113.5z M392.6,89.2c-0.8,14.9-13.7,28.3-31.1,37C366.8,105.9,380.7,90.9,392.6,89.2z"></path>
 	<path
-						d="M70.9,26.4c8.6-1,104.7-7.5,113-7.5c4.7,0,13-18.9,3.3-18.9C184.8,0,90,6.7,80.4,7.6
+					d="M70.9,26.4c8.6-1,104.7-7.5,113-7.5c4.7,0,13-18.9,3.3-18.9C184.8,0,90,6.7,80.4,7.6
 		C63.1,9.2,38.3,11.5,21,11.5c-8.8,0-15.9-0.6-19.3-2.2c-1,2-1.8,5.5-1.8,7.5c0,8.4,5.9,15.1,16.3,15.1c7.7,0,17.7-1,28.7-2.4
 		c-3.1,12.2-9.4,29.9-14.9,44.8C15.7,113.9,8.6,134.7,4.3,151c5.9,9.6,13,15.1,22,16.5c3.5-22.2,9.2-44.8,20.6-79.6
 		C52.9,70,63.5,41.3,70.9,26.4z"></path>
 </g>
 </svg>
-</div>
-	<form action="memberLogin" method="post" name="frm" >
-		<div class="form-item">
-			<p class="formLabel">Phone</p>
-			<input type="text" name="phone" id="phone" class="form-style"
-					autocomplete="off" />
 		</div>
-		<div class="form-item">
-			<p class="formLabel">Password</p>
-			<input type="password" name="pwd" id="pwd"
-					class="form-style" />
-			<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
-			<p>
-				</p>	
-		</div>
-		<input type="submit" class="login pull-right" value="Log In">
-		<input type="button" class="login pull-right" value="일반가입" onclick="location.href='memberInsertForm'">
-		<input type="button"  class="login pull-right" value="사업자가입" onclick="location.href='adminInsertForm'">
-		</form>
-		
-</div>
-</div>
-</body>
-</html></body>
 
-</html>
+		<form action="memberLogin" method="post" name="frm">
+			<div class="form-item">
+				<p class="formLabel">Phone</p>
+				<input type="text" name="phone" id="phone" class="form-style"
+					autocomplete="off" />
+			</div>
+			<div class="form-item">
+				<p class="formLabel">Password</p>
+				<input type="password" name="pwd" id="pwd" class="form-style" />
+				<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
+				<p></p>
+			</div>
+			<input type="button" class="login pull-right" value="로그인" onclick="validCheck()">
+			<input type="button" class="login pull-right" value="일반가입"
+				onclick="location.href='memberInsertForm'"> <input
+				type="button" class="login pull-right" value="사업자가입"
+				onclick="location.href='adminInsertForm'">
+		</form>
+	</div>
+</div>

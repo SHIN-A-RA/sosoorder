@@ -75,7 +75,7 @@
 				<div id="gnb_menu" class="hd_gnb_menu"><span></span></div>				
 				<tiles:insertAttribute name="menu"/>
 				<!--  -->
-				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;">
+				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" onclick="location.href='memberLoginForm'">
 	              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                <span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
 	                <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>

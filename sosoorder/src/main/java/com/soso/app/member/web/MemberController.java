@@ -22,7 +22,7 @@ public class MemberController {
 	
 	@RequestMapping("memberLoginForm")
 	public String memberLoginForm(MemberVO vo, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
-		return "/member/memberLoginForm";
+		return "member/memberLoginForm";
 	}
 	
 	//로그인
@@ -35,11 +35,11 @@ public class MemberController {
 		
 		if (dbVO == null ) {
 	         model.addAttribute("errorMsg", "id오류");
-	          path = "/member/memberLoginForm";
+	          path = "member/memberLoginForm";
 	         
 	      } else if (!vo.getPwd().equals(dbVO.getPwd())) {
 	    	  model.addAttribute("errorMsg", "pwd오류");
-	    	  path = "/member/memberLoginForm";
+	    	  path = "member/memberLoginForm";
 
 	      } else {
 	         session.setAttribute("phone", vo.getPhone());
@@ -53,7 +53,7 @@ public class MemberController {
 	// 가입
 	@RequestMapping("memberInsertForm")
 	public String memberInsertForm(MemberVO vo) {
-		return "/member/memberInsertForm";
+		return "member/memberInsertForm";
 	}
 
 	// 등록처리
@@ -62,7 +62,7 @@ public class MemberController {
 		memberService.memberInsert(vo);
 		//서비스 호출
 		
-		return "/member/memberLoginForm";
+		return "member/memberLoginForm";
 		
 	}
 

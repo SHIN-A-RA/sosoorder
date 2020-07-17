@@ -32,7 +32,7 @@
          email, 
          delAddr)
       VALUES
-         ((SELECT NVL(max(memberNum), 0)+1 FROM member),
+         ((member_seq.nextval),
          #{phone},
          #{pwd},
          #{email},

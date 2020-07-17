@@ -1,30 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<script src="https:////cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
 <!-- 추가사항
-아이디 (DB)중복체크
-정규식
-사업자 번호 데이터 장규식  -->
+아이디 (DB)중복체크-->
 
 
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
+<script src="resources/admin/scss/addcss/adminInsertValued.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
-<body>
 	<div id="formWrapper">
-<div id="form">
-<div class="logo">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+		<div id="form">
+			<div class="logo">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-					viewBox="0 0 458.8 167.5" 
-					xml:space="preserve">
+					viewBox="0 0 458.8 167.5" xml:space="preserve">
 <g>
 	<path
 						d="M71.9,53.3c0,4,5.4,7.3,12,7.3c6.6,0,12-3.3,12-7.3c0-4.1-5.4-7.3-12-7.3C77.2,46,71.9,49.2,71.9,53.3z"></path>
@@ -73,44 +63,53 @@
 		C52.9,70,63.5,41.3,70.9,26.4z"></path>
 </g>
 </svg>
+			</div>
+			<form action="adminInsert" method="post" name="frm" id="frm">
+				<div class="form-item">
+					<p class="formLabel">사업자 아아디</p>
+					<input type="text" name="storeId" id="storeId" class="form-style"
+						autocomplete="off" />
+				</div>
+				<div class="form-item">
+					<p class="formLabel">비밀번호</p>
+					<input type="text" name="storePwd" id="storePwd" class="form-style"
+						autocomplete="off" onchange="passwordChack()" />
+				</div>
+				<div class="form-item">
+					<p class="formLabel">비밀번호 확인</p>
+					<input type="text" name="storePwd2" id="storePwd2"
+						class="form-style" autocomplete="off" onchange="passwordChack()" />
+					<p>
+						<span id="same"></span>
+					</p>
+				</div>
+				<div class="form-item">
+					<p class="formLabel">상호명</p>
+					<input type="text" name="storeName" id="storeName"
+						class="form-style" autocomplete="off" />
+				</div>
+				<div class="form-item">
+					<p class="formLabel">사업자번호</p>
+					<input type="text" name="storeNum" id="storeNum" class="form-style"
+						autocomplete="off" />
+				</div>
+				<div class="form-item">
+					<p class="formLabel">사업장 주소</p>
+					<input type="text" name="storeAddr" id="storeAddr"
+						class="form-style" autocomplete="off" />
+				</div>
+				<div class="form-item">
+					<p class="formLabel">계좌번호</p>
+					<input type="text" name="accountNum" id="accountNum"
+						class="form-style" autocomplete="off" />
+				</div>
 
+				<p></p>
+				<input type="button" onclick="validCheck()" class="login pull-right" value="가입완료">
+				</form>
+			</div>
+	</div>
+			
 
-
-
-</div>
-<form action="adminInsert" method="post" name="frm" >
-		<div class="form-item">
-			<p class="formLabel">사업자 아아디</p>
-			<input type="text" name="storeId" id="storeId" class="form-style" autocomplete="off" />
-		</div>
-		<div class="form-item">
-			<p class="formLabel">비밀번호</p>
-			<input type="text" name="storePwd" id="storePwd" class="form-style" autocomplete="off" onchange="passwordChack()" />
-		</div>
-		<div class="form-item">
-			<p class="formLabel">비밀번호 확인</p>
-			<input type="text" name="storePwd2" id="storePwd2" class="form-style" autocomplete="off"onchange="passwordChack()"/>
-			<p><span id="same"></span></p>
-		</div>	
-		<div class="form-item">
-			<p class="formLabel">상호명</p>
-			<input type="text" name="storeName" id="storeName" class="form-style" autocomplete="off" />
-		</div>	
-		<div class="form-item">
-			<p class="formLabel">사업자번호</p>
-			<input type="text" name="storeNum" id="storeNum" class="form-style" autocomplete="off" />
-		</div>	
-		<div class="form-item">
-			<p class="formLabel">사업장 주소</p>
-			<input type="text" name="storeAddr" id="storeAddr" class="form-style" autocomplete="off" />
-		</div>	
-		<div class="form-item">
-			<p class="formLabel">계좌번호</p>
-			<input type="text" name="accountNum" id="accountNum" class="form-style" autocomplete="off" />
-		</div>	
-												
-		<p></p>	
-		<input type="submit" class="login pull-right" value="가입완료">
-</form>
 </body>
 </html>
