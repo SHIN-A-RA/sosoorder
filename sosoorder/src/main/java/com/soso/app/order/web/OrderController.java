@@ -13,6 +13,11 @@ public class OrderController {
 	public String orderInsert() {
 		return "order/orderInsert";
 	}
+	
+	@RequestMapping("/jusoPopup")
+	public String jusoPopup() {
+		return "empty/order/jusoPopup";
+	}
 
 }
 
