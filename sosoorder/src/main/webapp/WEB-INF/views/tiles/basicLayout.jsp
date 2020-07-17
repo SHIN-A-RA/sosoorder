@@ -26,11 +26,11 @@
   <link href="resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript-->
-  <script src="resources/admin/vendor/jquery/jquery.min.js"></script>
+   <script src="resources/admin/vendor/jquery/jquery.min.js"></script> 
   <script src="resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
   <!-- slick -->
-  <script src="resources/admin/js/slick/jquery-1.12.4.min.js"></script>
+  
   <script src="resources/admin/js/slick/slick.min.js"></script>
   <link href="resources/admin/js/slick/slick.css" rel="stylesheet">
   <link href="resources/admin/js/slick/slick.min.js" rel="stylesheet">
@@ -43,11 +43,11 @@
   <script src="resources/admin/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="resources/admin/vendor/chart.js/Chart.min.js"></script>
-
+<!--   <script src="resources/admin/vendor/chart.js/Chart.min.js"></script>
+ -->
   <!-- Page level custom scripts -->
-  <script src="resources/admin/js/demo/chart-area-demo.js"></script>
-  <script src="resources/admin/js/demo/chart-pie-demo.js"></script>
+ <!--  <script src="resources/admin/js/demo/chart-area-demo.js"></script>
+  <script src="resources/admin/js/demo/chart-pie-demo.js"></script> -->
   
   <!-- addcss -->
   <link href="resources/admin/scss/addcss/common.css" rel="stylesheet">

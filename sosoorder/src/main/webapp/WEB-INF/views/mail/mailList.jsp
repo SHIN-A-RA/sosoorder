@@ -38,10 +38,10 @@
 		 
           </tbody>
       </table>
-      
-      <button class="btn btn-dark center" style="margin:0 auto">Dark</button>
-
- 
+   
+	<ul class="btn_confirm write_div">
+           <li class="btn_submit btn fr"><a href="mailwrite.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>리오더 메일 발송</a></li>
+         </ul>
  
  <!--    
    /*$.ajax({

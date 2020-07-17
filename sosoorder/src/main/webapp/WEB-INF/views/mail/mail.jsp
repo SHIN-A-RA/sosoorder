@@ -50,7 +50,7 @@ position: absolute;
         <p>
           <div align="center">
           <!-- 내용 -->
-            <textarea name="content" cols="120" rows="12"
+            <textarea name="contents" cols="120" rows="12"
             style="width: 100%; resize: none" placeholder="내용"
             class="form-control"></textarea>
           </div>
