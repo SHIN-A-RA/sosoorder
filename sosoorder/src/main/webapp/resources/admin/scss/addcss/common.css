@@ -1,10 +1,5 @@
 @charset "utf-8";
 
-@import url(layout.css);
-@import url(main.css);
-@import url(sub.css);
-@import url(font.css);
-@import url(main.css);
 @import url('https://fonts.googleapis.com/css?family=Poppins:800,900'); /*font-family: 'Poppins', sans-serif;*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'); /*font-family: 'Roboto', sans-serif;*/
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR'); /*font-family: 'Noto Serif KR', sans-serif;*/
