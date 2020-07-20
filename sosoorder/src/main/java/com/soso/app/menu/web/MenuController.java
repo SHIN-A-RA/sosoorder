@@ -21,11 +21,18 @@ public class MenuController {
 		return "menu/menuManager";
 	}
 	
-	//메뉴등록
-	@RequestMapping("menuInsert")
-	public String menuInsert() {
-		return "menu/menuInsert";
+	//메뉴 등록페이지 이동
+	@RequestMapping("menuInserForm")
+	public String menuInserForm() {
+		return "menu/menuInserForm";
 	}
+	
+	//메뉴 등록 처리하고 관리페이지로 이동
+		@RequestMapping("menuInsert")
+		public String menuInsert() {
+			
+			return "menu/menuManager";
+		}
 
 		
 }

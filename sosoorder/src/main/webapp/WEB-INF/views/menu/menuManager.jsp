@@ -91,7 +91,7 @@
 <br>
 <div align="right">
 	<button type="button" class="btn btn-danger"
-		onClick="location.href='menuInsert'">등록</button>
+		onClick="location.href='menuInsertForm'">등록</button>
 </div>
 
 <script>
