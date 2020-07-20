@@ -35,4 +35,5 @@
 			</tr>
 		</c:forEach>
 	</tbody>
+	<button onclick="location.href='employeesInsertForm'">직원등록</button>
 </table>

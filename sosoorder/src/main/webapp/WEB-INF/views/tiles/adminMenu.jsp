@@ -19,7 +19,7 @@
 	<li class="gnb_dp1">
 		<span>직원관리</span>
 		<ul class="gnb_dp2_wrap">
-			<li class="gnb_dp2"><a href="javascript:GoPage('gene01')">직원목록</a></li>
+			<li class="gnb_dp2"><a href="employeesList">직원목록</a></li>
 			<li class="gnb_dp2"><a href="javascript:GoPage('gene02')">근태관리</a></li>
 			<li class="gnb_dp2"><a href="javascript:GoPage('gene02')">급여관리</a></li>
 		</ul>

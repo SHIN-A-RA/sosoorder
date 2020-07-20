@@ -10,7 +10,6 @@ import com.soso.app.employees.service.EmployeesVO;
 
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface EmployeesMapper {
 

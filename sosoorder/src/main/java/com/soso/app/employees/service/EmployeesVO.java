@@ -1,8 +1,6 @@
 package com.soso.app.employees.service;
 
-import java.util.Date;
-
-import lombok.Data;   
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data

@@ -10,7 +10,6 @@ import com.soso.app.member.service.MemberVO;
 
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface MemberMapper {
 
