@@ -58,16 +58,18 @@ function GoMyCoupon(){
 			     <th class="basic_tb_th_up">수량</th>
 			     <th class="basic_tb_th_up">가격</th>
 			</tr>	
+		 <c:set var = "sum" value = "0" />
 		 <c:forEach items="${oderList}" var="order">		
 			<tr>
 			  <td class="basic_tb_tdd">${order.menuName}</td>
 			  <td class="basic_tb_tdd"> ${order.orderCount}</td> 
 			  <td class="basic_tb_tdd">${order.price}</td> 			      
 			</tr>
-			 </c:forEach>		
+			<c:set var= "totalPrice" value="${totalPrice +order.price}"/>
+				</c:forEach>	
 				<tr>
-					<td class="basic_tb_td_down" colspan="3">총 추문금액: "#총주문값"</td>
-				</tr>						
+					<td class="basic_tb_td_down" colspan="3">총 주문금액: <c:out value="${totalPrice}"/>원</td>
+				</tr>		
 		</table>
 </div>
 
