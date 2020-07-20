@@ -70,14 +70,13 @@
 	<br> <br>
 	<div class="row">
 		<div class="col">
-			
-				<div class="input-group-prepend">
-					<span class="input-group-text">가격</span>
-				</div>
-				<input type="text" class="form-control"
-					style="text-align: center;" placeholder="가격을 입력바래요"
-					aria-label="Username" name="menuPrice" id="menuPrice"
-					aria-describedby="basic-addon2">
+
+			<div class="input-group-prepend">
+				<span class="input-group-text">가격</span>
+			</div>
+			<input type="text" class="form-control" style="text-align: center;"
+				placeholder="가격을 입력바래요" aria-label="Username" name="menuPrice"
+				id="menuPrice" aria-describedby="basic-addon2">
 		</div>
 		<div class="col">
 			<div class="input-group" style="width: 600px;">
@@ -128,17 +127,20 @@
 		});
 	</script>
 	<br>
-	<div class="col">
-		<div class="input-group" id="gear">
+	<div class="row">
+		<div class="col">
+			<div class="input-group" id="gear">
 
-			<span class="input-group-text">주/부 메뉴 코드</span> <select
-				class="form-control" id="exampleFormControlSelect1">
-				<option>0</option>
-				<option>1</option>
-			</select>
-
+				<span class="input-group-text">주/부 메뉴 코드</span>
+				<div style="width: 100px;">
+					<select class="form-control" id="exampleFormControlSelect1">
+						<option>0</option>
+						<option>1</option>
+					</select>
+				</div>
+			</div>
+			<div class="col"></div>
 		</div>
-	</div>
 	</div>
 </form>
 <div class="col" id="btn">

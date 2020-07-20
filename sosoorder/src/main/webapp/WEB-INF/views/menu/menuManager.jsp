@@ -82,7 +82,6 @@
 <script>
 	$(function() {
 		//목록
-
 		$('#table_id').DataTable({});
 	});
 	
