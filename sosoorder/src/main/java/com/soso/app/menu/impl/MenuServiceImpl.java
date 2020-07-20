@@ -15,6 +15,11 @@ public class MenuServiceImpl implements MenuService{
 	@Autowired MenuMapper menuMapper;
 	
 	@Override
+	public List<MenuVO> getMenuListHome(MenuVO menuVO) {
+		return menuMapper.getMenuListHome(menuVO);
+	}
+
+	@Override
 	public List<MenuVO> getMenuList(MenuVO menuVO) {
 		return menuMapper.getMenuList(menuVO);
 	}

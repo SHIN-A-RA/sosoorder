@@ -29,7 +29,7 @@ public class HomeController {
 	
 	@RequestMapping("homeSample/{storeId}")
 	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO, @PathVariable String storeId) {
-		model.addAttribute("menuList", menuService.getMenuList(menuVO));
+		model.addAttribute("menuList", menuService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		return "home";
 	}
