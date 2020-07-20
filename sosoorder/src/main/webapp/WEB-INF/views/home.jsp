@@ -101,7 +101,7 @@
   </div>
 
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script>
 var myApp = angular.module("myApp",[]);
 myApp.controller("myAppCtrl", function($scope){
@@ -143,7 +143,7 @@ myApp.controller("myAppCtrl", function($scope){
   </tr>
   </table>
  </div>
- </div>
+ </div> -->
              		
 <script>
 	 $('.menu_bar').slick({
@@ -248,20 +248,31 @@ function storageSupport() {
 }
 
 </script>
-<!-- <script>
+ <script>
     $(document).ready(function() {
-    	var sJson="[ ";
-    	for(var i = 0; i < sessionStorage.length; i++)
-    	{
-    	    var key = sessionStorage.key(i);
-    	    var value = sessionStorage[key];
-    	   
+    	
+    	var sJson="[";
+    	for(var i = 0; i < sessionStorage.length; i++){
+    		var key = sessionStorage.key(i);
+    		var value = sessionStorage[key];
+    		var v_menuName = JSON.parse(value).menuName;
+    		var v_menuNum = JSON.parse(value).menuNum;
+    		var v_menuPrice = JSON.parse(value).menuPrice;
+    		
+
     	    if(i < sessionStorage.length -1){
     	    	sJson += value + "," ;
     	    }else if(i == sessionStorage.length -1){
-    	    	sJson += value + " ]" ;
+    	    	sJson += value + "]";
     	    }
+    	    
+    	     
     	}
+    	
+    	console.log();
+        	
+    	
+    	
     	var result = document.getElementById('ajaxValue');
     	var result2 = document.getElementById('ajaxValue2');
         result.innerHTML = sJson;	
@@ -271,8 +282,8 @@ function storageSupport() {
 			
     	$.ajax({
     	    url :  storeId, 
-    	    dataType :"TEXT",
-    	    data:sJson,
+    	    dataType :"JSON",
+    	    data:JSON.parse(sJson),
     	    method:"POST",
     	    success : function(data) {
                 console.log(data);
@@ -284,6 +295,6 @@ function storageSupport() {
     });
 </script>
 <div id="ajaxValue"></div>
-<div id="ajaxValue2">결과 : </div> -->
+<div id="ajaxValue2">결과 : </div> 
 
 

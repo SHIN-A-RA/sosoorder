@@ -4,6 +4,11 @@
 
 <mapper namespace="com.soso.app.menu.mapper.MenuMapper">
 	<select id="getMenuListHome" resultType="MenuVO" parameterType="MenuVO">
-		SELECT * FROM MENU where storeId = #{storeId}
+		SELECT * FROM MENU
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
 	</select>
 </mapper>
