@@ -1,284 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-<!-- SLICK -->
-
-.MultiCarousel {
-	float: left;
-	overflow: hidden;
-	padding: 15px;
-	width: 100%;
-	position: relative;
-}
-
-.MultiCarousel .MultiCarousel-inner {
-	transition: 1s ease all;
-	float: left;
-}
-
-.MultiCarousel .MultiCarousel-inner .item {
-	float: left;
-}
-
-.MultiCarousel .MultiCarousel-inner .item>div {
-	text-align: center;
-	padding: 10px;
-	margin: 10px;
-	background: #f1f1f1;
-	color: #666;
-}
-
-.MultiCarousel .leftLst, .MultiCarousel .rightLst {
-	position: absolute;
-	border-radius: 50%;
-	top: calc(50% - 20px);
-}
-
-.MultiCarousel .leftLst {
-	left: 0;
-}
-
-.MultiCarousel .rightLst {
-	right: 0;
-}
-
-.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
-	pointer-events: none;
-	background: #ccc;
+#un {
+	text-decoration: underline;
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
-
-<!-- slick cdn -->
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-<script>
-	//슬릭
-	$(document)
-			.ready(
-					function() {
-						var itemsMainDiv = ('.MultiCarousel');
-						var itemsDiv = ('.MultiCarousel-inner');
-						var itemWidth = "";
-
-						$('.leftLst, .rightLst').click(function() {
-							var condition = $(this).hasClass("leftLst");
-							if (condition)
-								click(0, this);
-							else
-								click(1, this)
-						});
-
-						ResCarouselSize();
-
-						$(window).resize(function() {
-							ResCarouselSize();
-						});
-
-						//this function define the size of the items
-						function ResCarouselSize() {
-							var incno = 0;
-							var dataItems = ("data-items");
-							var itemClass = ('.item');
-							var id = 0;
-							var btnParentSb = '';
-							var itemsSplit = '';
-							var sampwidth = $(itemsMainDiv).width();
-							var bodyWidth = $('body').width();
-							$(itemsDiv).each(
-									function() {
-										id = id + 1;
-										var itemNumbers = $(this).find(
-												itemClass).length;
-										btnParentSb = $(this).parent().attr(
-												dataItems);
-										itemsSplit = btnParentSb.split(',');
-										$(this).parent().attr("id",
-												"MultiCarousel" + id);
-
-										if (bodyWidth >= 1200) {
-											incno = itemsSplit[3];
-											itemWidth = sampwidth / incno;
-										} else if (bodyWidth >= 992) {
-											incno = itemsSplit[2];
-											itemWidth = sampwidth / incno;
-										} else if (bodyWidth >= 768) {
-											incno = itemsSplit[1];
-											itemWidth = sampwidth / incno;
-										} else {
-											incno = itemsSplit[0];
-											itemWidth = sampwidth / incno;
-										}
-										$(this).css({
-											'transform' : 'translateX(0px)',
-											'width' : itemWidth * itemNumbers
-										});
-										$(this).find(itemClass).each(
-												function() {
-													$(this).outerWidth(
-															itemWidth);
-												});
-
-										$(".leftLst").addClass("over");
-										$(".rightLst").removeClass("over");
-
-									});
-						}
-
-						//this function used to move the items
-						function ResCarousel(e, el, s) {
-							var leftBtn = ('.leftLst');
-							var rightBtn = ('.rightLst');
-							var translateXval = '';
-							var divStyle = $(el + ' ' + itemsDiv).css(
-									'transform');
-							var values = divStyle.match(/-?[\d\.]+/g);
-							var xds = Math.abs(values[4]);
-							if (e == 0) {
-								translateXval = parseInt(xds)
-										- parseInt(itemWidth * s);
-								$(el + ' ' + rightBtn).removeClass("over");
-
-								if (translateXval <= itemWidth / 2) {
-									translateXval = 0;
-									$(el + ' ' + leftBtn).addClass("over");
-								}
-							} else if (e == 1) {
-								var itemsCondition = $(el).find(itemsDiv)
-										.width()
-										- $(el).width();
-								translateXval = parseInt(xds)
-										+ parseInt(itemWidth * s);
-								$(el + ' ' + leftBtn).removeClass("over");
-
-								if (translateXval >= itemsCondition - itemWidth
-										/ 2) {
-									translateXval = itemsCondition;
-									$(el + ' ' + rightBtn).addClass("over");
-								}
-							}
-							$(el + ' ' + itemsDiv).css('transform',
-									'translateX(' + -translateXval + 'px)');
-						}
-
-						//It is used to get some elements from btn
-						function click(ell, ee) {
-							var Parent = "#" + $(ee).parent().attr("id");
-							var slide = $(Parent).attr("data-slide");
-							ResCarousel(ell, Parent, slide);
-						}
-
-					});
-</script>
-
-<div class="container" align="center">
-	<div class="row">
-		<div class="MultiCarousel" data-items="1,3,5,6" data-slide="1"
-			id="MultiCarousel" data-interval="1000">
-			<div class="MultiCarousel-inner">
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">1번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">2번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">3번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">4번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">5번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">6번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">7번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">8번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">9번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">10번 음식 종류</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="pad15">
-						<p class="lead">11번 음식 종류</p>
-					</div>
-				</div>
-			</div>
-			<button class="btn btn-primary leftLst">왼쪽</button>
-			<button class="btn btn-primary rightLst">오른쪽</button>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+				
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+	
+<div class="slick_box menu_category">
+	<div class="menu_bar">
+		<div>
+			<a>양식</a>
+		</div>
+		<div>
+			<a>중식</a>
+		</div>
+		<div>
+			<a>한식</a>
+		</div>
+		<div>
+			<a>경양식</a>
+		</div>
+		<div>
+			<a>분식</a>
+		</div>
+		<div>
+			<a>편의점음식</a>
 		</div>
 	</div>
-</div><br><br>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">종류</th>
-      <th scope="col">메뉴이름</th>
-      <th scope="col">가격</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td></td>
-      <td> </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
 
-<div align="right">
-<button type="button" class="btn btn-danger" onClick="location.href='menuInsert'">등록</button>
+	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"
+		aria-hidden="true"></i></span> <span class="next" id="aro_next1"><i
+		class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
+<div>
+	<h3 id="un">메뉴관리</h3>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+	<div class="col">
+		<div>목록</div>
+		<div id="empList">
+			<table id="table_id" class="display">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>메뉴 카테고리</th>
+						<th>메뉴 이름</th>
+						<th>가격</th>
+						<th>주/부 메뉴 코드</th>
+						<th>메뉴 소개</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${menuManager}" var="menu">
+					<tr>
+						<td>${menu.menuNum}</td> 
+						<td>${menu.menuCategory}</td>
+						<td>${menu.menuName}</td>
+						<td>${menu.menuPrice}</td>
+						<td>${menu.menuCheck}</td>
+						<td>${menu.menuContents}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+	$(function() {
+		//목록
+
+		$('#table_id').DataTable({});
+	});
+	
+</script>
+<br>
+<br>
+<br>
+<div align="right">
+	<button type="button" class="btn btn-danger"
+		onClick="location.href='menuInsert'">등록</button>
+</div>
+
+<script>
+	$('.menu_bar').slick({
+		autoplay : false,
+		dots : false,
+		speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
+		infinite : false,
+		autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
+		prevArrow : $('#aro_prev1'),
+		nextArrow : $('#aro_next1'),
+		arrows : true,
+		slidesToShow : 5,
+		slidesToScroll : 5,
+		fade : false
+	});
+</script>
