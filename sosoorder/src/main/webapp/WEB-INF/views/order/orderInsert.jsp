@@ -34,7 +34,13 @@ function Show() {
 	}
 	}
 	
+// 쿠폰함 팝업창
+function GoMyCoupon(){
 
+	window.open("myCouponList","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+
+}
 
 </script>
 
@@ -108,14 +114,14 @@ function Show() {
 </div>
 
 <!-- 할인 및 포인트 -->
-<div class="basic">
+<div class="basic"> 
 	<h3 class="basic_h3">할인 및 포인트</h3>
  <table class="basic_tb">
 
 	 <tr>
 		<th class="basic_tb_th" >쿠폰할인</th>
 	         <td class="basic_tb_td">
-	             <div class="input_empty"><span>"$할인금액"</span></div><span>원</span><button class="btn_post">쿠폰사용</button>
+	             <div class="input_empty"><span>"$할인금액"</span></div><span>원</span><button onclick="GoMyCoupon()" class="btn_post">쿠폰사용</button>
 	         </td>
 	</tr>                         
 	<tr>

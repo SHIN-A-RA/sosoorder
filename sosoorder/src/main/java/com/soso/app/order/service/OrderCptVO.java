@@ -15,6 +15,6 @@ public class OrderCptVO {
 	String menuNum;
 	String orderCount;
 	String orderNum;
-	
+	String paynum;
 
 }

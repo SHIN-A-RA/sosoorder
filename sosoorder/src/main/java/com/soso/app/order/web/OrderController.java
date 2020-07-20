@@ -23,7 +23,7 @@ public class OrderController {
 	//by혜원, 나의쿠폰함팝업
 	@RequestMapping("/myCouponList")
 	public String myCouponList() {
-		return "order/myCouponList";
+		return "empty/order/myCouponList";
 	}
 
 }
