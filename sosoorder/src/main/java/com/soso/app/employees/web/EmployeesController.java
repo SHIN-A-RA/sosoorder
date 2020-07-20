@@ -19,7 +19,11 @@ public class EmployeesController {
 
 	// employees 등록페이지 이동
 	@RequestMapping("employeesInsertForm")
+	/*@RequestMapping("employeesInsertForm/{storeId}")*/
 	public String employeesInsertForm(EmployeesVO vo) {
+		/* kkkk\ */
+		/*변수*/
+		/*return "employees/employeesInsertForm?storeId="변수;*/
 		return "employees/employeesInsertForm";
 	}
 

@@ -10,7 +10,6 @@ import com.soso.app.employees.service.EmployeesVO;
 
 
 
-@ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface EmployeesMapper {
 
 	public EmployeesVO getEmployees(EmployeesVO employeesVO);

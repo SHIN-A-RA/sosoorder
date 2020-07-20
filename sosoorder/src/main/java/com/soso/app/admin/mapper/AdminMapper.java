@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.soso.app.admin.service.AdminVO;
 
 
-@ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface AdminMapper {
 
 	public AdminVO getAdmin(AdminVO adminVO);

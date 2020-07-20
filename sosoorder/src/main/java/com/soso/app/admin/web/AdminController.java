@@ -1,16 +1,22 @@
 package com.soso.app.admin.web;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.admin.service.AdminService;
 import com.soso.app.admin.service.AdminVO;
+import com.soso.app.member.service.MemberVO;
 
 
 @Controller // Bean �벑濡�, DispacherServlet�씠 �씤�떇�븷 �닔 �엳�뒗 Controller濡� 蹂��솚 => @Compnent
@@ -19,16 +25,41 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
     
+	//admin로그인DB처리
+	@RequestMapping("adminLogin")
+	public String memberLogin(AdminVO vo, Model model,HttpSession session) {
+		String path = null;
+		AdminVO dbVO = adminService.getAdmin(vo);
+		System.out.println(vo.getStoreId());
+		
+		//&& !vo.getPhone().equals(dbVO.getPhone())
+		
+		if (dbVO == null ) {
+	         model.addAttribute("errorMsg", "id오류");
+	          path = "member/memberLoginForm";
+	         
+	      } else if (!vo.getStorePwd().equals(dbVO.getStorePwd())) {
+	    	  model.addAttribute("errorMsg", "pwd오류");
+	    	  path = "member/memberLoginForm";
 
+	      } else {
+	         session.setAttribute("storeId", vo.getStoreId());
+	         session.setAttribute("storePwd", vo.getStorePwd());
+	         
+	         path = "redirect:/";
+	      }
+		return path;
+	}
+	
 	//admin 등록페이지 이동
 	@RequestMapping("adminInsertForm")
-	public String adminInsertForm(AdminVO vo) {
+	public String adminInsertForm(AdminVO vo,@PathVariable String storeId) {
 		return "admin/adminInsertForm";
 	}
 
 	//admin 등록DB처리
 	@RequestMapping("adminInsert")
-	public String adminInsert(AdminVO vo, Model model) {
+	public String adminInsert(AdminVO vo, Model model,@PathVariable String storeId) {
 		adminService.adminInsert(vo);
 		//서비스 호출
 		

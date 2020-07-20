@@ -1,10 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="resources/admin/scss/addcss/loginValued.js"></script>
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
+<script src="resources/admin/scss/addcss/loginToggle.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
+<style>
+.toggleBG{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
+.toggleFG{background: #FFFFFF; width: 30px; height: 30px; border: none; border-radius: 15px; position: relative; left: 0px;}	
+</style>
+<script>
+function memberValidCheck() {
 
+	//필수 입력 체크
+	if (window.document.frm.phone.value == "") {
+		alert("휴대폰번호를 입력해주세요");
+		frm.phone.focus();
+		return;
+	}
+	if (window.document.frm.pwd.value == "") {
+		alert("비밀번호를 입력해주세요");
+		frm.pwd.focus();
+		return;
+	}
 
+	frm.submit();
+
+}
+
+function adminValidCheck() {
+
+	//필수 입력 체크
+	if (window.document.frm2.storeId.value == "") {
+		alert("사업자 아이디를 입력해주세요");
+		frm2.storeId.focus();
+		return;
+	}
+	if (window.document.frm2.storePwd.value == "") {
+		alert("비밀번호를 입력해주세요");
+		frm2.storePwd.focus();
+		return;
+	}
+
+	frm2.submit();
+
+}
+</script>
 <div id="formWrapper">
 	<div id="form">
 		<div class="logo">
@@ -61,22 +100,44 @@
 </g>
 </svg>
 		</div>
+	
 
-		<form action="memberLogin" method="post" name="frm">
+<div class='toggleBG' onclick="getToggleBtnState('buttonID');">
+    <button id='buttonID' class='toggleFG' ></button>
+</div>
+
+
+		<form action="adminLogin" method="post" name="frm2" class="basic" id="adminLogin2">
+			<div class="form-item">
+				<p class="formLabel">id</p>
+				<input type="text" name="storeId" id="storeId" class="form-style"
+					autocomplete="off" />
+			</div><p></p>
+			<div class="form-item">
+				<p class="formLabel">Password</p>
+				<input type="password" name="storePwd" id="storePwd" class="form-style" />
+				<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
+			</div>
+			<input type="button" class="login pull-right" value="로그인" onclick="adminValidCheck()">
+</form>
+
+
+<form action="memberLogin" method="post" name="frm" class="basic" id="memberLogin2">
 			<div class="form-item">
 				<p class="formLabel">Phone</p>
 				<input type="text" name="phone" id="phone" class="form-style"
 					autocomplete="off" />
-			</div>
+			</div><br>
 			<div class="form-item">
 				<p class="formLabel">Password</p>
 				<input type="password" name="pwd" id="pwd" class="form-style" />
-				<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
 				<p></p>
 			</div>
-			<input type="button" class="login pull-right" value="로그인" onclick="validCheck()">
-			<input type="button" class="login pull-right" value="일반가입" onclick="location.href='memberInsertForm'"> 
-			<input type="button" class="login pull-right" value="사업자가입"onclick="location.href='adminInsertForm'">
-		</form>
-	</div>
+			<input type="button" class="login pull-right" value="로그인" onclick="memberValidCheck()">
+</form>
+
+			<input type="button" class="login pull-right" value="일반가입" onclick="location.href='memberInsertForm'"/> 
+			<input type="button" class="login pull-right" value="사업자가입"onclick="location.href='adminInsertForm'"/>
+		
+</div>
 </div>

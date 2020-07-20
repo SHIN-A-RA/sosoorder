@@ -10,7 +10,6 @@ import com.soso.app.member.service.MemberVO;
 
 
 
-@ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface MemberMapper {
 
 	public MemberVO getMember(MemberVO memberVO);

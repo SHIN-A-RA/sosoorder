@@ -32,9 +32,6 @@ public class MemberController {
 	public String memberLogin(MemberVO vo, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		String path = null;
 		MemberVO dbVO = memberService.getMember(vo);
-		
-		//&& !vo.getPhone().equals(dbVO.getPhone())
-		
 		if (dbVO == null ) {
 	         model.addAttribute("errorMsg", "id오류");
 	          path = "member/memberLoginForm";
@@ -71,8 +68,6 @@ public class MemberController {
 	  //아이디 중복처리
 	@RequestMapping("IdDupCheck")
 	public void idDupCheck(MemberVO vo, Model model) {
-		
-		
 	}
 	
 	
