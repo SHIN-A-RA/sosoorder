@@ -18,29 +18,29 @@
   
   
   <!-- Custom fonts for this template-->
-  <link href="resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/admin/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript-->
-   <script src="resources/admin/vendor/jquery/jquery.min.js"></script> 
-  <script src="resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/admin/vendor/jquery/jquery.min.js"></script> 
+  <script src="${pageContext.request.contextPath}/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
   <!-- slick -->
   
-  <script src="resources/admin/js/slick/slick.min.js"></script>
-  <link href="resources/admin/js/slick/slick.css" rel="stylesheet">
-  <link href="resources/admin/js/slick/slick.min.js" rel="stylesheet">
+  <script src="${pageContext.request.contextPath}/resources/admin/js/slick/slick.min.js"></script>
+  <link href="${pageContext.request.contextPath}/resources/admin/js/slick/slick.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/admin/js/slick/slick.min.js" rel="stylesheet">
   
   
   <!-- Core plugin JavaScript-->
-  <script src="resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="resources/admin/js/sb-admin-2.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/admin/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
 <!--   <script src="resources/admin/vendor/chart.js/Chart.min.js"></script>
@@ -50,11 +50,11 @@
   <script src="resources/admin/js/demo/chart-pie-demo.js"></script> -->
   
   <!-- addcss -->
-  <link href="resources/admin/scss/addcss/common.css" rel="stylesheet">
-  <link href="resources/admin/scss/addcss/layout.css" rel="stylesheet">
-  <script src="resources/admin/scss/addcss/basic.js"></script>
+  <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/common.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/layout.css" rel="stylesheet">
+  <script src="${pageContext.request.contextPath}/resources/admin/scss/addcss/basic.js"></script>
 
-  <link href="resources/admin/scss/addcss/jw.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/jw.css" rel="stylesheet">
 </head>
 
 <body id="page-top">

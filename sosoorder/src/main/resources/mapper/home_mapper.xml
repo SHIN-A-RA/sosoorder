@@ -4,7 +4,6 @@
 
 <mapper namespace="com.soso.app.menu.mapper.MenuMapper">
 	<select id="getMenuList" resultType="MenuVO" parameterType="MenuVO">
-		SELECT * FROM MENU
+		SELECT * FROM MENU where storeId = #{storeId}
 	</select>
-
 </mapper>

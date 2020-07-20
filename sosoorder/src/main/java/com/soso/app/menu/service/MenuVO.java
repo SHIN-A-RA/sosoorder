@@ -6,27 +6,28 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MenuVO {
-	String menunum;
-	String menuname;
-	String menuprice;
-	String menuimage;
-	String menucategory;
-	String menucontents;
-	String menucheck;
-	String storeid;
-	
-	public MenuVO(String menunum, String menuname, String menuprice, String menuimage, String menucategory,
-			String menucontents, String menucheck, String storeid) {
+	String menuNum;
+	String menuName;
+	String menuPrice;
+	String menuImage;
+	String menuCategory;
+	String menuContents;
+	String menuCheck;
+	String storeId;
+	public MenuVO(String menuNum, String menuName, String menuPrice, String menuImage, String menuCategory,
+			String menuContents, String menuCheck, String storeId) {
 		super();
-		this.menunum = menunum;
-		this.menuname = menuname;
-		this.menuprice = menuprice;
-		this.menuimage = menuimage;
-		this.menucategory = menucategory;
-		this.menucontents = menucontents;
-		this.menucheck = menucheck;
-		this.storeid = storeid;
+		this.menuNum = menuNum;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.menuImage = menuImage;
+		this.menuCategory = menuCategory;
+		this.menuContents = menuContents;
+		this.menuCheck = menuCheck;
+		this.storeId = storeId;
 	}
+	
+	
 	
 	
 	
