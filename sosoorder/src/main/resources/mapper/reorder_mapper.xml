@@ -33,10 +33,11 @@
 	</select> -->
 
 	<insert id="mailInsert" parameterType="reorderVO">
-		INSERT INTO reorder (reorderNum, contents, storeId, reorderDate)
+		INSERT INTO reorder (reorderNum,contents,profile,storeId,reorderDate)
 						VALUES(
 						seq_reorderNum.nextval,
 						#{contents},
+						#{profile},
 						#{storeId},sysdate)
 								
 	</insert>

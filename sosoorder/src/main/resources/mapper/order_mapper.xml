@@ -2,8 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.soso.app.admin.mapper.AdminMapper">
+<mapper namespace="com.soso.app.order.mapper.OrderMapper">
 
+
+<!-- 	<resultMap type="MenuVO" id="MenuVO">
+	    <result column="menuNum" property="menuNum"/>
+	    <result column="menuName" property="menuName"/>
+	    <result column="menuPrice" property="menuPrice"/>
+	    <result column="storeId" property="storeId"/>
+	</resultMap>
+	    
+	<resultMap type="OrderCptVO" id="OrderCptVO">
+	    <result column="ORDERNUM" property="orderNum"/>
+	    <result column="ORDERCOUNT" property="menuNum"/>
+	    <result column="MENUNUM" property="menuNum"/>
+	    <collection property="menuVO" resultMap="MenuVO"/>
+	</resultMap>
+ -->
+	
+	<select id="getOrder" parameterType="com.soso.app.menu.service.MenuSearchVO" resultType="map">
+		SELECT 
+			m.menuName "menuName", 
+			o.orderCount "orderCount", 
+			m.menuPrice*o.orderCount "price"
+			FROM menu m JOIN orderCpt o ON (m.menuNum = o.menuNum)
+		
+		<where>
+		<if test="storeId != null">
+			m.storeId = #{storeId}
+		</if>
+		<if test="orderNum != null">
+			and o.orderNum = #{orderNum} 
+		</if>	
+		</where>
+
+	</select>
 
 
 

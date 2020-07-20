@@ -2,8 +2,12 @@ package com.soso.app.storeorder.service;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 public class ReorderVO {
 	String tomail;
@@ -14,7 +18,12 @@ public class ReorderVO {
 	String storeId;
 	Date reorderDate;
 	String frommail;
+	String filename;
+	String profile;
 	
+MultipartFile uploadFile;
+	
+
 	public String getTomail() {
 		return tomail;
 	}
@@ -57,19 +66,28 @@ public class ReorderVO {
 	public void setReorderDate(Date reorderDate) {
 		this.reorderDate = reorderDate;
 	}
-	@Override
-	public String toString() {
-		return "ReorderVO [tomail=" + tomail + ", title=" + title + ", contents=" + contents + ", reorderNum="
-				+ reorderNum + ", memberNum=" + memberNum + ", storeId=" + storeId + ", reorderDate=" + reorderDate
-				+ "]";
-	}
+
+
 	public String getFrommail() {
 		return frommail;
 	}
 	public void setFrommail(String frommail) {
 		this.frommail = frommail;
 	}
-
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	@Override
+	public String toString() {
+		return "ReorderVO [tomail=" + tomail + ", title=" + title + ", contents=" + contents + ", reorderNum="
+				+ reorderNum + ", memberNum=" + memberNum + ", storeId=" + storeId + ", reorderDate=" + reorderDate
+				+ ", frommail=" + frommail + ", filename=" + filename + ", profile=" + profile + ", uploadFile="
+				+ uploadFile + "]";
+	}
+	
 	
 	
 	

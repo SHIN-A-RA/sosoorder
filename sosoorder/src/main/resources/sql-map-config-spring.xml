@@ -20,6 +20,8 @@
 		 <typeAlias type="com.soso.app.menu.service.MenuVO" alias="MenuVO"/>  
 		 <typeAlias type="com.soso.app.storeorder.service.ReorderVO" alias="ReorderVO"/>
 		 <typeAlias type="com.soso.app.employees.service.EmployeesVO" alias="EmployeesVO"/>   
+		 <typeAlias type="com.soso.app.order.service.OrderCptVO" alias="OrderCptVO"/> 
+		 <typeAlias type="com.soso.app.order.service.PaymentVO" alias="PaymentVO"/> 
 	</typeAliases>
 
 </configuration>

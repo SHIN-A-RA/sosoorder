@@ -13,10 +13,11 @@ public class PaymentVO {
 	String payNum;
 	String payCheck;
 	String payDay;
-	String memberNum;
-	String seatNum;
 	String pointUse;
 	String couponUse;
+	String seatNum;
+	String memberNum;
+	String amount;
 	String totalPay;
 
 }

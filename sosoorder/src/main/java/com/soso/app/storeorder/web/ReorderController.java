@@ -1,20 +1,20 @@
 package com.soso.app.storeorder.web;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soso.app.member.mapper.MemberMapper;
 import com.soso.app.member.service.MemberVO;
@@ -36,6 +36,8 @@ public class ReorderController {
 		return "mail/mail";
 	}
   
+	
+	
 	// mailSending 코드
 	@RequestMapping("mailSending.do")
 	public String mailSending(HttpServletRequest request) {
@@ -61,21 +63,37 @@ public class ReorderController {
 		return "emp/empList";
 	}
 	
+
 	@RequestMapping("sendMailAttach.do")
-	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO) {
+	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO) throws IllegalStateException, IOException {
+		
+		
+		//업로드 처리
+		MultipartFile file = vo.getUploadFile();
+		String filename = "";
+		if(file != null && file.getSize() > 0) {
+			filename = file.getOriginalFilename();
+		    File upFile = FileRenamePolicy.rename(new File("c:/upload", filename));
+			filename = upFile.getName();
+			file.transferTo(upFile);	
+			vo.setProfile(filename);
+		}
+		
 		//발송이력저장
 		vo.setStoreId("test");
 		reorderService.mailInsert(vo);
-		// 회원목록조회
 		
+		// 회원목록조회
 		MemberVO memberVO = new MemberVO();
 		List<MemberVO> list = memberMapper.getMemberList(memberVO);
+
 		// 회원목록for문
 		MimeMessagePreparator[] preparators = new MimeMessagePreparator[list.size()];
 		int i = 0;
 		for (MemberVO member : list) {
 			member.getEmail();
 			preparators[i++] = new MimeMessagePreparator() {
+			
 				@Override
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -83,17 +101,22 @@ public class ReorderController {
 					helper.setTo(member.getEmail());
 					helper.setSubject(vo.getTitle());
 					helper.setText(vo.getContents(), true);
-					FileSystemResource file = new FileSystemResource(new File("D:/test/test.jpg"));
-					helper.addAttachment("test.jpg", file);
+					if(vo.getProfile()  != null )
+					{
+						helper.addAttachment(vo.getProfile(), new File("c:/upload", vo.getProfile()));
+					}
+				 
+					
 				}
 			};
-
 		}
+		
 		mailSender.send(preparators);
 		
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
 		return "mail/mailList";
 	}
+	
 	//목록조회
 	@RequestMapping("mailList.do")
 	public String mailList(Model model, ReorderVO reorderVO) {
