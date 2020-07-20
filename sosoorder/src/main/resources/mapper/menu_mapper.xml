@@ -9,7 +9,7 @@
 	<!-- 현재 등록된 메뉴 조회 -->
 	<select id="getMenuList" parameterType="menuVO"
 		resultType="menuVO">
-		SELECT *
+		SELECT menuName,menuCategory,menuPrice,menuContents,menuCheck
 		FROM menu
 		ORDER BY menuNum
 	</select>

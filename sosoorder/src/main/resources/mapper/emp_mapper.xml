@@ -50,7 +50,17 @@
    </insert>
    
    <select id="getEmployeesList" parameterType="EmployeesVO" resultType="EmployeesVO">
-	SELECT * 
+	SELECT empNum,
+	empName,
+	workPart,
+	to_char(empBirth,'YY-MM-DD'),
+	to_char(hireDate,'YY-MM-DD'),
+	salary,
+	to_char(endDate,'YY-MM-DD'),
+	empPhone,
+	to_char(salaryDay,'YY-MM-DD'),
+	empClass,
+	storeId
 	FROM employees
 	ORDER BY hireDate
    </select>
