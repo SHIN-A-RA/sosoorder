@@ -1,11 +1,18 @@
 package com.soso.app.order.mapper;
 
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.List;
+import java.util.Map;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+import org.springframework.test.context.ContextConfiguration;
+
+import com.soso.app.menu.service.MenuSearchVO;
+import com.soso.app.order.service.OrderCptVO;
+
+
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface OrderMapper {
+	
+	//주문메뉴리스트
+	public List<Map<String, Object>> getOrder(MenuSearchVO menuSearchVO);	
 
 }

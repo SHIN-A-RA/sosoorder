@@ -8,3 +8,12 @@ WHERE C.storeId = 'test'
    
 /* orderCpt insert */
 insert into ORDERCPT values(2, null, 2, 3, 1, null)
+
+/* 주문메뉴 */
+SELECT m.menuName, o.orderCount, m.menuPrice*o.orderCount AS price
+FROM menu m JOIN orderCpt o ON (m.menuNum = o.menuNum)
+WHERE m.storeId = 'test' 
+	AND o.orderNum= 1;
+
+
+
