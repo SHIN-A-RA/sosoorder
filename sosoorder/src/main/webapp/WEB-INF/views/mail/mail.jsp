@@ -34,7 +34,7 @@ position: absolute;
 <div class="top_bar"></div>
 <div class="item">
   <h4>리-오더 보내기</h4>
-    <form action="sendMailAttach.do" method="post" >
+    <form action="sendMailAttach.do" method="post"  enctype = "multipart/form-data" >
        <div align="center">
         <input type="text" name="frommail" size="100"  style="width: 100%" placeholder="보내는 사람 메일">
        
@@ -65,8 +65,10 @@ position: absolute;
                <div class="wr_c">
                     <div class="bo_w_flie write_div">
                        <div class="file_wr write_div">
-                        <label for="filename" class="lb_icon"><i class="fa fa-download" aria-hidden="true"></i></label>
-                        <input type="file" name="filename" id="filename" class="frm_file ">
+                     <%--  // <img src="${pageContext.request.contextPath }${url }" style="width:150px"> --%>
+                        <label for="file" class="lb_icon"><i class="fa fa-download" aria-hidden="true"></i></label>
+                        <input type="file" name="UploadFile" id="filename" class="frm_file ">
+                      
                        </div>
                   </div>
                   </div>
