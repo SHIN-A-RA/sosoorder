@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,8 +32,8 @@ public class ReorderController {
 	@Autowired
 	private ReorderService reorderService;
 	
-	@RequestMapping("mailwrite.do")
-	public String mailwrite() {
+	@RequestMapping("mailwrite.do/{storeId}")
+	public String mailwrite(@PathVariable String storeId) {
 		return "mail/mail";
 	}
   
@@ -64,8 +65,8 @@ public class ReorderController {
 	}
 	
 
-	@RequestMapping("sendMailAttach.do")
-	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO) throws IllegalStateException, IOException {
+	@RequestMapping("sendMailAttach.do/{storeId}")
+	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO, @PathVariable String storeId) throws IllegalStateException, IOException {
 		
 		
 		//업로드 처리
@@ -85,7 +86,7 @@ public class ReorderController {
 		
 		// 회원목록조회
 		MemberVO memberVO = new MemberVO();
-		List<MemberVO> list = memberMapper.getMemberList(memberVO);
+		List<MemberVO> list = reorderService.getEmail(memberVO);
 
 		// 회원목록for문
 		MimeMessagePreparator[] preparators = new MimeMessagePreparator[list.size()];
@@ -98,7 +99,7 @@ public class ReorderController {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 					helper.setFrom(vo.getFrommail());//어드민 메일 
-					helper.setTo(member.getEmail());
+					helper.setTo("");
 					helper.setSubject(vo.getTitle());
 					helper.setText(vo.getContents(), true);
 					if(vo.getProfile()  != null )
