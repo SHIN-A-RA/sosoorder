@@ -14,9 +14,16 @@ public class OrderController {
 		return "order/orderInsert";
 	}
 	
+	//by혜원, 주소찾기팝업
 	@RequestMapping("/jusoPopup")
 	public String jusoPopup() {
 		return "empty/order/jusoPopup";
+	}
+	
+	//by혜원, 나의쿠폰함팝업
+	@RequestMapping("/myCouponList")
+	public String myCouponList() {
+		return "order/myCouponList";
 	}
 
 }

@@ -95,7 +95,7 @@
 		<div class="col">
 			<div class="input-group" id="uploadFile">
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputGroupFile04"
+					<input type="file" class="custom-file-input" id="menuImage" name="menuImage"
 						aria-describedby="inputGroupFileAddon04"> <label
 						class="custom-file-label" style="text-align: left;"
 						for="inputGroupFile04">이미지 선택</label>
@@ -108,7 +108,7 @@
 					<span class="input-group-text" id="basic-addon2">메뉴소개</span>
 				</div>
 				<textarea style="width: 600px; text-align: center;" class="DOC_TEXT"
-					name="DOC_TEXT" placeholder="200자 이내로 적어주세요."></textarea>
+					name="menuContents" id="menuContents" placeholder="200자 이내로 적어주세요."></textarea>
 			</div>
 			<span style="color: #aaa;" id="counter">(0 / 최대 200자)</span>
 		</div>
