@@ -2,6 +2,55 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+var myApp = angular.module("myApp",[]);
+myApp.controller("myAppCtrl", function($scope){
+	var product = sessionStorage.getItem('cart');
+	var number;
+	if(product == null)
+		product = [];
+	else
+		product = JSON.parse(product);
+	$scope.products = product;
+	$scope.addItem = function(user){
+		var pa = $(window.event.target).parent();
+		var name = pa.find(".menuName").html();
+		var num = pa.find(".menuNum").html();
+		var price = pa.find(".menuPrice").html();
+		var count = 1; 
+		
+		var values = $scope.products;
+		angular.forEach(values, function(value, key){
+			if (value.menuNum == num)
+		    	$scope.products.splice(index, 1);
+				count = value.orderCount + 1; 
+		});
+		
+		$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count});
+		sessionStorage.setItem('cart', JSON.stringify($scope.products));
+		
+		number = $scope.products.length;
+		$(".shoping-cart-cnt").html(number);
+
+	}
+	$scope.deleteItem = function(user){
+		var index = $scope.products.indexOf(user);
+	    $scope.products.splice(index, 1);
+	    sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+	    
+	    number = $scope.products.length;
+		$(".shoping-cart-cnt").html(number);
+
+	}
+	
+	
+	number = $scope.products.length;
+	$(".shoping-cart-cnt").html(number);
+	console.log(number);
+	
+	
+});
+</script>
 
 <input type="hidden" name="hidden_storeId" id="hidden_storeId" value="${storeId}"> <br>
 <!-- 메뉴 구분-->
@@ -19,6 +68,9 @@
 </div>
 
 <!-- 메뉴 목록 -->
+<div ng-app="myApp">
+<div ng-controller="myAppCtrl">
+
 <div class="slick_box menu_list_wrap">
 	<div class="menu_list">
 	<c:forEach items="${menuList}" var="menu">
@@ -39,14 +91,12 @@
 	               </div>
 	           </div>
 	           <div class="separator clear-left">
-		           	<form>
-		           		<div class="btn-add cartInsertBtn" onclick="setdata()">
-		           			<input type="hidden" class="menuName" value="${menu.menuName}">
-		           			<input type="hidden" class="menuPrice" value="${menu.menuPrice}">
-		           			<input type="hidden" class="menuNum" value="${menu.menuNum}">
-		           			<i class="fa fa-shopping-cart"></i> Add to cart
-		           		</div>
-					</form>	           	
+	           		<div class="btn-add cartInsertBtn" ng-click="addItem()">
+	           			<span class="menuName none">${menu.menuName}</span>
+	           			<span class="menuPrice none">${menu.menuPrice}</span>
+	           			<span class="menuNum none">${menu.menuNum}</span>
+	           			<i class="fa fa-shopping-cart"></i> Add to cart
+	           		</div>
 	           	
 	               <p class="btn-details">
 	                   <i class="fa fa-list"></i>
@@ -74,14 +124,15 @@
     Shopping Bag
   </div>
   <!-- Product #1 -->
-  <div class="item">
+  <div class="item" ng-repeat="row in products track by $index">
     <div class="buttons">
-      <span class="delete-btn"><i class="fa fa-times" aria-hidden="true"></i></span>
+      <span class="delete-btn" ng-click="deleteItem(row)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </div>
  
     <div class="description">
-      <span>MENUNAME</span>
-      <span>$549</span>
+      <span>{{row.menuName}}</span>
+      <span>{{row.menuPrice}} 원</span>
+      <span class="none">{{row.menuNum}}</span>
     </div>
  
     <div class="quantity">
@@ -95,55 +146,15 @@
     </div>
  
     <div class="total-price">$549</div>
+  </div> 
+  <!-- Product #1 -->
+  <div class="cart_btn_wrap">
+  	<div class="cart_sumit">결제하기</div>
+  	<div class="cart_remove">삭제하기</div>
   </div>
- 
-  </div>
+</div>
 
-
-<script>
-function setdata(){
-var myApp = angular.module("myApp",[]);
-myApp.controller("myAppCtrl", function($scope){
-	/* $scope.setdata = function(){ */
-		var sJson="[";
-		for(var i = 0; i < sessionStorage.length; i++){
-			var key = sessionStorage.key(i);
-			var value = sessionStorage[key];
-			var v_menuName = JSON.parse(value).menuName;
-			var v_menuNum = JSON.parse(value).menuNum;
-			var v_menuPrice = JSON.parse(value).menuPrice;
-			
-
-		    if(i < sessionStorage.length -1){
-		    	sJson += value + "," ;
-		    }else if(i == sessionStorage.length -1){
-		    	sJson += value + "]";
-		    }
-		}
-		$scope.list = JSON.parse(sJson);
-	/* } */
-	
-	//console.log(sJson);
-	
-});
-
-}
-setdata();
-</script>
-<div ng-app="myApp">
-<div ng-controller="myAppCtrl">
-  <table border="1">
-  <tr>
-    <td>menuName</td>
-    <td>menuNum</td>
-    <td>menuPrice</td>
-  </tr>
-  <tr data-ng-repeat="row in list">
-    <td>{{row.menuName}}</td>
-    <td>{{row.menuNum}}</td>
-    <td>{{row.menuPrice}}</td>
-  </tr>
-  </table>
+<!--  -->
  </div>
  </div>
              		
@@ -216,82 +227,3 @@ $(function(){
 	
 })
 </script>
-<script type="text/javascript">
-//sessionStorage에 선택한 메뉴의 정보를 저장하는 장바구니 
-$(".cartInsertBtn").on("click",function(){
-	if(!storageSupport()) {
-		return false;
-	} 
-
-    var menuName = $(this).find(".menuName").attr('value');
-    var menuNum = $(this).find(".menuNum").attr('value');
-    var menuPrice = $(this).find(".menuPrice").attr('value');
-    
-    var obj = {
-    		'menuName' : menuName,
-            'menuNum' : menuNum,
-        	'menuPrice' : menuPrice
-    	}
-    sessionStorage.setItem(menuNum, JSON.stringify(obj));   
-    var cartCtn = sessionStorage.length; //길이
-    //sessionStorage.removeItem(key) //해당키값삭제
-
-    return true;
-});
-
-
-	
-//세션 스토리지를 지원하는 브라우저인지 확인하는 코드
-function storageSupport() {
-	if(!window.sessionStorage) {
-		return false;
-	}
-	return true;
-}
-
-</script>
- <!-- <script>
-    $(document).ready(function() {
-    	var sJson="[";
-    	for(var i = 0; i < sessionStorage.length; i++){
-    		var key = sessionStorage.key(i);
-    		var value = sessionStorage[key];
-    		var v_menuName = JSON.parse(value).menuName;
-    		var v_menuNum = JSON.parse(value).menuNum;
-    		var v_menuPrice = JSON.parse(value).menuPrice;
-    	    
-    		if(i < sessionStorage.length -1){
-    	    	sJson += value + "," ;
-    	    }else if(i == sessionStorage.length -1){
-    	    	sJson += value + "]";
-    	    }
-    	}
-    	
-	  	var result = document.getElementById('ajaxValue');
-
-		var storeId = $('#hidden_storeId').val();
-			
-    	$.ajax({
-    	    url : homeSample/storeId, 
-    	    dataType :"json",
-    	    data:JSON.parse(sJson),
-    	    method:"POST",
-    	    success : function(data) {
-    	    	
-    	    	var str = "";
-				for(var i=0; i<data.length; i++) {
-					str += "id=" + data[i].menuName;
-					str += ",userId=" + data[i].menuNum;
-					str += ",userPwd=" + data[i].menuPrice + "<br/>";
-				}
-				result.innerHTML = str;
-            },error : function(e) {
-            }
-    	});
-
-    });
-</script> -->
-
-<div id="ajaxValue"></div>
-
-

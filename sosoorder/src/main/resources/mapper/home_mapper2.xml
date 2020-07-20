@@ -4,7 +4,12 @@
 
 <mapper namespace="com.soso.app.home.mapper.HomeMapper">
 	<select id="getMenuCategory" resultType="AdminVO" parameterType="AdminVO">
-		SELECT storeMenu FROM admin where storeId = #{storeId}
+		SELECT storeMenu FROM admin
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
 	</select>
 
 </mapper>

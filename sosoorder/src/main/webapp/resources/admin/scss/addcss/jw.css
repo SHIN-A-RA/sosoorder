@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+.none{display: none !important;}
 .slick_box{position:relative}
 .slick_box .prev, .slick_box .next{position:absolute; top:50%;  transform:translateY(-50%);  font-size: 30px;}
 .slick_box .prev{left:10%;}
