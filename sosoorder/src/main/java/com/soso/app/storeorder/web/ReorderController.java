@@ -36,6 +36,8 @@ public class ReorderController {
 		return "mail/mail";
 	}
   
+	
+	
 	// mailSending 코드
 	@RequestMapping("mailSending.do")
 	public String mailSending(HttpServletRequest request) {
