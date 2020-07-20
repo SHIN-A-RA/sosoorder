@@ -1,14 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 추가사항
-아이디 (DB)중복체크-->
 
 
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
 <script src="resources/admin/scss/addcss/adminInsertValued.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
-<meta charset="UTF-8">
 
+
+<script>
+var idPass;
+var idRegex = /^[a-zA-Z0-9]{4,12}$/;
+$(document).ready(function(){
+	//아이디 중복체크
+	$('input[name=storeId]').blur(function(){
+		var idCheck=$('input[name=storeId]').val();
+		if(idRegex.test(idCheck)){
+			$.ajax({
+				url:'idCheck?storeId='+idCheck,
+				type:'get',
+				success:function(data){
+					var color;
+					var ans;
+					if(data>0){
+						ans='이미있는 아이디입니다.';
+						color='red';
+                        idPass=false;
+					}else{
+						ans='회원가입 가능한 아이디입니다.';
+						color='green';
+						idPass=true;
+					}
+					$('#temp').text(ans);
+					$('#temp').css('color',color);
+				}
+			})	
+		}
+	});
+});
+ </script>
+
+
+
+
+<meta charset="UTF-8">
 	<div id="formWrapper">
 		<div id="form">
 			<div class="logo">
@@ -66,22 +100,23 @@
 			</div>
 			<form action="adminInsert" method="post" name="frm" id="frm">
 				<div class="form-item">
-					<p class="formLabel">사업자 아아디</p>
+				<!-- 가입시 영문 숫자(4,12)까지 허용 -->
+					<p class="formLabel">사업자 아아디</p> 
 					<input type="text" name="storeId" id="storeId" class="form-style"
 						autocomplete="off" />
+						<span id = "temp"></span>
 				</div>
+				
 				<div class="form-item">
 					<p class="formLabel">비밀번호</p>
-					<input type="text" name="storePwd" id="storePwd" class="form-style"
-						autocomplete="off" onchange="passwordChack()" />
+					<input type="password" name="storePwd" id="storePwd" class="form-style"
+						autocomplete="off" onkeyup="checkPwd()" />
 				</div>
 				<div class="form-item">
 					<p class="formLabel">비밀번호 확인</p>
-					<input type="text" name="storePwd2" id="storePwd2"
-						class="form-style" autocomplete="off" onchange="passwordChack()" />
-					<p>
-						<span id="same"></span>
-					</p>
+					<input type="password" name="storePwd2" id="storePwd2"
+						class="form-style" autocomplete="off"  onkeyup="checkPwd()"/>
+						<p><span id="checkPwd"></span></p>
 				</div>
 				<div class="form-item">
 					<p class="formLabel">상호명</p>
@@ -105,11 +140,9 @@
 				</div>
 
 				<p></p>
-				<input type="button" onclick="validCheck()" class="login pull-right" value="가입완료">
+				<input type="submit" class="login pull-right" value="가입완료">
 				</form>
 			</div>
 	</div>
 			
 
-</body>
-</html>

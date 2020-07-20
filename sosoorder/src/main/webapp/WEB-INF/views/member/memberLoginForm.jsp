@@ -75,10 +75,8 @@
 				<p></p>
 			</div>
 			<input type="button" class="login pull-right" value="로그인" onclick="validCheck()">
-			<input type="button" class="login pull-right" value="일반가입"
-				onclick="location.href='memberInsertForm'"> <input
-				type="button" class="login pull-right" value="사업자가입"
-				onclick="location.href='adminInsertForm'">
+			<input type="button" class="login pull-right" value="일반가입" onclick="location.href='memberInsertForm'"> 
+			<input type="button" class="login pull-right" value="사업자가입"onclick="location.href='adminInsertForm'">
 		</form>
 	</div>
 </div>

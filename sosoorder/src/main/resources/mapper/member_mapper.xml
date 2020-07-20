@@ -6,7 +6,7 @@
 
 
 <!-- 관리자(Admin) 조회 -->
-   <select id="getMember" parameterType="memberVO" resultType="memberVO">
+   <select id="getMember" parameterType="MemberVO" resultType="MemberVO">
       SELECT
       memberNum,
       phone,
@@ -18,13 +18,13 @@
    </select>
 
 <!-- 관리자들(Admin)리스트 조회 -->
-   <select id="getMemberList" parameterType="memberVO" resultType="memberVO">   
+   <select id="getMemberList" parameterType="MemberVO" resultType="MemberVO">   
       SELECT * 
       FROM member
       ORDER BY memberNum
    </select>
 
-   <insert id="memberInsert" parameterType="memberVO">  
+   <insert id="memberInsert" parameterType="MemberVO">  
       INSERT INTO member
          (memberNum, 
          phone, 

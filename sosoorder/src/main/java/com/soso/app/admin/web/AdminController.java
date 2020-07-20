@@ -4,7 +4,10 @@ package com.soso.app.admin.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.admin.service.AdminService;
 import com.soso.app.admin.service.AdminVO;
@@ -17,13 +20,13 @@ public class AdminController {
 	AdminService adminService;
     
 
-	//사업자 등록폼
+	//admin 등록페이지 이동
 	@RequestMapping("adminInsertForm")
 	public String adminInsertForm(AdminVO vo) {
-		return "basic/admin/adminInsertForm";
+		return "admin/adminInsertForm";
 	}
 
-	// 등록처리
+	//admin 등록DB처리
 	@RequestMapping("adminInsert")
 	public String adminInsert(AdminVO vo, Model model) {
 		adminService.adminInsert(vo);
@@ -33,6 +36,12 @@ public class AdminController {
 		
 	}
 
+	//아이디 중복 체크 
+	@GetMapping("idCheck")
+	public @ResponseBody int idCheck(@RequestParam("storeId")String id) {
+		int cnt=adminService.idCheck(id);
+		return cnt;
+	}
 	/*
 	 * // 단건조회
 	 * 
@@ -46,7 +55,7 @@ public class AdminController {
 	  @RequestMapping("adminList") 
 	  public String adminList(Model model) {
 	  model.addAttribute("adminList", adminService.getAdminList(null)); 
-	  return "admin/admin/adminInsert";
+	  return "admin/adminInsert";
 	  }
 	 /* 
 	 * // emp관리

@@ -34,4 +34,10 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
+	@Override
+	public int idCheck(String id) {
+		int cnt=adminMapper.idCheck(id);
+		return cnt;
+	}
+
 }

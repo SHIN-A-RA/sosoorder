@@ -40,3 +40,17 @@
 
 	
 	} 
+	function checkPwd(){
+	  var f1 = document.forms[0];
+	  var pw1 = f1.storePwd.value;
+	  var pw2 = f1.storePwd2.value;
+	  if(pw1!=pw2){
+	   document.getElementById('checkPwd').style.color = "red";
+	   document.getElementById('checkPwd').innerHTML = "비밀번호 불일치";
+	  }else{
+	   document.getElementById('checkPwd').style.color = "green";
+	   document.getElementById('checkPwd').innerHTML = "비밀번호 일치";
+	   
+	  }
+	  
+	 }

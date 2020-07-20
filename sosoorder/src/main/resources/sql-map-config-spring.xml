@@ -15,10 +15,11 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>  -->
 	<typeAliases>
-		 <typeAlias type="com.soso.app.member.service.MemberVO" alias="memberVO"/> 
-		 <typeAlias type="com.soso.app.admin.service.AdminVO" alias="adminVO"/>    
+		 <typeAlias type="com.soso.app.member.service.MemberVO" alias="MemberVO"/> 
+		 <typeAlias type="com.soso.app.admin.service.AdminVO" alias="AdminVO"/>    
 		 <typeAlias type="com.soso.app.menu.service.MenuVO" alias="MenuVO"/>  
-		 <typeAlias type="com.soso.app.storeorder.service.ReorderVO" alias="ReorderVO"/>  
+		 <typeAlias type="com.soso.app.storeorder.service.ReorderVO" alias="ReorderVO"/>
+		 <typeAlias type="com.soso.app.employees.service.EmployeesVO" alias="EmployeesVO"/>   
 	</typeAliases>
 
 </configuration>

@@ -6,7 +6,7 @@
 
 
 <!-- 관리자(Admin) 조회 -->
-   <select id="getAdmin" parameterType="adminVO" resultType="adminVO">
+   <select id="getAdmin" parameterType="AdminVO" resultType="AdminVO">
       SELECT
       storeId,
       storePwd,
@@ -14,12 +14,12 @@
       storeAddr,
       storeName,
       accountNum
-      FROM employees
+      FROM admin
       WHERE storeId = #{storeId}
    </select>
 
 <!-- 관리자(Admin) 회원가입 -->
-   <insert id="adminInsert" parameterType="adminVO">  
+   <insert id="adminInsert" parameterType="AdminVO">  
       INSERT INTO admin
          (storeId, 
          storePwd, 
@@ -33,16 +33,25 @@
          #{storeNum},
          #{storeAddr},
          #{storeName},                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-         #{accountNum})
+         #{accountNum})r
    </insert>
 
+<select id="idCheck" parameterType="String" resultType="int">
+      SELECT COUNT(*) FROM admin
+      WHERE
+          storeId = #{storeId}
+</select>
+
+
+
 <!-- 관리자들(Admin)리스트 조회 슈퍼유저 -->
-   <select id="getAdminList" parameterType="adminVO" resultType="adminVO">   
+   <select id="getAdminList" parameterType="AdminVO" resultType="AdminVO">   
       SELECT * 
       FROM admin
       ORDER BY storeId
    </select>
 
+   
    
    <select id="getName" resultType="java.lang.String" parameterType="integer"> 
    	SELECT first_name from employees where employee_id = #{employeeId}
@@ -56,17 +65,5 @@
    	SELECT * from employees order by first_name 
    </select>   
    
-<!--    <update id="updateSomething" parameterType="#modelname">
-      UPDATE tablename1
-      SET
-      columnname1=#{param1}
-      WHERE
-      columnname2 = #{param2}
-   </update>
-
-   <delete id="deleteSomething" parameterType="int">
-      DELETE FROM tablename1 WHERE
-      columnname1 = #{param1}
-   </delete> -->
 
 </mapper>

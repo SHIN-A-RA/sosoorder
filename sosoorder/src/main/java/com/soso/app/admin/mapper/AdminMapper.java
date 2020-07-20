@@ -20,7 +20,5 @@ public interface AdminMapper {
 
 	public void adminInsert(AdminVO adminVO);
 
-	/* public String getName(Integer id); */
-	
-	/* public List<Map<String, Object>> getEmpMap(); */
+	public int idCheck(String id);
 }

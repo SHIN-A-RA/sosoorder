@@ -2,14 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<!-- <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
- --><!-- 추가사항
-아이디 (DB)중복체크
-정규식
-사업자 번호 데이터 장규식  -->
+
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
 <script src="resources/admin/scss/addcss/memberInsertValued.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
+
+
+
+
+
 
 <div id="formWrapper">
 	<div id="form">
@@ -79,12 +80,12 @@
 			</div>
 			<div class="form-item">
 				<p class="formLabel">비밀번호</p>
-				<input type="text" name="pwd" id="pwd" class="form-style"
-					autocomplete="off" onchange="passwordChack()" />
+				<input type="password" name="pwd" id="pwd" class="form-style"
+					autocomplete="off" onchange="passwordChack()" onkeyup="checkPwd()" />
 			</div>
 			<div class="form-item">
 				<p class="formLabel">비밀번호 확인</p>
-				<input type="text" name="pwd2" id="pwd2" class="form-style"
+				<input type="password" name="pwd2" id="pwd2" class="form-style"
 					autocomplete="off" onchange="passwordChack()" onkeyup="checkPwd()" />
 			</div>
 			<p><span id="checkPwd"></span></p>
