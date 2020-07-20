@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <input type="hidden" name="hidden_storeId" id="hidden_storeId" value="${storeId}"> <br>
 <!-- 메뉴 구분-->
@@ -41,12 +40,12 @@
 	           </div>
 	           <div class="separator clear-left">
 		           	<form>
-		           		<button class="btn-add cartInsertBtn">
+		           		<div class="btn-add cartInsertBtn" onclick="setdata()">
 		           			<input type="hidden" class="menuName" value="${menu.menuName}">
 		           			<input type="hidden" class="menuPrice" value="${menu.menuPrice}">
 		           			<input type="hidden" class="menuNum" value="${menu.menuNum}">
 		           			<i class="fa fa-shopping-cart"></i> Add to cart
-		           		</button>
+		           		</div>
 					</form>	           	
 	           	
 	               <p class="btn-details">
@@ -101,32 +100,35 @@
   </div>
 
 
-<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script>
+function setdata(){
 var myApp = angular.module("myApp",[]);
 myApp.controller("myAppCtrl", function($scope){
-	var sJson="[";
-	for(var i = 0; i < sessionStorage.length; i++){
-		var key = sessionStorage.key(i);
-		var value = sessionStorage[key];
-		var v_menuName = JSON.parse(value).menuName;
-		var v_menuNum = JSON.parse(value).menuNum;
-		var v_menuPrice = JSON.parse(value).menuPrice;
-		
+	/* $scope.setdata = function(){ */
+		var sJson="[";
+		for(var i = 0; i < sessionStorage.length; i++){
+			var key = sessionStorage.key(i);
+			var value = sessionStorage[key];
+			var v_menuName = JSON.parse(value).menuName;
+			var v_menuNum = JSON.parse(value).menuNum;
+			var v_menuPrice = JSON.parse(value).menuPrice;
+			
 
-	    if(i < sessionStorage.length -1){
-	    	sJson += value + "," ;
-	    }else if(i == sessionStorage.length -1){
-	    	sJson += value + "]";
-	    }
-	    
-	     
-	}
+		    if(i < sessionStorage.length -1){
+		    	sJson += value + "," ;
+		    }else if(i == sessionStorage.length -1){
+		    	sJson += value + "]";
+		    }
+		}
+		$scope.list = JSON.parse(sJson);
+	/* } */
+	
 	//console.log(sJson);
-	$scope.list = 
-    	JSON.parse(sJson)
-    ;
+	
 });
+
+}
+setdata();
 </script>
 <div ng-app="myApp">
 <div ng-controller="myAppCtrl">
@@ -143,7 +145,7 @@ myApp.controller("myAppCtrl", function($scope){
   </tr>
   </table>
  </div>
- </div> -->
+ </div>
              		
 <script>
 	 $('.menu_bar').slick({
@@ -248,9 +250,8 @@ function storageSupport() {
 }
 
 </script>
- <script>
+ <!-- <script>
     $(document).ready(function() {
-    	
     	var sJson="[";
     	for(var i = 0; i < sessionStorage.length; i++){
     		var key = sessionStorage.key(i);
@@ -258,43 +259,39 @@ function storageSupport() {
     		var v_menuName = JSON.parse(value).menuName;
     		var v_menuNum = JSON.parse(value).menuNum;
     		var v_menuPrice = JSON.parse(value).menuPrice;
-    		
-
-    	    if(i < sessionStorage.length -1){
+    	    
+    		if(i < sessionStorage.length -1){
     	    	sJson += value + "," ;
     	    }else if(i == sessionStorage.length -1){
     	    	sJson += value + "]";
     	    }
-    	    
-    	     
     	}
     	
-    	console.log();
-        	
-    	
-    	
-    	var result = document.getElementById('ajaxValue');
-    	var result2 = document.getElementById('ajaxValue2');
-        result.innerHTML = sJson;	
-        
+	  	var result = document.getElementById('ajaxValue');
 
 		var storeId = $('#hidden_storeId').val();
 			
     	$.ajax({
-    	    url :  storeId, 
-    	    dataType :"JSON",
+    	    url : homeSample/storeId, 
+    	    dataType :"json",
     	    data:JSON.parse(sJson),
     	    method:"POST",
     	    success : function(data) {
-                console.log(data);
+    	    	
+    	    	var str = "";
+				for(var i=0; i<data.length; i++) {
+					str += "id=" + data[i].menuName;
+					str += ",userId=" + data[i].menuNum;
+					str += ",userPwd=" + data[i].menuPrice + "<br/>";
+				}
+				result.innerHTML = str;
             },error : function(e) {
-                
             }
     	});
 
     });
-</script>
+</script> -->
+
 <div id="ajaxValue"></div>
-<div id="ajaxValue2">결과 : </div> 
 
 
