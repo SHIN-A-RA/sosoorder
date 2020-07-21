@@ -1,11 +1,12 @@
 package com.soso.app.employees.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soso.app.employees.service.EmployeesService;
@@ -59,25 +60,12 @@ public class EmployeesController {
 	 * employeesService.idCheck(vo.getStoreId()); return cnt; }
 	 */
 
-	// employees 단건조회
-	/*
-	 * @RequestMapping("getEmp/{employeeId}/{lastName}") public String
-	 * getEmp(@PathVariable Integer employeeId, String lastName) {
-	 * System.out.println(employeeId); System.out.println(lastName); return "home";
-	 * }
-	 */
-	/*
-	 * // employees ajax목록
-	 * 
-	 * @RequestMapping("ajaxGetEmployeesList") public @ResponseBody
-	 * List<EmployeesVO> ajaxGetEmployeesList(EmployeesVO vo) { return
-	 * employeesService.getEmployeesList(vo); }
-	 */
-
-	// 수정폼
-
-	// 수정처리
-
-	// 삭제처리
+	  
+	@RequestMapping("empSchList") 
+    public String getEmployees(HttpSession session,Model model) {
+	model.addAttribute("empList",employeesService.getEmployees(session.getAttribute("storeId")));
+	return "employees/empSchList"; 
+	
+	}
 
 }

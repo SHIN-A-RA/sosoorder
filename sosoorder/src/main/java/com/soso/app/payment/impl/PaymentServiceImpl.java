@@ -1,4 +1,4 @@
-package com.soso.app.payment.Impl;
+package com.soso.app.payment.impl;
 
 import java.util.List;
 import java.util.Map;

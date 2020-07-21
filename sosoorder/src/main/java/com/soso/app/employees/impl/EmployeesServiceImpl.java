@@ -16,8 +16,8 @@ public class EmployeesServiceImpl implements EmployeesService {
 	
 	//employees 단건조회
 	@Override
-	public EmployeesVO getEmployees(EmployeesVO employeesVO) {
-		return employeesMapper.getEmployees(employeesVO);
+	public List<EmployeesVO> getEmployees(Object object) {
+		return employeesMapper.getEmployees(object);
 	}
 
 	//employees 등록폼

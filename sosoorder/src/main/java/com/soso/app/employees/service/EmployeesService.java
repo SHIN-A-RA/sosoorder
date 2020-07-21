@@ -5,7 +5,7 @@ import java.util.List;
 public interface EmployeesService {
 
 
-	public EmployeesVO getEmployees(EmployeesVO employeesVO);
+	public List<EmployeesVO> getEmployees(Object object);
 	public void employeesInsert(EmployeesVO employeesVO);
 	public List<EmployeesVO> getEmployeesList(EmployeesVO employeesVO);
 

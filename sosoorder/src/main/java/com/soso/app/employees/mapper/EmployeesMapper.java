@@ -12,7 +12,7 @@ import com.soso.app.employees.service.EmployeesVO;
 
 public interface EmployeesMapper {
 
-	public EmployeesVO getEmployees(EmployeesVO employeesVO);
+	public List<EmployeesVO> getEmployees(Object object);
 	public void employeesInsert(EmployeesVO employeesVO);
 	public List<EmployeesVO> getEmployeesList(EmployeesVO employeesVO);
 
