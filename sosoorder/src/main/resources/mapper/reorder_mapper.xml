@@ -41,8 +41,12 @@
 						#{storeId},sysdate)
 								
 	</insert>
-	<select id="getEamil" parameterType="memberVO" resultType="memberVO">   
-	select m.email from point p, member m where p.memberNum = m.memberNum and p.storeId = #{storeId}
+	<select id="getEmail" parameterType="adminVO" resultType="map">   
+	select m.email
+	from point p, member m, admin a
+	where p.memberNum = m.memberNum and
+		a.storeid = p.storeid and
+		a.storeId = #{storeId}
  </select>
   
    

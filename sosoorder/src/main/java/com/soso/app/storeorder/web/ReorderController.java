@@ -3,9 +3,11 @@ package com.soso.app.storeorder.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,8 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.soso.app.admin.service.AdminVO;
 import com.soso.app.member.mapper.MemberMapper;
-import com.soso.app.member.service.MemberVO;
 import com.soso.app.storeorder.service.ReorderService;
 import com.soso.app.storeorder.service.ReorderVO;
 
@@ -32,15 +34,15 @@ public class ReorderController {
 	@Autowired
 	private ReorderService reorderService;
 	
-	@RequestMapping("mailwrite.do/{storeId}")
-	public String mailwrite(@PathVariable String storeId) {
-		return "mail/mail";
+	@RequestMapping("mailwrite")
+	public String mailwrite() {
+		return "reorder/mail";
 	}
   
 	
 	
 	// mailSending 코드
-	@RequestMapping("mailSending.do")
+	@RequestMapping("mailSending")
 	public String mailSending(HttpServletRequest request) {
 
 		String setfrom = "";
@@ -65,8 +67,10 @@ public class ReorderController {
 	}
 	
 
-	@RequestMapping("sendMailAttach.do/{storeId}")
-	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, ReorderVO reorderVO, @PathVariable String storeId) throws IllegalStateException, IOException {
+	@RequestMapping("sendMailAttach")
+	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, 
+			ReorderVO reorderVO, HttpSession session, AdminVO adminVO
+			) throws IllegalStateException, IOException {
 		
 		
 		//업로드 처리
@@ -80,26 +84,28 @@ public class ReorderController {
 			vo.setProfile(filename);
 		}
 		
+		String storeId = (String)session.getAttribute("storeId");
+		adminVO.setStoreId(storeId);
 		//발송이력저장
-		vo.setStoreId("test");
+		vo.setStoreId(storeId);
 		reorderService.mailInsert(vo);
 		
 		// 회원목록조회
-		MemberVO memberVO = new MemberVO();
-		List<MemberVO> list = reorderService.getEmail(memberVO);
+		//MemberVO memberVO = new MemberVO();
+		List<Map> list = reorderService.getEmail(adminVO);
 
 		// 회원목록for문
 		MimeMessagePreparator[] preparators = new MimeMessagePreparator[list.size()];
 		int i = 0;
-		for (MemberVO member : list) {
-			member.getEmail();
+		for (Map map : list) {
+			String email = (String)map.get("EMAIL");
 			preparators[i++] = new MimeMessagePreparator() {
 			
 				@Override
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 					helper.setFrom(vo.getFrommail());//어드민 메일 
-					helper.setTo("");
+					helper.setTo(email);
 					helper.setSubject(vo.getTitle());
 					helper.setText(vo.getContents(), true);
 					if(vo.getProfile()  != null )
@@ -115,14 +121,14 @@ public class ReorderController {
 		mailSender.send(preparators);
 		
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
-		return "mail/mailList";
+		return "reorder/mailList";
 	}
 	
 	//목록조회
-	@RequestMapping("mailList.do")
+	@RequestMapping("mailList")
 	public String mailList(Model model, ReorderVO reorderVO) {
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
-		return "mail/mailList";
+		return "reorder/mailList";
 		//일반 방식
 	
 	}

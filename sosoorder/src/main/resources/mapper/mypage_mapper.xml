@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.mypage.mapper.MypageMapper">
+
+
+	<select id="getPointsList" parameterType="MemberVO" resultType="map">
+		SELECT distinct
+		p.point "point",
+		p.pointCheck "pointCheck",
+		p.pointDate "pointDate",
+		a.STORENAME "storeName"
+		FROM point p, admin a, member m
+		<where>
+		p.storeId = a.storeId 
+		and m.membernum = p.membernum
+			<if test="phone != null">
+			and m.phone = #{phone}
+			</if>
+		</where>
+
+		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
+	</select>
+
+
+	<select id="getStoreList" parameterType="MemberVO" resultType="map">
+	
+		SELECT 	distinct
+		a.storeName "storeName"
+		FROM point p, admin a, member m
+		<where>
+		p.storeId = a.storeId
+		 and m.membernum = p.membernum
+			<if test="phone != null">
+			and m.phone = #{phone}
+			</if>
+		</where>
+		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
+	
+	</select>
+
+
+</mapper>
+
