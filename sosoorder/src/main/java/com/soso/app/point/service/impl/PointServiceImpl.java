@@ -17,8 +17,8 @@ public class PointServiceImpl implements PointService{
 	
 	//by혜원, 총적립금
 	@Override
-	public List<MenuSearchVO> totalPoint(MenuSearchVO menuSearchVO) {
-		return pointMapper.totalPoint(menuSearchVO);
+	public List<PointVO> getTotalPoint(MenuSearchVO menuSearchVO){
+		return pointMapper.getTotalPoint(menuSearchVO);
 	}
 	
 	

@@ -37,7 +37,7 @@ function Show() {
 // 쿠폰함 팝업창
 function GoMyCoupon(){
 
-	window.open("myCouponList","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 
+	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
 
 }
@@ -126,12 +126,9 @@ function GoMyCoupon(){
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
-		    	<p><input class="basic_input">원<button class="btn_post">전액사용</button>
-		    	 <c:set var = "totalPoint" value = "0" />
-				 <c:forEach items="${point}" var="point">	
-		    	<c:set var= "totalPoint" value="${totalPoint +point.point}"/>
-				</c:forEach>
-		    	(총 적립금:<strong style="color: #E91E63;"><c:out value="${totalPoint}"/></strong>원)</p>
+		    	<p><input class="basic_input2">원<button class="btn_post">전액사용</button>
+		    	
+		    	(총 적립금:<strong style="color: #E91E63;">${point[0].point}</strong>원)</p>
 		    	<ul class="ul_info">
 					<li>- 적립금은 사용제한 없이 언제든 결제가 가능합니다.</li>                     
                 </ul>
@@ -146,7 +143,7 @@ function GoMyCoupon(){
 	<table class="basic_tb">
 		<tr>
 			<th class="basic_tb_th2" >총 주문금액</th>
-			<td class="basic_tb_td" ></td>
+			<td class="basic_tb_td" ><c:out value="${totalPrice}"/>원</td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>

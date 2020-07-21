@@ -12,6 +12,6 @@ import com.soso.app.point.service.PointVO;
 public interface PointMapper {
 	
 	//by혜원, 총적립금 확인
-	public List<MenuSearchVO> totalPoint(MenuSearchVO menuSearchVO);	
+	public List<PointVO> getTotalPoint(MenuSearchVO menuSearchVO);	
 
 }

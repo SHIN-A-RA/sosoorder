@@ -18,21 +18,11 @@ WHERE m.storeId = 'test'
 alter table point add(pointCheck varchar2(2)); 
 
 /* 총적립금 */
-select point from point 
-where storeId = 'test' 
-	and memberNum = 1
-	and pointCheck = 0
+select sum(point*pointCheck) AS totalPoint 
+from point
+where storeId = 'test'
+	and memberNum = 1;
+	
 
-select 
-(
-(select point from point 
-where storeId = 'test' 
-	and memberNum = 1
-	and pointCheck = 0) - 
-(select point from point 
-where storeId = 'test' 
-	and memberNum = 1
-	and pointCheck = 1)
-	)  as pointtotal 
-	from point;
+
 

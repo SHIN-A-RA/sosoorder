@@ -86,6 +86,14 @@ border: 1px solid #d5d5d5;
 margin: 2px;
 }
 
+.basic_input2{
+height: 40px;
+padding: 5px 8px;
+border: 1px solid #d5d5d5;
+margin: 2px;
+text-align: right;
+}
+
 .btn_post{
 padding: 7px 15px;
 font-size: 16px;

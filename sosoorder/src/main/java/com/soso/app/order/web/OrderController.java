@@ -36,7 +36,7 @@ public class OrderController {
 		menuSearchVO.setMemberNum(1);	
 		
 		model.addAttribute("oderList", orderService.getOrder(menuSearchVO));
-		model.addAttribute("point", pointService.totalPoint(menuSearchVO));
+		model.addAttribute("point", pointService.getTotalPoint(menuSearchVO));
 		return "order/orderInsert";
 	}
 	
@@ -48,9 +48,9 @@ public class OrderController {
 	}
 	
 	//by혜원, 나의쿠폰함팝업
-	@RequestMapping("/myCouponList")
-	public String myCouponList() {
-		return "empty/order/myCouponList";
+	@RequestMapping("/orderCoupon")
+	public String orderCoupon() {
+		return "empty/order/orderCoupon";
 	}
 
 }
