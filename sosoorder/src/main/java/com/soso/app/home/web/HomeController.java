@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soso.app.admin.service.AdminVO;
@@ -28,21 +29,16 @@ public class HomeController {
 //	}
 
 	
-	@RequestMapping("/")
-	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO,HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
-		adminVO.setStoreId(storeId);
+	@RequestMapping("/{storeId}")
+	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO,HttpSession session,
+			@PathVariable String storeId) {
+		//storeId = (String)session.getAttribute("storeId");
+		//adminVO.setStoreId(storeId);
 		model.addAttribute("menuList", menuService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		return "home";
 	}
-	
-	//세션에 저장
-	@RequestMapping(value = "cart")
-	public String cartInsert(){
-		return "home";
-	}
-	
+
 	
 	
 

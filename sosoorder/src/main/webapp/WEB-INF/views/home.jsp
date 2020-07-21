@@ -17,16 +17,18 @@ myApp.controller("myAppCtrl", function($scope){
 		var name = pa.find(".menuName").html();
 		var num = pa.find(".menuNum").html();
 		var price = pa.find(".menuPrice").html();
-		var count = 1; 
+		/* var count = 1; */ 
 		
-		var values = $scope.products;
+	/* 	var values = $scope.products;
 		angular.forEach(values, function(value, key){
+			
 			if (value.menuNum == num)
 		    	$scope.products.splice(index, 1);
 				count = value.orderCount + 1; 
 		});
-		
-		$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count});
+		 */
+		$scope.products.push({menuName : name, menuNum : num, menuPrice : price});
+		count = 1;
 		sessionStorage.setItem('cart', JSON.stringify($scope.products));
 		
 		number = $scope.products.length;
@@ -139,7 +141,7 @@ myApp.controller("myAppCtrl", function($scope){
       <button class="plus-btn" type="button" name="button">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </button>
-      <input type="text" name="name" value="1">
+      <input type="text" name="name" value="{{row.orderCount}}">
       <button class="minus-btn" type="button" name="button">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
