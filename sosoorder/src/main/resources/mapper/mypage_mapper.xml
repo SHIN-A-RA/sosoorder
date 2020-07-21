@@ -4,7 +4,8 @@
 
 <mapper namespace="com.soso.app.mypage.mapper.MypageMapper">
 
-
+<!-- 적립금스트 -->
+<!-- by아라 -->
 	<select id="getPointsList" parameterType="MemberVO" resultType="map">
 		SELECT distinct
 		p.point "point",
@@ -22,8 +23,6 @@
 
 		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
 	</select>
-
-
 	<select id="getStoreList" parameterType="MemberVO" resultType="map">
 	
 		SELECT 	distinct
@@ -37,9 +36,33 @@
 			</if>
 		</where>
 		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
-	
 	</select>
-
-
+	
+	<!-- 주문내역리스트 -->
+	<!-- by아라 -->
+	<select id="getOrderList" parameterType="MemberVO" resultType="map">
+		SELECT distinct
+		p.payDay "payDay",
+		p.totalPay "totalPay", 
+		a.storeName "storeName" 
+		FROM payment p, admin a, member m
+		<where>
+	    m.membernum = p.membernum
+	    <if test="phone != null">
+  	    and m.phone = #{phone}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 별점업데이트 -->
+	<!-- by아라 -->
+	<update id="orderStarUpdate" parameterType="OrderCptVO">
+		UPDATE orderCpt
+		set
+		orderStart=#{orderStart}
+		where menuOrderNum= #{menuOrderNum}
+	</update>
+	
+	
 </mapper>
 
