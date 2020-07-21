@@ -20,13 +20,13 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getDayTotal(PaymentVO paymentVO) {
-		return paymentMapper.getDayTotal(paymentVO);
+	public List<Map<String, Object>> getDayTotal() {
+		return paymentMapper.getDayTotal();
 	}
 
 	@Override
-	public List<Map<String, Object>> getMonthTotal(PaymentVO paymentVO) {
-		return paymentMapper.getMonthTotal(paymentVO);
+	public List<Map<String, Object>> getMonthTotal() {
+		return paymentMapper.getMonthTotal();
 	}
 
 }

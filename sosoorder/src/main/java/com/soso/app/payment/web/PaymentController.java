@@ -15,21 +15,24 @@ import com.soso.app.payment.service.PaymentVO;
 @Controller
 public class PaymentController {
 
-	/*
-	 * @Autowired PaymentService paymentService;
-	 * 
-	 * //한건 조회
-	 * 
-	 * @RequestMapping("getPayment") public List<PaymentVO> getPayment(PaymentVO
-	 * vo,Model model) { return paymentService.getPayment(vo); } //일별 판매량 조회
-	 * 
-	 * @RequestMapping("getDayTotal") public @ResponseBody List<Map<String, Object>>
-	 * getDayTotal(PaymentVO vo) { return paymentService.getDayTotal(vo); }
-	 * 
-	 * //월별 판매량 조회
-	 * 
-	 * @RequestMapping("getMonthTotal") public @ResponseBody List<Map<String,
-	 * Object>> getDayTotal(PaymentVO vo){ return paymentService.getMonthTotal(vo);
-	 * }
-	 */
+	@Autowired
+	PaymentService paymentService;
+	
+	//한건 조회
+	@RequestMapping("getPayment")
+	public List<PaymentVO> getPayment(PaymentVO vo,Model model) {
+	return paymentService.getPayment(vo);
+	}
+	
+	//일별 판매량 조회
+	@RequestMapping("getDayTotal")
+	public @ResponseBody List<Map<String, Object>> getDayTotal() {
+		return paymentService.getDayTotal();
+	}
+	
+	//월별 판매량 조회
+	@RequestMapping("getMonthTotal")
+	public @ResponseBody List<Map<String, Object>> getMonthTotal(){
+		return paymentService.getMonthTotal();
+	}
 }
