@@ -127,7 +127,11 @@ function GoMyCoupon(){
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
 		    	<p><input class="basic_input">원<button class="btn_post">전액사용</button>
-		    	(총 적립금:<strong style="color: #E91E63;">0</strong>원)</p>
+		    	 <c:set var = "totalPoint" value = "0" />
+				 <c:forEach items="${point}" var="point">	
+		    	<c:set var= "totalPoint" value="${totalPoint +point.point}"/>
+				</c:forEach>
+		    	(총 적립금:<strong style="color: #E91E63;"><c:out value="${totalPoint}"/></strong>원)</p>
 		    	<ul class="ul_info">
 					<li>- 적립금은 사용제한 없이 언제든 결제가 가능합니다.</li>                     
                 </ul>

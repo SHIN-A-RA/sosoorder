@@ -6,5 +6,7 @@ import lombok.Data;
 public class MenuSearchVO extends MenuVO {
 	String storeId;
 	Integer orderNum;
+	Integer memberNum;
+	String pointCheck;
 
 }

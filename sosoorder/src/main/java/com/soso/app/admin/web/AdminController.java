@@ -64,10 +64,8 @@ public class AdminController {
 	@RequestMapping("adminInsert")
 	public String adminInsert(AdminVO vo, Model model,@PathVariable String storeId) {
 		adminService.adminInsert(vo);
-		//서비스 호출
-		
-		return "redirect:memberLoginForm";
-		
+		//서비스 호출		
+		return "redirect:memberLoginForm";		
 	}
 
 	//아이디 중복 체크 

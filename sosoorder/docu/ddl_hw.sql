@@ -14,6 +14,23 @@ SELECT m.menuName, o.orderCount, m.menuPrice*o.orderCount AS price
 FROM menu m JOIN orderCpt o ON (m.menuNum = o.menuNum)
 WHERE m.storeId = 'test' 
 	AND o.orderNum= 1;
+	
+alter table point add(pointCheck varchar2(2)); 
 
+/* 총적립금 */
+select point from point 
+where storeId = 'test' 
+	and memberNum = 1
+	and pointCheck = 0;
 
+select 
+((select point from point 
+where storeId = 'test' 
+	and memberNum = 1
+	and pointCheck = 0) - 
+(select point from point 
+where storeId = 'test' 
+	and memberNum = 1
+	and pointCheck = 1)) as pointtotal 
+	from point;
 

@@ -1,4 +1,4 @@
-package com.soso.app.order.service;
+package com.soso.app.point.service;
 
 import java.util.Date;
 
@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OrderCptVO {
-	String menuOrderNum;
-	String orderStar;
-	String menuNum;
-	String orderCount;
-	String orderNum;
-	String paynum;
-	String price;
+public class PointVO {
+	String pointNum;
+	String pointDate;
+	String point;
+	String storeId;
+	Integer memberNum;
+	String pointCheck;
+
 
 }
