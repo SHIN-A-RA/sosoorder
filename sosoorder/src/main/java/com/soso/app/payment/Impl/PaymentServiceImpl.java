@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.soso.app.payment.mapper.PaymentMapper;
 import com.soso.app.payment.service.PaymentService;
 import com.soso.app.payment.service.PaymentVO;
 
+@Service
 public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired

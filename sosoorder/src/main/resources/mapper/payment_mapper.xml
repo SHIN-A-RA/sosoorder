@@ -5,7 +5,7 @@
 <mapper namespace="com.soso.app.payment.mapper.PaymentMapper">
 
 <!-- payment 전체조회 -->
-   <select id="getPaymentList" parameterType="PaymentVO" resultType="PaymentVO">
+   <select id="getPayment" parameterType="PaymentVO" resultType="PaymentVO">
 	SELECT
 	*
 	FROM payment
