@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.payment.mapper.PaymentMapper">
+
+<!-- payment 전체조회 -->
+   <select id="getPaymentList" parameterType="PaymentVO" resultType="PaymentVO">
+	SELECT
+	*
+	FROM payment
+   </select>
+
+<!-- payment 일별 매출량-->
+   <select id="getDayTotal" parameterType="PaymentVO" resultType="PaymentVO">
+	SELECT DISTINCT(TO_Char(payday, 'mm/DD')),
+	 		sum(totalpay) FROM payment 
+	 group by (TO_Char(payday, 'mm/DD'));
+   </select>
+   
+<!-- payment 월별 매출량 -->
+   <select id="getMonthTotal" parameterType="PaymentVO" resultType="PaymentVO">
+SELECT TO_Char(payday, 'mm') ,
+ 			sum(totalpay) FROM payment
+ group by TO_Char(payday, 'mm') 
+ order by to_char(payday,'mm') ASC;
+   </select>   
+</mapper>
+

@@ -1,6 +1,9 @@
 package com.soso.app.admin.web;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -88,18 +91,14 @@ public class AdminController {
 	  model.addAttribute("adminList", adminService.getAdminList(null)); 
 	  return "admin/adminInsert";
 	  }
-	 /* 
-	 * // emp관리
-	 * 
-	 * @RequestMapping("empClient") public String empClient() { return
-	 * "admin/emp/empClient"; }
-	 * 
-	 * // ajax목록
+	  
+	/* // ajax목록
 	 * 
 	 * @RequestMapping("ajaxEmpList") public @ResponseBody List<EmpVO> ajaxEmpList()
 	 * { return empMapper.empList(null); }
 	 */
 
+	  
 	// 수정폼
 
 	// 수정처리

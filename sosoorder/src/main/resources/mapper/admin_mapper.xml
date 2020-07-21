@@ -51,8 +51,6 @@
       ORDER BY storeId
    </select>
 
-   
-   
    <select id="getName" resultType="java.lang.String" parameterType="integer"> 
    	SELECT first_name from employees where employee_id = #{employeeId}
    </select>

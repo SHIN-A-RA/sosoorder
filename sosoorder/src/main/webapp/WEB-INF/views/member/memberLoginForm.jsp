@@ -106,7 +106,7 @@ function adminValidCheck() {
     <button id='buttonID' class='toggleFG' ></button>
 </div>
 
-
+<p></p>
 		<form action="adminLogin" method="post" name="frm2" class="basic" id="adminLogin2">
 			<div class="form-item">
 				<p class="formLabel">id</p>
@@ -118,10 +118,10 @@ function adminValidCheck() {
 				<input type="password" name="storePwd" id="storePwd" class="form-style" />
 				<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
 			</div>
-			<input type="button" class="login pull-right" value="로그인" onclick="adminValidCheck()">
+			<button type="button" class="btn btn-success" onclick="adminValidCheck()">로그인</button>
 </form>
 
-
+<p></p>
 <form action="memberLogin" method="post" name="frm" class="basic" id="memberLogin2">
 			<div class="form-item">
 				<p class="formLabel">Phone</p>
@@ -133,11 +133,11 @@ function adminValidCheck() {
 				<input type="password" name="pwd" id="pwd" class="form-style" />
 				<p></p>
 			</div>
-			<input type="button" class="login pull-right" value="로그인" onclick="memberValidCheck()">
+			<button type="button" class="btn btn-success" onclick="memberValidCheck()">로그인</button>
 </form>
-
-			<input type="button" class="login pull-right" value="일반가입" onclick="location.href='memberInsertForm'"/> 
-			<input type="button" class="login pull-right" value="사업자가입"onclick="location.href='adminInsertForm'"/>
+			<button type="button" class="btn btn-primary" onclick="location.href='memberInsertForm'">일반가입</button>
+			<button type="button" class="btn btn-primary" onclick="location.href='adminInsertForm'">사업자가입</button>
+			
 		
 </div>
 </div>
