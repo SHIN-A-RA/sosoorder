@@ -67,7 +67,7 @@ public class AdminController {
 		//서비스 호출		
 		return "redirect:memberLoginForm";		
 	}
-
+ 
 	//아이디 중복 체크 
 	@GetMapping("idCheck")
 	public @ResponseBody int idCheck(@RequestParam("storeId")String id) {
