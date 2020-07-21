@@ -3,30 +3,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.soso.app.menu.mapper.MenuMapper">
+
 	<!-- 현재 등록된 메뉴 조회 -->
 	<select id="getMenuList" parameterType="menuVO"
 		resultType="menuVO">
-		SELECT menuNum, menuName,menuCategory,menuPrice,menuContents,menuCheck
+		SELECT menuNum,
+		menuName,menuCategory,menuPrice,menuContents,menuCheck
 		FROM menu
-		ORDER BY menuNum
+		ORDER
+		BY menuNum
 	</select>
-
+	<!--단건조회 -->
+	<select id="getMenu" parameterType="menuVO" resultType="menuVO">
+		select
+		menuNum,menuName,menuCategory,menuPrice,menuContents,menuCheck
+		from
+		menu
+		where menuNum = #{menuNum}
+	</select>
 	<!-- 메뉴등록 -->
 	<insert id="menuInsert" parameterType="menuVO">
 		INSERT INTO menu
 		(menuNum,
+		menuCategory,
 		menuName,
 		menuPrice,
 		menuImage,
-		menuCategory,
 		menuContents,
 		menuCheck,
 		storeId)
 		VALUES
 		((SELECT NVL(max(menuNum), 0)+1 FROM menu),
+		#{menuCategory},
+		#{menuName},
 		#{menuPrice},
 		#{menuImage},
-		#{menuCategory},
 		#{menuContents},
 		#{menuCheck},
 		#{storeId})
@@ -35,28 +46,20 @@
 	<!-- 메뉴 수정 -->
 	<update id="menuUpdate" parameterType="menuVO">
 		UPDATE menu
-		(menuNum,
-		menuName,
-		menuPrice,
-		menuImage,
-		menuCategory,
-		menuContents,
-		menuCheck,
-		storId)
-		VALUES
-		(#{menuNum},
-		#{menuName},
-		#{menuPrice},
-		#{menuImage},
-		#{menuCategory},
-		#{menuContents},
-		#{menuCheck},
-		#{storId})
+		set
+		menuCategory=#{menuCategory},
+		menuName=#{menuName},
+		menuPrice=#{menuPrice},
+		menuImage=#{menuImage},
+		menuContents=#{menuContents},
+		menuCheck=#{menuCheck},
+		storeId=#{storeId}
+		where menuNum= #{menuNum}
 	</update>
 
 	<!-- 메뉴 삭제 -->
 	<delete id="menuDelete" parameterType="menuVO">
-	delete from menu where = #{menuName}
+		delete from menu where = #{menuName}
 	</delete>
 
 
