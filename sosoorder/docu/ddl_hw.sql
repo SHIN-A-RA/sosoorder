@@ -5,6 +5,7 @@ FROM COUPON C JOIN USERCOUPON U ON(C.SERIALNUM = U.SERIALNUM)
 WHERE C.storeId = 'test' 
    AND U.memberNum = 1
    AND U.usecheck = 0;
+   ㅇ
    
 /* orderCpt insert */
 insert into ORDERCPT values(2, null, 2, 3, 1, null)
