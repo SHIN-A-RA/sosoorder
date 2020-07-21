@@ -8,9 +8,11 @@ import java.net.URL;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("apitest")
 public class sosoApiController {
-	 @GetMapping("/apitest")
+	 @GetMapping("apitest")
 	   public String callapihttp(HttpServletResponse reponse) {
 	      StringBuffer result = new StringBuffer();
 	      try {
