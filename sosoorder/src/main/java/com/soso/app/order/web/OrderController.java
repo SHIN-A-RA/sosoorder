@@ -29,7 +29,7 @@ public class OrderController {
 	@RequestMapping("/orderInsert")
 	public String orderInsert(Model model, MenuSearchVO menuSearchVO, HttpSession session) {
 		
-		String storeId = (String)session.getAttribute("stoeId");
+		String storeId = (String)session.getAttribute("storeId");
 		//test용 setstoreId
 		menuSearchVO.setStoreId(storeId);
 		menuSearchVO.setOrderNum(1);

@@ -23,4 +23,14 @@ where storeId = 'test'
 	and memberNum = 1
 	and pointCheck = 0;
 
+select 
+((select point from point 
+where storeId = 'test' 
+	and memberNum = 1
+	and pointCheck = 0) - 
+(select point from point 
+where storeId = 'test' 
+	and memberNum = 1
+	and pointCheck = 1)) as pointtotal 
+	from point;
 
