@@ -1,5 +1,7 @@
 package com.soso.app.home.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,13 @@ public class HomeServiceImpl  implements HomeService{
 	public AdminVO getMenuCategory(AdminVO adminVO) {
 		return homeMapper.getMenuCategory(adminVO);
 	}
+
+	@Override
+	public List<AdminVO> getStoreIdList(AdminVO adminVO) {
+		return homeMapper.getStoreIdList(adminVO);
+	}
+	
+	
 
 
 }
