@@ -281,3 +281,6 @@ input:focus {
   color: #43484D;
   font-weight: 300;
 }
+
+.categoryIf.off{display: none !important;}
+.categoryIf.on{display:block !important;}

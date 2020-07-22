@@ -14,4 +14,21 @@
 	<select id="getStoreIdList" resultType="AdminVO" parameterType="AdminVO">
 		SELECT storeId FROM admin
 	</select>
+	
+	<select id="getOrderNum" resultType="OrderCptVO">
+		SELECT MAX(orderNum) "orderNum"
+		FROM orderCpt
+	</select>
+	
+	<insert id="cartInert" parameterType="OrderCptVO">
+		INSERT INTO orderCpt(menuOrderNum, orderNum, menuNum, orderCount)
+		select seq_ordercpt.nextval, A.*
+		from (
+		<foreach collection="list" item="item" separator="UNION ALL">
+			select #{item.orderNum}, #{item.menuNum},#{item.orderCount}
+			from dual
+		</foreach>
+		) "A"
+	</insert>
+
 </mapper>

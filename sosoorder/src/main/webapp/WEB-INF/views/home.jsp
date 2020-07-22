@@ -17,43 +17,103 @@ myApp.controller("myAppCtrl", function($scope){
 		var name = pa.find(".menuName").html();
 		var num = pa.find(".menuNum").html();
 		var price = pa.find(".menuPrice").html();
-		/* var count = 1; */ 
+		var ordernum =${menuOrderNum.orderNum}+1;
+		var count = 1; 
 		
-	/* 	var values = $scope.products;
+		//추가시 수 증가
+	 	var values = $scope.products;
 		angular.forEach(values, function(value, key){
-			
-			if (value.menuNum == num)
-		    	$scope.products.splice(index, 1);
-				count = value.orderCount + 1; 
+			if (value.menuNum == num){
+				var index = $scope.products.indexOf(value);
+			    $scope.products.splice(index, 1);
+				count = value.orderCount + 1;
+			}
 		});
-		 */
-		$scope.products.push({menuName : name, menuNum : num, menuPrice : price});
-		count = 1;
+		 
+		$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
 		sessionStorage.setItem('cart', JSON.stringify($scope.products));
 		
-		number = $scope.products.length;
-		$(".shoping-cart-cnt").html(number);
-
+		cartNum();
 	}
+	
+	/* delete버튼 클릭시 삭제 */
 	$scope.deleteItem = function(user){
 		var index = $scope.products.indexOf(user);
 	    $scope.products.splice(index, 1);
 	    sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
 	    
-	    number = $scope.products.length;
-		$(".shoping-cart-cnt").html(number);
+	    cartNum();
+	}
 
+	$scope.plusItem = function(user){
+		var value = $scope.products.indexOf(user);
+		var name = user.menuName;
+		var num = user.menuNum;
+		var ordernum = user.orderNum;
+		var price = user.menuPrice;
+		var count = user.orderCount + 1; 
+	 	
+		$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
+		$scope.products.splice(value, 1);
+
+		sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+	    
+	    cartNum();
 	}
 	
+	$scope.minusItem = function(user){
+		
+		var value = $scope.products.indexOf(user);
+		var name = user.menuName;
+		var num = user.menuNum;
+		var ordernum = user.orderNum;
+		var price = user.menuPrice;
+		var count = user.orderCount - 1; 
+		if(count>0){
+			$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
+			$scope.products.splice(value, 1);
+			sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+		}else if(count == 0){
+			$scope.products.splice(value, 1);
+		}
+	    cartNum();
+	}
 	
-	number = $scope.products.length;
-	$(".shoping-cart-cnt").html(number);
-	console.log(number);
+	/* 전체삭제 */
+	$scope.deleteKey = function(){
+		deleteMenu()
+	    cartNum();
+	}
+	function deleteMenu(){
+		delete $scope.products;
+		product = [];
+		$scope.products = product;
+	   	sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+	}
 	
+	cartNum();
+	/*cart에 들어가는 숫자  */	
+	function cartNum(){
+ 		number = $scope.products.length;
+		$(".shoping-cart-cnt").html(number);
+	}
+	
+	var cartList = $scope.products;
+	console.log(JSON.stringify(cartList))
+	 $('.cart_sumit').on('click', function(){
+		$.ajax({
+			url: "cartList",
+			type: "POST",
+			data: JSON.stringify(cartList),
+			contentType: 'application/json'
+        }).done(function(){
+        	deleteMenu();
+        	window.location.href = "orderInsert?orderNum="+ ${menuOrderNum.orderNum+1} ;
+        })
+	}); 
 	
 });
 </script>
-
 <input type="hidden" name="hidden_storeId" id="hidden_storeId" value="${storeId}"> <br>
 <!-- 메뉴 구분-->
 <div class="slick_box menu_category">
@@ -62,7 +122,7 @@ myApp.controller("myAppCtrl", function($scope){
 	      var jbString = "${menuCategory.storeMenu}" ;
 	      var jbSplit = jbString.split("|");
 	      for ( var i in jbSplit ) {
-	    	  $(".menu_bar").append("<div><a>" + jbSplit[i] + "</a></div>" );
+	    	  $(".menu_bar").append("<div><a class='MCategory'>" + jbSplit[i] + "</a></div>" );
 	      }
 	 </script>
 	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"  aria-hidden="true"></i></span>
@@ -76,7 +136,7 @@ myApp.controller("myAppCtrl", function($scope){
 <div class="slick_box menu_list_wrap">
 	<div class="menu_list">
 	<c:forEach items="${menuList}" var="menu">
-		<div class="col-item">
+		<div class="col-item categoryIf" name="${menu.menuCategory}">
 	       <div class="photo">
 	           <img src="http://placehold.it/350x350" class="img-responsive" alt="${menu.menuImage}" />
 	       </div>
@@ -118,7 +178,9 @@ myApp.controller("myAppCtrl", function($scope){
 
 <div class="shopping-cart cart-close">
   <div class="shoping-cart-btn">
-  	<div class="shoping-cart-cnt">1</div>
+  	<div class="shoping-cart-cnt">
+  		
+  	</div>
   	<i class="fa fa-shopping-cart" aria-hidden="true"></i>
   </div>
   <!-- Title -->
@@ -134,25 +196,25 @@ myApp.controller("myAppCtrl", function($scope){
     <div class="description">
       <span>{{row.menuName}}</span>
       <span>{{row.menuPrice}} 원</span>
-      <span class="none">{{row.menuNum}}</span>
+      
     </div>
  
     <div class="quantity">
-      <button class="plus-btn" type="button" name="button">
+      <div class="plus-btn" name="button" ng-click="plusItem(row)">
         <i class="fa fa-plus" aria-hidden="true"></i>
-      </button>
+      </div>
       <input type="text" name="name" value="{{row.orderCount}}">
-      <button class="minus-btn" type="button" name="button">
+      <div class="minus-btn" name="button" ng-click="minusItem(row)">
         <i class="fa fa-minus" aria-hidden="true"></i>
-      </button>
+      </div>
     </div>
  
-    <div class="total-price">$549</div>
+    <div class="total-price">{{row.menuPrice*row.orderCount}}</div>
   </div> 
   <!-- Product #1 -->
   <div class="cart_btn_wrap">
-  	<div class="cart_sumit">결제하기</div>
-  	<div class="cart_remove">삭제하기</div>
+  	<button class="cart_sumit">결제하기</button>
+  	<button class="cart_remove" ng-click="deleteKey()">삭제하기</button>
   </div>
 </div>
 
@@ -215,8 +277,8 @@ myApp.controller("myAppCtrl", function($scope){
 </script>
 	
 <script>
+/*장바구니 열기, 닫기*/
 $(function(){
-	
 	$('.shoping-cart-btn').click(function(){
 		if($('.shopping-cart').hasClass('cart-open')){
 			$('.shopping-cart').removeClass('cart-open');
@@ -226,6 +288,38 @@ $(function(){
 			$('.shopping-cart').removeClass('cart-close');
 		}
 	});
+})
+
+
+</script>
+<script>
+$(function(){
+	$("div.categoryIf").addClass("off");
+	var category = $(".menu_category").first().find('.MCategory').html();
+	console.log(category);
+	//var x = $(".categoryIf").attr('name');
+	//console.log(x);
+	
+	if(category == $(".categoryIf").attr('name')){
+		$(this).addClass("on")
+		$(this).removeClass("off")	
+	} 
+
 	
 })
+	/* categoryOn();
+	function categoryOn(){ */
+		
+	/* } */
+	/* $('.MCategory').on('click', function(){
+		var category = $(this).html();
+		var x = document.getElementByClass("categoryIf").attr('name');
+		var mCategory = ${menu.menuCategory};
+		document.getElementByClass("categoryIf").removeClass("on")
+		if(category == x){
+			document.getElementByClass(mCategory).addClass("on")
+		}
+	}); */
+
 </script>
+
