@@ -1,6 +1,8 @@
 
 package com.soso.app.order.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,16 +29,19 @@ public class OrderController {
 	
 	//by혜원, 주문페이지 
 	@RequestMapping("/orderInsert")
-	public String orderInsert(Model model, MenuSearchVO menuSearchVO, HttpSession session) {
+	public String orderInsert(Model model, MenuSearchVO menuSearchVO, HttpSession session, HttpServletRequest request) {
 		
 		String storeId = (String)session.getAttribute("storeId");
+		int orderNum =   Integer.parseInt(request.getParameter("orderNum"));
+		
 		//test용 setstoreId
 		menuSearchVO.setStoreId(storeId);
-		menuSearchVO.setOrderNum(1);
-		menuSearchVO.setMemberNum(1);	
+		menuSearchVO.setOrderNum(orderNum);
 		
+		menuSearchVO.setMemberNum(1);
 		model.addAttribute("oderList", orderService.getOrder(menuSearchVO));
 		model.addAttribute("point", pointService.getTotalPoint(menuSearchVO));
+		
 		return "order/orderInsert";
 	}
 	

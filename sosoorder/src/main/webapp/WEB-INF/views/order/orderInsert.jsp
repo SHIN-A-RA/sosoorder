@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="resources/admin/scss/addcss/hw.css" rel="stylesheet" type="text/css">
 
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
@@ -32,15 +33,61 @@ function Show() {
 	} else {
 		delivery.style.display = ""
 	}
-	}
+	};
 	
-// 쿠폰함 팝업창
+// 쿠폰함 팝업창 열기
 function GoMyCoupon(){
-
-	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
-
+	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 	
 }
+
+//적립금 
+/*    function usePoint(){	
+	var totalPrice = parseInt($("#totalPrice").text());
+	var totalPoint = parseInt($("#totalPoint").text());
+	var pointDiscount  = parseInt($("#pointDiscount").val());
+	var var1;
+	if(pointDiscount != null){
+		if(pointDiscount < totalPoint){
+			var1 = totalPrice - pointDiscount
+			(# ).text(var1);
+			
+		}else{
+			alert("초과금액")
+		}
+	} else if($("#pointDiscount").val() > )
+		$("#pointUse").text($("#pointDiscount").val());
+} ;   */
+
+
+
+$(function(){
+	var totalPrice = parseInt($("#totalPrice").text());
+	var totalPoint = parseInt($("#totalPoint").text());
+	var pointDiscount  = parseInt($("#pointDiscount").val());
+	var finalPay = parseInt($("#finalPay").text());
+	var pointContents = $("#pointContents").text();
+	var var1;
+	console.log(pointDiscount);
+	// 적립금사용금액 출력	
+	$("#pointDiscount").keyup(function(){	
+		$("#pointUse").text($("#pointDiscount").val());
+		pointDiscount = $("#pointUse").text();
+	/* 	 if(pointDiscount != null) { */
+			 if(totalPoint >= pointDiscount){
+					var1 = totalPrice - pointDiscount
+					$("#finalPay").text(var1);
+					
+			}else if(totalPoint < pointDiscount){
+				//총적립금보다 많은 금액입력시 경고말 아웃풋
+				var contents = "사용금액초과";
+				 $("#pointContents").text(contents);	 
+			
+			}
+		 /* } */						 
+		
+	});	
+//끝단
+});
 
 </script>
 <div class="div_f"> 
@@ -58,7 +105,6 @@ function GoMyCoupon(){
 			     <th class="basic_tb_th_up">수량</th>
 			     <th class="basic_tb_th_up">가격</th>
 			</tr>	
-		 <c:set var = "sum" value = "0" />
 		 <c:forEach items="${oderList}" var="order">		
 			<tr>
 			  <td class="basic_tb_tdd">${order.menuName}</td>
@@ -66,17 +112,17 @@ function GoMyCoupon(){
 			  <td class="basic_tb_tdd">${order.price}</td> 			      
 			</tr>
 			<c:set var= "totalPrice" value="${totalPrice +order.price}"/>
-				</c:forEach>	
-				<tr>
-					<td class="basic_tb_td_down" colspan="3">총 주문금액: <c:out value="${totalPrice}"/>원</td>
-				</tr>		
+		 </c:forEach>	
+			<tr>
+				<td class="basic_tb_td_down" colspan="3">총 주문금액:<span id="totalPrice">${totalPrice}</span>원</td>
+			</tr>		
 		</table>
 </div>
 
 
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
-	<h5 style="margin-bottom:20px;"> <strong style="color: red;">배달할거에요?</strong>
+	<h5 style="margin-bottom:20px;"><strong style="color: red;">배달할거에요?</strong>
 	<input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
 </div>
 <div class="basic"  id="delivery" style="display:none" >
@@ -120,15 +166,20 @@ function GoMyCoupon(){
 	 <tr>
 		<th class="basic_tb_th" >쿠폰할인</th>
 	         <td class="basic_tb_td">
-	             <div class="input_empty"><span>"$할인금액"</span></div><span>원</span><button onclick="GoMyCoupon()" class="btn_post">쿠폰사용</button>
+	             <div class="input_empty">
+	             	<span id="couponDiscount" name="couponDiscount"></span>
+	             	</div><span>원</span><button onclick="GoMyCoupon()" class="btn_post">쿠폰사용</button>
 	         </td>
 	</tr>                         
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
-		    	<p><input class="basic_input2">원<button class="btn_post">전액사용</button>
+		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2" type="text" >원<button class="btn_post">전액사용</button>
 		    	
-		    	(총 적립금:<strong style="color: #E91E63;">${point[0].point}</strong>원)</p>
+		    	(총 적립금:<strong style="color: #E91E63;" id="totalPoint">${point[0].point}</strong>원)</p>
+		    	<div class="l">
+		    	<span id="pointContents"></span>
+		    	</div>		    	
 		    	<ul class="ul_info">
 					<li>- 적립금은 사용제한 없이 언제든 결제가 가능합니다.</li>                     
                 </ul>
@@ -143,19 +194,20 @@ function GoMyCoupon(){
 	<table class="basic_tb">
 		<tr>
 			<th class="basic_tb_th2" >총 주문금액</th>
-			<td class="basic_tb_td" ><c:out value="${totalPrice}"/>원</td>
+			<td class="basic_tb_td" >${totalPrice}원</td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
 			<td class="basic_tb_td" ></td>
 		<tr>
+		
 		<tr>
 			<th class="basic_tb_th2" >적립금 사용금액</th>
-			<td class="basic_tb_td" ></td>
+			<td class="basic_tb_td" ><span id="pointUse"></span></td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >총 결제금액</th>
-			<td class="basic_tb_td" ></td>
+			<td class="basic_tb_td" ><span id="finalPay"></span></td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >결제방법</th>
