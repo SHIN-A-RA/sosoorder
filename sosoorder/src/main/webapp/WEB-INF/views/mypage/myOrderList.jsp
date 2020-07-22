@@ -101,9 +101,9 @@ $('.btnadd2').on( "click", function() {
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${myOrderList}" var="order">
+		<c:forEach items="${myStarOrderList}" var="menu">
 			<tr>
-				<td>${order.payDay}</td>
+				<td>${menu.menuName}</td>
 					<td align='center'><input type=submit value="별점등록" style="width:50%" class="btnadd2" ></td>
 			</tr>
 		</c:forEach>

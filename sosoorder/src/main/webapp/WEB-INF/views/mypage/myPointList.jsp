@@ -25,9 +25,12 @@
 
 <div class="slick_box menu_category">
 	<div class="list_bar">
+		<div>
+				<a href="myPointList">전체</a>
+			</div>
 		<c:forEach items="${MyStoreList}" var="point">
 			<div>
-				<a>${point.storeName}</a>
+				<a href="myPointList?storeId=${point.storeId}">${point.storeName}</a>
 			</div>
 		</c:forEach>
 	</div>
@@ -35,10 +38,10 @@
 <table class="table table-white">
 	<thead>
 		<tr>
-			<th scope="col">주문일</th>
 			<th scope="col">상호명</th>
+			<th scope="col">적립일</th>
 			<th scope="col">결제금액</th>
-			<th scope="col">별점누르기</th>
+			<th scope="col">사용금액</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -46,10 +49,20 @@
 			<tr>
 				<td>${point.storeName}</td>
 				<td>${point.pointDate}</td>
-				<td>${point.point}</td>
-				<td>${point.pointCheck}</td>
+				<td>
+				<c:if test="${point.pointCheck == 1}">
+					${point.point*point.pointCheck}
+				</c:if>
+				</td>
+				<td>
+				<c:if test="${point.pointCheck == -1}">
+					${point.point*point.pointCheck}
+				</c:if>
+				</td>
 			</tr>
+			<c:set var="total" value="${total + point.point*point.pointCheck}"/>
 		</c:forEach>
+		${total}
 	</tbody>
 </table>
 </body>
@@ -88,4 +101,3 @@
 		});
 	});
 </script>
-    

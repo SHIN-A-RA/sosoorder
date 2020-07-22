@@ -1,12 +1,16 @@
 package com.soso.app.mypage.web;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soso.app.member.service.MemberVO;
 import com.soso.app.mypage.service.MypageService;
@@ -23,8 +27,16 @@ public class MypageController {
 	// 마이페이지 적립금목록조회
 
 	@RequestMapping("myPointList")
-	public String getPointsList(MemberVO memberVO, Model model) {
-		model.addAttribute("myPointsList", mypageService.getPointsList(memberVO));
+	public String getPointsList(MemberVO memberVO, Model model, HttpSession session,
+			@RequestParam(required = false, value="storeId") String storeId) {
+		String phone = (String)session.getAttribute("phone");
+		memberVO.setPhone(phone);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", phone);
+		map.put("storeId", storeId);
+
+		model.addAttribute("myPointsList", mypageService.getPointsList(map));
 		model.addAttribute("MyStoreList", mypageService.getStoreList(memberVO));
 		return "mypage/myPointList";
 	}
@@ -33,6 +45,7 @@ public class MypageController {
 	@RequestMapping("myOrderList")
 	public String getOrderList(MemberVO memberVO, Model model) {
 		model.addAttribute("myOrderList", mypageService.getOrderList(memberVO));
+		model.addAttribute("myStarOrderList", mypageService.StarOrderList(memberVO));
 		return "mypage/myOrderList";
 	}
 	
