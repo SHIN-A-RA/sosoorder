@@ -79,8 +79,10 @@ $(function(){
 					
 			}else if(totalPoint < pointDiscount){
 				//총적립금보다 많은 금액입력시 경고말 아웃풋
-				var contents = "사용금액초과";
-				 $("#pointContents").text(contents);	 
+				alert("사용금액초과")
+				location.reload();
+			/* 	var contents = "사용금액초과";
+				 $("#pointContents").text(contents);	  */
 			
 			}
 		 /* } */						 
@@ -167,8 +169,8 @@ $(function(){
 		<th class="basic_tb_th" >쿠폰할인</th>
 	         <td class="basic_tb_td">
 	             <div class="input_empty">
-	             	<span id="couponDiscount" name="couponDiscount"></span>
-	             	</div><span>원</span><button onclick="GoMyCoupon()" class="btn_post">쿠폰사용</button>
+	             	<span id="couponDiscount" name="couponDiscount" style="color:blue"></span>
+	             	</div></span><button onclick="GoMyCoupon()" class="btn_post">쿠폰조회</button>
 	         </td>
 	</tr>                         
 	<tr>

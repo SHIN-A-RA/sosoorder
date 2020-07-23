@@ -24,6 +24,12 @@ from point
 where storeId = 'test'
 	and memberNum = 1;
 	
+/* 사용 가능한 쿠폰 조회*/	
+select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck
+FROM COUPON c JOIN USERCOUPON u ON (c.serialNum = u.serialNum)
+WHERE c.storeId = 'test'
+AND c.expEnd > sysdate
+AND u.usecheck = 0;
 
 
 

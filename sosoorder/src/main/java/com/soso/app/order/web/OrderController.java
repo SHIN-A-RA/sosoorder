@@ -42,6 +42,8 @@ public class OrderController {
 		model.addAttribute("oderList", orderService.getOrder(menuSearchVO));
 		model.addAttribute("point", pointService.getTotalPoint(menuSearchVO));
 		
+		
+		
 		return "order/orderInsert";
 	}
 	
