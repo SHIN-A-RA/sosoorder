@@ -7,16 +7,19 @@
 	<!-- 현재 등록된 메뉴 조회 -->
 	<select id="getMenuList" parameterType="menuVO"
 		resultType="menuVO">
-		SELECT menuNum,
-		menuName,menuCategory,menuPrice,menuContents,menuCheck
+		SELECT *
 		FROM menu
-		ORDER
-		BY menuNum
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
+		order by menuCategory
 	</select>
 	<!--단건조회 -->
 	<select id="getMenu" parameterType="menuVO" resultType="menuVO">
 		select
-		menuNum,menuName,menuCategory,menuPrice,menuContents,menuCheck
+		menuNum,menuName,menuCategory,menuPrice,menuContents,menuCheck,menuImage
 		from
 		menu
 		where menuNum = #{menuNum}
@@ -59,7 +62,7 @@
 
 	<!-- 메뉴 삭제 -->
 	<delete id="menuDelete" parameterType="menuVO">
-		delete from menu where = #{menuName}
+		delete from menu where menuNum = #{menuNum}
 	</delete>
 
 

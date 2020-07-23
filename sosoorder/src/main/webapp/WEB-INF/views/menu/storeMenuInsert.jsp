@@ -41,8 +41,9 @@
 <br>
 <br>
 <br>
-<form action="menuInsert" method="post" name="menuInsert"
-	id="menuInsert">
+<form action="menuInsert" method="post" enctype="multipart/form-data" name="menuInsert"
+	id="menuInsert" >
+	
 <input type="hidden" name="menuNum" value="${oneMenu.menuNum}"/>
 	<div class="row">
 		<div class="col">
@@ -98,8 +99,8 @@
 			<div class="input-group" id="uploadFile">
 				<div class="custom-file">
 					<span class="input-group-text">이미지	</span>
-					<input type="file" id="menuImage" name="menuImage"
-					value="${oneMenu.menuImage}"> 
+					<input type="file" name="uploadFile" 
+					value="${oneMenu.menuImage}">${oneMenu.menuImage}
 					<!-- input-group-text <이게 회색 박스 만들어줌  -->
 				</div>
 			</div>
@@ -128,6 +129,8 @@
 				$('#counter').html("(200 / 최대 200자)");
 			}
 		});
+		
+		
 	</script>
 	<br>
 	<div class="row">
@@ -149,6 +152,7 @@
 <div class="col" id="btn">
 	<input type="submit" class="btn btn-primary" value="메뉴등록"/>
 	
-	<input type="button" class="btn btn-primary" value="메뉴삭제"/>
+	<input type="button" class="btn btn-primary" onclick="location.href='menuDelete?menuNum=${oneMenu.menuNum}'" value="메뉴삭제"/>
+
 </div>
 </form>

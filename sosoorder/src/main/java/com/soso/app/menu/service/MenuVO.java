@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 public class MenuVO {
 	
 	MultipartFile uploadFile;
-	String msg;
-	String profile;
+	
 	
 	String menuNum;
 	String menuName;

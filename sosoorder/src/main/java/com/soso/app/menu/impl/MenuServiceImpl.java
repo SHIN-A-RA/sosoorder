@@ -32,11 +32,19 @@ public class MenuServiceImpl implements MenuService{
 	public void menuInsert(MenuVO menuVO) {
 		menuMapper.menuInsert(menuVO);
 	}
+	@Override
 	public void menuUpdate(MenuVO menuVO) {
 		menuMapper.menuUpdate(menuVO);
 	}
+	@Override
 	public MenuVO getMenu(MenuVO menuVO) {
 		return menuMapper.getMenu(menuVO);
 	}
+	@Override
+	public void menuDelete(MenuVO menuVO) {
+		menuMapper.menuDelete(menuVO);
+	}
+
+	
 
 }

@@ -14,31 +14,18 @@
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
+<!-- 메뉴 구분-->
 <div class="slick_box menu_category">
-	<div class="menu_bar">
-		<div>
-			<a>양식</a>
-		</div>
-		<div>
-			<a>중식</a>
-		</div>
-		<div>
-			<a>한식</a>
-		</div>
-		<div>
-			<a>경양식</a>
-		</div>
-		<div>
-			<a>분식</a>
-		</div>
-		<div>
-			<a>편의점음식</a>
-		</div>
-	</div>
-
-	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"
-		aria-hidden="true"></i></span> <span class="next" id="aro_next1"><i
-		class="fa fa-caret-right" aria-hidden="true"></i></span>
+	<div class="menu_bar"></div>
+	<script>
+	      var jbString = "${menuCategory.storeMenu}" ;
+	      var jbSplit = jbString.split("|");
+	      for ( var i in jbSplit ) {
+	    	  $(".menu_bar").append("<div><a>" + jbSplit[i] + "</a></div>" );
+	      }
+	 </script>
+	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"  aria-hidden="true"></i></span>
+	<span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
 <div>
 	<h3 id="un">메뉴관리</h3>
@@ -55,7 +42,6 @@
 			<table id="table_id" class="display">
 				<thead>
 					<tr>
-						<th>번호</th>
 						<th>메뉴 카테고리</th>
 						<th>메뉴 이름</th>
 						<th>가격</th>
@@ -67,13 +53,13 @@
 				<tbody>
 					<c:forEach items="${storeMenuList}" var="menu">
 						<tr>
-							<td>${menu.menuNum}</td>
 							<td>${menu.menuCategory}</td>
 							<td>${menu.menuName}</td>
-							<td>${menu.menuPrice}</td>
-							<td>${menu.menuImage}</td>
+							<td>${menu.menuPrice} 원</td>
+							<td><img src="resources/download/${menu.menuImage}" style="width:80px;"></td>
 							<td>${menu.menuCheck}</td>
 							<td>${menu.menuContents}</td>
+						  
 						</tr>
 					</c:forEach>
 				</tbody>

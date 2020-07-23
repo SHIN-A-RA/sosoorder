@@ -11,5 +11,6 @@ public interface MenuMapper {
 	public List<MenuVO> getMenuCategory(MenuVO menuVO);
 	public void menuInsert(MenuVO menuVO);
 	public void menuUpdate(MenuVO menuVO);
+	public void menuDelete(MenuVO menuVO);
 	
 }
