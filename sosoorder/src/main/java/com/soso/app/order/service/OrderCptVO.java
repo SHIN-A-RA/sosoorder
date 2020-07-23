@@ -31,5 +31,6 @@ public class OrderCptVO {
 	String expEnd;
 	Integer discount;
 	String useCheck;
+	String storeName;
 
 }

@@ -31,5 +31,29 @@ WHERE c.storeId = 'test'
 AND c.expEnd > sysdate
 AND u.usecheck = 0;
 
+/* 사용 가능 쿠폰조회 조인3개*/
+select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck, a.storeName
+FROM USERCOUPON u 
+INNER JOIN COUPON c 
+	ON (u.serialNum = c.serialNum)
+INNER JOIN ADMIN a
+	ON (c.storeId= a.storeId)
+WHERE c.storeId = 'test'
+AND c.expEnd > sysdate
+AND u.usecheck = 0;
+
+/* 테이블 조인 3개 방법2 */
+select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck, a.storeName
+FROM USERCOUPON u , COUPON c, ADMIN a
+WHERE u.serialNum = c.serialNum
+	AND c.storeId= a.storeId
+	AND c.storeId = 'test'
+	AND c.expEnd > sysdate
+	AND u.usecheck = 0;
+
+
+
+
+
 
 

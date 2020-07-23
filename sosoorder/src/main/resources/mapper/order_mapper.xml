@@ -37,29 +37,28 @@
 	</select>
 	
 		<!-- 쿠폰조회  -->
-	  <select id="findCoupon" parameterType="OrderCptVO" resultType="OrderCptVO">
+	<select id="findCoupon" parameterType="OrderCptVO" resultType="OrderCptVO">
 		SELECT 
 			c.serialNum, 
 			c.expStart, 
 			c.expEnd, 
 			c.discount, 
 			c.storeId, 
-			u.useCheck
-		FROM COUPON c JOIN USERCOUPON u ON (c.serialNum = u.serialNum)
-		
+			u.useCheck,
+			a.storeName
+		FROM USERCOUPON u 
+		INNER JOIN COUPON c 
+			ON (u.serialNum = c.serialNum)
+		INNER JOIN ADMIN a
+			ON (c.storeId= a.storeId)	
 		<where>
-		<if test="storeId != null">
-			c.storeId = #{storeId}
-		</if>
-		<if test="expEnd != null">		
-			AND c.expEnd > sysdate
-		</if>
-		<if test="useCheck != null">
-			AND u.usecheck = 0;
-		</if>
-		
+			c.expEnd > sysdate
+			AND u.usecheck = 0
+			<if test="storeId != null">
+				AND c.storeId = #{storeId}
+			</if>
 		</where>
-   </select>
+	</select>
 
 
 

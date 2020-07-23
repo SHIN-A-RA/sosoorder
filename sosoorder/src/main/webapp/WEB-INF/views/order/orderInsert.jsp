@@ -92,6 +92,35 @@ $(function(){
 //끝단
 });
 
+
+/* 모달 */
+ jQuery.fn.center = function() {
+	  this.css('top', Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+	  this.css('left', Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+	  return this;
+	}
+
+	function wrapWindowByMask() {
+	  var maskHeight = $(document).height();
+	  var maskWidth = $(window).width();
+
+	  $('#mask').css({
+	    'width': maskWidth,
+	    'height': maskHeight
+	  });
+	  $('#mask').fadeTo(10, 0.8);
+
+	  $('.ModalPopup').show();
+	  $('.ModalPopup').center();
+	}
+
+	$(function() {
+	  $('.openMask').click(function(e) {
+	    e.preventDefault();
+	    wrapWindowByMask();
+	  });
+	});
+
 </script>
 <div class="div_f"> 
 
@@ -141,7 +170,7 @@ $(function(){
               <input class="basic_input" id="addrDetail"  name="addrDetail"  size="60"  type="text"> <span class="txtInfo">나머지주소</span><span>(선택입력가능)</span>
          </td>
 </tr>   
-</form>
+
                 
 <tr >
 	<th class="basic_tb_th">휴대전화 <span class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></span>
@@ -158,6 +187,7 @@ $(function(){
  </tr>
 </table>
 </div>  
+</form>
 </div>
 
 <!-- 할인 및 포인트 -->
@@ -170,57 +200,10 @@ $(function(){
 	         <td class="basic_tb_td">
 	             <div class="input_empty">
 	             	<span id="couponDiscount" name="couponDiscount" style="color:blue"></span>
-	             	</div></span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">쿠폰조회</button>
+	             	</div>
+	             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">쿠폰조회</button>
 	         </td>
-	</tr>         
-	<!-- 모달 -->
-<div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
-  <div class="modal-dialog modal-80size modal-center" role="document">
-    <div class="modal-content modal-80size">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">쿠폰함</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <
-      </div>
-     <!--  <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div> -->
-    </div>
-  </div>
-</div>
-
-<!-- 모달스크립트  -->
-<script>
-jQuery.fn.center = function() {
-	  this.css('top', Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + 'px');
-	  this.css('left', Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
-	  return this;
-	}
-
-	function wrapWindowByMask() {
-	  var maskHeight = $(document).height();
-	  var maskWidth = $(window).width();
-
-	  $('#mask').css({
-	    'width': maskWidth,
-	    'height': maskHeight
-	  });
-	  $('#mask').fadeTo(10, 0.8);
-
-	  $('.ModalPopup').show();
-	  $('.ModalPopup').center();
-	}
-
-	$(function() {
-	  $('.openMask').click(function(e) {
-	    e.preventDefault();
-	    wrapWindowByMask();
-	  });
-	});
-</script>
-	                
+	</tr>        
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
@@ -235,7 +218,44 @@ jQuery.fn.center = function() {
 			</td>	    	
 
 	</tr>
- </table>
+ </table> 
+	<!-- 모달 -->
+<div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
+  <div class="modal-dialog modal-80size modal-center" role="document">
+    <div class="modal-content modal-80size">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">쿠폰함</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      
+
+	      <c:forEach items="${coupon}" var="coupon">
+	     	<table border="1" style="width:100%;">
+	     	<tr>
+	     		<th style="background-color: #cc87d8; width: 30%; text-align: center;">
+	 	    	    <p style="color: white">${coupon.discount}</p>
+					<p style="color: white">할인쿠폰</p>						     		
+	     		</th>
+	     		<td style="padding: 10px 10px 10px 10px;">
+	     			<p>${coupon.storeName}</p>
+	     			<p>${coupon.expEnd}</p>
+	     			<p>${coupon.serialNum}</p><button>저장</button>
+	     		</td>
+	     	</tr>    
+	     	<tr style="height: 20px;">
+	     	</tr>  
+	     	</table>	        		
+      	 </c:forEach>  
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	                
+	
 </div>
 <!-- 결제정보-->
 <div class="basic">
