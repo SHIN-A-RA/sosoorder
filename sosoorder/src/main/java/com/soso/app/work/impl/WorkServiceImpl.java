@@ -1,6 +1,7 @@
 package com.soso.app.work.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,20 +14,25 @@ import com.soso.app.work.service.WorkVO;
 public class WorkServiceImpl implements WorkService {
 
 	@Autowired WorkMapper workMapper;
-
+	
 	@Override
-	public String empNum(Object object) {
-		return workMapper.empNum(object);
+	public List<WorkVO> empNum(String StoreId){
+		return workMapper.empNum(StoreId);
 	}
 
 	@Override
-	public void workStart(WorkVO vo) {
-		workMapper.workStart(vo);
+	public void workStart(String empNum) {
+		workMapper.workStart(empNum);
 	}
 
 	@Override
-	public void workEnd(WorkVO vo) {
-		workMapper.workEnd(vo);
+	public void workEnd(String empNum) {
+		workMapper.workEnd(empNum);
+	}
+
+	@Override
+	public List<Map<String, Object>> getWorkTimeData(String storeId) {
+		return workMapper.getWorkTimeData(storeId);
 	}
 
 

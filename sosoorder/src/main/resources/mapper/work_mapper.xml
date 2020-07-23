@@ -4,66 +4,31 @@
 
 <mapper namespace="com.soso.app.work.mapper.WorkMapper">
 
-<!-- employees 조회 -->
-   <select id="empNum" parameterType="WorkVO" resultType="WorkVO">
-	SELECT
-	empNum,
-	empName,
-	workPart,
-	empBirth,
-	salary,
-	endDate,
-	empPhone,
-	salaryDay,
-	empClass,
-	storeId
-	FROM employees
-	WHERE storeId = #{storeId}
+<!-- work 조회 -->
+   <select id="empNum" parameterType="String" resultType="map">
+select e.empName, to_char(w.workstart,'hh24:mi') AS workStart, NVL(to_char(w.workEnd,'hh24:mi'),' ') AS workEnd
+  from employees e, work w
+  where w.empNum = e.empNum AND storeId =#{storeId}
    </select>
 
-<!-- employees 등록 -->
-   <insert id="workStart" parameterType="WorkVO">
-	INSERT INTO employees
-	(empNum,
-	empName,
-	workPart,
-	empBirth,
-	hireDate,
-	salary,
-	endDate,
-	empPhone,
-	salaryDay,
-	empClass,
-	storeId)
-	VALUES
-	((employees_seq.nextval),
-	#{empName},
-	#{workPart},
-	#{empBirth},
-	#{hireDate},
-	#{salary},
-	(SELECT sysdate + (INTERVAL '10' YEAR)  FROM dual),
-	#{empPhone},
-	#{salaryDay},
-	#{empClass},
-	#{storeId})
+<!--work 시작-->
+   <insert id="workStart" parameterType="String">
+	INSERT INTO work(workNum,empNum,workStart) values(work_seq.nextval,#{empNum},SYSDATE)
    </insert>
    
-   <select id="workEnd" parameterType="WorkVO" resultType="WorkVO">
-	SELECT empNum,
-	empName,
-	workPart,
-	to_char(empBirth,'YY-MM-DD'),
-	to_char(hireDate,'YY-MM-DD'),
-	salary,
-	to_char(endDate,'YY-MM-DD'),
-	empPhone,
-	to_char(salaryDay,'YY-MM-DD'),
-	empClass,
-	storeId
-	FROM employees
-	ORDER BY hireDate
-   </select>
+   
+<!-- work 종료 -->  
+   <update id="workEnd" parameterType="String" >
+	UPDATE work SET workEnd=SYSDATE where empNum=#{empNum}
+   </update>
+
+<!-- 캘린더 work 데이터 -->
+	<select id = "getWorkTimeData" resultType="map">
+select e.empName, to_char(w.workstart,'YYYY-MM-DD') AS workStart
+  from employees e, work w
+ where w.empNum = e.empNum 
+   AND storeId =#{storeId}
+	</select>
 
 
 </mapper>

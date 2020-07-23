@@ -2,7 +2,6 @@ package com.soso.app.work.service;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @NoArgsConstructor
 public class WorkVO {//11개

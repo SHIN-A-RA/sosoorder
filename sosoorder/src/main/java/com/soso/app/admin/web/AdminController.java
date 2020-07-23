@@ -1,11 +1,6 @@
 package com.soso.app.admin.web;
 
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.admin.service.AdminService;
 import com.soso.app.admin.service.AdminVO;
-import com.soso.app.member.service.MemberVO;
 
 
 @Controller // Bean �벑濡�, DispacherServlet�씠 �씤�떇�븷 �닔 �엳�뒗 Controller濡� 蹂��솚 => @Compnent
@@ -56,13 +50,13 @@ public class AdminController {
 	
 	//admin 등록페이지 이동
 	@RequestMapping("adminInsertForm")
-	public String adminInsertForm(AdminVO vo,@PathVariable String storeId) {
+	public String adminInsertForm(AdminVO vo) {
 		return "admin/adminInsertForm";
 	}
 
 	//admin 등록DB처리
 	@RequestMapping("adminInsert")
-	public String adminInsert(AdminVO vo, Model model,@PathVariable String storeId) {
+	public String adminInsert(AdminVO vo, Model model,String storeId) {
 		adminService.adminInsert(vo);
 		//서비스 호출		
 		return "redirect:memberLoginForm";		

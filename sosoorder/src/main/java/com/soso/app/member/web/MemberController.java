@@ -68,6 +68,7 @@ public class MemberController {
 	  //아이디 중복처리
 	@RequestMapping("IdDupCheck")
 	public void idDupCheck(MemberVO vo, Model model) {
+		
 	}
 	
 	
