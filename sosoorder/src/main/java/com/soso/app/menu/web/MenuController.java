@@ -35,6 +35,8 @@ public class MenuController {
 		String storeId = (String) session.getAttribute("storeId");
 		 
 		adminVO.setStoreId(storeId);
+		menuVO.setStoreId(storeId);
+		
 		model.addAttribute("storeMenuList", menuService.getMenuList(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		return "menu/storeMenuList";
