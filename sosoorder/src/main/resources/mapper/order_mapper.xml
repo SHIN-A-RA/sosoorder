@@ -4,23 +4,8 @@
 
 <mapper namespace="com.soso.app.order.mapper.OrderMapper">
 
-
-<!-- 	<resultMap type="MenuVO" id="MenuVO">
-	    <result column="menuNum" property="menuNum"/>
-	    <result column="menuName" property="menuName"/>
-	    <result column="menuPrice" property="menuPrice"/>
-	    <result column="storeId" property="storeId"/>
-	</resultMap>
-	    
-	<resultMap type="OrderCptVO" id="OrderCptVO">
-	    <result column="ORDERNUM" property="orderNum"/>
-	    <result column="ORDERCOUNT" property="menuNum"/>
-	    <result column="MENUNUM" property="menuNum"/>
-	    <collection property="menuVO" resultMap="MenuVO"/>
-	</resultMap>
- -->
-	
-	<select id="getOrder" parameterType="com.soso.app.menu.service.MenuSearchVO" resultType="map">
+	<!-- 주문내역 -->
+	<select id="getOrder" parameterType="OrderCptVO" resultType="map">
 		SELECT 
 			m.menuName "menuName", 
 			o.orderCount "orderCount", 
@@ -35,8 +20,46 @@
 			and o.orderNum = #{orderNum} 
 		</if>	
 		</where>
-
 	</select>
+	
+	<!-- 총적립금조회 -->
+	<select id="getTotalPoint" resultType="OrderCptVO" parameterType="OrderCptVO">	
+		select sum(point*pointCheck) AS point
+		from point  		
+		<where>
+			<if test="storeId != null">
+				storeId = #{storeId}
+			</if>
+			<if test="memberNum != null">
+				and memberNum = #{memberNum}
+			</if>	
+		</where>
+	</select>
+	
+		<!-- 쿠폰조회  -->
+	  <select id="findCoupon" parameterType="OrderCptVO" resultType="OrderCptVO">
+		SELECT 
+			c.serialNum, 
+			c.expStart, 
+			c.expEnd, 
+			c.discount, 
+			c.storeId, 
+			u.useCheck
+		FROM COUPON c JOIN USERCOUPON u ON (c.serialNum = u.serialNum)
+		
+		<where>
+		<if test="storeId != null">
+			c.storeId = #{storeId}
+		</if>
+		<if test="expEnd != null">		
+			AND c.expEnd > sysdate
+		</if>
+		<if test="useCheck != null">
+			AND u.usecheck = 0;
+		</if>
+		
+		</where>
+   </select>
 
 
 

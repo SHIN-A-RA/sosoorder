@@ -36,9 +36,10 @@ function Show() {
 	};
 	
 // 쿠폰함 팝업창 열기
+/*
 function GoMyCoupon(){
 	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 	
-}
+}*/
 
 //적립금 
 /*    function usePoint(){	
@@ -121,7 +122,6 @@ $(function(){
 		</table>
 </div>
 
-
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
 	<h5 style="margin-bottom:20px;"><strong style="color: red;">배달할거에요?</strong>
@@ -170,14 +170,61 @@ $(function(){
 	         <td class="basic_tb_td">
 	             <div class="input_empty">
 	             	<span id="couponDiscount" name="couponDiscount" style="color:blue"></span>
-	             	</div></span><button onclick="GoMyCoupon()" class="btn_post">쿠폰조회</button>
+	             	</div></span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">쿠폰조회</button>
 	         </td>
-	</tr>                         
+	</tr>         
+	<!-- 모달 -->
+<div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
+  <div class="modal-dialog modal-80size modal-center" role="document">
+    <div class="modal-content modal-80size">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">쿠폰함</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <
+      </div>
+     <!--  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- 모달스크립트  -->
+<script>
+jQuery.fn.center = function() {
+	  this.css('top', Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+	  this.css('left', Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+	  return this;
+	}
+
+	function wrapWindowByMask() {
+	  var maskHeight = $(document).height();
+	  var maskWidth = $(window).width();
+
+	  $('#mask').css({
+	    'width': maskWidth,
+	    'height': maskHeight
+	  });
+	  $('#mask').fadeTo(10, 0.8);
+
+	  $('.ModalPopup').show();
+	  $('.ModalPopup').center();
+	}
+
+	$(function() {
+	  $('.openMask').click(function(e) {
+	    e.preventDefault();
+	    wrapWindowByMask();
+	  });
+	});
+</script>
+	                
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
-		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2" type="text" >원<button class="btn_post">전액사용</button>
-		    	
+		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2" type="text" >		    	
 		    	(총 적립금:<strong style="color: #E91E63;" id="totalPoint">${point[0].point}</strong>원)</p>
 		    	<div class="l">
 		    	<span id="pointContents"></span>

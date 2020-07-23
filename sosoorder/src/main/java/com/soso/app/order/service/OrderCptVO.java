@@ -15,8 +15,21 @@ public class OrderCptVO {
 	String orderStar;
 	String menuNum;
 	String orderCount;
-	String orderNum;
+	Integer orderNum;
 	String paynum;
 	String price;
+	Integer memberNum;
+	String storeId;
+	
+	String pointNum;
+	String pointDate;
+	String point;
+	String pointCheck;
+	
+	String serialNum;
+	String expStart;
+	String expEnd;
+	Integer discount;
+	String useCheck;
 
 }

@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.soso.app.menu.service.MenuSearchVO;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
-import com.soso.app.point.service.PointService;
-import com.soso.app.point.service.PointVO;
+
 
 @Controller
 public class OrderController {
@@ -23,25 +22,21 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
-	@Autowired
-	PointService pointService;
-	
-	
 	//by혜원, 주문페이지 
 	@RequestMapping("/orderInsert")
-	public String orderInsert(Model model, MenuSearchVO menuSearchVO, HttpSession session, HttpServletRequest request) {
+	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session, HttpServletRequest request) {
 		
 		String storeId = (String)session.getAttribute("storeId");
 		int orderNum =   Integer.parseInt(request.getParameter("orderNum"));
 		
 		//test용 setstoreId
-		menuSearchVO.setStoreId(storeId);
-		menuSearchVO.setOrderNum(orderNum);
+//		menuSearchVO.setStoreId(storeId);
+//		menuSearchVO.setOrderNum(orderNum);
 		
-		menuSearchVO.setMemberNum(1);
-		model.addAttribute("oderList", orderService.getOrder(menuSearchVO));
-		model.addAttribute("point", pointService.getTotalPoint(menuSearchVO));
-		
+		orderCptVO.setMemberNum(1);
+		model.addAttribute("oderList", orderService.getOrder(orderCptVO));
+		model.addAttribute("point", orderService.getTotalPoint(orderCptVO));
+		model.addAttribute("coupon", orderService.findCoupon(orderCptVO));
 		
 		
 		return "order/orderInsert";
@@ -55,10 +50,10 @@ public class OrderController {
 	}
 	
 	//by혜원, 나의쿠폰함팝업
-	@RequestMapping("/orderCoupon")
-	public String orderCoupon() {
-		return "empty/order/orderCoupon";
-	}
+	/*
+	 * @RequestMapping("/orderCoupon") public String orderCoupon() { return
+	 * "empty/order/orderCoupon"; }
+	 */
 
 }
 
