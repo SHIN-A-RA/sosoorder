@@ -136,7 +136,7 @@ myApp.controller("myAppCtrl", function($scope){
 <div class="slick_box menu_list_wrap">
 	<div class="menu_list">
 	<c:forEach items="${menuList}" var="menu">
-		<div class="col-item categoryIf" name="${menu.menuCategory}">
+		<div class="col-item categoryIf ${menu.menuCategory}" name="${menu.menuCategory}">
 	       <div class="photo">
 	           <img src="http://placehold.it/350x350" class="img-responsive" alt="${menu.menuImage}" />
 	       </div>
@@ -296,14 +296,18 @@ $(function(){
 $(function(){
 	$("div.categoryIf").addClass("off");
 	var category = $(".menu_category").first().find('.MCategory').html();
-	console.log(category);
-	//var x = $(".categoryIf").attr('name');
-	//console.log(x);
 	
-	if(category == $(".categoryIf").attr('name')){
-		$(this).addClass("on")
-		$(this).removeClass("off")	
-	} 
+	$("." + category).addClass("on");
+	$("." + category).removeClass("off");
+	
+	$('.MCategory').on('click', function(){
+		$("div.categoryIf").addClass("off");
+		$("." + category).removeClass("on");
+		
+		category = $(this).html();
+		$("." + category).addClass("on");
+		$("." + category).removeClass("off");
+	});
 
 	
 })
