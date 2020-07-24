@@ -9,7 +9,7 @@
 <body>
 
       <c:forEach items="${getCoupon}" var="coupon">
-	     	<table border="1" style="width:50%;">
+	     	<table border="1" style="width:50%; margin:auto;">
 	     	<tr>
 	     		<th style="background-color: #cc87d8; width: 30%; text-align: center;">
 	 	    	    <p style="color: white">${coupon.discount}</p>
