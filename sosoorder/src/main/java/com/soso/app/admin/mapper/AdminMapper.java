@@ -17,6 +17,6 @@ public interface AdminMapper {
 	 public List<AdminVO> getAdminList(AdminVO adminVO); 
 
 	public void adminInsert(AdminVO adminVO);
-
 	public int idCheck(String id);
+	public String getMenuUpdate(AdminVO adminVO);
 }

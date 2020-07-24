@@ -40,4 +40,9 @@ public class AdminServiceImpl implements AdminService {
 		return cnt;
 	}
 
+	@Override
+	public String getMenuUpdate(AdminVO adminVO) {
+	return adminMapper.getMenuUpdate(adminVO);
+	}
+
 }

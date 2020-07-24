@@ -68,14 +68,6 @@ public class AdminController {
 		int cnt=adminService.idCheck(id);
 		return cnt;
 	}
-	/*
-	 * // 단건조회
-	 * 
-	 * @RequestMapping("getEmp/{employeeId}/{lastName}") public String
-	 * getEmp(@PathVariable Integer employeeId, String lastName) {
-	 * System.out.println(employeeId); System.out.println(lastName); return "home";
-	 * }
-	 */
 	
 	  // 목록조회
 	  @RequestMapping("adminList") 
@@ -84,11 +76,6 @@ public class AdminController {
 	  return "admin/adminInsert";
 	  }
 	  
-	/* // ajax목록
-	 * 
-	 * @RequestMapping("ajaxEmpList") public @ResponseBody List<EmpVO> ajaxEmpList()
-	 * { return empMapper.empList(null); }
-	 */
 
 	  
 	// 수정폼

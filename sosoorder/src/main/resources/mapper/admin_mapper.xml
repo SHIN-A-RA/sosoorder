@@ -54,5 +54,10 @@
       ORDER BY storeId
    </select>
    
-
+	<update id="getMenuUpdate" parameterType="AdminVO">
+	UPDATE admin
+		set
+		STOREMENU=#{storeMenu}
+		where STOREID = #{storeId};
+	</update>
 </mapper>
