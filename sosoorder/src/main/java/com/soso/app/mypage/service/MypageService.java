@@ -13,9 +13,9 @@ public interface MypageService {
 	public List<Map> getPointsList(HashMap<String, Object> map);
 	
 	public List<Map> getStoreList(MemberVO memberVO);
-	public List<Map> getOrderList(MemberVO memberVO);
+	public List<Map> getOrderList(HashMap<String, Object> map);
 	public void orderStarUpdate(OrderCptVO ordercptVO);
-	public List<Map> StarOrderList(MemberVO memberVO);
+	public List<Map> StarOrderList(HashMap<String, Object> map);
 
 
 	/* public String getName(Integer id); */

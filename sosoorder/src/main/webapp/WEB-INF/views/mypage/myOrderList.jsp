@@ -52,7 +52,6 @@ $('.btnadd2').on( "click", function() {
 </head>
 <body>
 
-
 <table class="table table-white">
 	<thead>
 		<tr>
@@ -84,8 +83,8 @@ $('.btnadd2').on( "click", function() {
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">주문내역</h4>
-          
+          <h4 class="modal-title">주문내역</h64>
+          </h4>
           
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -96,15 +95,19 @@ $('.btnadd2').on( "click", function() {
 <table class="table table-white">
 	<thead>
 		<tr>
-			<th scope="col">상세내역</th>
-			<th scope="col">별점주기</th>
+			<th scope="col">메뉴</th>
+			<th scope="col">결제일</th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${myStarOrderList}" var="menu">
+		<c:forEach items="${myStarOrderList}" var="MENU">
 			<tr>
-				<td>${menu.menuName}</td>
-					<td align='center'><input type=submit value="별점등록" style="width:50%" class="btnadd2" ></td>
+				<td>${MENU.menuName}</td>
+				<td>${MENU.payDay}</td>
+				<td align='center'>
+					<input type=submit value="별점등록" style="width:50%" class="btnadd2" >
+				
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -134,17 +137,17 @@ $('.btnadd2').on( "click", function() {
         </div>
         
         <!-- Modal body -->
-      <form action="" method="post" >
-               <input type="hidden" name="starC" id="starC">
-               <div class="starRev">
-                 <span class="starR on">별1</span>
-                 <span class="starR">별2</span>
-                 <span class="starR">별3</span>
-                 <span class="starR">별4</span>
-                 <span class="starR">별5</span>
-               </div>
-               <button class="btn2starBtn" style="margin-top:20px"data-dismiss="modal">등록</button>            
-            </form>  
+      <form action="orderStarUpdate" method="post" >
+      	<input type="hidden" name="starC" id="starC">
+        	<div class="starRev">
+            	<span class="starR on">별1</span>
+                <span class="starR">별2</span>
+                <span class="starR">별3</span>
+                <span class="starR">별4</span>
+                <span class="starR">별5</span>
+            </div>
+            <button class="btn2starBtn" style="margin-top:20px"data-dismiss="modal">등록</button>            
+		</form>  
       </div>
     </div>
   </div>

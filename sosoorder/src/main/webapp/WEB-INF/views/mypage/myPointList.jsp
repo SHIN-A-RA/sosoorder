@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		
 <h2>적립금 리스트</h2>
 <style>
 .btn-group .button {
@@ -20,6 +21,7 @@
   background-color: #3e8e41;
 }
 </style>
+
 </head>
 <body>
 
@@ -33,6 +35,7 @@
 				<a href="myPointList?storeId=${point.storeId}">${point.storeName}</a>
 			</div>
 		</c:forEach>
+			
 	</div>
 	</div>
 <table class="table table-white">
@@ -62,10 +65,15 @@
 			</tr>
 			<c:set var="total" value="${total + point.point*point.pointCheck}"/>
 		</c:forEach>
-		${total}
 	</tbody>
 </table>
+	
 </body>
+
+   <div  style="width:340px; height:40px; text-align:center; padding-top:7px; 
+		font-size:16px; border:1px solid; margin:auto;">총적립금: ${total}</div>
+
+
 
 	<ul class="sub_menu_box sub02 ">
          <li class="gnb_dp2 m1"><a href="myPointList">나의 적립금</a></li>

@@ -24,20 +24,27 @@ public class MypageServiceImpl implements MypageService{
 		return mypageMapper.getStoreList(memberVO);
 	}
 	@Override
-	public List<Map> getOrderList(MemberVO memberVO) {
-		return mypageMapper.getOrderList(memberVO);
+	public List<Map> getOrderList(HashMap<String, Object> map) {
+		return mypageMapper.getOrderList(map);
 	}
-	public void orderStarUpdate(OrderCptVO ordercptVO) {
-		mypageMapper.orderStarUpdate(ordercptVO);
-	}
+
 	@Override
-	public List<Map> StarOrderList(MemberVO memberVO) {
-		return mypageMapper.StarOrderList(memberVO);
+	public List<Map> StarOrderList(HashMap<String, Object> map) {
+		return mypageMapper.StarOrderList(map);
 	}
 	@Override
 	public List<Map> getPointsList(HashMap<String, Object> map) {
 		return mypageMapper.getPointsList(map);
 	}
+	@Override
+	public void orderStarUpdate(OrderCptVO ordercptVO) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	
+
+	/*
+	 * public void orderStarUpdate(OrderCptVO ordercptVO) {
+	 * mypageMapper.orderStarUpdate(ordercptVO); }
+	 */
 }

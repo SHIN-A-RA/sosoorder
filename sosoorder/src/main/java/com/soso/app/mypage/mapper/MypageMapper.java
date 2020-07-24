@@ -18,12 +18,12 @@ public interface MypageMapper {
 	
 	public List<Map> getStoreList(MemberVO memberVO);
 	
-	public List<Map> getOrderList(MemberVO memberVO);
+	public List<Map> getOrderList(HashMap<String, Object> map);
 	
 	public void orderStarUpdate(OrderCptVO ordercptVO);
 	/* public String getName(Integer id); */
 	
-	public List<Map> StarOrderList(MemberVO memberVO);
+	public List<Map> StarOrderList(HashMap<String, Object> map);
 	
 	/* public List<Map<String, Object>> getEmpMap(); */
 }
