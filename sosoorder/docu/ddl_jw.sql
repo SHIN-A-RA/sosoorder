@@ -60,3 +60,12 @@ insert into point('1',sysdate, '20', 'test')
 select * from menu;
 select * from admin;
 update admin set storemenu = '밥|음료|분식' where storeId = 'test';
+
+select c.serialnum, c.expstart, c.expend, c.discount, a.storeName from coupon c, admin a where c.storeId = a.storeId AND c.storeId = ?;
+
+insert into coupon(serialNum, expStart, expEnd, discount)
+		set('123213', to_date('20091023', 'yyyymmdd'), to_date('20150520','yyyymmdd'), 1000,'test')
+
+select * from coupon;		
+alter table coupon MODIFY(serialnum varcher2(20));
+delete from coupon where serialNum ='12';

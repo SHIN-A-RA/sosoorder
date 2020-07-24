@@ -16,6 +16,6 @@ public interface OrderService {
 	public List<OrderCptVO> getTotalPoint(OrderCptVO orderCptVO);	
 	
 	//by혜원, 쿠폰조회
-	public List<OrderCptVO> findCoupon(OrderCptVO orderCptVO);
+	public List<Map<String, Object>> findCoupon(OrderCptVO orderCptVO);
 
 }

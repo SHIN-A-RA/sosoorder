@@ -41,86 +41,113 @@ function GoMyCoupon(){
 	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 	
 }*/
 
-//적립금 
-/*    function usePoint(){	
-	var totalPrice = parseInt($("#totalPrice").text());
-	var totalPoint = parseInt($("#totalPoint").text());
-	var pointDiscount  = parseInt($("#pointDiscount").val());
-	var var1;
-	if(pointDiscount != null){
-		if(pointDiscount < totalPoint){
-			var1 = totalPrice - pointDiscount
-			(# ).text(var1);
-			
-		}else{
-			alert("초과금액")
-		}
-	} else if($("#pointDiscount").val() > )
-		$("#pointUse").text($("#pointDiscount").val());
-} ;   */
-
-
-
+//쿠폰 가격입력 후 모달 닫기
 $(function(){
-	var totalPrice = parseInt($("#totalPrice").text());
-	var totalPoint = parseInt($("#totalPoint").text());
-	var pointDiscount  = parseInt($("#pointDiscount").val());
-	var finalPay = parseInt($("#finalPay").text());
-	var pointContents = $("#pointContents").text();
-	var var1;
-	console.log(pointDiscount);
-	// 적립금사용금액 출력	
-	$("#pointDiscount").keyup(function(){	
-		$("#pointUse").text($("#pointDiscount").val());
-		pointDiscount = $("#pointUse").text();
-	/* 	 if(pointDiscount != null) { */
-			 if(totalPoint >= pointDiscount){
-					var1 = totalPrice - pointDiscount
-					$("#finalPay").text(var1);
-					
-			}else if(totalPoint < pointDiscount){
-				//총적립금보다 많은 금액입력시 경고말 아웃풋
-				alert("사용금액초과")
-				location.reload();
-			/* 	var contents = "사용금액초과";
-				 $("#pointContents").text(contents);	  */
-			
-			}
-		 /* } */						 
-		
-	});	
-//끝단
+	$(".saveCoupon").on("click",function(){
+		var discount = $(this).parent().prev().find("#discount").text();
+		$("#couponUse").text(discount);
+		var serial = $(this).parent().find("#serial").val();
+		$("#couponDiscount").text(serial);	
+	});
 });
 
+//적립금 사용
+/* $(function(){
+	var totalPoint = parseInt($("#totalPoint").text());
+ 	var pointDiscount;
 
-/* 모달 */
- jQuery.fn.center = function() {
-	  this.css('top', Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + 'px');
-	  this.css('left', Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
-	  return this;
+	// 적립금사용금액 출력	
+	
+	$("#pointDiscount").keyup(function(){	
+			$("#pointUse").text($("#pointDiscount").val());
+		
+  		pointDiscount  = parseInt($("#pointDiscount").val());
+  	 if(totalPoint >= pointDiscount){
+			}else if(totalPoint < pointDiscount){
+	            //총적립금보다 많은 금액입력시 경고말 아웃풋
+	            alert("사용금액초과")
+	            location.reload();		
+			}  
+					 
+	});	
+});
+ */
+
+ $(function(){
+	   var totalPrice = parseInt($("#totalPrice").text());
+	   var totalPoint = parseInt($("#totalPoint").text());
+	   var pointDiscount  = parseInt($("#pointDiscount").val());
+	   var finalPay = parseInt($("#finalPay").text());
+	   var pointContents = $("#pointContents").text();
+	   var var1;
+	   console.log(pointDiscount);
+	   // 적립금사용금액 출력   
+	   $("#pointDiscount").keyup(function(){   
+	      $("#pointUse").text($("#pointDiscount").val());
+	      pointDiscount = $("#pointUse").text();
+	   /*     if(pointDiscount != null) { */
+	          if(totalPoint >= pointDiscount){
+	               var1 = totalPrice - pointDiscount
+	               $("#finalPay").text(var1);
+	               
+	         }else if(totalPoint < pointDiscount){
+	            //총적립금보다 많은 금액입력시 경고말 아웃풋
+	            alert("사용금액초과")
+	            location.reload();
+	      
+	         }
+	       /* } */                   
+	      
+	   });   
+	});
+
+
+
+	// 계산 nvl 처리
+	function nvl(A, B) {
+		if (isNull(A) || isUndefined(A)) {
+			return B;
+		} else {
+			return A;
+		}
+	};
+	
+	
+	 
+
+	/* 모달 */
+	jQuery.fn.center = function() {
+		this.css('top', Math.max(0, (($(window).height() - $(this)
+				.outerHeight()) / 2)
+				+ $(window).scrollTop())
+				+ 'px');
+		this.css('left', Math.max(0,
+				(($(window).width() - $(this).outerWidth()) / 2)
+						+ $(window).scrollLeft())
+				+ 'px');
+		return this;
 	}
 
 	function wrapWindowByMask() {
-	  var maskHeight = $(document).height();
-	  var maskWidth = $(window).width();
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
 
-	  $('#mask').css({
-	    'width': maskWidth,
-	    'height': maskHeight
-	  });
-	  $('#mask').fadeTo(10, 0.8);
+		$('#mask').css({
+			'width' : maskWidth,
+			'height' : maskHeight
+		});
+		$('#mask').fadeTo(10, 0.8);
 
-	  $('.ModalPopup').show();
-	  $('.ModalPopup').center();
+		$('.ModalPopup').show();
+		$('.ModalPopup').center();
 	}
 
 	$(function() {
-	  $('.openMask').click(function(e) {
-	    e.preventDefault();
-	    wrapWindowByMask();
-	  });
+		$('.openMask').click(function(e) {
+			e.preventDefault();
+			wrapWindowByMask();
+		});
 	});
-
 </script>
 <div class="div_f"> 
 
@@ -222,39 +249,36 @@ $(function(){
 	<!-- 모달 -->
 <div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
   <div class="modal-dialog modal-80size modal-center" role="document">
-    <div class="modal-content modal-80size">
+    <div class="modal-content modal-80size" id="a">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">쿠폰함</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body">
-      
+      <div class="modal-body" style="overflow: scroll;">
 
 	      <c:forEach items="${coupon}" var="coupon">
 	     	<table border="1" style="width:100%;">
 	     	<tr>
 	     		<th style="background-color: #cc87d8; width: 30%; text-align: center;">
-	 	    	    <p style="color: white">${coupon.discount}</p>
+	 	    	    <p id="discount" style="color: white">${coupon.discount}</p>
 					<p style="color: white">할인쿠폰</p>						     		
 	     		</th>
 	     		<td style="padding: 10px 10px 10px 10px;">
 	     			<p>${coupon.storeName}</p>
 	     			<p>${coupon.expEnd}</p>
-	     			<p>${coupon.serialNum}</p><button>저장</button>
+	     			<input id="serial" name="serial" type="hidden" value="${coupon.serialNum}">
+	     			<p>${coupon.serialNum}</p><button class="saveCoupon" data-dismiss="modal">저장</button>
 	     		</td>
 	     	</tr>    
 	     	<tr style="height: 20px;">
 	     	</tr>  
-	     	</table>	        		
+	     	</table>	     		        		
       	 </c:forEach>  
      
       </div>
     </div>
   </div>
-</div>
-
-
-	                
+</div>              
 	
 </div>
 <!-- 결제정보-->
@@ -267,7 +291,7 @@ $(function(){
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
-			<td class="basic_tb_td" ></td>
+			<td class="basic_tb_td" ><span id="couponUse"></span></td>
 		<tr>
 		
 		<tr>

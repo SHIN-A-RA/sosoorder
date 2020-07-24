@@ -40,7 +40,8 @@ public class MypageController {
 		return "mypage/myPointList";
 	}
 	
-
+	//마이페이지 주문내역, 별점
+	
 	@RequestMapping("myOrderList")
 	public String getOrderList(MemberVO memberVO, Model model, HttpSession session,
 			@RequestParam(required = false, value="storeId") String storeId) {
@@ -63,6 +64,20 @@ public class MypageController {
 		
 }
 
+	//마이페이지 나의 쿠폰함
+
+	@RequestMapping("myCouponList")
+	public String getCoupon(MemberVO memberVO, Model model, HttpSession session,
+			@RequestParam(required = false, value="storeId") String storeId) {
+		String phone = (String)session.getAttribute("phone");
+		memberVO.setPhone(phone);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", phone);
+		map.put("storeId", storeId);
+		model.addAttribute("getCoupon", mypageService.getCoupon(map));
+	return "mypage/myCouponList";
+	
+	}
 	/*
 	 * @RequestMapping("myPointsList") public String getStoreList(PointVO vo, Model
 	 * model) {

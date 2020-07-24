@@ -16,6 +16,7 @@ public interface MypageService {
 	public List<Map> getOrderList(HashMap<String, Object> map);
 	public void orderStarUpdate(OrderCptVO ordercptVO);
 	public List<Map> StarOrderList(HashMap<String, Object> map);
+	public List<Map> getCoupon(HashMap<String, Object> map);
 
 
 	/* public String getName(Integer id); */
