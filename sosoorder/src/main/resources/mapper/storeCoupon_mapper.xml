@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.store.mapper.StoreCouponMapper">
+	<insert id="storeCouponInsert" parameterType="StoreCouponVO">   
+		insert into coupon(serialNum, expStart, expEnd, discount, storeId)
+		VALUES(
+			#{serialNum},
+			to_date(#{expStart}, 'YYYYMMDD'),
+			to_date(#{expEnd}, 'YYYYMMDD'),
+			 #{discount},
+			 #{storeId}
+			)
+	 </insert>
+	 
+	 <select id="storeCouponList" parameterType="StoreCouponVO" resultType="map">
+	 	select
+	 		c.serialNum "serialNum",
+	 		c.expStart "expStart",
+	 		c.expEnd "expEnd",
+	 		c.discount "discount",
+	 		a.storeName "storeName"
+	 	from coupon c, admin a
+	 	<where>
+	 		c.storeId = a.storeId
+	 		<if  test="storeId != null">
+	 			AND c.storeId = #{storeId}
+	 		</if>
+	 	</where>
+	 </select>
+	 
+	 <delete id="storeCouponDelete" parameterType="StoreCouponVO" >
+		 delete from coupon where serialNum = #{serialNum}
+	 </delete>
+</mapper>

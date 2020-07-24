@@ -284,3 +284,12 @@ input:focus {
 
 .categoryIf.off{display: none !important;}
 .categoryIf.on{display:block !important;}
+
+
+.mb11{margin-bottom: 11px;}
+.pd30{padding : 30px;}
+.pd15{padding : 15px;}
+.pd_b0{padding-bottom:0;}
+.pd_t0{padding-top:0;}
+.pd_l0{padding-left:0;}
+.pd_r0{padding-right:0;}
