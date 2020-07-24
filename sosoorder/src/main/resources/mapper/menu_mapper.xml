@@ -16,13 +16,27 @@
 		</where>
 		order by menuCategory
 	</select>
+	<!--  -->
 	<!--단건조회 -->
-	<select id="getMenu" parameterType="menuVO" resultType="menuVO">
+	<select id="getMenu" parameterType="menuVO" resultType="map">
 		select
-		menuNum,menuName,menuCategory,menuPrice,menuContents,menuCheck,menuImage
+		m.menuNum "menuNum",
+		m.menuName "menuName",
+		m.menuCategory "menuCategory",
+		m.menuPrice "menuPrice",
+		m.menuContents "menuContents",
+		m.menuCheck "menuCheck",
+		m.menuImage "menuImage", 
+		a.storeMenu "storeMenu"
 		from
-		menu
-		where menuNum = #{menuNum}
+		menu m, admin a
+		<where>
+			m.storeId=a.storeId
+			<if test="menuNum != null">
+			and m.menuNum = #{menuNum}
+			</if>
+			
+		</where>
 	</select>
 	<!-- 메뉴등록 -->
 	<insert id="menuInsert" parameterType="menuVO">

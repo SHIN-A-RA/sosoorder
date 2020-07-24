@@ -61,15 +61,25 @@
 		<div class="col">
 			<div class="input-group" style="width: 600px;">
 				<div class="input-group-prepend">
-					<span class="input-group-text">메뉴 카테고리</span>
+					<span class="input-group-text" >메뉴 카테고리</span>
 				</div>
-				<input type="text" class="form-control" name="menuCategory"
-					id="menuCategory" style="text-align: center;"
-					placeholder="추가하실 새로운 카테고리명을 적어주세요" value="${oneMenu.menuCategory}">
-				<button>Enroll</button>
+				<select class="form-control selectmenu" name="menuCategory" id="menuCategory"
+					style="text-align: center;" >
+					
+				</select>
 			</div>
 		</div>
 	</div>
+		<script>
+		// (|)짤라주는거
+		var jbString = "${storeMenu.storeMenu}";
+		var jbSplit = jbString.split("|");
+		for ( var i in jbSplit) {
+			$(".selectmenu").append(
+					"<option>" + jbSplit[i] + "</option>");
+		}
+		$('#menuCategory').val('${oneMenu.menuCategory}')
+	</script>
 	<br> <br>
 	<div class="row">
 		<div class="col">
@@ -89,8 +99,8 @@
 				</div>
 				<input type="text" class="form-control" name="storeMenu"
 					id="storeMenu" style="text-align: center;"
-					placeholder="추가하실 새로운 카테고리명을 적어주세요">
-				<button>Enroll</button>
+					placeholder="추가하실 새로운 카테고리명을 적어주세요" value="${storeMenu.storeMenu}">
+				<button onclick="storeMenuUpdate">Enroll</button>
 			</div>
 		</div>
 	</div>
@@ -99,9 +109,8 @@
 		<div class="col">
 			<div class="input-group" id="uploadFile">
 				<div class="custom-file">
-					<span class="input-group-text">이미지 </span> 
-					<input type="file" name="uploadFile">
-					<span>현재파일:${oneMenu.menuImage}</span>
+					<span class="input-group-text">이미지 </span> <input type="file"
+						name="uploadFile"> <span>현재파일:${oneMenu.menuImage}</span>
 					<!-- input-group-text <이게 회색 박스 만들어줌  -->
 				</div>
 			</div>
@@ -130,7 +139,8 @@
 			}
 		});
 	</script>
-
+	
+	
 
 	<br>
 	<div class="row">
@@ -140,7 +150,7 @@
 				<span class="input-group-text">주/부 메뉴 코드</span>
 				<div style="width: 100px;">
 					<select class="form-control" name="menuCheck"
-						id="exampleFormControlSelect1" value="${oneMenu.menuCheck}">
+						id="exampleFormControlSelect1">
 						<c:if test="${oneMenu.menuCheck==0}">
 							<option selected>0</option>
 							<option>1</option>

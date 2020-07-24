@@ -1,6 +1,7 @@
 package com.soso.app.menu.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class MenuServiceImpl implements MenuService{
 		menuMapper.menuUpdate(menuVO);
 	}
 	@Override
-	public MenuVO getMenu(MenuVO menuVO) {
+	public Map getMenu(MenuVO menuVO) {
 		return menuMapper.getMenu(menuVO);
 	}
 	@Override
