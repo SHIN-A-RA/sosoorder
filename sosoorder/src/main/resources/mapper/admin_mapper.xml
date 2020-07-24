@@ -27,14 +27,16 @@
          storeNum,
          storeAddr, 
          storeName, 
-         accountNum)
+         accountNum,
+         storeMenu)
       VALUES
          (#{storeId},
          #{storePwd},
          #{storeNum},
          #{storeAddr},
          #{storeName},
-         #{accountNum})
+         #{accountNum},
+         #{storeMenu})
    </insert>
 
 <select id="idCheck" parameterType="String" resultType="int">
@@ -51,18 +53,6 @@
       FROM admin
       ORDER BY storeId
    </select>
-
-   <select id="getName" resultType="java.lang.String" parameterType="integer"> 
-   	SELECT first_name from employees where employee_id = #{employeeId}
-   </select>
-   
-   <select id="getCnt" resultType="int">
-   	SELECT count(*) from employees
-   </select>
-   
-   <select id="getEmpMap" resultType="map">
-   	SELECT * from employees order by first_name 
-   </select>   
    
 
 </mapper>
