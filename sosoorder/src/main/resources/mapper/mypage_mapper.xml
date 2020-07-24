@@ -89,6 +89,24 @@
 		where menuOrderNum= #{menuOrderNum}
 	</update>
 	
-	
+		<!--쿠폰함 담기 -->
+	<select id="getCoupon" parameterType="hashmap" resultType="map">
+		select distinct
+		u.serialNum "serialNum", u.memberNum "memberNum", u.useCheck "useCheck",
+		a.storeName "storeName", c.expStart "expStart", c.expEnd "expEnd", c.discount
+		from
+		userCoupon u, admin a, member m, point p, coupon c
+		where u.memberNum  = 1
+		and m.membernum = p.membernum
+	    and p.storeId = a.storeId
+	    and c.storeId = a.storeId
+		 <if test="phone != null">
+  	    and m.phone = #{phone}
+  	    </if> 
+  	    <if test="storeId != null">
+		and a.storeId = #{storeId}
+		</if>
+		
+	</select>
 </mapper>
 
