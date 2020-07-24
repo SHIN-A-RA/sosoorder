@@ -40,9 +40,9 @@
 		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
 	</select>
 	
-	<!-- 주문내역리스트 -->
+	<!-- 전체(상호)주문내역리스트 -->
 	<!-- by아라 -->
-	<select id="getOrderList" parameterType="MemberVO" resultType="map">
+	<select id="getOrderList" parameterType="hashmap" resultType="map">
 	    SELECT distinct
 		p.payDay "payDay",
 		p.totalPay "totalPay", 
@@ -54,16 +54,20 @@
 	    <if test="phone != null">
   	    and m.phone = #{phone}
 			</if>
+		<if test="storeId != null">
+		and a.storeId = #{storeId}
+			</if>
 
 	</select>
 	
 	<!-- 별점업데이트 -->
-	<!-- 별점주문내역리스트 -->
 	<!-- by아라 -->
-	<select id="StarOrderList" parameterType="MemberVO" resultType="map">
-		SELECT 
-		menu.menuName "menuName"
-		FROM point p, admin a, member m, menu menu
+	
+	<!-- (주문상세내역리스트) -->
+	<select id="StarOrderList" parameterType="hashmap" resultType="map">
+	SELECT distinct
+		menu.menuName "menuName", pay.payday "payday"
+		FROM point p, admin a, member m, menu menu, payment pay
 		where 
 		menu.storeId = a.storeId 
 	    and m.membernum = p.membernum
@@ -71,13 +75,17 @@
 	    <if test="phone != null">
   	    and m.phone = #{phone}
   	    </if> 
+  	    <if test="storeId != null">
+		and a.storeId = #{storeId}
+		</if>
+  	    
 	</select>
 	
 	<!-- by아라 -->
 	<update id="orderStarUpdate" parameterType="OrderCptVO">
 		UPDATE orderCpt
 		set
-		orderStart=#{orderStart}
+		orderStar=#{orderStar}
 		where menuOrderNum= #{menuOrderNum}
 	</update>
 	

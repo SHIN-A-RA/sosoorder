@@ -31,7 +31,6 @@ public class MypageController {
 			@RequestParam(required = false, value="storeId") String storeId) {
 		String phone = (String)session.getAttribute("phone");
 		memberVO.setPhone(phone);
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("phone", phone);
 		map.put("storeId", storeId);
@@ -43,12 +42,19 @@ public class MypageController {
 	
 
 	@RequestMapping("myOrderList")
-	public String getOrderList(MemberVO memberVO, Model model) {
-		model.addAttribute("myOrderList", mypageService.getOrderList(memberVO));
-		model.addAttribute("myStarOrderList", mypageService.StarOrderList(memberVO));
+	public String getOrderList(MemberVO memberVO, Model model, HttpSession session,
+			@RequestParam(required = false, value="storeId") String storeId) {
+		String phone = (String)session.getAttribute("phone");
+		memberVO.setPhone(phone);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", phone);
+		map.put("storeId", storeId);
+		model.addAttribute("myOrderList", mypageService.getOrderList(map));
+		model.addAttribute("myStarOrderList", mypageService.StarOrderList(map));
 		return "mypage/myOrderList";
 	}
 	
+	@RequestMapping("orderStarUpdate")
 	public String orderStarUpdate(@ModelAttribute OrderCptVO vo, HttpServletRequest request) {
 		String onClass= request.getParameter("starC");
 		vo.setOrderStar(onClass);
