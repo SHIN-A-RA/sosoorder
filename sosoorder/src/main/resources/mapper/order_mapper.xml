@@ -13,9 +13,6 @@
 			FROM menu m JOIN orderCpt o ON (m.menuNum = o.menuNum)
 		
 		<where>
-		<if test="storeId != null">
-			m.storeId = #{storeId}
-		</if>
 		<if test="orderNum != null">
 			and o.orderNum = #{orderNum} 
 		</if>	
@@ -28,29 +25,29 @@
 		from point  		
 		<where>
 			<if test="storeId != null">
-				storeId = #{storeId}
+				AND storeId = #{storeId}
 			</if>
 			<if test="memberNum != null">
-				and memberNum = #{memberNum}
+				and memberNum = #{memberNum}   
 			</if>	
 		</where>
 	</select>
 	
 		<!-- 쿠폰조회  -->
-	<select id="findCoupon" parameterType="OrderCptVO" resultType="OrderCptVO">
+	<select id="findCoupon" parameterType="OrderCptVO" resultType="map">
 		SELECT 
-			c.serialNum, 
-			c.expStart, 
-			c.expEnd, 
-			c.discount, 
-			c.storeId, 
-			u.useCheck,
-			a.storeName
+			c.serialNum "serialNum", 
+			c.expStart "expStart", 
+			c.expEnd "expEnd", 
+			c.discount "discount", 
+			c.storeId "storeId", 
+			u.useCheck "useCheck",
+			a.storeName "storeName"
 		FROM USERCOUPON u 
 		INNER JOIN COUPON c 
 			ON (u.serialNum = c.serialNum)
 		INNER JOIN ADMIN a
-			ON (c.storeId= a.storeId)	
+			ON (c.storeId = a.storeId)	
 		<where>
 			c.expEnd > sysdate
 			AND u.usecheck = 0
