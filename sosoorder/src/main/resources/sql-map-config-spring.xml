@@ -19,7 +19,7 @@
 		 <typeAlias type="com.soso.app.admin.service.AdminVO" alias="AdminVO"/>    
 		 <typeAlias type="com.soso.app.menu.service.MenuVO" alias="MenuVO"/>  
 		 <typeAlias type="com.soso.app.storeorder.service.ReorderVO" alias="ReorderVO"/>
-		 <typeAlias type="com.soso.app.employees.service.EmployeesVO" alias="EmployeesVO"/>   
+		 <typeAlias type="com.soso.app.emp.service.EmpVO" alias="EmpVO"/>   
 		 <typeAlias type="com.soso.app.order.service.OrderCptVO" alias="OrderCptVO"/> 
 		 <typeAlias type="com.soso.app.payment.service.PaymentVO" alias="PaymentVO"/> 
 		 <typeAlias type="com.soso.app.work.service.WorkVO" alias="WorkVO"/> 

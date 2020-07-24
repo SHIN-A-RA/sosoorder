@@ -32,8 +32,7 @@
 			frm.accountNum.focus();
 			return;
 		}
-		
-		
+
 
 		
 	frm.submit();

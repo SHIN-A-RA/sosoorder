@@ -6,7 +6,81 @@
 <script src="resources/admin/scss/addcss/adminInsertValued.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
 
+<script>
+//필수 입력 체크, 정규식
+function validCheck(){
+	
+	//StoreId
+	var userIdCheck = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
+	var storeId = userIdCheck.test(window.document.frm.storeId.value);
+	if(window.document.frm.storeId.value=="" || storeId == false){
+		alert("아이디는 영어만 입력해주세요.(5~20자)");
+		frm.storeId.focus();
+		return;
+	}
+	
+	//비밀번호
+	var passwdCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+	var storePwd = userIdCheck.test(window.document.frm.storePwd.value);
+		if(window.document.frm.storePwd.value=="" || storePwd == false){
+			alert("비밀번호는 영문 대문자와 소문자, 숫자, 특수문자를 하나 이상 포함하여야 생성가능합니다.(8~16자)");
+			frm.storeId.focus();
+			return;
+	}
+	
+	//계좌번호(숫자) + replace로 - 제거 해줘야함
+	var regexp = /^[0-9]*$/;
+	var accountNum = regexp.test(window.document.frm.accountNum.value);
+	if(window.document.frm.accountNum.value=="" || accountNum == false){
+		alert("계좌번호는 숫자만 가능합니다");
+		frm.accountNum.focus();
+		return;
+	};
+	
+	//상호명(null체크만)
+	if(window.document.frm.storeName.value == ""){  
+		alert("상호명을 입력해주세요");
+		frm.storeName.focus();
+		return;
+	}
+	
+	//사업자번호(숫자) -> 소상공인 api 사용시 변경가능성 있음
+	var regexp = /^[0-9]*$/;
+	var storeNum = regexp.test(window.document.frm.storeNum.value);
+	if(window.document.frm.storeNum.value=="" || storeNum == false){
+		alert("사업자번호는 숫자만 가능합니다");
+		frm.storeNum.focus();
+		return;
+	};
+	
+	
+	
+		if(window.document.frm.storeAddr.value == ""){  
+		alert("주소를 입력해주세요");
+		frm.storeAddr.focus();
+		return;
+	}
+				
+	
+frm.submit();
 
+} 
+
+
+function checkPwd(){
+  var f1 = document.forms[0];
+  var pw1 = f1.storePwd.value;
+  var pw2 = f1.storePwd2.value;
+  if(pw1!=pw2){
+   document.getElementById('checkPwd').style.color = "red";
+   document.getElementById('checkPwd').innerHTML = "비밀번호 불일치";
+  }else{
+   document.getElementById('checkPwd').style.color = "green";
+   document.getElementById('checkPwd').innerHTML = "비밀번호 일치";
+   
+  }
+ }
+</script>
 <script>
 var idPass;
 var idRegex = /^[a-zA-Z0-9]{4,12}$/;
@@ -37,11 +111,7 @@ $(document).ready(function(){
 		}
 	});
 });
-
-
  </script>
-
-
 
 
 <meta charset="UTF-8">
@@ -140,9 +210,8 @@ $(document).ready(function(){
 					<input type="text" name="accountNum" id="accountNum"
 						class="form-style" autocomplete="off" />
 				</div>
-
 				<p></p>
-				<input type="submit" class="login pull-right" value="가입완료">
+				<button type="button" class="btn btn-success" onclick="validCheck()">가입완료</button>
 				</form>
 			</div>
 	</div>

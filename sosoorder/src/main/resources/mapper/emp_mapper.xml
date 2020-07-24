@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.soso.app.employees.mapper.EmployeesMapper">
+<mapper namespace="com.soso.app.emp.mapper.EmpMapper">
 
-<!-- employees 조회 -->
-   <select id="getEmployees" parameterType="EmployeesVO" resultType="EmployeesVO">
+<!-- employees storeId 조회 -->
+   <select id="getEmp" parameterType="EmpVO" resultType="EmpVO">
 	SELECT
 	empNum,
 	empName,
@@ -20,9 +20,25 @@
 	FROM employees
 	WHERE storeId = #{storeId}
    </select>
-
+   
+   <!-- employees 번호 조회 -->
+	   <select id="getEmpNum" parameterType="EmpVO" resultType="EmpVO">
+	SELECT
+	empNum,
+	empName,
+	workPart,
+	empBirth,
+	salary,
+	endDate,
+	empPhone,
+	salaryDay,
+	empClass,
+	storeId
+	FROM employees
+	WHERE empNum = #{empNum}
+   </select>
 <!-- employees 등록 -->
-   <insert id="employeesInsert" parameterType="EmployeesVO">
+   <insert id="empInsert" parameterType="EmpVO">
 	INSERT INTO employees
 	(empNum,
 	empName,
@@ -40,7 +56,7 @@
 	#{empName},
 	#{workPart},
 	#{empBirth},
-	#{hireDate},
+	sysdate,
 	#{salary},
 	(SELECT sysdate + (INTERVAL '10' YEAR)  FROM dual),
 	#{empPhone},
@@ -49,22 +65,40 @@
 	#{storeId})
    </insert>
    
-   <select id="getEmployeesList" parameterType="EmployeesVO" resultType="EmployeesVO">
+   
+   <!-- 직원list -->
+   <select id="getEmpList" parameterType="String" resultType="EmpVO">
 	SELECT empNum,
 	empName,
 	workPart,
-	to_char(empBirth,'YY-MM-DD'),
-	to_char(hireDate,'YY-MM-DD'),
+	to_char(empBirth,'YY-MM-DD') AS empBirth,
+	to_char(hireDate,'YY-MM-DD') AS hireDate,
 	salary,
-	to_char(endDate,'YY-MM-DD'),
+	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	to_char(salaryDay,'YY-MM-DD'),
+	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
 	empClass,
 	storeId
 	FROM employees
-	ORDER BY hireDate
+	WHERE storeId = #{storeId}
    </select>
 
-
+	<!-- 직원 삭제 -->
+	<delete id="getEmpDelete" parameterType="EmpVo">
+	delete from employees where empNum = ${empNum}
+	</delete>
+	
+	<update id="setUpdateEmp" parameterType="EmpVo">
+	UPDATE employees SET
+	workPart=#{workPart}
+	empName=#{empName},
+	salary=#{salary},
+	empPhone=#{empPhone},
+	salaryDay=#{salaryDay},
+	empClass=#{empClass}
+	WHERE empNum = #{empNum}
+	</update>
+	
+	
 </mapper>
 
