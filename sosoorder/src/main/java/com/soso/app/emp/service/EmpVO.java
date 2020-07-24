@@ -1,11 +1,11 @@
-package com.soso.app.employees.service;
+package com.soso.app.emp.service;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class EmployeesVO {//11개
+public class EmpVO {//11개
 	String empNum; //insert view 입력 제외
 	String empName;
 	String workPart;
