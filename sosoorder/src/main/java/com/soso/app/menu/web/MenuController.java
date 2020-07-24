@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.soso.app.admin.service.AdminService;
 import com.soso.app.admin.service.AdminVO;
 import com.soso.app.home.service.HomeService;
 import com.soso.app.menu.common.FileRenamePolicy;
@@ -28,6 +29,9 @@ public class MenuController {
 	
 	@Autowired
 	HomeService homeService;
+	
+	@Autowired
+	AdminService adminService;
 
 	// 메뉴관리 페이지(리스트에뿌림)
 	@RequestMapping("storeMenuList")
@@ -43,12 +47,21 @@ public class MenuController {
 	}
 
 	// 메뉴 등록페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
-	@RequestMapping("storeMenuInsert")
-	public String storeMenuInsert(MenuVO vo, Model model) {
+	@RequestMapping("storeMenuInsert")//insertForm
+	public String storeMenuInsert(MenuVO vo, Model model, AdminVO adminVO,HttpSession session) {
 		if (vo.getMenuNum() != null && !vo.getMenuNum().isEmpty()) {
 			model.addAttribute("oneMenu", menuService.getMenu(vo));// oneMenu=단건조회
 		}
+		String storeId = (String) session.getAttribute("storeId");
+		adminVO.setStoreId(storeId);
+		model.addAttribute("storeMenu", adminService.getAdmin(adminVO));//스토어메뉴 단건조회
 		return "menu/storeMenuInsert";
+	}
+	
+	@RequestMapping("storeMenuUpdate")
+	public String storeMenuUpdate(AdminVO adminVO) {
+		
+		return adminService.getMenuUpdate(adminVO);
 	}
 
 	// 메뉴 등록 처리하고 관리페이지로 이동

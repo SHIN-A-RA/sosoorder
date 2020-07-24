@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderCptVO> findCoupon(OrderCptVO orderCptVO) {
+	public List<Map<String, Object>> findCoupon(OrderCptVO orderCptVO) {
 		return orderMapper.findCoupon(orderCptVO);
 	}
 	

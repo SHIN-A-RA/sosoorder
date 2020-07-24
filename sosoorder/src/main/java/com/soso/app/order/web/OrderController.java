@@ -24,16 +24,15 @@ public class OrderController {
 	
 	//by혜원, 주문페이지 
 	@RequestMapping("/orderInsert")
-	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session, HttpServletRequest request) {
+	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
 		
 		String storeId = (String)session.getAttribute("storeId");
-		int orderNum =   Integer.parseInt(request.getParameter("orderNum"));
-		
-		//test용 setstoreId
-//		menuSearchVO.setStoreId(storeId);
-//		menuSearchVO.setOrderNum(orderNum);
-		
+//		int orderNum =   Integer.parseInt(request.getParameter("orderNum"));
+
 		orderCptVO.setMemberNum(1);
+		orderCptVO.setStoreId(storeId);
+//		orderCptVO.setOrderNum(orderNum);
+		
 		model.addAttribute("oderList", orderService.getOrder(orderCptVO));
 		model.addAttribute("point", orderService.getTotalPoint(orderCptVO));
 		model.addAttribute("coupon", orderService.findCoupon(orderCptVO));
