@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.soso.app.menu.service.MenuSearchVO;
 
 public interface OrderService {
 

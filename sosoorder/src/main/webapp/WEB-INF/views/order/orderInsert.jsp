@@ -51,32 +51,15 @@ $(function(){
 	});
 });
 
-//적립금 사용
-/* $(function(){
-	var totalPoint = parseInt($("#totalPoint").text());
- 	var pointDiscount;
 
-	// 적립금사용금액 출력	
 	
-	$("#pointDiscount").keyup(function(){	
-			$("#pointUse").text($("#pointDiscount").val());
-		
-  		pointDiscount  = parseInt($("#pointDiscount").val());
-  	 if(totalPoint >= pointDiscount){
-			}else if(totalPoint < pointDiscount){
-	            //총적립금보다 많은 금액입력시 경고말 아웃풋
-	            alert("사용금액초과")
-	            location.reload();		
-			}  
-					 
-	});	
-});
- */
 
+/* 
  $(function(){
 	   var totalPrice = parseInt($("#totalPrice").text());
 	   var totalPoint = parseInt($("#totalPoint").text());
 	   var pointDiscount  = parseInt($("#pointDiscount").val());
+	   var couponUse = parseInt($("#couponUse").text());
 	   var finalPay = parseInt($("#finalPay").text());
 	   var pointContents = $("#pointContents").text();
 	   var var1;
@@ -84,36 +67,70 @@ $(function(){
 	   // 적립금사용금액 출력   
 	   $("#pointDiscount").keyup(function(){   
 	      $("#pointUse").text($("#pointDiscount").val());
+	      
 	      pointDiscount = $("#pointUse").text();
-	   /*     if(pointDiscount != null) { */
-	          if(totalPoint >= pointDiscount){
-	               var1 = totalPrice - pointDiscount
-	               $("#finalPay").text(var1);
-	               
-	         }else if(totalPoint < pointDiscount){
-	            //총적립금보다 많은 금액입력시 경고말 아웃풋
-	            alert("사용금액초과")
+	      couponUse = parseInt($("#couponUse").text());
+	      
+	      	if(totalPrice >= couponUse+pointDiscount){
+	      		 if(totalPoint >= pointDiscount){
+	      			 var1 = totalPrice - nvl(pointDiscount,0) - nvl(couponUse,0)
+	      			 $("#finalPay").text(var1);
+	      		 }else if(totalPoint < pointDiscount){
+	 	            //총적립금보다 많은 금액입력시 경고말 아웃풋
+	 	            alert("사용금액초과")
+	 	            location.reload();
+	      		}
+	      	}else if(totalPrice < couponUse+pointDiscount){
+	      		alert("할인금액이 최종결제금액보다 많습니다.")
 	            location.reload();
-	      
-	         }
-	       /* } */                   
-	      
+	      	}
+	  	      
 	   });   
-	});
-
-
-
-	// 계산 nvl 처리
-	function nvl(A, B) {
-		if (isNull(A) || isUndefined(A)) {
+}); */
+ 
+ 	// 계산 nvl 처리
+/* 	function nvl(A, B) {
+		if (isEmpty(A) || isUndefined(A)) {
 			return B;
 		} else {
 			return A;
 		}
-	};
+	}; */
 	
-	
-	 
+	   function nvl(str, defaultStr){
+        
+        if(typeof str == "undefined" || str == null || str == "")
+            str = defaultStr ;
+         
+        return str ;
+    }
+
+
+ $(function(){
+	 var pointDiscount  = parseInt($("#pointDiscount").val());
+	 nvl(pointDiscount,0);
+	 console.log("pointDiscount")
+ });
+  
+  
+  /* 숫자만 입력 가능하게 */
+  function onlyNumber(event){
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+        return;
+    else
+        return false;
+}
+ 
+function removeChar(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+        return;
+    else
+        event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
 
 	/* 모달 */
 	jQuery.fn.center = function() {
@@ -234,7 +251,7 @@ $(function(){
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
-		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2" type="text" >		    	
+		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2"  type="text" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'">		    	
 		    	(총 적립금:<strong style="color: #E91E63;" id="totalPoint">${point[0].point}</strong>원)</p>
 		    	<div class="l">
 		    	<span id="pointContents"></span>
@@ -259,15 +276,15 @@ $(function(){
 	      <c:forEach items="${coupon}" var="coupon">
 	     	<table border="1" style="width:100%;">
 	     	<tr>
-	     		<th style="background-color: #cc87d8; width: 30%; text-align: center;">
+	     		<th style="background-color: #cc87d8; width: 30%; text-align: center; font-size: 15px">
 	 	    	    <p id="discount" style="color: white">${coupon.discount}</p>
 					<p style="color: white">할인쿠폰</p>						     		
 	     		</th>
 	     		<td style="padding: 10px 10px 10px 10px;">
-	     			<p>${coupon.storeName}</p>
-	     			<p>${coupon.expEnd}</p>
+	     			<p style="font-size: 17px; margin: 1p; font-weight: bold; padding: 5px 0px 0px 5px;">${coupon.storeName}</p>
+	     			<p style="font-size: 13px; padding: 5px;">${coupon.expEnd}까지</p>
 	     			<input id="serial" name="serial" type="hidden" value="${coupon.serialNum}">
-	     			<p>${coupon.serialNum}</p><button class="saveCoupon" data-dismiss="modal">저장</button>
+	     			<button class="saveCoupon" data-dismiss="modal">사용</button>
 	     		</td>
 	     	</tr>    
 	     	<tr style="height: 20px;">

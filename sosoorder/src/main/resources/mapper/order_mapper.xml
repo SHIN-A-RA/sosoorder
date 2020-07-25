@@ -38,7 +38,7 @@
 		SELECT 
 			c.serialNum "serialNum", 
 			c.expStart "expStart", 
-			c.expEnd "expEnd", 
+			to_char(c.expEnd,'yyyy/mm/dd') "expEnd", 
 			c.discount "discount", 
 			c.storeId "storeId", 
 			u.useCheck "useCheck",

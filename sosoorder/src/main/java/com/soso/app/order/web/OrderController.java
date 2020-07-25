@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.soso.app.menu.service.MenuSearchVO;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
 
