@@ -24,9 +24,8 @@
 	  	  $(".menu_bar").append("<div><a class='MCategory'>" + jbSplit[i] + "</a></div>" );
 	    }
 	</script>
-	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"
-		aria-hidden="true"></i></span> <span class="next" id="aro_next1"><i
-		class="fa fa-caret-right" aria-hidden="true"></i></span>
+	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left" aria-hidden="true"></i>
+	</span> <span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
 <div>
 	<h3 id="un">메뉴관리</h3>
@@ -43,7 +42,6 @@
 			<table id="table_id" class="display">
 				<thead>
 					<tr>
-						<th>메뉴 번호</th>
 						<th>메뉴 카테고리</th>
 						<th>메뉴 이름</th>
 						<th>가격</th>
@@ -54,8 +52,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${storeMenuList}" var="menu">
-						<tr class="categoryIf ${menu.menuCategory}">
-							<td>${menu.menuNum}</td>
+						<tr class="categoryIf ${menu.menuCategory}" name="${menu.menuNum}">
 							<td>${menu.menuCategory}</td>
 							<td>${menu.menuName}</td>
 							<td>${menu.menuPrice}원</td>
@@ -75,8 +72,9 @@
 		//목록
 		var otable = $('#table_id').DataTable({});
 		$('#table_id tbody').on('click', 'tr', function() {
-			var data = otable.row(this).data();
-			var col1 = data[0];
+			var col1 = $(this).attr("name");
+			//var data = otable.row(this).data();
+			//var col1 = data[1].;
 			location.href = "storeMenuInsert?menuNum=" + col1
 		});
 
@@ -104,4 +102,12 @@
 		slidesToScroll : 5,
 		fade : false
 	});
+</script>
+<script>
+$(function(){
+	$('.MCategory').on('click', function(){
+		category = $(this).html();
+		location.href = "storeMenuList?menuCategory=" + category;
+	});
+})
 </script>

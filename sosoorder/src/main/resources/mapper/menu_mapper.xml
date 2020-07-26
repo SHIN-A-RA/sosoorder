@@ -13,6 +13,9 @@
 			<if test="storeId != null">
 			storeId = #{storeId}
 			</if>
+			<if test="menuCategory != null">
+			AND menuCategory = #{menuCategory}
+			</if>
 		</where>
 		order by menuCategory
 	</select>

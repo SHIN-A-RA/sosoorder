@@ -55,9 +55,8 @@
    </select>
    
 	<update id="getMenuUpdate" parameterType="AdminVO">
-	UPDATE admin
-		set
-		STOREMENU=#{storeMenu}
-		where STOREID = #{storeId};
+		UPDATE admin
+		set storeMenu = #{storeMenu}
+		where storeId = #{storeId}
 	</update>
 </mapper>

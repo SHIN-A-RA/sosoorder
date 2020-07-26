@@ -99,8 +99,8 @@
 				</div>
 				<input type="text" class="form-control" name="storeMenu"
 					id="storeMenu" style="text-align: center;"
-					placeholder="추가하실 새로운 카테고리명을 적어주세요" value="${storeMenu.storeMenu}">
-				<button onclick="storeMenuUpdate">Enroll</button>
+					 value="${storeMenu.storeMenu}">
+				<div id="btnUpdate">Enroll</div>
 			</div>
 		</div>
 	</div>
@@ -155,7 +155,7 @@
 				<div style="width: 100px;">
 					<select class="form-control" name="menuCheck"
 						id="exampleFormControlSelect1">
-						<c:if test="${oneMenu.menuCheck==0}">
+						<c:if test="${oneMenu.menuCheck!=1}">
 							<option selected>0</option>
 							<option>1</option>
 						</c:if>
@@ -178,3 +178,26 @@
 
 	</div>
 </form>
+<script>
+$(function(){
+	storeMenuUpdate()
+
+function storeMenuUpdate(){
+	//수정 버튼 클릭
+	$('#btnUpdate').on('click',function(){
+		var storeMenu = $('input:text[name="storeMenu"]').val();
+		console.log(storeMenu);
+		$.ajax({ 
+		    url: "storeMenuUpdate",  
+		    type: 'POST',  
+		    //dataType: 'json', 
+		    data: JSON.stringify({storeMenu: storeMenu}),
+		    contentType: 'application/json',
+		    success: function(data) { 
+		    	location.reload();
+		    }
+		 });
+	});//수정 버튼 클릭
+}
+});
+</script>

@@ -41,8 +41,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public String getMenuUpdate(AdminVO adminVO) {
-	return adminMapper.getMenuUpdate(adminVO);
+	public void getMenuUpdate(AdminVO adminVO) {
+	adminMapper.getMenuUpdate(adminVO);
 	}
 
 }
