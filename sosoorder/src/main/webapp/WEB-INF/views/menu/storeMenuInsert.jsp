@@ -110,7 +110,11 @@
 			<div class="input-group" id="uploadFile">
 				<div class="custom-file">
 					<span class="input-group-text">이미지 </span> <input type="file"
-						name="uploadFile"> <span>현재파일:${oneMenu.menuImage}</span>
+						name="uploadFile">
+						<span>현재파일:
+							<span>${oneMenu.menuImage}</span>
+							<input type="hidden" name="updateFile" value="${oneMenu.menuImage}">
+						</span>
 					<!-- input-group-text <이게 회색 박스 만들어줌  -->
 				</div>
 			</div>

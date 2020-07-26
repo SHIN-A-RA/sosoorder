@@ -93,7 +93,13 @@ public class MenuController {
 		vo.setMenuImage(filename);
 		// 서비스호출
 		if (vo.getMenuNum() != null && !vo.getMenuNum().isEmpty()) {
-			menuService.menuUpdate(vo);
+			if(vo.getMenuImage() == null || vo.getMenuImage() == "") {
+				String updateFileName= request.getParameter("updateFile");
+				vo.setMenuImage(updateFileName);
+				menuService.menuUpdate(vo);
+			}else {
+				menuService.menuUpdate(vo);
+			}
 		} else {
 			menuService.menuInsert(vo);
 		}
