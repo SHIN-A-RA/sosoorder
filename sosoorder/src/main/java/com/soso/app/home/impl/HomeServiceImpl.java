@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 import com.soso.app.admin.service.AdminVO;
 import com.soso.app.home.mapper.HomeMapper;
 import com.soso.app.home.service.HomeService;
+import com.soso.app.menu.service.MenuVO;
 import com.soso.app.order.service.OrderCptVO;
 
 @Service
 public class HomeServiceImpl  implements HomeService{
 
 	@Autowired HomeMapper homeMapper;
+	
+	@Override
+	public List<MenuVO> getMenuListHome(MenuVO menuVO) {
+		return homeMapper.getMenuListHome(menuVO);
+	}
 	
 	@Override
 	public AdminVO getMenuCategory(AdminVO adminVO) {

@@ -91,27 +91,26 @@ $('.btnadd2').on( "click", function() {
         
         <!-- Modal body -->
         <div class="modal-body">
-       
-<table class="table table-white">
-	<thead>
-		<tr>
-			<th scope="col">메뉴</th>
-			<th scope="col">결제일</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${myStarOrderList}" var="MENU">
-			<tr>
-				<td>${MENU.menuName}</td>
-				<td>${MENU.payDay}</td>
-				<td align='center'>
-					<input type=submit value="별점등록" style="width:50%" class="btnadd2" >
-				
-				</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+			<table class="table table-white">
+				<thead>
+					<tr>
+						<th scope="col">메뉴</th>
+						<th scope="col">결제일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${myStarOrderList}" var="MENU">
+						<tr>
+							<td>${MENU.menuName}</td>
+							<td>${MENU.payDay}</td>
+							<td align='center'>
+								<input type=submit value="별점등록" style="width:50%" class="btnadd2" >
+							
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
         </div>
         
         <!-- Modal footer -->

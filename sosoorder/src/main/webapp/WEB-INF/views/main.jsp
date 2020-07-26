@@ -4,9 +4,12 @@
 
 <div>
 <c:forEach items="${storeIdList}" var="store">
-<form action="homeSample" method="post" >
+<%-- <form action="homeSample" method="post" >
 	<input type="hidden" name="storeId" value="${store.storeId}">
 	<button>${store.storeId}</button>	
-</form>
+</form> --%>
+	<div>
+		<a href="homeSample/${store.storeId}">${store.storeId}</a>
+	</div>
 </c:forEach>
 </div>

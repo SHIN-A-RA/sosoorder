@@ -114,7 +114,7 @@ myApp.controller("myAppCtrl", function($scope){
 	
 });
 </script>
-<input type="hidden" name="hidden_storeId" id="hidden_storeId" value="${storeId}"> <br>
+
 <!-- 메뉴 구분-->
 <div class="slick_box menu_category">
 	<div class="menu_bar"></div>
@@ -136,7 +136,7 @@ myApp.controller("myAppCtrl", function($scope){
 <div class="slick_box menu_list_wrap">
 	<div class="menu_list">
 	<c:forEach items="${menuList}" var="menu">
-		<div class="col-item categoryIf ${menu.menuCategory}" name="${menu.menuCategory}">
+		<div class="col-item categoryIf ${menu.menuCategory}">
 	       <div class="photo">
 	           <img src="http://placehold.it/350x350" class="img-responsive" alt="${menu.menuImage}" />
 	       </div>
@@ -294,36 +294,13 @@ $(function(){
 </script>
 <script>
 $(function(){
-	$("div.categoryIf").addClass("off");
-	var category = $(".menu_category").first().find('.MCategory').html();
-	
-	$("." + category).addClass("on");
-	$("." + category).removeClass("off");
 	
 	$('.MCategory').on('click', function(){
-		$("div.categoryIf").addClass("off");
-		$("." + category).removeClass("on");
-		
 		category = $(this).html();
-		$("." + category).addClass("on");
-		$("." + category).removeClass("off");
+		location.href = "/sosoroder/homeSample?menuCategory=" + category;
 	});
-
+	
 	
 })
-	/* categoryOn();
-	function categoryOn(){ */
-		
-	/* } */
-	/* $('.MCategory').on('click', function(){
-		var category = $(this).html();
-		var x = document.getElementByClass("categoryIf").attr('name');
-		var mCategory = ${menu.menuCategory};
-		document.getElementByClass("categoryIf").removeClass("on")
-		if(category == x){
-			document.getElementByClass(mCategory).addClass("on")
-		}
-	}); */
-
 </script>
 

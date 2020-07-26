@@ -29,6 +29,19 @@ public class StoreCouponServiceImpl  implements StoreCouponService{
 	public void storeCouponDelete(StoreCouponVO storeCouponVO) {
 		storeCouponMapper.storeCouponDelete(storeCouponVO);
 	}
+
+	@Override
+	public StoreCouponVO storeCouponOne(StoreCouponVO storeCouponVO) {
+		return storeCouponMapper.storeCouponOne(storeCouponVO);
+	}
+
+	@Override
+	public void storeCouponUpdate(StoreCouponVO storeCouponVO) {
+		storeCouponMapper.storeCouponUpdate(storeCouponVO);
+		
+	}
+	
+	
 	
 
 }

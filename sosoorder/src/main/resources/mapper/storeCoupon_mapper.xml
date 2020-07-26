@@ -17,8 +17,8 @@
 	 <select id="storeCouponList" parameterType="StoreCouponVO" resultType="map">
 	 	select
 	 		c.serialNum "serialNum",
-	 		c.expStart "expStart",
-	 		c.expEnd "expEnd",
+	 		to_char(c.expStart, 'YYYY-MM-DD') "expStart",
+			to_char(c.expEnd, 'YYYY-MM-DD') "expEnd",
 	 		c.discount "discount",
 	 		a.storeName "storeName"
 	 	from coupon c, admin a
@@ -33,4 +33,24 @@
 	 <delete id="storeCouponDelete" parameterType="StoreCouponVO" >
 		 delete from coupon where serialNum = #{serialNum}
 	 </delete>
+	 
+	 <select id="storeCouponOne" parameterType="StoreCouponVO" resultType="StoreCouponVO">
+		 SELECT
+		 to_char(expStart, 'YYYYMMDD') "expStart",
+		 to_char(expEnd, 'YYYYMMDD') "expEnd",
+		 discount "discount",
+		 serialNum "serialNum"
+		 FROM coupon
+		 WHERE serialNum = #{serialNum}
+	 </select>
+	 
+	 <update id="storeCouponUpdate" parameterType="StoreCouponVO">   
+		UPDATE coupon
+		SET
+		expStart = to_date(#{expStart}, 'YYYYMMDD'),
+		expEnd = to_date(#{expEnd}, 'YYYYMMDD'),
+		discount = #{discount}
+		WHERE
+		serialNum = #{serialNum}
+	 </update>
 </mapper>

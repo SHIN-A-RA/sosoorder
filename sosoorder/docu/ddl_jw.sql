@@ -69,3 +69,19 @@ insert into coupon(serialNum, expStart, expEnd, discount)
 select * from coupon;		
 alter table coupon MODIFY(serialnum varcher2(20));
 delete from coupon where serialNum ='12';
+
+
+SELECT * FROM MENU where storeid = 'test' and menucategory = 
+(select regexp_substr(storemenu,'[^|]+',1,1) from admin where storeid ='test');
+
+
+UPDATE coupon
+		SET
+		expStart = to_date('20200717' , 'YYYYMMDD'),
+		expEnd = to_date('20200720', 'YYYYMMDD'),
+		discount = '3000'
+		WHERE
+		serialNum = 'IBJZXAAT'
+		
+		select * from COUPON
+

@@ -6,7 +6,6 @@ import java.util.Map;
 import com.soso.app.menu.service.MenuVO;
 
 public interface MenuMapper {
-	public List<MenuVO> getMenuListHome(MenuVO menuVO);
 	public Map getMenu(MenuVO menuVO);
 	public List<MenuVO> getMenuList(MenuVO menuVO);	
 	public List<MenuVO> getMenuCategory(MenuVO menuVO);

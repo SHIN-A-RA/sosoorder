@@ -2,6 +2,7 @@ package com.soso.app.store.web;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,21 +41,10 @@ public class StoreCouponController {
 		return "store/storeCouponList";
 	}
 	
-	@RequestMapping("storeCouponInsertForm")
-	public String storeCouponInsertForm(Model model, StoreCouponVO storeCouponVO) {
-		return "empty/store/storeCouponInsert";
-	}
-	
 	@RequestMapping("storeCouponInsert")
 	@ResponseBody
 	public void storeCouponInsert(Model model, StoreCouponVO storeCouponVO, HttpServletRequest request ,HttpSession session) {
-		String expStart = request.getParameter("expStart");
-		String expEnd = request.getParameter("expEnd");
-		String discount =request.getParameter("discount");
 		String storeId = (String)session.getAttribute("storeId");
-		storeCouponVO.setExpStart(expStart);
-		storeCouponVO.setExpEnd(expEnd);
-		storeCouponVO.setDiscount(discount);
 		storeCouponVO.setStoreId(storeId);
 		//쿠폰 시리얼번호
 		  final char[] possibleCharacters =
@@ -79,11 +68,27 @@ public class StoreCouponController {
 
 	}
 	
-	@RequestMapping(value="storeCouponDelete/{serialNum}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/storeCouponDelete/{serialNum}", method=RequestMethod.DELETE)
 	@ResponseBody
-	public void storeCouponDelete(@PathVariable String serialNum, StoreCouponVO storeCouponVO) {
+	public Map storeCouponDelete(@PathVariable String serialNum, StoreCouponVO storeCouponVO) {
 		storeCouponService.storeCouponDelete(storeCouponVO);
+		Map result = new HashMap<String, Object>();
+		result.put("result", Boolean.TRUE);
+		return result;
 	}
+	
+	@RequestMapping(value="storeCouponOne", method=RequestMethod.GET)
+	@ResponseBody
+	public StoreCouponVO storeCouponOne(StoreCouponVO storeCouponVO) {
+		return storeCouponService.storeCouponOne(storeCouponVO);
+	}
+	
+	@RequestMapping(value="storeCouponUpdate", method=RequestMethod.POST)
+	@ResponseBody
+	public void storeCouponUpdate(StoreCouponVO storeCouponVO) {
+		storeCouponService.storeCouponUpdate(storeCouponVO);
+	}
+	
 	
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,23 +35,34 @@ public class HomeController {
 		model.addAttribute("storeIdList", homeService.getStoreIdList(adminVO));
 		return "main";
 	}
-	//HttpSession session = request.getSession();
-	//session.setAttribute("loginId", id);
 	
-	@RequestMapping("homeSample")
+	@RequestMapping("homeSample/{storeId}")
 	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
-			HttpServletRequest request) {
-		// 세션 선언
-		HttpSession session = request.getSession();
-		String storeId = request.getParameter("storeId");
+			HttpSession session, @PathVariable String storeId) {
 		//세션 저장
 		session.setAttribute("storeId", storeId);
 		
 		//세션 가져오기
 		//(String)session.getAttribute("storeId")
 		
+		//adminVO.setStoreId(storeId);
+		//menuVO.setStoreId(storeId);
+		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
+		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
+		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
+		return "home";
+	}
+	
+	@RequestMapping("homeSample")
+	public String home(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
+			HttpSession session) {
+		
+		//세션 가져오기
+		String storeId = (String)session.getAttribute("storeId");
+		
 		adminVO.setStoreId(storeId);
-		model.addAttribute("menuList", menuService.getMenuListHome(menuVO));
+		menuVO.setStoreId(storeId);
+		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
 		return "home";

@@ -9,4 +9,6 @@ public interface StoreCouponMapper {
 	public void storeCouponInsert(StoreCouponVO storeCouponVO);
 	public List<Map> storeCouponList(StoreCouponVO storeCouponVO);
 	public void storeCouponDelete(StoreCouponVO storeCouponVO);
+	public StoreCouponVO storeCouponOne(StoreCouponVO storeCouponVO);
+	public void storeCouponUpdate(StoreCouponVO storeCouponVO);
 }

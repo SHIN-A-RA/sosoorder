@@ -2,13 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.soso.app.menu.mapper.MenuMapper">
+<mapper namespace="com.soso.app.home.mapper.HomeMapper">
 	<select id="getMenuListHome" resultType="MenuVO" parameterType="MenuVO">
 		SELECT * FROM MENU
 		<where>
 			<if test="storeId != null">
 			storeId = #{storeId}
 			</if>
+			<if test="menuCategory != null">
+			AND menuCategory = #{menuCategory}
+			</if>
+			<if test="menuCategory == null and storeId != null">
+			AND menuCategory = (
+				SELECT regexp_substr(storeMenu,'[^|]+',1,1)
+				FROM admin
+				WHERE storeId =#{storeId}
+			)
+			</if>
 		</where>
 	</select>
+	
+	<select id="getMenuCategory" resultType="AdminVO" parameterType="AdminVO">
+		SELECT storeMenu FROM admin
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
+	</select>
+	<select id="getStoreIdList" resultType="AdminVO" parameterType="AdminVO">
+		SELECT storeId FROM admin
+	</select>
+	
+	<select id="getOrderNum" resultType="OrderCptVO">
+		SELECT MAX(orderNum) "orderNum"
+		FROM orderCpt
+	</select>
+	
+	<insert id="cartInert" parameterType="OrderCptVO">
+		INSERT INTO orderCpt(menuOrderNum, orderNum, menuNum, orderCount)
+		select seq_ordercpt.nextval, A.*
+		from (
+		<foreach collection="list" item="item" separator="UNION ALL">
+			select #{item.orderNum}, #{item.menuNum},#{item.orderCount}
+			from dual
+		</foreach>
+		) "A"
+	</insert>
+
 </mapper>

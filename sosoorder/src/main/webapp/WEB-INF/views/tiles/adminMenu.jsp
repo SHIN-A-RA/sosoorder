@@ -13,7 +13,7 @@
 			<li class="gnb_dp2"><a href="#">팝업관리</a></li>
 			<li class="gnb_dp2"><a href="#">테이블관리</a></li>
 			<li class="gnb_dp2"><a href="#">리오더관리</a></li>
-			<li class="gnb_dp2"><a href="storeCouponList">쿠폰관리</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/storeCouponListForm">쿠폰관리</a></li>
 		</ul>
 	</li>
 	<!-- 직원관리 -->
