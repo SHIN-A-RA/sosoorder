@@ -42,7 +42,7 @@ public class MemberController {
 
 	      } else {
 	         session.setAttribute("phone", vo.getPhone());
-	         session.setAttribute("pwd", vo.getPwd());
+	         
 	         
 	         path = "redirect:/";
 	      }

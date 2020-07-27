@@ -4,37 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link href='resources/admin/scss/fullCalendar/main.css' rel='stylesheet' />
 <script src='resources/admin/scss/fullCalendar/main.js'></script>
-<script src='resources/admin/scss/fullCalendar/locales/ko.js'></script>
-<script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var workTimeData = [];
-    $.ajax({
-    	url:"workTimeData",
-    	async : false,	 //동기식
-    	success:function(dataResult){
-			    	for(i=0; i<dataResult.length; i++){
-			    		workTimeData.push({
-			    	          title: dataResult[i].EMPNAME,
-			    	          start: dataResult[i].WORKSTART
-			    		});	
-			    	}
-    	}
-    });
-    
-    console.log(workTimeData);
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      editable: true,
-      selectable: true,
-      businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: workTimeData
-    });
-    calendar.render();
-});
-
-</script>
 <style>
 
   body {
@@ -71,6 +41,40 @@
 }
 
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var workTimeData = [];
+    $.ajax({
+    	url:"workTimeData",
+    	async : false,	 //동기식
+    	success:function(dataResult){
+			    	for(i=0; i<dataResult.length; i++){
+			    		workTimeData.push({
+			    	          title: dataResult[i].EMPNAME,
+			    	          start: dataResult[i].WORKSTART
+			    		});	
+			    	}
+    	}
+    });
+    
+    console.log(workTimeData);
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      editable: true,
+      selectable: true,
+      businessHours: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: workTimeData,
+      
+      dateClick: function(info) {
+    	    alert('Date: ' + info.dateStr);
+    	  
+    	  }
+    });
+    calendar.render();
+});
+
+</script>
 
 <script>
 
