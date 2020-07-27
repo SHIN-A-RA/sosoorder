@@ -54,7 +54,7 @@ $(function(){
 
 	
 
-/* 
+/* //적립금
  $(function(){
 	   var totalPrice = parseInt($("#totalPrice").text());
 	   var totalPoint = parseInt($("#totalPoint").text());
@@ -63,7 +63,6 @@ $(function(){
 	   var finalPay = parseInt($("#finalPay").text());
 	   var pointContents = $("#pointContents").text();
 	   var var1;
-	   console.log(pointDiscount);
 	   // 적립금사용금액 출력   
 	   $("#pointDiscount").keyup(function(){   
 	      $("#pointUse").text($("#pointDiscount").val());
@@ -73,7 +72,7 @@ $(function(){
 	      
 	      	if(totalPrice >= couponUse+pointDiscount){
 	      		 if(totalPoint >= pointDiscount){
-	      			 var1 = totalPrice - nvl(pointDiscount,0) - nvl(couponUse,0)
+	      			 var1 = totalPrice-pointDiscount-couponUse
 	      			 $("#finalPay").text(var1);
 	      		 }else if(totalPoint < pointDiscount){
 	 	            //총적립금보다 많은 금액입력시 경고말 아웃풋
@@ -86,31 +85,52 @@ $(function(){
 	      	}
 	  	      
 	   });   
-}); */
+}); 
+  */
  
- 	// 계산 nvl 처리
-/* 	function nvl(A, B) {
+//적립금 사용
+ $(function(){
+    var totalPrice = parseInt($("#totalPrice").text());
+    var totalPoint = parseInt($("#totalPoint").text());
+    var pointDiscount  = parseInt($("#pointDiscount").val());
+    var finalPay = parseInt($("#finalPay").text());
+    var pointContents = $("#pointContents").text();
+    var var1;
+    console.log(pointDiscount);
+    // 적립금사용금액 출력   
+    $("#pointDiscount").keyup(function(){   
+       $("#pointUse").text($("#pointDiscount").val());
+       pointDiscount = $("#pointUse").text();
+    /*     if(pointDiscount != null) { */
+           if(totalPoint >= pointDiscount){
+                var1 = totalPrice - pointDiscount
+                $("#finalPay").text(var1);
+                
+          }else if(totalPoint < pointDiscount){
+             //총적립금보다 많은 금액입력시 경고말 아웃풋
+             alert("사용금액초과")
+             location.reload();
+       
+          }
+        /* } */                   
+       
+    });   
+ });
+ 
+/*  	// 계산 nvl 처리
+	function nvl(A, B) {
 		if (isEmpty(A) || isUndefined(A)) {
 			return B;
 		} else {
 			return A;
 		}
-	}; */
-	
-	   function nvl(str, defaultStr){
-        
-        if(typeof str == "undefined" || str == null || str == "")
-            str = defaultStr ;
-         
-        return str ;
-    }
-
+	};  
 
  $(function(){
 	 var pointDiscount  = parseInt($("#pointDiscount").val());
 	 nvl(pointDiscount,0);
 	 console.log("pointDiscount")
- });
+ }); */
   
   
   /* 숫자만 입력 가능하게 */
