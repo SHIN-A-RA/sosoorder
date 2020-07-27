@@ -94,7 +94,11 @@ UPDATE coupon
 		
 select * from POPUP
 
+alter table POPUP drop column popchack;
 alter table POPUP drop column START_DAY;
-alter table POPUP add (ENDDAY date);
+alter table POPUP add (popcheck varchar2(2));
+alter table POPUP MODIFY(popImage varchar2(1000));
 
 select * from userCoupon;
+
+

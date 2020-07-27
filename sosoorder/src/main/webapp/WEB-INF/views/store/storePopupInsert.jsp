@@ -10,63 +10,70 @@
     </div>
     
     <div>
-	    <form class="pd30 pd_t0 pd_b0" id="storePopupInsert" action="storePopupInsert" method="post">
+	    <form	class="pd30 pd_t0 pd_b0" id="storePopupInsert" enctype="multipart/form-data" 
+	    		action="storePopupInsert" method="post">
 			<div class="row">
 				<div class="checkbox-container">
-					<label for="is-subscription">사용유무</label>
-					<input type="checkbox" name="popChack" value="1" id="is-subscription" checked>
+					<label for="is-subscription">사용유무
+						<input type="checkbox" name="popCheck" value="1" id="is-subscription" checked>
+					</label>
 				</div>
 			</div>
+			<div class="row">
+				<div class="input-group mb11">
+					<div class="input-group-prepend">
+						<span class="input-group-text">제&nbsp;&nbsp;목</span>
+					</div>
+					<input type="text" name="popTitle" class="form-control popTitle" aria-label="" aria-describedby="basic-addon1" value="${popupOne.popTitle}">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-group mb11 col pd_l0">
+					<div class="input-group-prepend">
+						<span class="input-group-text">시작일</span>
+					</div>
+					<input type="text" name="startDay" class="form-control datetimepicker startDay" aria-label="" aria-describedby="basic-addon1" value="${popupOne.startDay}">
+				</div>
+			
+				<div class="input-group mb11 col pd_r0">
+					<div class="input-group-prepend">
+						<span class="input-group-text">종료일</span>
+					</div>
+					<input type="text" name="endDay" class="form-control datetimepicker endDay" aria-label="" aria-describedby="basic-addon1" value="${popupOne.endDay}">
+				</div>
+			</div>
+			
 			<div class="row">
 				<div class="input-group mb11" id="">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">제&nbsp;&nbsp;목</span>
-					</div>
-					<input type="text" name="popTitle" class="form-control popTitle" aria-label="" aria-describedby="basic-addon1" value="">
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="input-group mb11 col pd_l0" id="">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">시작일</span>
-					</div>
-					<input type="text" name="expStart" class="form-control expStart" aria-label="" aria-describedby="basic-addon1" value="">
-				</div>
-			
-				<div class="input-group mb11 col pd_r0" id="">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">종료일</span>
-					</div>
-					<input type="text" name="expEnd" class="form-control expEnd" aria-label="" aria-describedby="basic-addon1" value="">
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="input-group mb11" id="">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">내&nbsp;&nbsp;용</span>
+						<span class="input-group-text">내&nbsp;&nbsp;용</span>
 					</div>
 					<textarea cols="30" rows="10"
 					name="popContents" class="form-control popContents"
 					aria-label="" aria-describedby="basic-addon1" 
-					> </textarea>
+					>${popupOne.popContents} </textarea>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="input-group mb11" id="">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">이미지</span>
+				<div class="input-group" id="">
+					<div class="custom-file">
+						<div class="input-group-prepend">
+							<span class="input-group-text">이미지</span>
+						</div>
+						<input type="file" name="uploadFile" class="form-control">
 					</div>
-					
-					<input type="file"	name="uploadFile" class="form-control uploadFile" aria-label="" aria-describedby="basic-addon1" value="">
-				
 				</div>
+			</div>
+			<div class="row">
+				<p>현재파일:<span>${popupOne.popImage} </span>
+					<input type="hidden" name="updateFile" value="${popupOne.popImage}">
+				</p>
 			</div>
 			
 			
-			
+			<input type="hidden" name="popNum" value="${popupOne.popNum}">
 			<button type="submit" class="btn btn-success btn-icon-split fr" id="btnInsert">
 	          <span class="icon text-white-50"><i class="fas fa-check"></i></span>
 	          <span class="text">팝업등록하기</span>
@@ -74,46 +81,23 @@
 	    </form>
 	</div> 
 </div> 
-<script type="text/javascript">
-    $(document).ready(function () {
-            $.datepicker.setDefaults($.datepicker.regional['ko']); 
-            $( ".expStart" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 maxDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                      //시작일(startDate) datepicker가 닫힐때
-                      //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                     $(".expEnd").datepicker( "option", "minDate", selectedDate );
-                 }    
- 
-            });
-            $( ".expEnd" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 /* maxDate: 0,  */                      // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                     // 종료일(endDate) datepicker가 닫힐때
-                     // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-                     $(".expStart").datepicker( "option", "maxDate", selectedDate );
-                 }    
- 
-            });    
-    });
+
+<!-- datetimepicker -->
+<link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
+<script src="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+<script>
+
+$(function() {
+	$('.datetimepicker').appendDtpicker({
+		'locale' : 'ko', // 한글화
+		'autodateOnStart' : false, // 초기값 x
+		'timelistScroll' : false, // 시간 자동 스크롤 x
+		'closeOnSelected' : true, // 선택하면 선택창 x
+		'minuteInterval' : 30 // 시간 간격 조절 (m)
+	});
+});
+
+
 </script>
 
 

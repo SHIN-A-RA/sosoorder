@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.store.mapper.StorePopupMapper">
+	<!-- 팝업등록 -->
+	<insert id="storePopupInsert" parameterType="storePopupVO">
+		INSERT INTO popup
+		(popNum,
+		popTitle,
+		popContents,
+		popCheck,
+		popImage,
+		startDay,
+		endDay,
+		storeId)
+		VALUES
+		((SELECT NVL(max(popNum), 0)+1 FROM popup),
+		#{popTitle},
+		#{popContents},
+		#{popCheck},
+		#{popImage},
+		to_date(#{startDay}, 'YYYY-MM-DD HH24:mi'),
+		to_date(#{endDay}, 'YYYY-MM-DD HH24:mi'),
+		#{storeId})
+	</insert>
+	
+	<!-- 현재 등록된 팝업 조회 -->
+	<select id="storePopupList" parameterType="storePopupVO" resultType="storePopupVO">
+		SELECT 
+			popNum "popNum",
+			popTitle "popTitle",
+			popContents "popContents",
+			popCheck "popCheck",
+			popImage "popImage",
+			to_char(startDay, 'YYYY-MM-DD HH24:mi') "startDay",
+			to_char(endDay, 'YYYY-MM-DD HH24:mi') "endDay",
+			storeId "storeId"
+		FROM popup
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
+		order by popNum
+	</select>
+	
+	<!-- 팝업 단건 조회 -->
+	<select id="storePopupOne" parameterType="storePopupVO" resultType="storePopupVO">
+		SELECT 
+			popNum "popNum",
+			popTitle "popTitle",
+			popContents "popContents",
+			popCheck "popCheck",
+			popImage "popImage",
+			to_char(startDay, 'YYYY-MM-DD HH24:mi') "startDay",
+			to_char(endDay, 'YYYY-MM-DD HH24:mi') "endDay",
+			storeId "storeId"
+		FROM popup
+		<where>
+			popNum = #{popNum}
+		</where>
+	</select>
+	
+	<!-- 팝업 수정 -->
+	<update id="storePopupUpdate" parameterType="storePopupVO">
+		UPDATE popup
+		set
+		popTitle = #{popTitle},
+		popContents = #{popContents},
+		popCheck = #{popCheck},
+		popImage = #{popImage},
+		startDay = to_date(#{startDay}, 'YYYY-MM-DD HH24:mi'),
+		endDay = to_date(#{endDay}, 'YYYY-MM-DD HH24:mi')
+		where popNum = #{popNum}
+	</update>
+
+	<!-- 팝업 삭제 -->
+	<delete id="storePopupDelete" parameterType="storePopupVO">
+		delete from popup where popNum = #{popNum}
+	</delete>
+</mapper>
