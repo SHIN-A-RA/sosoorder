@@ -66,7 +66,7 @@ $('.btnadd2').on( "click", function() {
 			<tr>
 				<td>${order.payDay}</td>
 				<td>${order.storeName}</td>
-				<td>${order.totalPay}</td>
+				<td>${order.totalPay}원</td>
 				<td align='center'><input type=submit value="별점주기" style="width:50%" class="btnadd" ></td>
 				
 			</tr>
@@ -154,11 +154,16 @@ $('.btnadd2').on( "click", function() {
 </div>
 </body>
 
-	<ul class="sub_menu_box sub03 ">
-         <li class="gnb_dp2 m1"><a href="myPointList">나의 적립금</a></li>
-         <li class="gnb_dp2 m2"><a href="myCouponList">나의 쿠폰</a></li>
-         <li class="gnb_dp2 m3"><a href="myOrderList">나의 주문내역(별점)</a></li>
+
+<div class="mypagelist">
+	<ul class="mypagebtn_ul">
+		<li><a href="myPointList">나의 적립금</a> 
+		<li><a href="myCouponList">나의 쿠폰함</a>
+		<li><a href="myOrderList">나의 주문내역</a>
+	
 	</ul>
+</div>
+
 	
 <script>
 $('.starRev span').click(function(){

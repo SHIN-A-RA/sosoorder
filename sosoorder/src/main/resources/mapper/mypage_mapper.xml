@@ -10,7 +10,7 @@
 		SELECT distinct
 		p.point "point",
 		p.pointCheck "pointCheck",
-		p.pointDate "pointDate",
+		to_char(p.pointDate,'yyyy/mm/dd') "pointDate", 
 		a.STORENAME "storeName"
 		FROM point p, admin a, member m
 		<where>
@@ -44,13 +44,14 @@
 	<!-- by아라 -->
 	<select id="getOrderList" parameterType="hashmap" resultType="map">
 	    SELECT distinct
-		p.payDay "payDay",
+		to_char(p.payDay,'yyyy/mm/dd') "payDay", 
 		p.totalPay "totalPay", 
 		a.storeName "storeName" 
 		FROM payment p, admin a, member m, seat s
 		where s.storeId = a.storeId 
 	    and m.membernum = p.membernum
 	    and s.seatNum = p.seatNum
+	    and s.storeId = a.storeId
 	    <if test="phone != null">
   	    and m.phone = #{phone}
 			</if>
@@ -66,11 +67,12 @@
 	<!-- (주문상세내역리스트) -->
 	<select id="StarOrderList" parameterType="hashmap" resultType="map">
 	SELECT distinct
-		menu.menuName "menuName", pay.payday "payday"
-		FROM point p, admin a, member m, menu menu, payment pay
+		menu.menuName "menuName",
+		to_char(pay.payDay,'yyyy/mm/dd') "payDay"
+		FROM point p, admin a, member m, menu menu, payment pay 
 		where 
 		menu.storeId = a.storeId 
-	    and m.membernum = p.membernum
+	    and m.membernum = pay.membernum
 	    and p.storeId = a.storeId
 	    <if test="phone != null">
   	    and m.phone = #{phone}
@@ -93,9 +95,10 @@
 	<select id="getCoupon" parameterType="hashmap" resultType="map">
 		select distinct
 		u.serialNum "serialNum", u.memberNum "memberNum", u.useCheck "useCheck",
-		a.storeName "storeName", c.expStart "expStart", 
+		a.storeName "storeName", 
+		to_char(c.expStart,'yyyy/mm/dd') "expStart", 
 		to_char(c.expEnd,'yyyy/mm/dd') "expEnd", 
-		c.discount
+		c.discount "discount"
 		from
 		userCoupon u, admin a, member m, point p, coupon c
 		where u.memberNum  = 1

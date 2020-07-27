@@ -2,12 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <script>
-
 $(function() {
 	myCouponDelete();
-
 });
 //삭제 요청
 function myCouponDelete() {
@@ -30,29 +27,41 @@ function myCouponDelete() {
 		}//if
 	}); //삭제 버튼 클릭
 }//couponDelete
-
 </script>
 
 
+<div class="mypagelist">
+	<ul class="mypagebtn_ul">
+		<li><a href="myPointList">나의 적립금</a> 
+		<li><a href="myCouponList">나의 쿠폰함</a>
+		<li><a href="myOrderList">나의 주문내역</a>
+	
+	</ul>
+</div>
 
-    <c:forEach items="${getCoupon}" var="coupon">
-	     	<table border="1" style="width:50%; margin:auto;" class="table_wrap">
-	     	<tr>
-	     		<th style="background-color: #cc87d8; width: 30%; text-align: center;">
-	 	    	    <p style="color: white">${coupon.discount}</p>
-					<p style="color: white">할인쿠폰</p>						     		
-	     		</th>
-	     		<td style="padding: 10px 10px 10px 10px;">
-	     			<p>${coupon.storeName}</p>
-	     			<p>${coupon.expStart}</p>
-	     			<p>${coupon.expEnd}</p>
-	     			<p>${coupon.serialNum}</p>
-	     			<button class="btnDelete" name="${coupon.serialNum}">삭제</button>
-	     		</td>
-	     	</tr>    
-	     	<tr style="height: 20px;">
-	     	</tr>  
-	     	</table>	        		
-      	 </c:forEach>  
+<div style="padding-top:100px">
 
-
+    <c:forEach
+				items="${getCoupon}" var="coupon">
+				<table border="1" style="width: 50%; margin: auto;"
+					class="table_wrap">
+					<tr>
+						<th
+							style="background-color: #cc87d8; width: 30%; text-align: center;">
+							<p style="color: white">${coupon.discount}원</p>
+							<p style="color: white">할인쿠폰</p>
+						</th>
+						<td style="padding: 10px 10px 10px 10px;">
+							<p>${coupon.storeName}</p>
+							<p>${coupon.expStart}</p>
+							<p>${coupon.expEnd}</p>
+							<%-- <p>${coupon.serialNum}</p> --%>
+							<p>${coupon.discount}원 할인</p>
+							<button class="btnDelete" name="${coupon.serialNum}">삭제</button>
+						</td>
+					</tr>
+					<tr style="height: 20px;">
+					</tr>
+				</table>
+			</c:forEach>
+</div>

@@ -55,6 +55,7 @@
   <script src="${pageContext.request.contextPath}/resources/admin/scss/addcss/basic.js"></script>
 
   <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/jw.css" rel="stylesheet">
+   <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/ara.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
