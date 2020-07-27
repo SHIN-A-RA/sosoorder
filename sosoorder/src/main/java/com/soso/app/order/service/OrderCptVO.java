@@ -33,5 +33,11 @@ public class OrderCptVO {
 	String useCheck;
 	String storeName;
 	String phone;
+	
+	String seat;
+	String pointUse;
+	String couponUse;
+	String payCheck;
+	String totalPay;
 
 }

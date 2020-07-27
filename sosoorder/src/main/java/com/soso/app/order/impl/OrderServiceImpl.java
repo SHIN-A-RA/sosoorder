@@ -33,6 +33,17 @@ public class OrderServiceImpl implements OrderService{
 	public List<Map<String, Object>> findCoupon(OrderCptVO orderCptVO) {
 		return orderMapper.findCoupon(orderCptVO);
 	}
+
+	@Override
+	public List<OrderCptVO> getSeat(OrderCptVO orderCptVO) {
+		return orderMapper.getSeat(orderCptVO);
+	}
+
+	@Override
+	public void payInsert(OrderCptVO orderCptVO) {
+		orderMapper.payInsert(orderCptVO);
+		
+	}
 	
 	
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soso.app.order.service.OrderCptVO;
@@ -35,7 +36,7 @@ public class OrderController {
 		model.addAttribute("oderList", orderService.getOrder(orderCptVO));
 		model.addAttribute("point", orderService.getTotalPoint(orderCptVO));
 		model.addAttribute("coupon", orderService.findCoupon(orderCptVO));
-		
+		model.addAttribute("seat", orderService.getSeat(orderCptVO));
 		
 		return "order/orderInsert";
 	}
@@ -47,11 +48,12 @@ public class OrderController {
 		return "empty/order/jusoPopup";
 	}
 	
-	//by혜원, 나의쿠폰함팝업
-	/*
-	 * @RequestMapping("/orderCoupon") public String orderCoupon() { return
-	 * "empty/order/orderCoupon"; }
-	 */
+	@RequestMapping("payInsert")
+	public String payInsert(@ModelAttribute("evo") OrderCptVO vo, Model model) {
+		orderService.payInsert(vo);
+		System.out.println("인서트완료");
+		return "order/orderInsert";
+	}
 
 }
 

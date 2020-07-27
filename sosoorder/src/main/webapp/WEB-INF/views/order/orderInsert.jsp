@@ -41,7 +41,7 @@ $(function(){
 	
 	function printPay() {
 		var totalPrice = parseInt($("#totalPrice").text());
-		$("#finalPay").text(totalPrice);
+		$("#totalPay").text(totalPrice);
 	}
 	
 	printPay();
@@ -51,13 +51,13 @@ $(function(){
    var totalPoint = parseInt($("#totalPoint").text());
    var pointDiscount  = parseInt($("#pointDiscount").val());
    var couponUse;
-   var finalPay = parseInt($("#finalPay").text());
+   var totalPay = parseInt($("#totalPay").text());
    var var1;
    
    // 적립금사용금액 출력   
    $("#pointDiscount").keyup(function(){ 
 	   $("#pointUse").text($("#pointDiscount").val());
-	   totalPay();  	      
+	   finalPay(); 	      
    });
 	
    //쿠폰적용
@@ -66,24 +66,24 @@ $(function(){
 		$("#couponUse").text(discount);
 		var serial = $(this).parent().find("#serial").val();
 		$("#couponDiscount").text(serial);	
-		totalPay();
+		finalPay();
 	});
 
 	//총결제금액계산
-	function totalPay() {
+	function finalPay() {
 	    pointDiscount = parseInt(nvl($("#pointUse").text(),0));
 	    couponUse = parseInt(nvl($("#couponUse").text(),0));
 	    	if(totalPrice >= couponUse+pointDiscount){
 	    		 if(totalPoint >= pointDiscount){
 	    			 var1 = totalPrice- pointDiscount - couponUse	
-	    			 $("#finalPay").text(var1);
+	    			 $("#totalPay").text(var1);
 	    		 }else if(totalPoint < pointDiscount){
 		            //총적립금보다 많은 금액입력시 경고말 아웃풋
 		            alert("사용금액초과")
 		            $("#pointUse").text("0")
 		             $("#pointDiscount").val("")
 		            var1 = totalPrice- couponUse	
-	    			 $("#finalPay").text(var1);
+	    			 $("#totalPay").text(var1);
 	    		}
 	    	}else if(totalPrice < couponUse+pointDiscount){
 	    		alert("할인금액이 최종결제금액보다 많습니다.")
@@ -159,15 +159,29 @@ function removeChar(event) {
 			wrapWindowByMask();
 		});
 	});
+	
+
 </script>
 <div class="div_f"> 
 
    <!-- 컨텐츠영역 -->
 
    <div class="div-tt">
-       <h2>주문/결제</h2>
+      <h2>주문/결제</h2> 
    </div>
-    
+<form action="payInsert" method="post">
+    <div class="basic">
+    	<span>좌석번호
+  			 <c:if test="${!empty seat}">
+   				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
+    					<option key="default-empty" hidden></option> 
+    				<c:forEach var="seat" items="${seat}">
+    					<option value="${seat}">${seat.seat}</option>
+   					 </c:forEach>
+   				 </select>
+   			 </c:if>
+    	</span>
+    </div>
   <div class="basic">  
 		<table  class="basic_tb">		
 			<tr>
@@ -184,7 +198,8 @@ function removeChar(event) {
 			<c:set var= "totalPrice" value="${totalPrice +order.price}"/>
 		 </c:forEach>	
 			<tr>
-				<td class="basic_tb_td_down" colspan="3">총 주문금액:<span id="totalPrice">${totalPrice}</span>원</td>
+				<td class="basic_tb_td_down" colspan="3">총 주문금액:<span id="totalPrice">${totalPrice}</span>원
+				</td>
 			</tr>		
 		</table>
 </div>
@@ -298,20 +313,24 @@ function removeChar(event) {
 	<table class="basic_tb">
 		<tr>
 			<th class="basic_tb_th2" >총 주문금액</th>
-			<td class="basic_tb_td" >${totalPrice}원</td>
+			<td class="basic_tb_td" >${totalPrice}원</td>			
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
-			<td class="basic_tb_td" ><span id="couponUse"></span></td>
+			<td class="basic_tb_td" ><span id="couponUse"></span>
+			<input id="couponUse" name="couponUse" type="hidden" value="${couponUse}">
+			</td>
 		<tr>
 		
 		<tr>
 			<th class="basic_tb_th2" >적립금 사용금액</th>
-			<td class="basic_tb_td" ><span id="pointUse"></span></td>
+			<td class="basic_tb_td" ><span id="pointUse"></span>
+			<input id="pointUse" name="pointUse" type="hidden" value="${pointUse}"></td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >총 결제금액</th>
-			<td class="basic_tb_td" ><span id="finalPay"></span></td>
+			<td class="basic_tb_td" ><span id="totalPay"></span>
+			<input id="totalPay" name="totalPay" type="hidden" value="${totalPay}"></td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >결제방법</th>
@@ -319,24 +338,24 @@ function removeChar(event) {
 				<div class="type-selector-list-wrapper">
 					<ul id="payTypeList" class="type-selector-list">
 
-						<li id="rocketPayBox" class="type-selector-li">
-							<input class="type-selector-radio" type="radio" name="payType" id="payType8" value="ROCKET_BANK">
-							<label class="type-selector-label type-selector-label--bank" for="payType8" style="font-weight: normal;">
-								<span class="type-selector-label__text">계좌이체</span>
+						<li id="" class="">
+							<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="01">
+							<label >
+								<span>계좌이체</span>
 							</label>
 						</li>
 							
-						<li id="rocketPayCardBox" class="type-selector-li selected-pay-type">
-							<input class="type-selector-radio" type="radio" name="payType" id="payType10" value="ROCKET_CARD">
-							<label class="type-selector-label type-selector-label--card" for="payType10" style="font-weight: bold;">
-								<span class="type-selector-label__text">신용/체크카드</span>							
+						<li id="" class="">
+							<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="02">
+							<label>
+								<span>신용/체크카드</span>							
 							</label>
 						</li>
 			
-						<li id="virtualAccountPayBox" class="type-selector-li">
-									<input class="type-selector-radio" type="radio" name="payType" id="payType7" value="VIRTUALACCOUNT">
-									<label class="type-selector-label" for="payType7" style="font-weight: normal;">
-										<span class="type-selector-label__text">현금</span>
+						<li id="" class="">
+									<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="03">
+									<label>
+										<span>현금</span>
 									</label>
 						</li>
 					</ul>
@@ -352,9 +371,9 @@ function removeChar(event) {
         위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
     </div>
 <div class="div_pay">
-<button class="btn_pay"><span class="txt_payment">결제하기</span></button>
+<button class="btn_pay" type="submit"><span class="txt_payment">결제하기</span></button>
 </div>
-
+</form>
 </div>
 
             

@@ -21,6 +21,11 @@ public interface OrderMapper {
 	//by혜원, 쿠폰조회
 	public List<Map<String, Object>> findCoupon(OrderCptVO orderCptVO);
 	
+	// 좌석조회
+	public List<OrderCptVO> getSeat(OrderCptVO orderCptVO);	
+	
+	//결제등록
+	public void payInsert(OrderCptVO orderCptVO);
 	
 
 }

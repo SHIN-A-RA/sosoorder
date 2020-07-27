@@ -57,6 +57,41 @@
 			</if>			
 		</where>
 	</select>
+	
+	<!-- 좌석번호조회 -->
+	<select id="getSeat" resultType="OrderCptVO" parameterType="OrderCptVO">	
+		SELECT seat, 
+			   seatnum
+		FROM seat  		
+		<where>
+			<if test="storeId != null">
+				 storeId = #{storeId}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="payInsert" parameterType="OrderCptVO">  
+	INSERT INTO PAYMENT 
+		(PAYNUM, 
+		PAYCHECK, 
+		PAYDAY, 
+		POINTUSE, 
+		COUPONUSE, 
+		SEATNUM, 
+		MEMBERNUM, 
+		TOTALPAY, 
+		STATUS)
+	VALUES(
+		(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), 
+		 #{payCheck}, 
+		 sysdate, 
+		 #{pointUse}, 
+		 #{couponUse},
+		 (SELECT seatNum FROM SEAT WHERE SEAT = '6'), 
+		 #{memberNum}, 
+		 #{totalPay}, 
+		 '0');
+   </insert>
 
 
 

@@ -30,7 +30,8 @@ FROM COUPON c JOIN USERCOUPON u ON (c.serialNum = u.serialNum)
 WHERE c.storeId = 'test'
 AND c.expEnd > sysdate
 AND u.usecheck = 0
-AND u.memberNum =1;
+AND u.memberNum = (SELECT memberNum FROM member WHERE phone = '123')
+
 
 /* 사용 가능 쿠폰조회 조인3개*/
 select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck, a.storeName
@@ -57,6 +58,18 @@ alter table payment drop column amount;
 
 alter table payment add(status varchar2(5));
 
+(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT)
+
+insert into PAYMENT ("PAYNUM", "PAYCHECK", "PAYDAY", "POINTUSE", "COUPONUSE", "SEATNUM", "MEMBERNUM", "TOTALPAY", "STATUS")
+values(10, '0', '2020-06-21 00:00:00....', '200', '1000', 1, 1, 27000, '0')
+
+/* 결제테이블 인서트 */
+insert into PAYMENT 
+values(
+	(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), '0', sysdate, '200', '1000', 
+	(SELECT seatNum FROM SEAT WHERE SEAT = '6'), 1, 27000, '0');
+	
+	
 
 
 
