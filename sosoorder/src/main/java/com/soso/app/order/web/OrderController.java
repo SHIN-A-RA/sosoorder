@@ -26,10 +26,10 @@ public class OrderController {
 	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
 		
 		String storeId = (String)session.getAttribute("storeId");
-//		int orderNum =   Integer.parseInt(request.getParameter("orderNum"));
-
-		orderCptVO.setMemberNum(1);
+		String phone = (String)session.getAttribute("phone");
+		
 		orderCptVO.setStoreId(storeId);
+		orderCptVO.setPhone(phone);
 //		orderCptVO.setOrderNum(orderNum);
 		
 		model.addAttribute("oderList", orderService.getOrder(orderCptVO));

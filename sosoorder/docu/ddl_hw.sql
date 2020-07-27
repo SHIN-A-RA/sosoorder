@@ -29,7 +29,8 @@ select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck
 FROM COUPON c JOIN USERCOUPON u ON (c.serialNum = u.serialNum)
 WHERE c.storeId = 'test'
 AND c.expEnd > sysdate
-AND u.usecheck = 0;
+AND u.usecheck = 0
+AND u.memberNum =1;
 
 /* 사용 가능 쿠폰조회 조인3개*/
 select c.serialNum, c.expStart, c.expEnd, c.discount, c.storeId, u.useCheck, a.storeName

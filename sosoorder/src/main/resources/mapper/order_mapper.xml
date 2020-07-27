@@ -14,7 +14,7 @@
 		
 		<where>
 		<if test="orderNum != null">
-			and o.orderNum = #{orderNum} 
+			 o.orderNum = #{orderNum} 
 		</if>	
 		</where>
 	</select>
@@ -25,10 +25,10 @@
 		from point  		
 		<where>
 			<if test="storeId != null">
-				AND storeId = #{storeId}
+				 storeId = #{storeId}
 			</if>
 			<if test="memberNum != null">
-				and memberNum = #{memberNum}   
+				AND memberNum = (SELECT memberNum FROM member WHERE phone = #{phone})      
 			</if>	
 		</where>
 	</select>
@@ -51,9 +51,10 @@
 		<where>
 			c.expEnd > sysdate
 			AND u.usecheck = 0
+			AND u.memberNum = (SELECT memberNum FROM member WHERE phone = #{phone})    
 			<if test="storeId != null">
 				AND c.storeId = #{storeId}
-			</if>
+			</if>			
 		</where>
 	</select>
 

@@ -35,103 +35,76 @@ function Show() {
 	}
 	};
 	
-// 쿠폰함 팝업창 열기
-/*
-function GoMyCoupon(){
-	window.open("orderCoupon","blank", "width=570,height=420, scrollbars=yes, resizable=yes"); 	
-}*/
 
-//쿠폰 가격입력 후 모달 닫기
+//결제정보처리
 $(function(){
+	
+	function printPay() {
+		var totalPrice = parseInt($("#totalPrice").text());
+		$("#finalPay").text(totalPrice);
+	}
+	
+	printPay();
+	
+  //적립금
+   var totalPrice = parseInt($("#totalPrice").text());
+   var totalPoint = parseInt($("#totalPoint").text());
+   var pointDiscount  = parseInt($("#pointDiscount").val());
+   var couponUse;
+   var finalPay = parseInt($("#finalPay").text());
+   var var1;
+   
+   // 적립금사용금액 출력   
+   $("#pointDiscount").keyup(function(){ 
+	   $("#pointUse").text($("#pointDiscount").val());
+	   totalPay();  	      
+   });
+	
+   //쿠폰적용
 	$(".saveCoupon").on("click",function(){
 		var discount = $(this).parent().prev().find("#discount").text();
 		$("#couponUse").text(discount);
 		var serial = $(this).parent().find("#serial").val();
 		$("#couponDiscount").text(serial);	
+		totalPay();
 	});
-});
 
-
-	
-
-/* //적립금
- $(function(){
-	   var totalPrice = parseInt($("#totalPrice").text());
-	   var totalPoint = parseInt($("#totalPoint").text());
-	   var pointDiscount  = parseInt($("#pointDiscount").val());
-	   var couponUse = parseInt($("#couponUse").text());
-	   var finalPay = parseInt($("#finalPay").text());
-	   var pointContents = $("#pointContents").text();
-	   var var1;
-	   // 적립금사용금액 출력   
-	   $("#pointDiscount").keyup(function(){   
-	      $("#pointUse").text($("#pointDiscount").val());
-	      
-	      pointDiscount = $("#pointUse").text();
-	      couponUse = parseInt($("#couponUse").text());
-	      
-	      	if(totalPrice >= couponUse+pointDiscount){
-	      		 if(totalPoint >= pointDiscount){
-	      			 var1 = totalPrice-pointDiscount-couponUse
-	      			 $("#finalPay").text(var1);
-	      		 }else if(totalPoint < pointDiscount){
-	 	            //총적립금보다 많은 금액입력시 경고말 아웃풋
-	 	            alert("사용금액초과")
-	 	            location.reload();
-	      		}
-	      	}else if(totalPrice < couponUse+pointDiscount){
-	      		alert("할인금액이 최종결제금액보다 많습니다.")
-	            location.reload();
-	      	}
-	  	      
-	   });   
+	//총결제금액계산
+	function totalPay() {
+	    pointDiscount = parseInt(nvl($("#pointUse").text(),0));
+	    couponUse = parseInt(nvl($("#couponUse").text(),0));
+	    	if(totalPrice >= couponUse+pointDiscount){
+	    		 if(totalPoint >= pointDiscount){
+	    			 var1 = totalPrice- pointDiscount - couponUse	
+	    			 $("#finalPay").text(var1);
+	    		 }else if(totalPoint < pointDiscount){
+		            //총적립금보다 많은 금액입력시 경고말 아웃풋
+		            alert("사용금액초과")
+		            $("#pointUse").text("0")
+		             $("#pointDiscount").val("")
+		            var1 = totalPrice- couponUse	
+	    			 $("#finalPay").text(var1);
+	    		}
+	    	}else if(totalPrice < couponUse+pointDiscount){
+	    		alert("할인금액이 최종결제금액보다 많습니다.")
+	          location.reload();
+	    	}
+	}
+   
 }); 
-  */
+  
  
-//적립금 사용
- $(function(){
-    var totalPrice = parseInt($("#totalPrice").text());
-    var totalPoint = parseInt($("#totalPoint").text());
-    var pointDiscount  = parseInt($("#pointDiscount").val());
-    var finalPay = parseInt($("#finalPay").text());
-    var pointContents = $("#pointContents").text();
-    var var1;
-    console.log(pointDiscount);
-    // 적립금사용금액 출력   
-    $("#pointDiscount").keyup(function(){   
-       $("#pointUse").text($("#pointDiscount").val());
-       pointDiscount = $("#pointUse").text();
-    /*     if(pointDiscount != null) { */
-           if(totalPoint >= pointDiscount){
-                var1 = totalPrice - pointDiscount
-                $("#finalPay").text(var1);
-                
-          }else if(totalPoint < pointDiscount){
-             //총적립금보다 많은 금액입력시 경고말 아웃풋
-             alert("사용금액초과")
-             location.reload();
-       
-          }
-        /* } */                   
-       
-    });   
- });
  
-/*  	// 계산 nvl 처리
+  	// 계산 nvl 처리
 	function nvl(A, B) {
-		if (isEmpty(A) || isUndefined(A)) {
+		if (A == null || A == 'undefined' || A == "") {
 			return B;
 		} else {
 			return A;
 		}
 	};  
-
- $(function(){
-	 var pointDiscount  = parseInt($("#pointDiscount").val());
-	 nvl(pointDiscount,0);
-	 console.log("pointDiscount")
- }); */
-  
+/*
+	
   
   /* 숫자만 입력 가능하게 */
   function onlyNumber(event){
@@ -151,6 +124,7 @@ function removeChar(event) {
     else
         event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
+
 
 	/* 모달 */
 	jQuery.fn.center = function() {
