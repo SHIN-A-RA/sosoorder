@@ -84,4 +84,12 @@ UPDATE coupon
 		serialNum = 'IBJZXAAT'
 		
 		select * from COUPON
+		
+		
+select * from POPUP
 
+
+alter table POPUP drop column START_DAY;
+alter table POPUP add (ENDDAY date);
+
+select * from userCoupon;
