@@ -25,7 +25,7 @@
 		 <typeAlias type="com.soso.app.work.service.WorkVO" alias="WorkVO"/> 
 		 <typeAlias type="com.soso.app.store.service.StoreCouponVO" alias="StoreCouponVO"/> 
 		 <typeAlias type="com.soso.app.mypage.service.UserCouponVO" alias="UserCouponVO"/> 
-
+		<typeAlias type="com.soso.app.seat.service.SeatVO" alias="SeatVO"/> 
 	</typeAliases>
 
 </configuration>
