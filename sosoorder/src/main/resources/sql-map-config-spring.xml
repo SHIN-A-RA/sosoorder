@@ -24,6 +24,7 @@
 		 <typeAlias type="com.soso.app.payment.service.PaymentVO" alias="PaymentVO"/> 
 		 <typeAlias type="com.soso.app.work.service.WorkVO" alias="WorkVO"/> 
 		 <typeAlias type="com.soso.app.store.service.StoreCouponVO" alias="StoreCouponVO"/> 
+		 <typeAlias type="com.soso.app.mypage.service.UserCouponVO" alias="UserCouponVO"/> 
 
 	</typeAliases>
 

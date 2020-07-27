@@ -21,4 +21,5 @@ public interface MypageMapper {
 	public List<Map> StarOrderList(HashMap<String, Object> map);
 	public List<Map> getCoupon(HashMap<String, Object> map);
 	/* public List<Map<String, Object>> getEmpMap(); */
+	public void myCouponDelete(UserCouponVO usercouponVO);
 }

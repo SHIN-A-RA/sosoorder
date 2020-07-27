@@ -42,7 +42,10 @@ public class MypageServiceImpl implements MypageService{
 	public List<Map> getCoupon(HashMap<String, Object> map) {
 		return mypageMapper.getCoupon(map);
 	}
-
+	@Override
+	public void myCouponDelete(UserCouponVO usercouponVO) {
+		mypageMapper.myCouponDelete(usercouponVO);
+	}
 	}
 	
 
