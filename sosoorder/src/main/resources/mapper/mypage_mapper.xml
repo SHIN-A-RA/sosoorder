@@ -110,13 +110,14 @@
   	    <if test="storeId != null">
 		and a.storeId = #{storeId}
 		</if>
+		order by a.storeName
 	</select>
 	
 	
 	
 	<!--쿠폰 삭제 -->
  <delete id="myCouponDelete" parameterType="UserCouponVO" >
-		 delete from coupon where serialNum = #{serialNum}
+		 delete from userCoupon where serialNum = #{serialNum}
 	 </delete>
 	 
 </mapper>
