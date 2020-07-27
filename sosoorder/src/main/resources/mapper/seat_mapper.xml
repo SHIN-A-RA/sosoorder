@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.seat.mapper.SeatMapper">
+
+	<!-- 현재 등록된 좌 조회 -->
+	<select id="getSeatList" parameterType="seatVO"
+		resultType="seatVO">
+		SELECT *
+		FROM seat
+		<where>
+			<if test="storeId != null">
+				storeId = #{storeId}
+			</if>
+		</where>
+		order by seatNum
+	</select>
+	<!--단건조회 -->
+	<select id="getSeat" parameterType="seatVO" resultType="seatVO">
+		select
+		seatNum,
+		seat
+		from
+		seat
+		where
+		seatNum = #{seatNum}
+	</select>
+	<!-- 좌석 등록 -->
+	<insert id="seatInsert" parameterType="seatVO">
+		INSERT INTO seat
+		(seatNum,
+		seat,
+		storeId)
+		VALUES
+		(
+		#{seatNum},
+		#{seat},
+		#{storeId})
+	</insert>
+	<!-- 좌석 수정 -->
+	<update id="seatUpdate" parameterType="seatVO">
+		UPDATE seat
+		set
+		seatNum=#{seatNum},
+		seat=#{seat}
+		where seatNum= #{seatNum}
+	</update>
+	<!--좌석 삭제 -->
+	<delete id="seatDelete" parameterType="seatVO">
+		delete from seat where
+		seatNum = #{seatNum}
+	</delete>
+</mapper>
