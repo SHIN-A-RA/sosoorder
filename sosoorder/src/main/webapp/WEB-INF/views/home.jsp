@@ -102,13 +102,13 @@ myApp.controller("myAppCtrl", function($scope){
 	console.log(JSON.stringify(cartList))
 	 $('.cart_sumit').on('click', function(){
 		$.ajax({
-			url: "cartList",
+			url: "/sosoroder/cartList",
 			type: "POST",
 			data: JSON.stringify(cartList),
 			contentType: 'application/json'
         }).done(function(){
         	deleteMenu();
-        	window.location.href = "orderInsert?orderNum="+ ${menuOrderNum.orderNum+1} ;
+        	window.location.href = "/sosoroder/orderInsert?orderNum="+ ${menuOrderNum.orderNum+1} ;
         })
 	}); 
 	
