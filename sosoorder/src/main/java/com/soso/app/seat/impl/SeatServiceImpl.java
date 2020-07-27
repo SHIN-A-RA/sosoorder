@@ -15,7 +15,7 @@ public class SeatServiceImpl implements SeatService{
 	@Autowired SeatMapper seatMapper;
 
 	@Override
-	public List<SeatVO> getSeat(SeatVO seatVO) {
+	public String getSeat(SeatVO seatVO) {
 		// TODO Auto-generated method stub
 		return seatMapper.getSeat(seatVO);
 	}
