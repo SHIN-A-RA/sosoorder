@@ -6,48 +6,70 @@
 <div>
  <!-- Page Heading -->
    <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
-      <h1 class="h3 mb-0 text-gray-800">쿠폰등록</h1>
+      <h1 class="h3 mb-0 text-gray-800">팝업등록</h1>
     </div>
     
-    <!-- https://sgroom.tistory.com/60 -->
     <div>
-	    <form class="pd30 pd_t0 pd_b0" id="storeCouponInsert">
+	    <form class="pd30 pd_t0 pd_b0" id="storePopupInsert" action="storePopupInsert" method="post">
 			<div class="row">
-				<div class="input-group mb11" id="">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">시작날짜</span>
-					</div>
-					<input type="text" name="expStart" class="form-control expStart" aria-label="" aria-describedby="basic-addon1" value="">
+				<div class="checkbox-container">
+					<label for="is-subscription">사용유무</label>
+					<input type="checkbox" name="popChack" value="1" id="is-subscription" checked>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-group mb11" id="">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">종료날짜</span>
+						<span class="input-group-text" id="basic-addon1">제&nbsp;&nbsp;목</span>
+					</div>
+					<input type="text" name="popTitle" class="form-control popTitle" aria-label="" aria-describedby="basic-addon1" value="">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-group mb11 col pd_l0" id="">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">시작일</span>
+					</div>
+					<input type="text" name="expStart" class="form-control expStart" aria-label="" aria-describedby="basic-addon1" value="">
+				</div>
+			
+				<div class="input-group mb11 col pd_r0" id="">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">종료일</span>
 					</div>
 					<input type="text" name="expEnd" class="form-control expEnd" aria-label="" aria-describedby="basic-addon1" value="">
 				</div>
 			</div>
+			
 			<div class="row">
 				<div class="input-group mb11" id="">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">할인금액</span>
+						<span class="input-group-text" id="basic-addon1">내&nbsp;&nbsp;용</span>
 					</div>
-					
-					<select name="discount" class="form-control" aria-describedby="basic-addon1" >
-					    <option value="">할인금액선택</option>
-					    <option value="1000">1000원 할인</option>
-					    <option value="2000">2000원 할인</option>
-					    <option value="3000">3000원 할인</option>
-					</select>
-					
-					
+					<textarea cols="30" rows="10"
+					name="popContents" class="form-control popContents"
+					aria-label="" aria-describedby="basic-addon1" 
+					> </textarea>
 				</div>
 			</div>
 			
-			<button class="btn btn-success btn-icon-split fr" id="btnInsert">
+			<div class="row">
+				<div class="input-group mb11" id="">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">이미지</span>
+					</div>
+					
+					<input type="file"	name="uploadFile" class="form-control uploadFile" aria-label="" aria-describedby="basic-addon1" value="">
+				
+				</div>
+			</div>
+			
+			
+			
+			<button type="submit" class="btn btn-success btn-icon-split fr" id="btnInsert">
 	          <span class="icon text-white-50"><i class="fas fa-check"></i></span>
-	          <span class="text">쿠폰등록하기</span>
+	          <span class="text">팝업등록하기</span>
 	        </button>
 	    </form>
 	</div> 
@@ -92,28 +114,6 @@
  
             });    
     });
-</script>
-<script>
-$(function(){
-	
-
-//couponInsert 요청
-	$('#btnInsert').on('click',function(){
-		$.ajax({ 
-		    url: "storeCouponInsert",  
-		    type: 'POST',  
-		    dataType: 'json', 
-		    data: $("#storeCouponInsert").serialize(),
-		    success: function(response) {
-		    	window.close();
-		    } 
-		 });  
-	});//등록 버튼 클릭
-
-
-
-});
-
 </script>
 
 

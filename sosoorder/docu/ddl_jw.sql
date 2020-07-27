@@ -1,3 +1,9 @@
+CREATE VIEW orderAll_view AS(
+select m.menuName, p.payday, a.storeName, o.orderCount, me.phone, a.storeId, o.PAYNUM
+from payment p, admin a, menu m, ordercpt o, member me
+where p.memberNum = me.memberNum and o.paynum = p.paynum and m.menunum = o.menunum and a.storeid = m.storeid
+)
+
 select * from admin;
 select * from member;
 select * from MENU;
@@ -39,7 +45,7 @@ INSERT INTO orderCpt(menuOrderNum, menuNum, orderCount)
 		select seq_ordercpt.nextval, A.*
 		from (select '1','2' from dual) as A
 		
-		select 1,2 from dual
+select 1,2 from dual
 		
 SELECT MAX(orderNum) "orderNumMax" FROM orderCpt
 
@@ -87,7 +93,6 @@ UPDATE coupon
 		
 		
 select * from POPUP
-
 
 alter table POPUP drop column START_DAY;
 alter table POPUP add (ENDDAY date);

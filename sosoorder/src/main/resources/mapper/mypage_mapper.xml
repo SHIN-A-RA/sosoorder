@@ -36,6 +36,9 @@
 			<if test="phone != null">
 			and m.phone = #{phone}
 			</if>
+			<if test="storeId != null">
+			and a.storeId = #{storeId}
+			</if>
 		</where>
 		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
 	</select>
@@ -43,55 +46,46 @@
 	<!-- 전체(상호)주문내역리스트 -->
 	<!-- by아라 -->
 	<select id="getOrderList" parameterType="hashmap" resultType="map">
-	    SELECT distinct
-		to_char(p.payDay,'yyyy/mm/dd') "payDay", 
-		p.totalPay "totalPay", 
-		a.storeName "storeName" 
-		FROM payment p, admin a, member m, seat s
-		where s.storeId = a.storeId 
-	    and m.membernum = p.membernum
-	    and s.seatNum = p.seatNum
-	    and s.storeId = a.storeId
+	SELECT
+	PAYNUM "payNum",
+	payday "payDay",
+	storeName "storeName",
+    REGEXP_REPLACE(LISTAGG (menuname, ',') WITHIN GROUP (ORDER BY menuname), '([^,]+)(,\1)+', '\1') "menuName"
+	FROM orderAll_view
+	<where>
 	    <if test="phone != null">
-  	    and m.phone = #{phone}
-			</if>
+  	    phone = #{phone}
+		</if>
 		<if test="storeId != null">
-		and a.storeId = #{storeId}
-			</if>
-
+		and storeId = #{storeId}
+		</if>
+	</where>
+	GROUP BY payNum, payDay, storeName
 	</select>
+	
+	
 	
 	<!-- 별점업데이트 -->
 	<!-- by아라 -->
-	
 	<!-- (주문상세내역리스트) -->
 	<select id="StarOrderList" parameterType="hashmap" resultType="map">
-	SELECT distinct
-		menu.menuName "menuName",
-		to_char(pay.payDay,'yyyy/mm/dd') "payDay"
-		FROM point p, admin a, member m, menu menu, payment pay 
-		where 
-		menu.storeId = a.storeId 
-	    and m.membernum = pay.membernum
-	    and p.storeId = a.storeId
+	  select * from orderAll_view 
+	  where paynum = 1
 	    <if test="phone != null">
-  	    and m.phone = #{phone}
+  	    and phone = #{phone}
   	    </if> 
   	    <if test="storeId != null">
-		and a.storeId = #{storeId}
-		</if>
-  	    
+		and storeId = #{storeId}
+		</if>    
 	</select>
-	
 	<!-- by아라 -->
 	<update id="orderStarUpdate" parameterType="OrderCptVO">
-		UPDATE orderCpt
-		set
-		orderStar=#{orderStar}
-		where menuOrderNum= #{menuOrderNum}
+		UPDATE orderCpt SET orderstar = #{orderstar} where menuordernum = #{menuordernum}
 	</update>
-	
+		
+		
 		<!--쿠폰함 담기 -->
+		<!-- by아라 -->
 	<select id="getCoupon" parameterType="hashmap" resultType="map">
 		select distinct
 		u.serialNum "serialNum", u.memberNum "memberNum", u.useCheck "useCheck",

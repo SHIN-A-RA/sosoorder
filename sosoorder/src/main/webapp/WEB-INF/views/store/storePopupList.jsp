@@ -173,7 +173,7 @@
 		$('#tblBody').on('click', 'tr', function() {
 			$(this).attr('data-toggle', 'modal');
 			$(this).attr('data-target', '#myModal2');
-			var serialNum = $(this).childfirst().text()name");
+			var serialNum = $(this).children().first().text();
 			//특정 쿠폰 조회
 			$.ajax({
 				url:'storeCouponOne?serialNum=' + serialNum,

@@ -94,37 +94,6 @@ public class MypageController {
 	
 	
 	
-	/*
-	 * @RequestMapping("myPointsList") public String getStoreList(PointVO vo, Model
-	 * model) {
-	 * 
-	 * return "mypage/myPoinstList"; }
-	 */
-	// 아이디 중복 체크 이름 중복체크로 이용될 수 있음
-	/*
-	 * @GetMapping("idCheck") public int idCheck(AdminVO vo, String id) { int cnt =
-	 * employeesService.idCheck(vo.getStoreId()); return cnt; }
-	 */
-
-	// employees 단건조회
-	/*
-	 * @RequestMapping("getEmp/{employeeId}/{lastName}") public String
-	 * getEmp(@PathVariable Integer employeeId, String lastName) {
-	 * System.out.println(employeeId); System.out.println(lastName); return "home";
-	 * }
-	 */
-	/*
-	 * // employees ajax목록
-	 * 
-	 * @RequestMapping("ajaxGetEmployeesList") public @ResponseBody
-	 * List<EmployeesVO> ajaxGetEmployeesList(EmployeesVO vo) { return
-	 * employeesService.getEmployeesList(vo); }
-	 */
-
-	// 수정폼
-
-	// 수정처리
-
-	// 삭제처리
+	
 
 }

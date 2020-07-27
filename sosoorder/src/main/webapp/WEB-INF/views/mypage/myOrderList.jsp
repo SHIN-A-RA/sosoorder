@@ -66,8 +66,8 @@ $('.btnadd2').on( "click", function() {
 			<tr>
 				<td>${order.payDay}</td>
 				<td>${order.storeName}</td>
-				<td>${order.totalPay}원</td>
-				<td align='center'><input type=submit value="별점주기" style="width:50%" class="btnadd" ></td>
+				<td>${order.menuName}</td>
+				<td align='center'><input type=submit name="${order.payNum}" value="별점주기" style="width:50%" class="btnadd" ></td>
 				
 			</tr>
 		</c:forEach>
