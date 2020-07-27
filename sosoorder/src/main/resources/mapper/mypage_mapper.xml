@@ -112,6 +112,8 @@
 		</if>
 	</select>
 	
+	
+	
 	<!--쿠폰 삭제 -->
  <delete id="myCouponDelete" parameterType="UserCouponVO" >
 		 delete from coupon where serialNum = #{serialNum}
