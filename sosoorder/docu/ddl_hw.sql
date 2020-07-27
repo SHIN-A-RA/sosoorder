@@ -53,6 +53,9 @@ WHERE u.serialNum = c.serialNum
 	AND u.usecheck = 0;
 
 
+alter table payment drop column amount;
+
+alter table payment add(status varchar2(5));
 
 
 
