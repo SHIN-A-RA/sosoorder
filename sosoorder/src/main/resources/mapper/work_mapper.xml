@@ -29,6 +29,20 @@ select e.empName, to_char(w.workstart,'YYYY-MM-DD') AS workStart
  where w.empNum = e.empNum 
    AND storeId =#{storeId}
 	</select>
+	
+		 <!-- 직원list -->
+   <select id="getEmpListTime" parameterType="String" resultType="map">
+    select
+  	e.empName "empName",
+  	e.empNum "empNum",
+  	to_char(MAX(w.workstart),'YYYY-MM-DD') "workStart",
+  	to_char(MAX(w.workend) KEEP(DENSE_RANK FIRST ORDER BY w.workstart  DESC),'YYYY-MM-DD') "workEnd"
+  from employees e, work w
+ where w.empNum(+) = e.empNum 
+   AND storeId =#{storeId}
+   group by e.empName, e.empNum
+   order by e.empNum
+   </select>
 
 
 </mapper>

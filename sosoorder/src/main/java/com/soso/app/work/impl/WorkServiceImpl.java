@@ -34,7 +34,11 @@ public class WorkServiceImpl implements WorkService {
 	public List<Map<String, Object>> getWorkTimeData(String storeId) {
 		return workMapper.getWorkTimeData(storeId);
 	}
-
+	@Override
+	public List<Map<String, Object>> getEmpListTime(String storeId) {
+		// TODO Auto-generated method stub
+		return workMapper.getEmpListTime(storeId);
+	}
 
 	
 }

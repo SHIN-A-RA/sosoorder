@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soso.app.emp.service.EmpService;
 import com.soso.app.emp.service.EmpVO;
+import com.soso.app.work.service.WorkService;
 
 @Controller
 public class EmpController {
@@ -17,7 +18,10 @@ public class EmpController {
 	
 	@Autowired
 	EmpService empService;
-
+	
+	@Autowired
+	WorkService workService;
+	
 	// employees 등록페이지 이동
 	@RequestMapping("empInsertForm")
 	public String empInsertForm(EmpVO vo,Model model) {
@@ -60,8 +64,10 @@ public class EmpController {
 	//직원 근태관리 - 값 달력으로 보내기  
 	@RequestMapping("empSchList") 
     public String getEmp(HttpSession session,Model model) {
-	model.addAttribute("empList",empService.getEmp(session.getAttribute("storeId")));
-	return "emp/empSchList"; 
+		String storeId = (String) session.getAttribute("storeId");
+		model.addAttribute("empList",empService.getEmp(storeId));
+		model.addAttribute("getEmpListTime", workService.getEmpListTime(storeId));
+		return "emp/empSchList"; 
 	
 	}
 	//직원 삭제
