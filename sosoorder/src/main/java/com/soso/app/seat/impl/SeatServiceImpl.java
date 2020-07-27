@@ -3,11 +3,13 @@ package com.soso.app.seat.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.soso.app.seat.mapper.SeatMapper;
 import com.soso.app.seat.service.SeatService;
 import com.soso.app.seat.service.SeatVO;
 
+@Service
 public class SeatServiceImpl implements SeatService{
 	
 	@Autowired SeatMapper seatMapper;
