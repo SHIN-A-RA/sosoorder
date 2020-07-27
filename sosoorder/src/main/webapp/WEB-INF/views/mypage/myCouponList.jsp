@@ -35,11 +35,6 @@ function myCouponDelete() {
 
 
 
-	<div class = "btn-group">
-		<input type="button" class="btn btn-primary value="삭제" id="btnDelete"/>
-	</div>
-
-
     <c:forEach items="${getCoupon}" var="coupon">
 	     	<table border="1" style="width:50%; margin:auto;" class="table_wrap">
 	     	<tr>

@@ -102,6 +102,8 @@
 		and m.membernum = p.membernum
 	    and p.storeId = a.storeId
 	    and c.storeId = a.storeId
+	    and c.expEnd > sysdate
+		and u.usecheck = 0
 		 <if test="phone != null">
   	    and m.phone = #{phone}
   	    </if> 
@@ -109,6 +111,7 @@
 		and a.storeId = #{storeId}
 		</if>
 	</select>
+	
 	<!--쿠폰 삭제 -->
  <delete id="myCouponDelete" parameterType="UserCouponVO" >
 		 delete from coupon where serialNum = #{serialNum}
