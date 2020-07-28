@@ -12,7 +12,7 @@
 <div
 	class="d-sm-flex align-items-center justify-content-between mb-4 pd15"
 	style="border-bottom: 1px solid #d2d2d2">
-	<h1 class="h3 mb-0 text-gray-800">좌석관리</h1>
+	<h1 class="h3 mb-0 text-gray-800">점포관리 - 좌석관리</h1>
 </div>
 <div align="center">
 	<h3>좌석 리스트</h3>
