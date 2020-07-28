@@ -42,7 +42,8 @@
 			c.discount "discount", 
 			c.storeId "storeId", 
 			u.useCheck "useCheck",
-			a.storeName "storeName"
+			a.storeName "storeName",
+			u.memberNum "memberNum"
 		FROM USERCOUPON u 
 		INNER JOIN COUPON c 
 			ON (u.serialNum = c.serialNum)

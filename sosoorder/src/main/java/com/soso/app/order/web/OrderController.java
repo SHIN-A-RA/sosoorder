@@ -32,7 +32,15 @@ public class OrderController {
 		String phone = (String)session.getAttribute("phone");
 		
 		orderCptVO.setStoreId(storeId);
-		orderCptVO.setPhone(phone);
+		
+		if (phone == null) {
+			orderCptVO.setPhone("null");
+			orderCptVO.setMemberNum(0);
+			
+		}else {			
+			orderCptVO.setPhone(phone);
+		}
+	
 //		orderCptVO.setOrderNum(orderNum);
 		
 		model.addAttribute("oderList", orderService.getOrder(orderCptVO));
@@ -57,14 +65,27 @@ public class OrderController {
 		String phone = (String)session.getAttribute("phone");
 		
 		orderCptVO.setStoreId(storeId);
-		orderCptVO.setPhone(phone);
+		
+		if (phone == null) {
+			orderCptVO.setPhone("0");
+//			orderCptVO.setMemberNum(0);
+			
+		}else {			
+			orderCptVO.setPhone(phone);
+		}
 
 		System.out.println("orderCptVO" + orderCptVO);
 		orderService.payInsert(orderCptVO);
 		
 		//페이먼트 프로시저
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("phone", phone); 
+		
+		if(phone == null) {
+			map.put("phone", "0"); 			
+		}else {
+			map.put("phone", phone); 			
+		}
+		
 		map.put("storeId", storeId);
 			
 		String serialNum = orderCptVO.getSerialNum();

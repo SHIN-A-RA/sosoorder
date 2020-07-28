@@ -165,7 +165,7 @@ function removeChar(event) {
 		});
 	});
 	
-
+	
 </script>
 <div class="div_f"> 
 
@@ -248,7 +248,7 @@ function removeChar(event) {
 </div>
 
 <!-- 할인 및 포인트 -->
-<div class="basic"> 
+<div class="basic" id="getdiscount"> 
 	<h3 class="basic_h3">할인 및 포인트</h3>
  <table class="basic_tb">
 

@@ -60,22 +60,19 @@ alter table payment add(status varchar2(5));
 
 (SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT)
 
-insert into PAYMENT ("PAYNUM", "PAYCHECK", "PAYDAY", "POINTUSE", "COUPONUSE", "SEATNUM", "MEMBERNUM", "TOTALPAY", "STATUS")
-values(10, '0', '2020-06-21 00:00:00....', '200', '1000', 1, 1, 27000, '0')
-
 /* 결제테이블 인서트 */
 insert into PAYMENT 
 values(
-	(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), '0', sysdate, '200', '1000', 
+	(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), 
+	'0', 
+	sysdate, 
+	'200', 
+	'1000', 
 	(SELECT seatNum FROM SEAT WHERE SEAT = '6'), 1, 27000, '0');
 	
-
-update ORDERCPT set PAYNUM = '3' where ORDERNUM = '46'  
-
-
+/*결제 프로시저*/
 create or replace PROCEDURE PAYMENT_PROC
- (p_payNum IN payment.payNum%TYPE,
-  p_serialNum IN usercoupon.serialNum%TYPE,
+ ( p_serialNum IN usercoupon.serialNum%TYPE,
   p_pointUse IN payment.pointUse%TYPE,
   p_storeId IN admin.storeId%TYPE,
   p_phone IN member.phone%TYPE
@@ -83,11 +80,9 @@ create or replace PROCEDURE PAYMENT_PROC
 )
 IS
 
-SET SERVEROUTPUT ON 
-
 BEGIN
 	update ORDERCPT 
-	set PAYNUM= p_payNum
+	set PAYNUM= (SELECT MAX(PAYNUM) FROM PAYMENT)
 	where ORDERNUM = (SELECT MAX(ORDERNUM) FROM ORDERCPT);   
 	
 	update USERCOUPON 
