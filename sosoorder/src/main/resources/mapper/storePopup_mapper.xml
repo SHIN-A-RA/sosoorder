@@ -79,4 +79,13 @@
 	<delete id="storePopupDelete" parameterType="storePopupVO">
 		delete from popup where popNum = #{popNum}
 	</delete>
+	
+	
+	<resultMap id="popMap" type="storePopupVO"/>
+	<select id="storePopupListPro"  statementType="CALLABLE"  parameterType="storePopupVO">
+    { CALL POPUP_PROC (
+            #{storeId},
+            #{popList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=popMap}
+    ) }
+</select>
 </mapper>

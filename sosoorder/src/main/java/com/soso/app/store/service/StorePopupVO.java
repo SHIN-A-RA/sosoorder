@@ -1,6 +1,10 @@
 package com.soso.app.store.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class StorePopupVO {
+	@JsonIgnore
 	MultipartFile uploadFile;
 	
 	String popNum;
@@ -18,4 +23,7 @@ public class StorePopupVO {
 	String popImage;
 	String startDay;
 	String endDay;
+	
+	@JsonIgnore
+	private List<StorePopupVO> popList;
 }

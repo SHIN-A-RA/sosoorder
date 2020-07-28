@@ -106,6 +106,20 @@ public class StorePopupController {
 		result.put("result", Boolean.TRUE);
 		return result;
 	}
+	
+	@RequestMapping("storePopup")
+	public String storePopup() {
+		return "empty/store/storePopup";
+	}
+	
+	@RequestMapping("storePopupListPro")
+	@ResponseBody
+	public List<StorePopupVO> storePopupListPro(Model model, StorePopupVO storePopupVO, HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		storePopupVO.setStoreId(storeId);
+		storePopupService.storePopupListPro(storePopupVO);
+		return storePopupVO.getPopList();
+	}
 
 
 }

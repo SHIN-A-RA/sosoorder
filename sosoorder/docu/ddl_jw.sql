@@ -101,4 +101,6 @@ alter table POPUP MODIFY(popImage varchar2(1000));
 
 select * from userCoupon;
 
+select * from seat;
+alter table seat add(userCheck varchar2(2));
 

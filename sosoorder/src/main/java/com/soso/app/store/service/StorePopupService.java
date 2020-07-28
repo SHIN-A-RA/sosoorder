@@ -8,5 +8,6 @@ public interface StorePopupService {
 	public StorePopupVO storePopupOne(StorePopupVO storePopupVO);
 	public void storePopupUpdate(StorePopupVO storePopupVO);
 	public void storePopupDelete(StorePopupVO storePopupVO);
+	public void storePopupListPro(StorePopupVO storePopupVO);
 
 }

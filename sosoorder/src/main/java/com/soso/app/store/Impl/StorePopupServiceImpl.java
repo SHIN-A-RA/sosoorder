@@ -39,6 +39,11 @@ public class StorePopupServiceImpl  implements StorePopupService{
 	public void storePopupDelete(StorePopupVO storePopupVO) {
 		storePopupMapper.storePopupDelete(storePopupVO);
 	}
+
+	@Override
+	public void storePopupListPro(StorePopupVO storePopupVO) {
+		storePopupMapper.storePopupListPro(storePopupVO);
+	}
 	
 	
 	
