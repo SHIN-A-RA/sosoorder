@@ -7,59 +7,66 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.soso.app.admin.service.AdminVO;
 import com.soso.app.emp.service.EmpService;
 import com.soso.app.emp.service.EmpVO;
+import com.soso.app.menu.service.MenuVO;
 import com.soso.app.work.service.WorkService;
 
 @Controller
 public class EmpController {
 
 	
+	@Autowired
+	WorkService workService;
 	
 	@Autowired
 	EmpService empService;
 	
-	@Autowired
-	WorkService workService;
-	
-	// employees 등록페이지 이동
-	@RequestMapping("empInsertForm")
-	public String empInsertForm(EmpVO vo,Model model) {
-		return "emp/empInsertForm";
-	}
+	//employees 등록페이지 이동(tr 클릭시 판별후 수정,조회 판별)
+		@RequestMapping("empInsertForm")
+		public String empInsertForm(EmpVO vo,Model model) {
+			if(vo.getEmpNum() != null && !vo.getEmpNum().isEmpty()) {
+				model.addAttribute("one", empService.getEmpNum(vo));
+			}
+			//비어있는 form으로 보냄
+			return "emp/empInsertForm";
+		}
+		
+		
+	 //employee 수정
+		 @RequestMapping("setUpdateEmp")
+		 public String setUpdateEmp(EmpVO vo) {
+			 empService.setUpdateEmp(vo);
+		 return "redirect:empList"; 
+		 }
+		 
+		
+		// employees 등록DB처리
+		@RequestMapping("empInsert")
+		public String employeesInsert(EmpVO vo, Model model, HttpSession session) {
+			String storeId = (String) session.getAttribute("storeId");
+			vo.setStoreId(storeId);
+			if(vo.getEmpNum()!= null && !vo.getEmpNum().isEmpty()) {			
+				 empService.setUpdateEmp(vo);
+			}else {
+			     empService.empInsert(vo);
+			}
+			return "redirect:empList";
+		}
 
-
-	// employees 수정페이지 이동
-	@RequestMapping("empEditForm") 
-	public String empViewForm(EmpVO vo,Model model) {
-		model.addAttribute("oneEmp", empService.getEmp(vo));// oneMenu=단건조회 } 
-		return "empView"; 
-	}
-	  // 수정처리
-	 @RequestMapping("empView") 
-	 public String empView(EmpVO vo) {
-		 empService.setUpdateEmp(vo);
-	 return "redirect:empList"; 
-	 }
-	 
-	
-	// employees 등록DB처리
-	@RequestMapping("empInsert")
-	public String employeesInsert(EmpVO vo, Model model, HttpSession session) {
-		String storeId =(String)session.getAttribute("storeId");
-		vo.setStoreId(storeId);
-		empService.empInsert(vo);
-		model.addAttribute("empList", empService.getEmpList(storeId));
-		return "redirect:/";
-
-	}
-
-	  // employees 목록조회
-	  @RequestMapping("empList") public String empList(EmpVO vo,Model model,HttpSession session) { 
-		  String storeId = (String) session.getAttribute("storeId");
-		  model.addAttribute("empList",empService.getEmp(storeId));
-	  return "emp/empList"; 
-	  }
+		 // employees 목록조회
+		 @RequestMapping("empList")
+		 public String empList(EmpVO vo,Model model,HttpSession session) { 
+				String storeId = (String) session.getAttribute("storeId");
+				model.addAttribute("emp", empService.getEmp(storeId));
+				return "emp/empList";
+			}
+	  
+	  
+	  
+	  
+	  
 	  
 	  
 	  

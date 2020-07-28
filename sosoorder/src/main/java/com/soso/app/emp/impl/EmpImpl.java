@@ -49,9 +49,11 @@ public class EmpImpl implements EmpService {
 	}
 
 	@Override
-	public void getEmpNum(EmpVO empVO) {
-		empMapper.getEmpNum(empVO);
+	public EmpVO getEmpNum(EmpVO empVO) {
+		return empMapper.getEmpNum(empVO);
 	}
+
+
 
 
 }

@@ -11,7 +11,7 @@ public interface EmpMapper {
 	public void empInsert(EmpVO employeesVO);
 	public List<EmpVO> getEmpList(String storeId);
 	public void getEmpDelete(EmpVO empVO);
-	public void getEmpNum(EmpVO empVO);
+	public EmpVO getEmpNum(EmpVO empVO);
 	public void setUpdateEmp(EmpVO empVO);
 	
 }

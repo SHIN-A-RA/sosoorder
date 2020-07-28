@@ -10,11 +10,12 @@
 	empNum,
 	empName,
 	workPart,
-	empBirth,
+	to_char(hireDate,'YY-MM-DD') AS hireDate,
+	to_char(empBirth,'YY-MM-DD') AS empBirth,
 	salary,
-	endDate,
+	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	salaryDay,
+	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
 	empClass,
 	storeId
 	FROM employees
@@ -27,11 +28,12 @@
 	empNum,
 	empName,
 	workPart,
-	empBirth,
+	to_char(hireDate,'YY-MM-DD') AS hireDate,
+	to_char(empBirth,'YY-MM-DD') AS empBirth,
 	salary,
-	endDate,
+	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	salaryDay,
+	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
 	empClass,
 	storeId
 	FROM employees
@@ -85,17 +87,17 @@
 
 	<!-- 직원 삭제 -->
 	<delete id="getEmpDelete" parameterType="EmpVo">
-	delete from employees where empNum = ${empNum}
+	delete from employees where empNum = #{empNum}
 	</delete>
 	
 	<update id="setUpdateEmp" parameterType="EmpVo">
 	UPDATE employees SET
-	workPart=#{workPart}
-	empName=#{empName},
-	salary=#{salary},
-	empPhone=#{empPhone},
-	salaryDay=#{salaryDay},
-	empClass=#{empClass}
+			workPart=#{workPart},
+			empName=#{empName},
+			salary=#{salary},
+			empPhone=#{empPhone},
+			salaryDay=#{salaryDay},
+			empClass=#{empClass}
 	WHERE empNum = #{empNum}
 	</update>
 	
