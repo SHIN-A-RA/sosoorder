@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.soso.app.work.mapper.WorkMapper;
+import com.soso.app.work.service.SelDateVO;
 import com.soso.app.work.service.WorkService;
 import com.soso.app.work.service.WorkVO;
 
@@ -16,8 +17,8 @@ public class WorkServiceImpl implements WorkService {
 	@Autowired WorkMapper workMapper;
 	
 	@Override
-	public List<WorkVO> empNum(String StoreId){
-		return workMapper.empNum(StoreId);
+	public List<Map> empNum(SelDateVO vo){
+		return workMapper.empNum(vo);
 	}
 
 	@Override

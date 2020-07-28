@@ -5,11 +5,17 @@
 <mapper namespace="com.soso.app.work.mapper.WorkMapper">
 
 <!-- work 조회 -->
-   <select id="empNum" parameterType="String" resultType="map">
-select e.empName, to_char(w.workstart,'hh24:mi') AS workStart, NVL(to_char(w.workEnd,'hh24:mi'),' ') AS workEnd
-  from employees e, work w
-  where w.empNum = e.empNum AND storeId =#{storeId}
-   </select>
+   <select id="empNum" resultType="map">    
+	  SELECT e.empName, 
+			  to_char(w.workStart,'hh24:mi') AS workStart, 
+			  NVL(to_char(w.workEnd,'hh24:mi'),' ') AS workEnd
+	  FROM employees e, work w
+	  WHERE w.empNum = e.empNum 
+	  AND storeId = #{storeId}
+	  <if test="selectDate != null and selectDate !=''">
+	  AND trunc(workStart)= to_date(#{selectDate},'YYYY-MM-DD')
+	   </if> 
+  </select>
 
 <!--work 시작-->
    <insert id="workStart" parameterType="String">

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.soso.app.work.service.SelDateVO;
 import com.soso.app.work.service.WorkService;
 import com.soso.app.work.service.WorkVO;
 
@@ -29,11 +30,10 @@ public class WorkController {
 	//직원 조회(getEmpAjax)
 	@RequestMapping("getEmpAjax")
 	@ResponseBody
-	public List<WorkVO> getEmpAjax(HttpSession session) {
-		String storeId = (String) session.getAttribute("storeId");
-		
-		
-		return workService.empNum(storeId);
+	public List<Map> getEmpAjax(HttpSession session,SelDateVO seldateVO) {
+		//클릭시 데이트와 스토어아이디를 가져옴
+		seldateVO.setStoreId((String) session.getAttribute("storeId"));
+		return workService.empNum(seldateVO);
 	}
 	
 	

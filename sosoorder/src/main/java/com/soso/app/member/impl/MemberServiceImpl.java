@@ -32,4 +32,9 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public int phoneCheck(String phone) {
+		return memberMapper.phoneCheck(phone);
+	}
+
 }

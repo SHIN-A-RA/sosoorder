@@ -13,8 +13,5 @@ public interface MemberMapper {
 	public List<MemberVO> getMemberList(MemberVO memberVO);
 
 	public void memberInsert(MemberVO memberVO);
-
-	/* public String getName(Integer id); */
-	
-	/* public List<Map<String, Object>> getEmpMap(); */
+	public int phoneCheck(String phone);
 }

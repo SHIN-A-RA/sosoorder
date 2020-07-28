@@ -5,7 +5,7 @@
 <mapper namespace="com.soso.app.member.mapper.MemberMapper">
 
 
-<!-- 관리자(Admin) 조회 -->
+<!-- member 조회 -->
    <select id="getMember" parameterType="MemberVO" resultType="MemberVO">
       SELECT
       memberNum,
@@ -17,13 +17,24 @@
       WHERE phone = #{phone}
    </select>
 
-<!-- 관리자들(Admin)리스트 조회 -->
+
+
+<!-- phone 중복체크 -->
+<select id="phoneCheck" parameterType="String" resultType="int">
+      SELECT COUNT(*) FROM member
+      WHERE phone = #{phone}
+</select>
+
+
+
+<!-- member 리스트 조회 -->
    <select id="getMemberList" parameterType="MemberVO" resultType="MemberVO">   
       SELECT * 
       FROM member
       ORDER BY memberNum
    </select>
 
+<!-- member 가입 -->
    <insert id="memberInsert" parameterType="MemberVO">  
       INSERT INTO member
          (memberNum, 
@@ -39,29 +50,4 @@
          #{delAddr})
    </insert>
    
-   <select id="getName" resultType="java.lang.String" parameterType="integer"> 
-   	SELECT first_name from employees where employee_id = #{employeeId}
-   </select>
-   
-   <select id="getCnt" resultType="int">
-   	SELECT count(*) from employees
-   </select>
-   
-   <select id="getEmpMap" resultType="map">
-   	SELECT * from employees order by first_name 
-   </select>   
-   
-<!--    <update id="updateSomething" parameterType="#modelname">
-      UPDATE tablename1
-      SET
-      columnname1=#{param1}
-      WHERE
-      columnname2 = #{param2}
-   </update>
-
-   <delete id="deleteSomething" parameterType="int">
-      DELETE FROM tablename1 WHERE
-      columnname1 = #{param1}
-   </delete> -->
-
 </mapper>

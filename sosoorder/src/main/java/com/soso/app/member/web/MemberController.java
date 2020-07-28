@@ -7,8 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
@@ -54,6 +57,7 @@ public class MemberController {
 	public String memberInsertForm(MemberVO vo) {
 		return "member/memberInsertForm";
 	}
+	
 	//member가입 DB처리
 	@RequestMapping("memberInsert")
 	public String memberInsert(MemberVO vo, Model model) {
@@ -65,43 +69,15 @@ public class MemberController {
 	}
 
 	
-	  //아이디 중복처리
-	@RequestMapping("IdDupCheck")
-	public void idDupCheck(MemberVO vo, Model model) {
-		
+	 	
+	//가입시 휴대폰번호 중복 체크 
+	@GetMapping("phoneCheck")
+	public @ResponseBody int phoneCheck(@RequestParam("phone")String phone) {
+		int cnt=memberService.phoneCheck(phone);
+		return cnt;
 	}
 	
 	
-	 
 	
-	
-	
-	
-	
-	
-	/*
-	 * // 목록조회
-	 * 
-	 * @RequestMapping("memberList") public String memberList(Model model) {
-	 * model.addAttribute("memberList", memberService.getMemberList(null)); return
-	 * "loginSignUp/member/memberInsert"; }
-	 */
-	 /* 
-	 * // emp관리
-	 * 
-	 * @RequestMapping("empClient") public String empClient() { return
-	 * "admin/emp/empClient"; }
-	 * 
-	 * // ajax목록
-	 * 
-	 * @RequestMapping("ajaxEmpList") public @ResponseBody List<EmpVO> ajaxEmpList()
-	 * { return empMapper.empList(null); }
-	 */
-
-	// 수정폼
-
-	// 수정처리
-
-	// 삭제처리
 
 }

@@ -6,12 +6,12 @@ import java.util.Map;
 public interface WorkService {
 
 
-	public List<WorkVO> empNum(String StoreId);
+	public List<Map> empNum(SelDateVO vo);
+	
+	
 	public void workStart(String empNum);
 	public void workEnd(String empNum);
 	public List<Map<String, Object>> getWorkTimeData(String storeId);
 	public List<Map<String, Object>> getEmpListTime(String storeId);
-	/* public String getName(Integer id); */
 	
-	/* public List<Map<String, Object>> getEmpMap(); */
 }
