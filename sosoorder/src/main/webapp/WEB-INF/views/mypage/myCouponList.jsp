@@ -32,7 +32,7 @@ function myCouponDelete() {
 
 <div class="mypagelist">
 	<ul class="mypagebtn_ul">
-		<li><a href="myPointList">나의 적립금</a> 
+		<li><a href="myPointsList">나의 적립금</a> 
 		<li><a href="myCouponList">나의 쿠폰함</a>
 		<li><a href="myOrderList">나의 주문내역</a>
 	

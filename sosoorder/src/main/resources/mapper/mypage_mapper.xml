@@ -26,7 +26,7 @@
 	<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
 	</select>
 	
-	<select id="getStoreList" parameterType="MemberVO" resultType="map">
+	<select id="getStoreList" parameterType="hashmap" resultType="map">
 		SELECT 	distinct
 		a.storeName "storeName", a.storeId "storeId"
 		FROM point p, admin a, member m
@@ -45,7 +45,7 @@
 	
 	<!-- 전체(상호)주문내역리스트 -->
 	<!-- by아라 -->
-	<select id="getOrderList" parameterType="hashmap" resultType="map">
+	<select id="getOrderList" parameterType="memberVO" resultType="map">
 	SELECT
 	PAYNUM "payNum",
 	payday "payDay",
@@ -56,9 +56,6 @@
 	    <if test="phone != null">
   	    phone = #{phone}
 		</if>
-		<if test="storeId != null">
-		and storeId = #{storeId}
-		</if>
 	</where>
 	GROUP BY payNum, payDay, storeName
 	</select>
@@ -68,19 +65,21 @@
 	<!-- 별점업데이트 -->
 	<!-- by아라 -->
 	<!-- (주문상세내역리스트) -->
-	<select id="StarOrderList" parameterType="hashmap" resultType="map">
-	  select * from orderAll_view 
-	  where paynum = 1
-	    <if test="phone != null">
-  	    and phone = #{phone}
-  	    </if> 
-  	    <if test="storeId != null">
-		and storeId = #{storeId}
-		</if>    
+	<select id="StarOrderList" parameterType="paymentVO" resultType="map">
+	  select
+	  	MENUORDERNUM "menuOrderNum",
+	  	ORDERCOUNT "orderCount",
+	  	MENUNAME "menuName",
+	  	PAYNUM "payNum"
+	  FROM orderAll_view
+	  where payNum = #{payNum}
 	</select>
+	
+	
 	<!-- by아라 -->
-	<update id="orderStarUpdate" parameterType="OrderCptVO">
-		UPDATE orderCpt SET orderstar = #{orderstar} where menuordernum = #{menuordernum}
+	<update id="orderStarUpdate" parameterType="orderCptVO">
+		UPDATE orderCpt SET orderStar = #{orderStar} 
+		where menuOrderNum = #{menuOrderNum}
 	</update>
 		
 		
@@ -113,7 +112,7 @@
 	
 	
 	<!--쿠폰 삭제 -->
- <delete id="myCouponDelete" parameterType="UserCouponVO" >
+ <delete id="myCouponDelete" parameterType="userCouponVO" >
 		 delete from userCoupon where serialNum = #{serialNum}
 	 </delete>
 	 

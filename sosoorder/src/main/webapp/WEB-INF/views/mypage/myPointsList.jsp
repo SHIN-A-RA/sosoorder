@@ -28,7 +28,7 @@
 
 <div class="mypagelist">
 	<ul class="mypagebtn_ul">
-		<li><a href="myPointList">나의 적립금</a> 
+		<li><a href="myPointsList">나의 적립금</a> 
 		<li><a href="myCouponList">나의 쿠폰함</a>
 		<li><a href="myOrderList">나의 주문내역</a>
 	
@@ -36,11 +36,11 @@
 </div>
 	<ul class="nav nav-tabs nav-justified">
 	    <li class="nav-item">
-	      <a class="nav-link active" href="myPointList">전체</a>
+	      <a class="nav-link active" href="myPointsList">전체</a>
 	    </li>
 	    <c:forEach items="${MyStoreList}" var="point">
 		    <li class="nav-item">
-		      <a class="nav-link" href="myPointList?storeId=${point.storeId}">${point.storeName}</a>
+		      <a class="nav-link" href="myPointsList?storeId=${point.storeId}">${point.storeName}</a>
 		    </li>
 		</c:forEach>
   	</ul>
@@ -77,7 +77,7 @@
 
 <div class="mypagelist">
 	<ul class="mypagebtn_ul">
-		<li><a href="myPointList">나의 적립금</a> 
+		<li><a href="myPointsList">나의 적립금</a> 
 		<li><a href="myCouponList">나의 쿠폰함</a>
 		<li><a href="myOrderList">나의 주문내역</a>
 	

@@ -10,4 +10,5 @@ public class PaymentVO {
 	String pointUse;
 	String couponUse;
 	String totalPay;
+	String payNum;
 }
