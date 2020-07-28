@@ -10,8 +10,9 @@
 		SELECT *
 		FROM seat
 		<where>
+			userCheck = '1'
 			<if test="storeId != null">
-				storeId = #{storeId}
+				and storeId = #{storeId}
 			</if>
 		</where>
 		order by seatNum
@@ -30,13 +31,15 @@
 	<insert id="seatInsert" parameterType="seatVO">
 		INSERT INTO seat
 		(seatNum,
+		storeId,
 		seat,
-		storeId)
+		userCheck)
 		VALUES
 		(
-		#{seatNum},
+		(SELECT NVL(max(seatNum), 0)+1 FROM seat),
+		#{storeId},
 		#{seat},
-		#{storeId})
+		'1')
 	</insert>
 	<!-- 좌석 수정 -->
 	<update id="seatUpdate" parameterType="seatVO">
@@ -47,8 +50,10 @@
 		where seatNum= #{seatNum}
 	</update>
 	<!--좌석 삭제 -->
-	<delete id="seatDelete" parameterType="seatVO">
-		delete from seat where
-		seatNum = #{seatNum}
-	</delete>
+	<update id="seatDelete" parameterType="seatVO">
+		UPDATE seat
+		set
+		userCheck  = '0'
+		where seatNum= #{seatNum}
+	</update>
 </mapper>

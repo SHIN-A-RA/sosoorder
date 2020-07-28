@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeatVO {
 	
-	String SeatNum;
-	String Seat;
-	String StoreId;
+	String seatNum;
+	String storeId;
+	String seat;
 	
 
 }

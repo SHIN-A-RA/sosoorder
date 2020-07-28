@@ -74,7 +74,7 @@
 		$('#table_id tbody').on('click', 'tr', function() {
 			var col1 = $(this).attr("name");
 			//var data = otable.row(this).data();
-			//var col1 = data[1].;
+			//var col1 = data[1];
 			location.href = "storeMenuInsert?menuNum=" + col1
 		});
 
