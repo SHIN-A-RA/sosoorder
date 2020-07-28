@@ -42,6 +42,7 @@ $(function(){
 	function printPay() {
 		var totalPrice = parseInt($("#totalPrice").text());
 		$("#totalPay").text(totalPrice);
+		
 	}
 	
 	printPay();
@@ -57,6 +58,7 @@ $(function(){
    // 적립금사용금액 출력   
    $("#pointDiscount").keyup(function(){ 
 	   $("#pointUse").text($("#pointDiscount").val());
+	   $(".pointUse").val($("#pointDiscount").val());
 	   finalPay(); 	      
    });
 	
@@ -64,8 +66,10 @@ $(function(){
 	$(".saveCoupon").on("click",function(){
 		var discount = $(this).parent().prev().find("#discount").text();
 		$("#couponUse").text(discount);
+		$(".couponUse").val(discount);
 		var serial = $(this).parent().find("#serial").val();
-		$("#couponDiscount").text(serial);	
+		$("#couponDiscount").text(serial);
+		$(".serialNum").val(serial);
 		finalPay();
 	});
 
@@ -76,21 +80,22 @@ $(function(){
 	    	if(totalPrice >= couponUse+pointDiscount){
 	    		 if(totalPoint >= pointDiscount){
 	    			 var1 = totalPrice- pointDiscount - couponUse	
-	    			 $("#totalPay").text(var1);
+	    			 $("#totalPay").text(var1);	
+	    			 $(".total").val($("#totalPay").text());
 	    		 }else if(totalPoint < pointDiscount){
 		            //총적립금보다 많은 금액입력시 경고말 아웃풋
 		            alert("사용금액초과")
 		            $("#pointUse").text("0")
 		             $("#pointDiscount").val("")
 		            var1 = totalPrice- couponUse	
-	    			 $("#totalPay").text(var1);
+	    			 $("#totalPay").text(var1);		  
 	    		}
 	    	}else if(totalPrice < couponUse+pointDiscount){
 	    		alert("할인금액이 최종결제금액보다 많습니다.")
 	          location.reload();
 	    	}
 	}
-   
+	 
 }); 
   
  
@@ -169,14 +174,13 @@ function removeChar(event) {
    <div class="div-tt">
       <h2>주문/결제</h2> 
    </div>
-<form action="payInsert" method="post">
     <div class="basic">
     	<span>좌석번호
   			 <c:if test="${!empty seat}">
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
     					<option key="default-empty" hidden></option> 
     				<c:forEach var="seat" items="${seat}">
-    					<option value="${seat}">${seat.seat}</option>
+    					<option value="${seat.seat}">${seat.seat}</option>
    					 </c:forEach>
    				 </select>
    			 </c:if>
@@ -313,12 +317,12 @@ function removeChar(event) {
 	<table class="basic_tb">
 		<tr>
 			<th class="basic_tb_th2" >총 주문금액</th>
-			<td class="basic_tb_td" >${totalPrice}원</td>			
+			<td class="basic_tb_td" >${totalPrice}</td>			
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
 			<td class="basic_tb_td" ><span id="couponUse"></span>
-			<input id="couponUse" name="couponUse" type="hidden" value="${couponUse}">
+			
 			</td>
 		<tr>
 		
@@ -330,7 +334,7 @@ function removeChar(event) {
 		<tr>
 			<th class="basic_tb_th2" >총 결제금액</th>
 			<td class="basic_tb_td" ><span id="totalPay"></span>
-			<input id="totalPay" name="totalPay" type="hidden" value="${totalPay}"></td>
+			<input name="totalPay" type="hidden" value="${totalPay}"></td>
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >결제방법</th>
@@ -339,21 +343,21 @@ function removeChar(event) {
 					<ul id="payTypeList" class="type-selector-list">
 
 						<li id="" class="">
-							<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="01">
+							<input class="payCheck" type="radio" name="payCheck"value="0">
 							<label >
 								<span>계좌이체</span>
 							</label>
 						</li>
 							
 						<li id="" class="">
-							<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="02">
+							<input class="payCheck" type="radio" name="payCheck" value="1">
 							<label>
 								<span>신용/체크카드</span>							
 							</label>
 						</li>
 			
 						<li id="" class="">
-									<input class="type-selector-radio" type="radio" name="payCheck" id="payCheck" value="03">
+									<input class="payCheck" type="radio" name="payCheck" value="2">
 									<label>
 										<span>현금</span>
 									</label>
@@ -370,11 +374,37 @@ function removeChar(event) {
 <div style="margin: 20px; text-align: center; margin-bottom: 20px;">
         위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
     </div>
+<form action="payInsert" method="post">
+<input class="couponUse" name="couponUse" type="hidden" value="">
+<input class="payCheckval" name="payCheck" type="hidden" value="">
+<input class="seat" name="seat" type="hidden" value="">
+<input class="pointUse" name="pointUse" type="hidden" value="">
+<input class="total" name="totalPay" type="hidden" value="${totalPrice}">
+<input class="serialNum" name="serialNum" type="hidden" value="">
 <div class="div_pay">
 <button class="btn_pay" type="submit"><span class="txt_payment">결제하기</span></button>
 </div>
 </form>
 </div>
+
+<script>
+
+/* 좌석값받기 */
+$(function(){
+	$("#selectSeat").on("change",function(){
+		$(".seat").val($(this).val());
+	});
+});
+
+/* 결제방법받기 */
+$(function(){
+	$(".payCheck").on("change",function(){
+		$(".payCheckval").val($(this).val());
+	});
+});
+
+
+</script>
 
             
    

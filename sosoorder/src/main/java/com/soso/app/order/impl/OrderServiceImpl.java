@@ -1,5 +1,6 @@
 package com.soso.app.order.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,11 @@ public class OrderServiceImpl implements OrderService{
 	public void payInsert(OrderCptVO orderCptVO) {
 		orderMapper.payInsert(orderCptVO);
 		
+	}
+
+	@Override
+	public void paymentProc(HashMap<String, Object> map) {
+		orderMapper.paymentProc(map);		
 	}
 	
 	

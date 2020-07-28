@@ -1,5 +1,6 @@
 package com.soso.app.order.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +23,8 @@ public interface OrderService {
 	
 	//결제등록
 	public void payInsert(OrderCptVO orderCptVO);
+	
+	//결제프로시저
+	public void paymentProc(HashMap<String, Object> map);
 
 }

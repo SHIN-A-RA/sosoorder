@@ -85,14 +85,21 @@
 		(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), 
 		 #{payCheck}, 
 		 sysdate, 
-		 #{pointUse}, 
-		 #{couponUse},
-		 (SELECT seatNum FROM SEAT WHERE SEAT = '6'), 
-		 #{memberNum}, 
+		 NVL(#{pointUse},0), 
+		 NVL(#{couponUse},0),
+		 (SELECT seatNum FROM SEAT WHERE SEAT = #{seat}), 
+		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
 		 #{totalPay}, 
-		 '0');
+		 '0')
    </insert>
 
-
+	<select id="paymentProc"  statementType="CALLABLE"  parameterType="hashmap">
+    { CALL PAYMENT_PROC (
+		    #{serialNum},
+		    #{pointUse},
+		    #{storeId},
+		    #{phone}
+    ) }
+	</select>
 
 </mapper>

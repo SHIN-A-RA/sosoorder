@@ -3,6 +3,8 @@ package com.soso.app.order.web;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -49,9 +51,30 @@ public class OrderController {
 	}
 	
 	@RequestMapping("payInsert")
-	public String payInsert(@ModelAttribute("evo") OrderCptVO vo, Model model) {
-		orderService.payInsert(vo);
-		System.out.println("인서트완료");
+	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
+		
+		String storeId = (String)session.getAttribute("storeId");
+		String phone = (String)session.getAttribute("phone");
+		
+		orderCptVO.setStoreId(storeId);
+		orderCptVO.setPhone(phone);
+
+		System.out.println("orderCptVO" + orderCptVO);
+		orderService.payInsert(orderCptVO);
+		
+		//페이먼트 프로시저
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", phone); 
+		map.put("storeId", storeId);
+			
+		String serialNum = orderCptVO.getSerialNum();
+		map.put("serialNum", serialNum);
+		
+		String pointUse = orderCptVO.getPointUse();
+		map.put("pointUse", pointUse);
+		
+		orderService.paymentProc(map);
+		
 		return "order/orderInsert";
 	}
 

@@ -69,8 +69,40 @@ values(
 	(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), '0', sysdate, '200', '1000', 
 	(SELECT seatNum FROM SEAT WHERE SEAT = '6'), 1, 27000, '0');
 	
+
+update ORDERCPT set PAYNUM = '3' where ORDERNUM = '46'  
+
+
+create or replace PROCEDURE PAYMENT_PROC
+ (p_payNum IN payment.payNum%TYPE,
+  p_serialNum IN usercoupon.serialNum%TYPE,
+  p_pointUse IN payment.pointUse%TYPE,
+  p_storeId IN admin.storeId%TYPE,
+  p_phone IN member.phone%TYPE
+ 
+)
+IS
+
+SET SERVEROUTPUT ON 
+
+BEGIN
+	update ORDERCPT 
+	set PAYNUM= p_payNum
+	where ORDERNUM = (SELECT MAX(ORDERNUM) FROM ORDERCPT);   
 	
+	update USERCOUPON 
+	set USECHECK = '1'
+	WHERE SERIALNUM = p_serialNum;
+	
+	insert into POINT ("POINTNUM", "POINTDATE", "POINT", "STOREID", "MEMBERNUM", "POINTCHECK") 
+				values(
+				      (SELECT NVL(max(POINTNUM), 0)+1 FROM POINT), 
+				      sysdate, 
+				      p_pointUse,  
+				      p_storeId,
+				      (SELECT memberNum FROM member WHERE phone = p_phone),
+				       '-1');
 
-
-
-
+	
+	COMMIT;
+	END;
