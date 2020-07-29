@@ -8,8 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.soso.app.admin.service.AdminService;
-import com.soso.app.admin.service.AdminVO;
-import com.soso.app.menu.service.MenuVO;
+
 import com.soso.app.seat.service.SeatService;
 import com.soso.app.seat.service.SeatVO;
 

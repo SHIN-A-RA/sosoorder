@@ -4,7 +4,7 @@
 
 <mapper namespace="com.soso.app.seat.mapper.SeatMapper">
 
-	<!-- 현재 등록된 좌 조회 -->
+	<!-- 현재 등록된 좌석 조회 -->
 	<select id="getSeatList" parameterType="seatVO"
 		resultType="seatVO">
 		SELECT *
