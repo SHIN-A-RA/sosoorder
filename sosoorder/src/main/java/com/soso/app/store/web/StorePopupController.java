@@ -112,7 +112,7 @@ public class StorePopupController {
 		return "empty/store/storePopup";
 	}
 	
-	@RequestMapping("storePopupListPro")
+	@RequestMapping(value="/storePopupListPro", method=RequestMethod.GET)
 	@ResponseBody
 	public List<StorePopupVO> storePopupListPro(Model model, StorePopupVO storePopupVO, HttpSession session) {
 		String storeId = (String)session.getAttribute("storeId");

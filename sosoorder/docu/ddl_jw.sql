@@ -104,3 +104,9 @@ select * from userCoupon;
 select * from seat;
 alter table seat add(userCheck varchar2(2));
 
+
+
+
+
+
+
