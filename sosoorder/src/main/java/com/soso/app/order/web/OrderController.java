@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
@@ -63,8 +64,9 @@ public class OrderController {
 		
 		String storeId = (String)session.getAttribute("storeId");
 		String phone = (String)session.getAttribute("phone");
-		
+
 		orderCptVO.setStoreId(storeId);
+
 		
 		if (phone == null) {
 			orderCptVO.setPhone("0");
@@ -96,7 +98,22 @@ public class OrderController {
 		
 		orderService.paymentProc(map);
 		
-		return "order/orderInsert";
+		return "order/orderConfirm";
+	}
+	
+	@RequestMapping("/orderConfirm")
+	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request) {
+		
+		
+		return "";
+		
+	}
+	
+	@RequestMapping("insertPoint")
+	public String insertPoint(Model model, OrderCptVO orderCptVO, HttpServletRequest request) {
+		String orderNum = request.getParameter("orderNum");
+		
+		return "empty/order/insertPoint";
 	}
 
 }

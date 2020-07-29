@@ -97,7 +97,7 @@ BEGIN
 				      p_storeId,
 				      (SELECT memberNum FROM member WHERE phone = p_phone),
 				       '-1');
-
-	
 	COMMIT;
 	END;
+	
+	select totalpay *(3/100) FROM payment WHERE payNum = (select distinct payNum FROM orderCpt WHERE orderNum= '46') 

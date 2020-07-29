@@ -132,8 +132,8 @@ border-top: 3px solid #6e707e;
 }
 
 .btn_pay{
-	    width: 198px;
-    height: 56px;
+width: 198px;
+height: 56px;
 }
 
 .div-tt{
@@ -174,4 +174,56 @@ border-top: 3px solid #6e707e;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+}
+
+/*orderConfirm*/
+.div_text{
+padding: 90px;
+text-align: center;
+border-bottom: 3px solid black;
+}
+
+.div_text2{
+margin: auto;
+padding: 100px;
+text-align: center;
+}
+
+.btn_point{
+border-radius: 10px 0 10px 0;
+padding: 20px;
+background-color: #1f2025;
+color: white;
+text-align: bold;
+font-weight: bolder;
+font-size: 18px;
+}
+
+.btn_home{
+color: white;color: white !important;
+border-radius: 10px 0 10px 0;
+padding: 20px;
+background-color: #F44336;
+text-align: bold;
+font-weight: bolder;
+font-size: 18px;
+}
+
+.div_c{
+padding-top: 1.5rem;
+width: 50%;
+margin: auto;
+	
+}
+
+.div_a{
+overflow: hidden;
+width: 100%
+}
+
+.btn_a{
+width: 50%;
+float: left;
+padding: 10px 0px;
+text-align: center;
 }
