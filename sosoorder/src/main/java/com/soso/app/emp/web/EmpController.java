@@ -71,16 +71,17 @@ public class EmpController {
 	  
 	  
 	  // employees 근태관리 Bar 리스트 출력
-	  @RequestMapping("empBarList") public String empBarList(EmpVO vo,Model model,HttpSession session) { 
-			/*
-			 * String storeId = (String) session.getAttribute("storeId");
-			 * model.addAttribute("empBarList",empService.getEmp(storeId));
-			 */
+	  @RequestMapping("empSalaryList") public String empBarList(EmpVO vo,Model model,HttpSession session) { 
+		  String storeId = (String) session.getAttribute("storeId");
+		  vo.setStoreId(storeId);  
+		  model.addAttribute("empSalaryList",empService.getEmp(storeId));
 	  return "emp/empSalaryList"; 
 	  }
 	  
 	  
-
+	  
+	  
+	  
 	//직원 근태관리 - 값 달력으로 보내기  
 	@RequestMapping("empSchList") 
     public String getEmp(HttpSession session,Model model) {

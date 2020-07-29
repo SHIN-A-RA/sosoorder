@@ -42,4 +42,10 @@ public class WorkServiceImpl implements WorkService {
 	}
 
 	
+	@Override
+	public List<Map> getEmpSalAjax(SelDateVO vo) {
+		return workMapper.getEmpSalAjax(vo);
+	}
+
+	
 }

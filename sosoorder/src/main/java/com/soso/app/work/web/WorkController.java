@@ -36,6 +36,16 @@ public class WorkController {
 		return workService.empNum(seldateVO);
 	}
 	
+	//직원 조회(getEmpAjax)
+	@RequestMapping("getEmpSalAjax")
+	@ResponseBody
+	public List<Map> getEmpSalAjax(HttpSession session,SelDateVO seldateVO) {
+		//클릭시 데이트와 스토어아이디를 가져옴
+		seldateVO.setStoreId((String) session.getAttribute("storeId"));
+		return workService.empNum(seldateVO);
+	}
+	
+	
 	
 	//업무 시작(workStart)
 	@RequestMapping("workStart")

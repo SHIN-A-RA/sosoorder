@@ -24,7 +24,7 @@
 	 }	
 </script>
 <form action="empInsert" method="post" name="frm" id="frm">
-	<table id="empView">
+	<table id="empView" class="table table-dark">
 		<thead>
 			<tr>
 				<th>직원번호</th>
@@ -32,10 +32,10 @@
 				<th>업무파트</th>
 				<th>입사일</th>
 				<th>직원생일</th>
+				<th>직급</th>
 				<th>급여</th>
 				<th>급여일</th>
 				<th>전화번호</th>
-				<th>직급</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,13 +50,7 @@
 						value="${one.hireDate}" /></td>
 					<td><input type="text" name="empBirth" id="empBirth"
 						value="${one.empBirth}" /></td>
-					<td><input type="text" name="salary" id="salary"
-						value="${one.salary}" /><span id="checkClassRst"></span></td>
-					<td><input type="text" name="salaryDay" id="salaryDay"
-						value="${one.salaryDay}" /></td>
-					<td><input type="text" name="empPhone" id="empPhone"
-						value="${one.empPhone}" /></td>
-					<td><c:choose>
+						<td><c:choose>
 						    <c:when test="${one.empClass eq '1'}">
 							   	  <select name='empClass' id="empClass" onchange="checkClass(this.options[this.selectedIndex].value)">
 								  <option value='1' selected>정직원</option>
@@ -77,6 +71,13 @@
 								   </select>
 							    </c:otherwise>
 					 	</c:choose></td>
+					<td><input type="text" name="salary" id="salary"
+						value="${one.salary}" placeholder="직급을 먼저 선택해주세요"/><span id="checkClassRst"></span></td>
+					<td><input type="text" name="salaryDay" id="salaryDay"
+						value="${one.salaryDay}" /></td>
+					<td><input type="text" name="empPhone" id="empPhone"
+						value="${one.empPhone}" /></td>
+
 				</tr>
 		</tbody>
 	</table>

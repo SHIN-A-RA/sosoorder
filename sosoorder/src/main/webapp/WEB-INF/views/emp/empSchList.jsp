@@ -49,7 +49,6 @@ var NowTime = Now.getFullYear();
 NowTime += '-' + (Now.getMonth() + 1) ;
 NowTime += '-' + Now.getDate();
 
-
 $(function(){
     var calendarEl = document.getElementById('calendar');
     var workTimeData = [];

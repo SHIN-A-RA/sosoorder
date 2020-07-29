@@ -21,6 +21,7 @@
 	FROM employees
 	WHERE storeId = #{storeId}
    </select>
+ 
    
    <!-- employees 번호 조회 -->
 	   <select id="getEmpNum" parameterType="EmpVO" resultType="EmpVO">

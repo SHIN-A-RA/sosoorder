@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface WorkService {
 
-
+	public List<Map> getEmpSalAjax(SelDateVO vo);
 	public List<Map> empNum(SelDateVO vo);
 	
 	
