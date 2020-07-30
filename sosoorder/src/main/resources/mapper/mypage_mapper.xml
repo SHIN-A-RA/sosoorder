@@ -36,11 +36,10 @@
 			<if test="phone != null">
 			and m.phone = #{phone}
 			</if>
-			<if test="storeId != null">
+			<!-- <if test="storeId != null">
 			and a.storeId = #{storeId}
-			</if>
+			</if> -->
 		</where>
-		<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
 	</select>
 	
 	<!-- 전체(상호)주문내역리스트 -->
@@ -67,6 +66,8 @@
 	<!-- (주문상세내역리스트) -->
 	<select id="StarOrderList" parameterType="paymentVO" resultType="map">
 	  select
+	  	ORDERSTAR "orderStar",
+		MENUCHECK "menuCheck",
 	  	MENUORDERNUM "menuOrderNum",
 	  	ORDERCOUNT "orderCount",
 	  	MENUNAME "menuName",

@@ -76,9 +76,7 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title">
-							주문내역
-							</h64>
-						</h4>
+							주문내역</h4>
 
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
@@ -121,18 +119,31 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
+						
+						<table class="table table-white">
+							<thead>
+								<tr>
+									<th scope="col">별점</th>
+								</tr>
+							</thead>
+							<tbody id="starOrderListTBody2">
+
+							</tbody>
+						</table>
+					
 					<!-- Modal body -->
-					  <form action="orderStarUpdate" method="post" >
-      			<input type="hidden" name="orderStar" id="starC">
-      			<input type="hidden" name="menuOrderNum" id="menuOrderNum">
+				<form action="orderStarUpdate" method="post" >
+      				<input type="hidden" name="orderStar" id="starC">
+      				<input type="hidden" name="menuOrderNum" id="menuOrderNum">
         			<div class="starRev">
-            	<span class="starR on">별1</span>
-                <span class="starR">별2</span>
-                <span class="starR">별3</span>
-                <span class="starR">별4</span>
-                <span class="starR">별5</span>
+            		<span class="starR on">별1</span>
+               		 <span class="starR">별2</span>
+                	<span class="starR">별3</span>
+                	<span class="starR">별4</span>
+                	<span class="starR">별5</span>
             </div>
-            <button class="btn2starBtn" style="margin-top:20px"data-dismiss="modal">등록</button>            
+            <button class="btn2starBtn" style="margin-top:20px"data-dismiss="modal">등록</button>   
+            
 		</form>  
 				</div>
 			</div>
@@ -162,7 +173,6 @@
 				$(this).addClass('on').prevAll('span').addClass('on');
 				var onClass = $('.on').length;
 				$('#starC').val(onClass);
-				alert($('#starC').val());
 				  return false;
 			});
 		}
@@ -178,6 +188,7 @@
 				dataType : 'json'
 					
 			});
+			location.reload(); 
 		});
 	}
 
@@ -198,6 +209,7 @@
 		});
 	});
 </script>
+
 <script>
 	$(document).ready(function() {
 		$('.sub_menu_tit').click(function() {
@@ -237,19 +249,19 @@
 	//주문내역 조회 응답
 	function starOrderListResult(myOrder) {
 		$("#starOrderListTBody").empty();
-		$
-				.each(
-						myOrder,
-						function(idx, item) {
+		$.each(myOrder,function(idx, item) {
 							$('<tr>')
 									.append($('<td>').html(item.menuName))
 									.append($('<td>').html(item.orderCount))
-									.append(
-											$('<td>')
-													.html(
-															"<button name='"+ item.menuOrderNum+"' type='button' class='btn btn-primary btnadd2' data-toggle='modal' data-target='#myModal2'>별점추가</button>"))
+									.append($('<td>').addClass("s_"+item.orderStar+" starbtntd").html("<button name='"+ item.menuOrderNum+"' type='button' class='btn btn-primary btnadd2 mcheck_" + item.menuCheck + "' data-toggle='modal' data-target='#myModal2'>별점추가</button>"))
+									.append($('<td>').addClass("s_"+item.orderStar+" startd"))
 									.appendTo("#starOrderListTBody");
 						});//each
 		test();
+		$(".s_1").html("★☆☆☆☆");
+		$(".s_2").html("★★☆☆☆");
+		$(".s_3").html("★★★☆☆");
+		$(".s_4").html("★★★★☆");
+		$(".s_5").html("★★★★★");
 	}//success:starOrderListResult
 </script>

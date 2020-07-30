@@ -15,12 +15,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soso.app.admin.service.AdminVO;
 import com.soso.app.member.mapper.MemberMapper;
+import com.soso.app.member.service.MemberVO;
 import com.soso.app.storeorder.service.ReorderService;
 import com.soso.app.storeorder.service.ReorderVO;
 
@@ -68,8 +68,8 @@ public class ReorderController {
 	
 
 	@RequestMapping("sendMailAttach")
-	public String sendMailAttach(final ReorderVO vo,HttpServletRequest request,Model model, 
-			ReorderVO reorderVO, HttpSession session, AdminVO adminVO
+	public String sendMailAttach(final ReorderVO vo, MemberVO memberVO, HttpServletRequest request,Model model, 
+			ReorderVO reorderVO, HttpSession session,AdminVO adminVO
 			) throws IllegalStateException, IOException {
 		
 		
@@ -85,6 +85,10 @@ public class ReorderController {
 		}
 		
 		String storeId = (String)session.getAttribute("storeId");
+		String phone = (String)session.getAttribute("phone");
+		memberVO.setPhone(phone);
+		vo.setStoreId(storeId);
+		vo.setPhone(phone);
 		adminVO.setStoreId(storeId);
 		//발송이력저장
 		vo.setStoreId(storeId);
@@ -93,14 +97,12 @@ public class ReorderController {
 		// 회원목록조회
 		//MemberVO memberVO = new MemberVO();
 		List<Map> list = reorderService.getEmail(adminVO);
-
 		// 회원목록for문
 		MimeMessagePreparator[] preparators = new MimeMessagePreparator[list.size()];
 		int i = 0;
 		for (Map map : list) {
 			String email = (String)map.get("EMAIL");
 			preparators[i++] = new MimeMessagePreparator() {
-			
 				@Override
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -112,8 +114,6 @@ public class ReorderController {
 					{
 						helper.addAttachment(vo.getProfile(), new File("c:/upload", vo.getProfile()));
 					}
-				 
-					
 				}
 			};
 		}

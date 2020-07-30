@@ -20,6 +20,7 @@ public class ReorderVO {
 	String frommail;
 	String filename;
 	String profile;
+	String phone;
 	
 MultipartFile uploadFile;
 	

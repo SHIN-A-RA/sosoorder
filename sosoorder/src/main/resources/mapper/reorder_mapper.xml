@@ -38,15 +38,17 @@
 						seq_reorderNum.nextval,
 						#{contents},
 						#{profile},
-						#{storeId},sysdate)
-								
+						#{storeId}, 
+						sysdate)								
 	</insert>
 	<select id="getEmail" parameterType="adminVO" resultType="map">   
-	select m.email
+	select distinct
+	m.email
 	from point p, member m, admin a
 	where p.memberNum = m.memberNum and
 		a.storeid = p.storeid and
 		a.storeId = #{storeId}
+		and m.email is not null
  </select>
   
    
