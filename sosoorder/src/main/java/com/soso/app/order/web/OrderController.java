@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.soso.app.member.service.MemberService;
+import com.soso.app.member.service.MemberVO;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
 
@@ -24,6 +27,9 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	//by혜원, 주문페이지 
 	@RequestMapping("/orderInsert")
@@ -110,10 +116,55 @@ public class OrderController {
 	}
 	
 	@RequestMapping("insertPoint")
-	public String insertPoint(Model model, OrderCptVO orderCptVO, HttpServletRequest request) {
+	public String insertPoint(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
 		String orderNum = request.getParameter("orderNum");
+		String storeId = (String)session.getAttribute("storeId");
+		orderCptVO.setStoreId(storeId);
+		
 		
 		return "empty/order/insertPoint";
+	}
+	
+	
+	@RequestMapping("insertPo")
+	public String insertPo(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		orderCptVO.setStoreId(storeId);
+		
+		String path = null;
+		MemberVO dbVO = memberService.getMember(memberVO);
+		if (dbVO == null ) {
+	         model.addAttribute("errorMsg", "없는 휴대폰번호");
+	          path = "order/insertPoint";
+	         
+	      } else if (!memberVO.getPwd().equals(dbVO.getPwd())) {
+	    	  model.addAttribute("errorMsg", "pwd오류");
+	    	  path = "order/insertPoint";
+
+	      } else {
+	         session.setAttribute("phone", memberVO.getPhone());
+	         String phone = (String)session.getAttribute("phone");
+	         orderCptVO.setPhone(phone);
+	 		
+	 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
+	 		
+	        
+	      }
+		orderService.insertPo(orderCptVO);
+		
+		
+		return "empty/order/pointList";
+	}
+	
+	//적립금리스트보여주기
+	@RequestMapping("/showPoint")
+	public String showPoint(Model model, OrderCptVO orderCptVO, HttpSession session) {
+		
+		String phone = (String)session.getAttribute("phone");
+		orderCptVO.setPhone(phone);
+		
+		model.addAttribute("pList", orderService.showPoint(orderCptVO));
+		return null;		
 	}
 
 }

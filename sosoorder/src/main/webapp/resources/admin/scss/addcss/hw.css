@@ -226,4 +226,46 @@ width: 50%;
 float: left;
 padding: 10px 0px;
 text-align: center;
+height: 80px;
 }
+
+.frm_point{
+padding: 100px 100px 0px 100px;
+margin: auto;
+}
+
+.tbp_th{
+padding: 20px 0px 20px 0px;
+width: 30%
+}
+
+.point_input{
+height: 40px;
+padding: 5px 8px;
+border: 1px solid #d5d5d5;
+margin: 2px;	
+}
+
+.pointd_td{
+padding-top: 80px;	
+}
+
+.btn_point2{
+border-radius: 10px 0 10px 0;
+padding: 10px 20px 10px 20px;
+background-color: #000000;
+color: white;
+text-align: bold;
+font-weight: bolder;
+font-size: 18px;
+}
+
+.div_list{
+border-bottom: 3px solid black;
+padding: 100px 100px 50px 100px;
+}
+
+.list_h3{
+	
+}
+

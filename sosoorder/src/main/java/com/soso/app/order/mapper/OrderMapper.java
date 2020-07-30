@@ -31,5 +31,9 @@ public interface OrderMapper {
 	//결제프로시저
 	public void paymentProc(HashMap<String, Object> map);
 	
-
+	//적립금적립하기
+	public void insertPo(OrderCptVO orderCptVO);
+	
+	//적립금리스트
+	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO);
 }

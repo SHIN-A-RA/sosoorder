@@ -102,5 +102,31 @@
 		    #{phone}
     ) }
 	</select>
+	
+	<insert id="insertPo" parameterType="OrderCptVO">  
+	insert into POINT 
+		(POINTNUM, 
+		POINTDATE, 
+		POINT, 
+		STOREID, 
+		MEMBERNUM, 
+		POINTCHECK) 
+	values(
+		(SELECT NVL(max(POINTNUM), 0)+1 FROM POINT), 
+		sysdate,
+		(SELECT totalpay *(3/100) FROM payment WHERE payNum = (select distinct payNum FROM orderCpt WHERE orderNum= #{orderNum})), 
+		#{storeId},
+		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
+		 '1')
+	</insert>
+	<select id="showPoint" parameterType="OrderCptVO" resultType="map">
+	SELECT a.storeName "storeName", 
+			sum(p.point*p.pointCheck) "point"
+	FROM POINT p JOIN ADMIN a ON (p.storeId = a.storeId)
+		<where>
+			p.memberNum = (SELECT memberNum FROM member WHERE phone = #{phone}) 	
+		</where>
+		group by a.storeName
+	</select>
 
 </mapper>

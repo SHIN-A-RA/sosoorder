@@ -385,25 +385,24 @@ function removeChar(event) {
 <button class="btn_pay" type="submit"><span class="txt_payment">결제하기</span></button>
 </div>
 </form>
+
 </div>
 
 <script>
 
 /* 좌석값받기 */
-$(function(){
-	$("#selectSeat").on("change",function(){
-		$(".seat").val($(this).val());
+	$(function(){
+		$("#selectSeat").on("change",function(){
+			$(".seat").val($(this).val());
+		});
 	});
-});
-
-/* 결제방법받기 */
-$(function(){
-	$(".payCheck").on("change",function(){
-		$(".payCheckval").val($(this).val());
+	
+	/* 결제방법받기 */
+	$(function(){
+		$(".payCheck").on("change",function(){
+			$(".payCheckval").val($(this).val());
+		});
 	});
-});
-
-
 
 </script>
 

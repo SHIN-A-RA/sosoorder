@@ -101,3 +101,9 @@ BEGIN
 	END;
 	
 	select totalpay *(3/100) FROM payment WHERE payNum = (select distinct payNum FROM orderCpt WHERE orderNum= '46') 
+	
+	delete from point where point is null;
+	update POINT set MEMBERNUM=1 where MEMBERNUM=0
+	delete from payment where payNum BETWEEN 129 and 133;
+	delete from payment where paycheck is null;
+	delete from payment where MEMBERNUM is null;

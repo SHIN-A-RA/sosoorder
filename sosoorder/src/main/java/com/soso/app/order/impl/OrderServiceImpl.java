@@ -50,6 +50,17 @@ public class OrderServiceImpl implements OrderService{
 	public void paymentProc(HashMap<String, Object> map) {
 		orderMapper.paymentProc(map);		
 	}
+
+	//회원적립금인서트
+	@Override
+	public void insertPo(OrderCptVO orderCptVO) {		
+		orderMapper.insertPo(orderCptVO);		
+	}
+
+	@Override
+	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO) {
+		return orderMapper.showPoint(orderCptVO);
+	}
 	
 	
 	

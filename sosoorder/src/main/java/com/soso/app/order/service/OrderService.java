@@ -26,5 +26,11 @@ public interface OrderService {
 	
 	//결제프로시저
 	public void paymentProc(HashMap<String, Object> map);
+	
+	//멤버적립하기
+	public void insertPo(OrderCptVO orderCptVO);
+	
+	//적립금리스트
+	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO);
 
 }
