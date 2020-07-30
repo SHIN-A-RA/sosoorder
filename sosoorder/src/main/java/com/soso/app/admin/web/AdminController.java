@@ -15,6 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.soso.app.admin.service.AdminService;
 import com.soso.app.admin.service.AdminVO;
 
+/**
+ * 
+ * 
+ * 이대연
+ * 
+ * 
+ *
+ * */
 
 @Controller // Bean �벑濡�, DispacherServlet�씠 �씤�떇�븷 �닔 �엳�뒗 Controller濡� 蹂��솚 => @Compnent
 public class AdminController {

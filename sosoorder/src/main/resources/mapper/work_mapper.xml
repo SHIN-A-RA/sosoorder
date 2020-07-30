@@ -17,6 +17,37 @@
 	   </if> 
   </select>
 
+
+<!-- getEmpSalAjax 조회 -->
+   <select id="getEmpSalAjax" resultType="map">    
+ 	  SELECT  e.empName,
+	          to_char(w.workStart, 'dy') AS week,
+	          to_char(w.workStart,'mm/dd') AS month, 
+			  to_char(w.workStart,'hh24:mi') AS workStart, 
+			  NVL(to_char(w.workEnd,'hh24:mi'),' ') AS workEnd,
+        	 TRUNC((w.workend -w.workstart)*24,1) AS sumTime
+	  FROM employees e, work w
+	  WHERE w.empNum = e.empNum 
+	  AND storeId = #{storeId}
+	  AND to_char(w.workend,'YYYY-MM')=#{selectMonth}
+	  AND e.empNum = #{empNum}
+  </select>
+
+
+
+<!-- getEmpSalAjax 조회 -->
+   <select id="totalSalAjax" resultType="map">   
+SELECT sum(TRUNC((workend -workstart)*24,1)) AS totalTime,
+	   sum(TRUNC((workend -workstart)*24,1))*8350 AS totalSal 
+FROM work w ,employees e
+WHERE w.empNum = e.empNum 
+AND storeId = #{storeId}
+AND to_char(w.workend,'YYYY-MM')=#{selectMonth}
+AND e.empNum = #{empNum}
+</select>
+
+
+
 <!--work 시작-->
    <insert id="workStart" parameterType="String">
 	INSERT INTO work(workNum,empNum,workStart) values(work_seq.nextval,#{empNum},SYSDATE)

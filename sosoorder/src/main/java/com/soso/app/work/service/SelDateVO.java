@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class SelDateVO {
 	String selectDate;
 	String storeId;
+	String selectMonth;
+	String empNum;
 }

@@ -14,7 +14,10 @@ public interface WorkMapper {
 	public void workEnd(String empNum);
 	public List<Map<String, Object>> getWorkTimeData(String storeId);
 	public List<Map<String, Object>> getEmpListTime(String storeId);
+	
+	
 	public List<Map> empNum(SelDateVO vo);
 	public List<Map> getEmpSalAjax(SelDateVO vo);
+	public List<Map> totalSalAjax(SelDateVO vo);
 	
 }

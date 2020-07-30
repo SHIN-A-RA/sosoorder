@@ -1,6 +1,7 @@
 package com.soso.app.work.web;
 
 import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.soso.app.work.service.SelDateVO;
 import com.soso.app.work.service.WorkService;
 import com.soso.app.work.service.WorkVO;
+
+/**
+ * 
+ * 
+ * 이대연
+ * 
+ * 
+ *
+ * */
 
 @Controller
 public class WorkController {
@@ -36,14 +46,27 @@ public class WorkController {
 		return workService.empNum(seldateVO);
 	}
 	
-	//직원 조회(getEmpAjax)
+	//직원 조회("getEmpSalAjax")
 	@RequestMapping("getEmpSalAjax")
 	@ResponseBody
 	public List<Map> getEmpSalAjax(HttpSession session,SelDateVO seldateVO) {
-		//클릭시 데이트와 스토어아이디를 가져옴
 		seldateVO.setStoreId((String) session.getAttribute("storeId"));
-		return workService.empNum(seldateVO);
+		return workService.getEmpSalAjax(seldateVO);
 	}
+	
+	
+	
+	
+	
+	//총 급여 조회("getEmpSalAjax")
+	@RequestMapping("totalSalAjax")
+	@ResponseBody
+	public List<Map> totalSalAjax(HttpSession session,SelDateVO seldateVO) {
+		seldateVO.setStoreId((String) session.getAttribute("storeId"));
+		return workService.totalSalAjax(seldateVO);
+	}
+	
+	
 	
 	
 	

@@ -16,6 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 
+/**
+ * 
+ * 
+ * 이대연
+ * 
+ * 
+ *
+ * */
 
 @Controller // Bean �벑濡�, DispacherServlet�씠 �씤�떇�븷 �닔 �엳�뒗 Controller濡� 蹂��솚 => @Compnent
 public class MemberController {

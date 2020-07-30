@@ -12,7 +12,14 @@ import com.soso.app.emp.service.EmpService;
 import com.soso.app.emp.service.EmpVO;
 import com.soso.app.menu.service.MenuVO;
 import com.soso.app.work.service.WorkService;
-
+/**
+ * 
+ * 
+ * 이대연
+ * 
+ * 
+ *
+ * */
 @Controller
 public class EmpController {
 

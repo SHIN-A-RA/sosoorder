@@ -11,7 +11,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.payment.service.PaymentService;
 import com.soso.app.payment.service.PaymentVO;
-
+/**
+ * 
+ * 
+ * 이대연
+ * 
+ * 
+ *
+ * */
 @Controller
 public class PaymentController {
 

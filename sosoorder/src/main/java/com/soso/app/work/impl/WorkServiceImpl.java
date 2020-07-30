@@ -37,7 +37,6 @@ public class WorkServiceImpl implements WorkService {
 	}
 	@Override
 	public List<Map<String, Object>> getEmpListTime(String storeId) {
-		// TODO Auto-generated method stub
 		return workMapper.getEmpListTime(storeId);
 	}
 
@@ -47,5 +46,11 @@ public class WorkServiceImpl implements WorkService {
 		return workMapper.getEmpSalAjax(vo);
 	}
 
+	@Override
+	public List<Map> totalSalAjax(SelDateVO vo) {
+		return workMapper.totalSalAjax(vo);
+	}
+
+	
 	
 }
