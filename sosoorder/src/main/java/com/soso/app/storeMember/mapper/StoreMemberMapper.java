@@ -6,6 +6,7 @@ import com.soso.app.storeMember.service.StoreMemberVO;
 
 public interface StoreMemberMapper {
 	public List<StoreMemberVO> getStoreMemberList(StoreMemberVO storeMemberVO);
-	public String getStoreMember(StoreMemberVO storeMemberVO);
-	public void deleteStoreMember(StoreMemberVO storeMemberVO);
+	public StoreMemberVO getStoreMember(StoreMemberVO storeMemberVO);
+	public void storeMemberDelete(StoreMemberVO storeMemberVO);
+	public void storeMemberUpdate(StoreMemberVO storeMemberVO);
 }

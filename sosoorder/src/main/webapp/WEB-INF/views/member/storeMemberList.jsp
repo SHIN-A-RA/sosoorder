@@ -24,14 +24,14 @@
 			<table id="table_id" class="display">
 				<thead>
 					<tr>
-						<th>회원번호</th>
+						<th>핸드폰번호</th>
 						<th>주소</th>
 						<th>적립금</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${storeMemberList}" var="List">
-						<tr>
+						<tr name="${List.phone}">
 							<td>${List.phone}</td>
 							<td>${List.delAddr}</td>
 							<td>${List.point}</td>
@@ -46,7 +46,14 @@
 <script>
 	$(function() {
 		//목록
-		var otable = $('#table_id').DataTable({
+		var otable = $('#table_id').DataTable({})
+			$('#table_id tbody').on('click', 'tr', function() {
+				console.log(col1);
+				var col1 = $(this).attr("name");
+				//var data = otable.row(this).data();
+				//var col1 = data[1];
+				location.href = "storeMemberUpdateForm?phone=" + col1
+			});
 		});
 		
 		
@@ -55,13 +62,5 @@
 		/* $('#seatDelete').on('click', function() {
 			location.href = 'seatDelete?seatNum=' + $("#seatNum").val()
 		}); */
-	});
-</script>
 
-<br>
-<br>
-<br>
-<div align="right">
-	<input type="button" class="btn btn-danger"
-		onClick="location.href='storeMemberUpdate'" value="등록" />
-</div>
+</script>

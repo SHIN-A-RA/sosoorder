@@ -10,29 +10,29 @@
 		resultType="storeMemberVO">
 		SELECT *
 		FROM memberAdmin
+		where storeId = #{storeId}
 		order by phone
 	</select>
 	<!--회원정보 단건조회 -->
 	<select id="getStoreMember" parameterType="storeMemberVO" resultType="storeMemberVO">
 		select *
 		FROM memberAdmin
-		where
+		where storeId = #{storeId} and
 		phone = #{phone}
 	</select>
 	
 	<!--회원정보 수정 -->
-	<!-- <update id="StoreMemberUpdate" parameterType="storeMemberVO">
-		UPDATE memberAdmin
-		set
-		storeId=#{storeId},
-		memberNum=#{memberNum},
-		phone=#{phone},
-		delAddr=#{delAddr},
-		point=#{point}
-		where phone= #{phone}
-	</update> -->
+	 <update id="storeMemberUpdate" parameterType="storeMemberVO">
+		Update member
+		set phone = #{phone}, delAddr = #{delAddr}
+		where memberNum = #{memberNum}
+		
+	</update> 
 	<!--회원 삭제 -->
-	<update id="StoreMemberDelete" parameterType="storeMemberVO">
-		DELETE from memberAdmin where phone = ${phone}
-	</update>
+	<delete id="storeMemberDelete" parameterType="storeMemberVO">
+		delete from point
+		where 
+		storeId = #{storeId} and
+		phone = #{phone}
+	</delete>
 </mapper>

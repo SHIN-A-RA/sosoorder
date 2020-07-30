@@ -21,13 +21,19 @@ public class StoreMemberServiceImpl implements StoreMemberService{
 	}
 
 	@Override
-	public String getStoreMember(StoreMemberVO storeMemberVO) {
+	public StoreMemberVO getStoreMember(StoreMemberVO storeMemberVO) {
 		return storeMemberMapper.getStoreMember(storeMemberVO);
 	}
 
 	@Override
-	public void deleteStoreMember(StoreMemberVO storeMemberVO) {
-		storeMemberMapper.deleteStoreMember(storeMemberVO);
+	public void storeMemberDelete(StoreMemberVO storeMemberVO) {
+		storeMemberMapper.storeMemberDelete(storeMemberVO);
+	}
+
+	@Override
+	public void storeMemberUpdate(StoreMemberVO storeMemberVO) {
+		storeMemberMapper.storeMemberUpdate(storeMemberVO);
+		
 	}
 	
 
