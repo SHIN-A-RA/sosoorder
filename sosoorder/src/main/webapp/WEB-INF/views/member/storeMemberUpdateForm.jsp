@@ -16,7 +16,7 @@
 <form action="storeMemberUpdate" method="post"
 	enctype="multipart/form-data" name="storeMemberUpdate"
 	id="storeMemberUpdate">
- <input type="hidden" name="memberNum" value="${oneSm.memberNum}" /> 
+	<input type="hidden" name="memberNum" value="${oneSm.memberNum}" />
 	<div class="row">
 		<div class="col">
 			<div class="input-group mb-3" id="phone">
@@ -39,13 +39,22 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<div class="input-group" style="width: 600px;" id="point">
+			<div class="input-group-prepend">
+				<span class="input-group-text">적립금</span>
+			</div>
+			<input class="form-control selectmenu" name="point" id="point"
+				style="text-align: center;" value="${oneSm.point}">
 
+		</div>
+	</div>
 
-	<div class="dress" id="btn" >
-		<input type="submit" class="btn btn-primary" value="수정" />
-		<%-- <input
+	<div class="dress" id="btn">
+		<input type="submit" class="btn btn-primary" value="수정"/>
+		<input
 			type="button" class="btn btn-primary"
-			onclick="location.href='?phone=${oneSm.phone}'"
-			value="메뉴삭제" /> --%>
+			onclick="location.href='storeMemberDelete?storeId=${oneSm.storeId}&memberNum=${oneSm.memberNum}'"
+			value="회원정보삭제" />
 	</div>
 </form>

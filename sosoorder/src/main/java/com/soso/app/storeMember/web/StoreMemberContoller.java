@@ -69,7 +69,7 @@ public class StoreMemberContoller {
 		@RequestMapping("storeMemberDelete")
 		public String storeMemberDelete(StoreMemberVO vo) {
 			storeMemberService.storeMemberDelete(vo);
-			return "redirect:storeMenuList";
+			return "redirect:storeMemberList";
 		}
 
 }
