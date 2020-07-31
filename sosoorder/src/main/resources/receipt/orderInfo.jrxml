@@ -3,11 +3,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orderInfo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63ca33b1-6634-49ff-8424-baaeda6e291f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sosorder"/>
-	<parameter name="p_PAYNUM" class="java.lang.String"/>
+	<parameter name="p_payNum" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select distinct payday, storename, phone, storeAddr 
 from orderall_view
-where paynum =  $P{p_PAYNUM}]]>
+where payNum =  $P{p_payNum}]]>
 	</queryString>
 	<field name="PAYDAY" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="PAYDAY"/>
@@ -29,7 +29,7 @@ where paynum =  $P{p_PAYNUM}]]>
 			<textField>
 				<reportElement x="2" y="0" width="550" height="60" uuid="c0a729a4-84ad-43a4-9325-a5e51bcc16f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22"/>
+					<font size="19"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{STORENAME}]]></textFieldExpression>
 			</textField>

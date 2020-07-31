@@ -110,8 +110,12 @@ where o.menuNum = m.menuNum AND o.orderNum=1;
 
 select * from payment where paynum = 7;
 
+select distinct payday, storename, phone, storeAddr 
+from orderall_view
+where paynum =  $P{payNum} 
 
-
-
-
-
+select phone "id", 'ROLE_USER'
+from member
+UNION
+select storeId "id", 'ROLE_ADMIN'
+from admin

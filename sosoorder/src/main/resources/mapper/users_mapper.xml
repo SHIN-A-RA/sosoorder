@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.user.mapper.userMapper">
+
+	<select id="getRole" resultType="map">
+		SELECT phone "id", 'ROLE_USER'
+		FROM member
+		UNION
+		SELECT storeId "id", 'ROLE_ADMIN'
+		FROM admin
+		<where>
+			id = #{id}
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+<!-- 	<security:http>
+		<security:intercept-url pattern="/home.jsp"
+			access="permitAll()" />아무나 접근가능
+		<security:intercept-url pattern="/login.jsp"
+			access="permitAll()" method="GET"/>
+		<security:intercept-url pattern="/admin/**"
+			access="hasAuthority('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+		<security:form-login
+					default-target-url="/top.jsp"
+					login-page="/login.jsp"
+					login-processing-url="/processLogin"
+					username-parameter="paramLoginId"
+					password-parameter="paramPassword"
+					authentication-failure-url="/login.jsp"
+		/>
+		<security:logout logout-url="/logout"
+			logout-success-url="/top.jsp" />
+		<security:csrf disabled="true" />
+		<security:access-denied-handler
+			error-page="/accessDenied.jsp"/>
+	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService">
+			<security:password-encoder hash="bcrypt"/> 암호화 방식
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<context:component-scan base-package="com.soso"/> -->
+</beans>
