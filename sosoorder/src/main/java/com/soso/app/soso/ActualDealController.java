@@ -8,12 +8,11 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.XML;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
  
@@ -22,7 +21,7 @@ public class ActualDealController {
  
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
-    @RequestMapping("sosoOrder")
+    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
     public Map<String, Object> getActualDealPrice(@RequestParam Map<String, Object> paramMap) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
         Map<String, Object> resultMap = new HashMap<>();
@@ -33,6 +32,9 @@ public class ActualDealController {
         	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
             urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=128.5896283");
             urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=35.8704736");
+
+           // urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"="+URLEncoder.encode(paramMap.get("latitude").toString(), "UTF-8"));
+           // urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"="+URLEncoder.encode(paramMap.get("longitude").toString(), "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*Service Key*/
 
             URL url = new URL(urlBuilder.toString());
@@ -62,7 +64,6 @@ public class ActualDealController {
             org.json.JSONObject xmlJSONObj = XML.toJSONObject(sb.toString());
             String xmlJSONObjString = xmlJSONObj.toString();
             //System.out.println("### xmlJSONObjString=>"+xmlJSONObjString);
- 
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> map = new HashMap<>();
             map = objectMapper.readValue(xmlJSONObjString, new TypeReference<Map<String, Object>>(){});
@@ -70,10 +71,8 @@ public class ActualDealController {
             Map<String, Object> body = (Map<String, Object>) dataResponse.get("body");
             Map<String, Object> items = null;
             List<Map<String, Object>> itemList = null;
- 
             items = (Map<String, Object>) body.get("items");
             itemList = (List<Map<String, Object>>) items.get("item");
- 
             System.out.println("### map="+map);
             System.out.println("### dataResponse="+dataResponse);
             System.out.println("### body="+body);

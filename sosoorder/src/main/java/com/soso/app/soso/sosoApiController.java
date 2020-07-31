@@ -17,7 +17,7 @@ import com.soso.app.store.service.StoreCouponService;
 @Controller
 public class sosoApiController {
 
-	@RequestMapping("sosoList")
+	@RequestMapping("sosoList1")
 	   public String callapihttp(HttpServletResponse reponse) {
 	      StringBuffer result = new StringBuffer();
 	      try { 
@@ -30,7 +30,6 @@ public class sosoApiController {
 	      result.append("<xmp>");
 	      while((returnLine = br.readLine()) != null) {
 	         result.append(returnLine + "\n");
-
 	      }
 	      urlconnection.disconnect();
 	      System.out.println(result);
@@ -39,8 +38,13 @@ public class sosoApiController {
 	      }
 	      return result+"</xmp>";
 	   }
-
+	
+	@RequestMapping("gps")
+	   public String gps(HttpServletResponse reponse) {
+		return "sosoList/gps";
 	}
+
+}
 
 
 

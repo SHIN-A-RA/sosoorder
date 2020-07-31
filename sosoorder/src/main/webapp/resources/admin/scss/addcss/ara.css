@@ -13,19 +13,3 @@ div.mypagelist ul.mypagebtn_ul li a:hover{color:#ca1818}
 .starbtntd{display:none;}
 .starbtntd.s_undefined{display:block !important;}
 .startd.s_undefined{display:none;}
- 
-.table {
-	border-collapse: collapse;
-	margin:auto;
-	text-align:center;
-}
-
-.table td, .table th {
-	border: 1px solid black;
-	padding: 20px;
-	white-space: nowrap;
-	width:20px;
-}
-
-.table td:first-child, .table th:first-child {
-	width:100px;

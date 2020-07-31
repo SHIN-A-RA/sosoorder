@@ -86,8 +86,3 @@
    <div  style="width:340px; height:40px; text-align:center; padding-top:7px; 
 		font-size:16px; border:1px solid; margin:auto;">총적립금: ${total}원</div>
 
-
-
-
-
-
