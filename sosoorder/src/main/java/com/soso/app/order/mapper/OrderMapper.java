@@ -8,8 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.soso.app.order.service.OrderCptVO;
 
-
-
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")
 public interface OrderMapper {
 	
