@@ -107,3 +107,67 @@ BEGIN
 	delete from payment where payNum BETWEEN 129 and 133;
 	delete from payment where paycheck is null;
 	delete from payment where MEMBERNUM is null;
+	
+	create table Address(
+		deliveryNum NUMBER(10),
+		memberNum NUMBER(10),
+		addr  VARCHAR2(30),
+		payNum NUMBER(10),
+		deliveryDay Date,
+	CONSTRAINT deliver_PK PRIMARY KEY (deliveryNum),
+	CONSTRAINT memberNum_FK FOREIGN KEY (memberNum) REFERENCES member(memberNum),
+	CONSTRAINT payNum_FK FOREIGN KEY (payNum) REFERENCES payment(payNum)
+	);
+	
+SELECT TABLE_NAME, CONSTRAINT_NAME
+FROM USER_CONSTRAINTS 
+WHERE TABLE_NAME IN('Address','member');
+
+select 
+	 (select seat from seat where seatNum = seatNum)
+from payment
+where storeId = (select storeId from seat where seatNum = '1') 
+		AND status = '0';
+
+				(select p.paycheck from payment where p.paycheck = '2')
+		
+SELECT s.seat,
+		d.addr,
+		m.menuName,
+		o.orderCount,
+		(select p.paycheck from payment where p.paycheck = '2')
+FROM payment p
+INNER JOIN orderCpt o
+	ON (p.payNum = o.payNum)
+INNER JOIN seat s
+	ON (p.seatNum = s.seatNum)
+INNER JOIN menu m
+	ON (o.menuNum = m.menuNum)
+INNER JOIN delivery d
+	ON (p.payNum = d.paynum)
+WHERE s.storeId = 'test'
+	AND p.status = '0'
+
+	
+	SELECT s.seat, d.addr
+	FROM 
+	
+		(select p.paycheck from payment where p.paycheck = '2')
+	
+		
+SELECT  DISTINCT s.seat,
+		d.addr,
+		m.menuName,
+		o.orderCount,
+		p.paycheck
+FROM payment p
+INNER JOIN orderCpt o
+	ON (p.payNum = o.payNum)
+INNER JOIN seat s
+	ON (p.seatNum = s.seatNum)
+INNER JOIN menu m
+	ON (o.menuNum = m.menuNum)
+INNER JOIN delivery d
+	ON (p.payNum = d.paynum)
+WHERE s.storeId = 'test'
+	AND p.status = '0'

@@ -29,9 +29,9 @@ public class StoreOrderController {
 	/*
 	 * @Autowired StoreOrder storeOrderService;
 	 */
-	@RequestMapping("storeOrder")
-	public String storePopupListForm(Model model) {
-		return "store/storePopupList";
+	@RequestMapping("storeOrderList")
+	public String storeOrderList(Model model) {
+		return "store/storeOrderList";
 	}
 
 
