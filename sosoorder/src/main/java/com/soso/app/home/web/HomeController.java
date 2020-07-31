@@ -1,12 +1,18 @@
 package com.soso.app.home.web;
 
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +27,12 @@ import com.soso.app.menu.service.MenuService;
 import com.soso.app.menu.service.MenuVO;
 import com.soso.app.order.service.OrderCptVO;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
 
 @Controller
 public class HomeController {
@@ -29,6 +41,10 @@ public class HomeController {
 	
 	@Autowired
 	HomeService homeService;
+	
+	@Autowired
+	@Qualifier("dataSource")
+	DataSource datasource;
 	
 	@RequestMapping("/")
 	public String home(Model model, AdminVO adminVO) {
@@ -75,8 +91,22 @@ public class HomeController {
 		homeService.cartInert(ocVO);
 		return "order/orderInsert";
     }
-
 	
+	@RequestMapping("report.do")
+	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Connection conn = datasource.getConnection();
+		InputStream stream = getClass().getResourceAsStream("/receipt/receipt.jrxml");
+		JasperReport jasperReport = JasperCompileManager.compileReport(stream);
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+//		map.put("p_departmentId", request.getParameter("dept"));
+		map.put("p_payNum", request.getParameter("payNum"));
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+	}
+	
+
 
 
 }

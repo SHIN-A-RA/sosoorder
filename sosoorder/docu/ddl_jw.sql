@@ -104,6 +104,11 @@ select * from userCoupon;
 select * from seat;
 alter table seat add(userCheck varchar2(2));
 
+select m.menuName, o.orderCount ,m.menuPrice
+from orderCpt o, menu m
+where o.menuNum = m.menuNum AND o.orderNum=1;
+
+select * from payment where paynum = 7;
 
 
 

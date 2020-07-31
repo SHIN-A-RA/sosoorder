@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.2.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reseiptForm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6599f9f9-3964-4d77-8f7f-4af12cd61920">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sosorder"/>
+	<queryString language="SQL">
+		<![CDATA[select * from payment]]>
+	</queryString>
+	<field name="PAYNUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="PAYNUM"/>
+	</field>
+	<field name="PAYCHECK" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PAYCHECK"/>
+	</field>
+	<field name="PAYDAY" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="PAYDAY"/>
+	</field>
+	<field name="POINTUSE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POINTUSE"/>
+	</field>
+	<field name="COUPONUSE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="COUPONUSE"/>
+	</field>
+	<field name="SEATNUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SEATNUM"/>
+	</field>
+	<field name="MEMBERNUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="MEMBERNUM"/>
+	</field>
+	<field name="TOTALPAY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="TOTALPAY"/>
+	</field>
+	<field name="STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="STATUS"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
