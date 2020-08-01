@@ -25,7 +25,7 @@
 	          to_char(w.workStart,'mm/dd') AS month, 
 			  to_char(w.workStart,'hh24:mi') AS workStart, 
 			  NVL(to_char(w.workEnd,'hh24:mi'),' ') AS workEnd,
-        	 TRUNC((w.workend -w.workstart)*24,1) AS sumTime
+        	  ROUND( TRUNC((w.workend -w.workstart)*24,1),3) AS sumTime
 	  FROM employees e, work w
 	  WHERE w.empNum = e.empNum 
 	  AND storeId = #{storeId}
@@ -35,10 +35,10 @@
 
 
 
-<!-- getEmpSalAjax 조회 -->
+<!-- getEmpSalAjax 계산 및 조회 -->
    <select id="totalSalAjax" resultType="map">   
-SELECT sum(TRUNC((workend -workstart)*24,1)) AS totalTime,
-	   sum(TRUNC((workend -workstart)*24,1))*8350 AS totalSal 
+SELECT TRUNC(sum(TRUNC((workend -workstart)*24,1)),2) AS totalTime,
+	    TRUNC(sum(TRUNC((workend -workstart)*24,0))*8350,0) AS totalSal
 FROM work w ,employees e
 WHERE w.empNum = e.empNum 
 AND storeId = #{storeId}

@@ -42,4 +42,21 @@ public class PaymentController {
 	public @ResponseBody List<Map<String, Object>> getMonthTotal(){
 		return paymentService.getMonthTotal();
 	}
+	
+	//총 매출 데이터 조회(일,월,년)
+	@RequestMapping("salesData")
+	public @ResponseBody List<Map> salesData(PaymentVO vo){
+		
+	System.out.println("컨트롤러 salesData 넘어가는지 체크 "
+			+ vo.getYearSales()+vo.getDaySales()+vo.getMonthSales()
+	);	
+	
+		return paymentService.salesData(vo);
+	}
+	
+	
+	
+	
+	
+	
 }

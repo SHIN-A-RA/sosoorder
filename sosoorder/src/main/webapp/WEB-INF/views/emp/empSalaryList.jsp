@@ -123,7 +123,7 @@ fullCalendar
 					  cell2.innerHTML = result[i].MONTH;
 					  cell3.innerHTML = result[i].WORKSTART;
 					  cell4.innerHTML = result[i].WORKEND;
-					  cell5.innerHTML = result[i].SUMTIME;
+					  cell5.innerHTML = result[i].SUMTIME+"시간";
 				}
 		})
  		.fail(function(result){}) //서버 에러 발생시
@@ -144,8 +144,8 @@ function autoSalry(){
 				  var row = table.insertRow(0);
 				  var cell1 = row.insertCell(0);
 				  var cell2 = row.insertCell(1);
-				  cell1.innerHTML = result[i].TOTALTIME;
-				  cell2.innerHTML = result[i].TOTALSAL;
+				  cell1.innerHTML = result[i].TOTALTIME+"시간";
+				  cell2.innerHTML = result[i].TOTALSAL.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 			}
 	})
 		.fail(function(result){}) //서버 에러 발생시

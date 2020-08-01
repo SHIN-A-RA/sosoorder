@@ -11,4 +11,9 @@ public class PaymentVO {
 	String couponUse;
 	String totalPay;
 	String payNum;
+	
+	
+	String yearSales;
+	String monthSales;
+	String daySales;
 }

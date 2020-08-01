@@ -8,4 +8,5 @@ public interface PaymentService {
 	public List<PaymentVO> getPayment(PaymentVO paymentVO);
 	public List<Map<String, Object>> getDayTotal();
 	public List<Map<String, Object>> getMonthTotal();
+	public List<Map> salesData(PaymentVO vo);
 }

@@ -3,6 +3,14 @@ FullCalendar v5.1.0
 Docs & License: https://fullcalendar.io/
 (c) 2020 Adam Shaw
 */
+
+
+var yearSales ='';
+var monthSales ='';
+var daySales ='';
+
+
+
 var FullCalendar = (function (exports) {
     'use strict';
 
@@ -7672,6 +7680,54 @@ var FullCalendar = (function (exports) {
                 if (buttonName === 'title') {
                     isOnlyButtons = false;
                     children.push(createElement("h2", { className: 'fc-toolbar-title' }, props.title));
+
+/*============================================================================
+
+START OF CHART
+
+============================================================================*/
+yearSales = props.title.substring(0,4);
+monthSales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");
+daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");
+
+
+google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      var chartdata =[];
+      function drawChart() {
+			function autoChart(){
+			        $.ajax({
+		        	url : "salesData",
+		        	async : false, //동기식
+					data : {'yearSales':yearSales,'monthSales':monthSales,'daySales':daySales},
+		        	success : function(result) {
+		        		for(i=0; i<result.length; i++) {
+		        			chartdata.push([' ',result[i].yearSales, result[i].monthSales,result[i].daySales]);
+		        		}
+		        	}
+		        })
+		   }
+		var data = google.visualization.arrayToDataTable([
+          ['총 매출량', '년 매출', '월 매출', '일 매출' ],chartdata
+			/*[' ', 1000, 400, 200]*/
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+/*============================================================================
+
+END OF CHART
+
+============================================================================*/
                 }
                 else {
                     var ariaAttrs = buttonIcon ? { 'aria-label': buttonName } : {};
@@ -7692,6 +7748,7 @@ var FullCalendar = (function (exports) {
             else {
                 return children[0];
             }
+
         };
         return ToolbarSection;
     }(BaseComponent));
@@ -12058,6 +12115,7 @@ var FullCalendar = (function (exports) {
                     createElement("span", { className: 'fc-popover-title' }, props.title),
                     createElement("span", { className: 'fc-popover-close ' + theme.getIconClass('close'), onClick: this.handleCloseClick })),
                 createElement("div", { className: 'fc-popover-body ' + theme.getClass('popoverContent') }, props.children)));
+console.log(props.title);
         };
         Popover.prototype.componentDidMount = function () {
             document.addEventListener('mousedown', this.handleDocumentMousedown);
@@ -14355,3 +14413,5 @@ var FullCalendar = (function (exports) {
     return exports;
 
 }({}));
+
+

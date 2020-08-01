@@ -31,4 +31,9 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.getMonthTotal();
 	}
 
+	@Override
+	public List<Map> salesData(PaymentVO vo) {
+		return paymentMapper.salesData(vo);
+	}
+
 }

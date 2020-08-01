@@ -25,5 +25,20 @@ SELECT TO_Char(payday, 'mm') ,
  group by TO_Char(payday, 'mm') 
  order by to_char(payday,'mm') ASC;
    </select>   
+   
+   
+   <!-- 월 평균과 년수입 비교 자료 -->
+ 	<select id ="salesData" resultType ="map">
+  	 SELECT 
+     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
+	 	  (select sum(totalpay) FROM payment where to_char(payday,'yyyy/mm/')= #{monthSales}) "monthSales",
+	      (select TRUNC(sum(totalpay),0) from payment where to_char(payday,'yyyy/mm/dd') = #{daySales}) "daySales"
+     FROM payment
+     WHERE rownum =1;  
+ 	</select>  
+   
+  
+   
+   
 </mapper>
 

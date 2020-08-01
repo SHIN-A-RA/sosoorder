@@ -85,11 +85,14 @@ public class AdminController {
 	  }
 	  
 
-	  
-	// 수정폼
-
-	// 수정처리
-
-	// 삭제처리
+		
+ /* ==================================================
+ *  StoreSales(매출분석)
+ * ===================================================
+ */
+	 @RequestMapping("storeSales")
+	 public String storeSales(Model model) {
+		 return "admin/storeSales";
+	 }
 
 }
