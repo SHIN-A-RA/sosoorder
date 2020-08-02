@@ -61,6 +61,7 @@ public class HomeController {
 			) {
 		//세션 저장
 		session.setAttribute("storeId", storeId);
+		session.setAttribute("seat", seat);
 		
 		//세션 가져오기
 		//(String)session.getAttribute("storeId")
@@ -70,7 +71,7 @@ public class HomeController {
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
-		return "home";
+		return "home/home";
 	}
 	
 	@RequestMapping("homeSample/{storeId}")
@@ -89,7 +90,7 @@ public class HomeController {
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
-		return "home";
+		return "home/home";
 	}
 	
 
@@ -108,7 +109,7 @@ public class HomeController {
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
-		return "home";
+		return "home/home";
 	}
 	
 	@RequestMapping(value="cartList", method=RequestMethod.POST, 
@@ -131,6 +132,18 @@ public class HomeController {
 		
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
 		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+	}
+	
+	@RequestMapping("callInsertForm")
+	public String callInsertForm(Model model, SeatVO seatVO, HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		seatVO.setStoreId(storeId);
+		model.addAttribute("seatListCall", homeService.seatListHome(seatVO));
+		
+		String seat = (String)session.getAttribute("seat");
+		seatVO.setSeat(seat);
+		model.addAttribute("seatCheck", seatVO);
+		return "empty/home/callInsert";
 	}
 	
 

@@ -76,5 +76,17 @@
 		where orderStar is not null <!-- orderStar에 정보가 없는 것은 제외하고 계산한다. -->
 		group by menuNum;
 	</select>
+	
+	<select id="seatListHome" parameterType="SeatVO" resultType="SeatVO">
+		select *
+		from seat
+		<where>
+			userCheck = '1'
+			<if test="storeId != null">
+				and storeId = #{storeId}
+			</if>
+		</where>
+		order by seatNum
+	</select>
 
 </mapper>

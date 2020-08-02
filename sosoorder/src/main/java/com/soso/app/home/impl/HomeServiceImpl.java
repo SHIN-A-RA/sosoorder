@@ -10,6 +10,7 @@ import com.soso.app.home.mapper.HomeMapper;
 import com.soso.app.home.service.HomeService;
 import com.soso.app.menu.service.MenuVO;
 import com.soso.app.order.service.OrderCptVO;
+import com.soso.app.seat.service.SeatVO;
 
 @Service
 public class HomeServiceImpl  implements HomeService{
@@ -44,6 +45,11 @@ public class HomeServiceImpl  implements HomeService{
 	@Override
 	public List<OrderCptVO> starListHome() {
 		return homeMapper.starListHome();
+	}
+
+	@Override
+	public List<SeatVO> seatListHome(SeatVO seatVO) {
+		return homeMapper.seatListHome(seatVO);
 	}
 	
 	
