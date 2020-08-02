@@ -6,6 +6,7 @@
 	#popupWrap{}
 	.pop_box{position: absolute; left: 50%; top: 50%; z-index: 8; background: #fff;
     border: 1px solid #c5c5c5; border-radius: 9px; transform:translate(-50%, -50%); z-index: 9;}
+    .pop_box.popcheck_0{display:none !important;}
 	@media all and (max-width:600px) {
 		.pop_box{width:90%; margin:0 auto; left:5% !important; top: 50px !important}
 		.pop_box img{width:100% !important}
@@ -15,82 +16,88 @@
 	.poptit{padding: 9px; border-bottom: 1px solid #eee; font-size: 18px;}
 </style>
 
-<div id="popupWrap">	
-
-	<%-- <div class="pop_box">
-	<div class="poptit">dd</div>
-	<img src="${pageContext.request.contextPath}/resources/download/bob.jpeg" />
-	<div class="popcontents">dd</div>
-	<div class="btnPopup">
-	<div class="fl" onclick="todaycloseWin1();">하루동안 열지않기</div>
-	<div class="fr" onclick="closeWin1();">닫기</div> --%>
-</div>
+<div id="popupWrap"></div>
 
 
-
-<!-- 레이어팝업시작 -->
-<!-- <script>
-
-function setCookie( name, value, expirehours ) { 
-var todayDate = new Date(); 
-todayDate.setHours( todayDate.getHours() + expirehours ); 
-document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
-} 
-function closeWin() { 
-document.getElementById('popup0').style.display = "none";
-}
-function closeWin1() { 
-document.getElementById('popup1').style.display = "none";
-}
-function closeWin2() { 
-document.getElementById('popup2').style.display = "none";
-}
-function todaycloseWin() { 
-setCookie( "ncookie", "done" , 24 ); 
-document.getElementById('popup0').style.display = "none";
-}
-function todaycloseWin1() { 
-setCookie( "ncookie", "done" , 24 ); 
-document.getElementById('popup1').style.display = "none";
-}
-function todaycloseWin2() { 
-setCookie( "ncookie", "done" , 24 ); 
-document.getElementById('popup2').style.display = "none";
-}
-</script> -->
 <script>
 
  $(function(){
 	    getPopup();
+	    
 	});
 	 
 //사용자 목록 조회 요청
 	function getPopup() {
 		$.ajax({
-			url:'/sosoroder/storePopupListPro',
+			url:'/sosoroder/storePopupListPro', //팝업 프로시저 ( 팝업 호출 + 팝업 사용 유무 업데이트 ) 
 			type:'GET',
 			dataType:'json',
-			success:userListResult,
+			success:popupResult,
 			error:function(xhr,status,msg){
 				alert("상태값 :" + status + " Http에러메시지 :"+msg);
 			}
 	})//userList
 	}
-	//사용자 목록 조회 응답
-	function userListResult(data) {
+	//팝업 조회 응답
+	function popupResult(data) {
 		$("#popupWrap").empty();
 		$.each(data,function(idx,item){
-			$('<div>').addClass('pop_box').html(
+			$('<div>').addClass('pop_box').addClass('popNum_' + item.popNum).addClass('popcheck_' +item.popCheck).html(
 				"<div class='poptit'>" +item.popTitle + "</div>" +
     			"<img src='${pageContext.request.contextPath}/resources/download/"+ item.popImage+"' />"+
     			"<div class='popcontents'>"+ item.popContents+"</div>"+
     			"<div class='btnPopup'>"+
-    			"<div class='fl' onClick='javascript:setCookie(" + item.popNum + ")'>하루동안 열지않기</div>"+
-    			"<div class='fr' onclick='closeWin1();''>닫기</div> ").appendTo('#popupWrap');
+    			"<div class='fl setCookie' name ='" + item.popNum + "'>하루동안 열지않기</div>"+
+    			"<div class='fr closeWin'>닫기</div> ").appendTo('#popupWrap');
+			closeWin();
+			cookieClose();
+			getCookieMobile('popNum_' + item.popNum);
 
 		});//each
-	}//userListResult
+	}//popupResult
 	
+	
+	//팝업 닫기
+	function closeWin(){
+		$('.closeWin').on("click", function(){
+			$(this).parents('.pop_box').hide();
+		});
+	}
+	
+	//하루보지 않기를 클릭시 쿠키에 클릭한 popNum이 저장된다.
+	function cookieClose(){
+		$('.setCookie').on("click", function(){
+			var popupYN = 'popNum_' + $(this).attr('name');
+			setCookie(popupYN, "N", 1);
+			$(this).parents('.pop_box').hide();
+		});
+	}
+	
+	function setCookie(name, value, expiredays) {
+        var date = new Date();
+        date.setDate(date.getDate() + expiredays);
+        document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
+    }
+	
+	//쿠키에 저장된 값이 있으면 화면에 안보여주기
+	function getCookieMobile (popNum_n) {
+	    var cookiedata = document.cookie;
+	    if ( cookiedata.indexOf(popNum_n + "=N") < 0 ){
+	         $("."+popNum_n).show();
+	    }
+	    else {
+	        $("."+popNum_n).hide();
+	    }
+	}
+	
+	
+	
+	
+
+    
+
+	
+
 
 
 

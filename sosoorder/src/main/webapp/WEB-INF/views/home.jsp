@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script>
+//angularjs를 이용해서 storageSession에 메뉴정보를 저장한다.
 var myApp = angular.module("myApp",[]);
 myApp.controller("myAppCtrl", function($scope){
 	var product = sessionStorage.getItem('cart');
@@ -35,7 +37,9 @@ myApp.controller("myAppCtrl", function($scope){
 		sessionStorage.setItem('cart', JSON.stringify($scope.products));
 		
 		cartNum();
+		totalPay();
 	}
+	
 	
 	/* delete버튼 클릭시 삭제 */
 	$scope.deleteItem = function(user){
@@ -44,8 +48,10 @@ myApp.controller("myAppCtrl", function($scope){
 	    sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
 	    
 	    cartNum();
+	    totalPay();
 	}
-
+	
+	/* 장바구니의 +클릭시 수가 증가한다. */
 	$scope.plusItem = function(user){
 		var value = $scope.products.indexOf(user);
 		var name = user.menuName;
@@ -60,10 +66,11 @@ myApp.controller("myAppCtrl", function($scope){
 		sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
 	    
 	    cartNum();
+	    totalPay();
 	}
 	
+	/* 장바구니의 -클릭시 수가 감소한다. */
 	$scope.minusItem = function(user){
-		
 		var value = $scope.products.indexOf(user);
 		var name = user.menuName;
 		var num = user.menuNum;
@@ -78,12 +85,15 @@ myApp.controller("myAppCtrl", function($scope){
 			$scope.products.splice(value, 1);
 		}
 	    cartNum();
+	    totalPay();
 	}
+	
 	
 	/* 전체삭제 */
 	$scope.deleteKey = function(){
 		deleteMenu()
 	    cartNum();
+		totalPay();
 	}
 	function deleteMenu(){
 		delete $scope.products;
@@ -92,11 +102,22 @@ myApp.controller("myAppCtrl", function($scope){
 	   	sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
 	}
 	
-	cartNum();
 	/*cart에 들어가는 숫자  */	
+	cartNum();
 	function cartNum(){
  		number = $scope.products.length;
 		$(".shoping-cart-cnt").html(number);
+	}
+	
+	/* 총금액 */
+	totalPay();
+	function totalPay(){
+		var values = $scope.products;
+		var total = 0;
+		angular.forEach(values, function(value, key){
+			total += value.orderCount * value.menuPrice;
+		});
+		$(".totalPay").html(total);
 	}
 	
 	var cartList = $scope.products;
@@ -138,8 +159,8 @@ myApp.controller("myAppCtrl", function($scope){
 	<div class="menu_list">
 	<c:forEach items="${menuList}" var="menu">
 		<div class="col-item categoryIf ${menu.menuCategory}">
-	       <div class="photo">
-	           <img src="http://placehold.it/350x350" class="img-responsive" alt="${menu.menuImage}" />
+	       <div class="photo" 
+	       style="background-image:url( '${pageContext.request.contextPath}/resources/download/${menu.menuImage}');">
 	       </div>
 	       <div class="info">
 	           <div class="row">
@@ -148,9 +169,14 @@ myApp.controller("myAppCtrl", function($scope){
 	                   <h5 class="price-text-color">${menu.menuPrice}</h5>
 	               </div>
 	               <div class="rating hidden-sm col-md-6">
-	                   <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-	                   </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-	                   </i><i class="fa fa-star"></i>
+	               		<c:if test="${menu.orderStarAll == null}">
+		               		<c:forEach begin="1" end="${menu.orderStarAll}" >
+			                   <i class="price-text-color fa fa-star"></i>
+		               		</c:forEach>
+		               		<c:forEach begin="${menu.orderStarAll}" end="4">
+			                   <i class="fa fa-star"></i>
+		               		</c:forEach>
+	               		</c:if>
 	               </div>
 	           </div>
 	           <div class="separator clear-left">
@@ -163,7 +189,7 @@ myApp.controller("myAppCtrl", function($scope){
 	           	
 	               <p class="btn-details">
 	                   <i class="fa fa-list"></i>
-	                   <a href="javascript:ViewLayer();" class="hidden-sm">More details</a>
+	                   <a>More details</a>
 	               </p>
 	           </div>
 	           <div class="clearfix">
@@ -187,6 +213,9 @@ myApp.controller("myAppCtrl", function($scope){
   <!-- Title -->
   <div class="title">
     Shopping Bag
+    <c:if test="${seat.seat != 0}" >
+    	<span class="fr">테이블 번호 : ${seat.seat}</span>
+    </c:if> 
   </div>
   <!-- Product #1 -->
   <div class="item" ng-repeat="row in products track by $index">
@@ -211,11 +240,12 @@ myApp.controller("myAppCtrl", function($scope){
     </div>
  
     <div class="total-price">{{row.menuPrice*row.orderCount}}</div>
-  </div> 
+  </div> <!-- repeat -->
   <!-- Product #1 -->
   <div class="cart_btn_wrap">
-  	<button class="cart_sumit">결제하기</button>
-  	<button class="cart_remove" ng-click="deleteKey()">삭제하기</button>
+  	<div style="width:30%">총 결제금액 </div><div class="totalPay" style="width:70%"></div>
+  	<div class="cart_sumit">결제하기</div>
+  	<div class="cart_remove" ng-click="deleteKey()">삭제하기</div>
   </div>
 </div>
 

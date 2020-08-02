@@ -3,16 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.soso.app.home.mapper.HomeMapper">
+	<!--메뉴리스트 조회  -->
 	<select id="getMenuListHome" resultType="MenuVO" parameterType="MenuVO">
-		SELECT * FROM MENU
+		SELECT
+			round(AVG(o.orderStar),0) "orderStarAll",
+			m.menuNum "menuNum",
+			m.menuName "menuName",
+			m.menuPrice "menuPrice",
+			m.menuImage "menuImage",
+			m.menuCategory "menuCategory",
+			m.menuContents "menuContents",
+			m.menuCheck "menuCheck",
+			m.storeId "storeId"
+		FROM MENU m, OrderCpt o
 		<where>
+			m.menuNum = o.menuNum(+)
 			<if test="storeId != null">
-			storeId = #{storeId}
+			AND storeId = #{storeId}
 			</if>
-			<if test="menuCategory != null">
+			<if test="menuCategory != null"> <!-- 카테고리 클릭시 해당 카테고리의 메뉴만 나오게 -->
 			AND menuCategory = #{menuCategory}
 			</if>
-			<if test="menuCategory == null and storeId != null">
+			<if test="menuCategory == null and storeId != null"><!-- 홈으로 처음 들어왔을 때, 카테고리 처음에 있는 종류의 메뉴만 나오게 -->
 			AND menuCategory = (
 				SELECT regexp_substr(storeMenu,'[^|]+',1,1)
 				FROM admin
@@ -20,8 +32,11 @@
 			)
 			</if>
 		</where>
+		group by
+		m.menuNum, m.menuName, m.menuPrice, m.menuImage, m.menuCategory, m.menuContents, m.menuCheck, m.storeId
 	</select>
 	
+	<!-- 메뉴 카테고리 한건 조회 -->
 	<select id="getMenuCategory" resultType="AdminVO" parameterType="AdminVO">
 		SELECT storeMenu FROM admin
 		<where>
@@ -30,15 +45,19 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- main_ admin List -->
 	<select id="getStoreIdList" resultType="AdminVO" parameterType="AdminVO">
 		SELECT storeId FROM admin
 	</select>
 	
+	<!-- 주문시 최대값으로 -->
 	<select id="getOrderNum" resultType="OrderCptVO">
 		SELECT MAX(orderNum) "orderNum"
 		FROM orderCpt
 	</select>
 	
+	<!-- 카트에 담긴 메뉴 _ 다중 insert -->
 	<insert id="cartInert" parameterType="OrderCptVO">
 		INSERT INTO orderCpt(menuOrderNum, orderNum, menuNum, orderCount)
 		select seq_ordercpt.nextval, A.*
@@ -49,5 +68,13 @@
 		</foreach>
 		) "A"
 	</insert>
+	
+	<!-- 별점을 계산해서 리스트로 조회 -->
+	<select id="starListHome" resultType="OrderCptVO">
+		select SUM(nvl(orderStar, 0))/SUM(nvl(orderCount, 0)) "orderStar", menuNum
+		from OrderCpt
+		where orderStar is not null <!-- orderStar에 정보가 없는 것은 제외하고 계산한다. -->
+		group by menuNum;
+	</select>
 
 </mapper>

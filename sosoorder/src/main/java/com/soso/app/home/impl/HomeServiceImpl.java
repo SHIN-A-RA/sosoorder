@@ -40,6 +40,13 @@ public class HomeServiceImpl  implements HomeService{
 	public OrderCptVO getOrderNum(OrderCptVO orderCptVO) {
 		return homeMapper.getOrderNum(orderCptVO);
 	}
+
+	@Override
+	public List<OrderCptVO> starListHome() {
+		return homeMapper.starListHome();
+	}
+	
+	
 	
 	
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.admin.service.AdminVO;
@@ -26,6 +27,7 @@ import com.soso.app.home.service.HomeService;
 import com.soso.app.menu.service.MenuService;
 import com.soso.app.menu.service.MenuVO;
 import com.soso.app.order.service.OrderCptVO;
+import com.soso.app.seat.service.SeatVO;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -49,35 +51,60 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model, AdminVO adminVO) {
 		model.addAttribute("storeIdList", homeService.getStoreIdList(adminVO));
-		return "main";
+		return "empty/main";
 	}
 	
-	@RequestMapping("homeSample/{storeId}")
-	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
-			HttpSession session, @PathVariable String storeId) {
+	@RequestMapping("homeSample/{storeId}/{seat}")
+	public String homeSeat(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
+			HttpSession session, @PathVariable String storeId, SeatVO seatVO,
+			@PathVariable String seat
+			) {
 		//세션 저장
 		session.setAttribute("storeId", storeId);
 		
 		//세션 가져오기
 		//(String)session.getAttribute("storeId")
-		
 		//adminVO.setStoreId(storeId);
 		//menuVO.setStoreId(storeId);
+		model.addAttribute("seat", seatVO);
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
 		return "home";
 	}
 	
+	@RequestMapping("homeSample/{storeId}")
+	public String homeSample(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
+			HttpSession session, @PathVariable String storeId, SeatVO seatVO
+			) {
+		//세션 저장
+		session.setAttribute("storeId", storeId);
+		
+		//세션 가져오기
+		//(String)session.getAttribute("storeId")
+		//adminVO.setStoreId(storeId);
+		//menuVO.setStoreId(storeId);
+		seatVO.setSeat("0");
+		model.addAttribute("seat", seatVO);
+		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
+		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
+		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
+		return "home";
+	}
+	
+
+	
 	@RequestMapping("homeSample")
 	public String home(Model model, MenuVO menuVO, AdminVO adminVO, OrderCptVO orderCptVO,
-			HttpSession session) {
+			HttpSession session, SeatVO seatVO) {
 		
 		//세션 가져오기
 		String storeId = (String)session.getAttribute("storeId");
 		
 		adminVO.setStoreId(storeId);
 		menuVO.setStoreId(storeId);
+		seatVO.setSeat("0");
+		model.addAttribute("seat", seatVO);
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));

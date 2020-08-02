@@ -69,8 +69,12 @@ public class StorePopupController {
 			}
 		}
 		String storeId = (String)session.getAttribute("storeId");
+		String popContents =  request.getParameter("popContents");
+		popContents = popContents.replace("\r\n","<br>");
+		
 		storePopupVO.setStoreId(storeId);
 		storePopupVO.setPopImage(filename);
+		storePopupVO.setPopContents(popContents);
 		
 		if(storePopupVO.getPopCheck() == null || storePopupVO.getPopCheck() == "") {
 			storePopupVO.setPopCheck("0");

@@ -119,3 +119,76 @@ from member
 UNION
 select storeId "id", 'ROLE_ADMIN'
 from admin
+
+
+select SUM(nvl(orderStar, 0))/SUM(nvl(orderCount, 0)) "orderStar", menuNum
+from OrderCpt
+where orderStar is not null
+group by menuNum;
+
+select * from menu
+where
+ storeId = 'test' 
+
+
+SELECT
+round(AVG(o.orderStar),0) "orderStar",
+m.menuNum "menuNum",
+m.menuPrice "menuPrice",
+m.menuImage "menuImage",
+m.menuCategory "menuCategory",
+m.menuContents "menuContents",
+m.menuCheck "menuCheck",
+m.storeId "storeId"
+FROM MENU m, OrderCpt o
+where
+m.menuNum = o.menuNum(+)
+AND m.storeId = 'test' 
+group by m.menuNum ,
+m.menuPrice, m.menuImage, m.menuCategory, m.menuContents, m.menuCheck, m.storeId;
+
+
+
+
+SELECT  e.empName,
+             to_char(w.workStart, 'dy') AS week,
+             to_char(w.workStart,'mm/dd') AS month, 
+           to_char(w.workStart,'hh24:mi') AS workStart, 
+       to_char(w.workEnd,'hh24:mi') AS workEnd,
+           TRUNC(( TO_DATE(w.workend,'HH24:MI:SS') -TO_DATE(w.workstart,'HH24:MI:SS')),0) AS sumTime
+     FROM employees e, work w
+     WHERE w.empNum = e.empNum 
+     AND storeId = 'test'
+     AND to_char(w.workend,'YYYY-MM')='2020-07'
+     AND e.empNum = 41;
+     
+     
+     SELECT  e.empName,
+             to_char(w.workStart, 'dy') AS week,
+             to_char(w.workStart,'mm/dd') AS month, 
+           to_char(w.workStart,'hh24:mi') AS workStart, 
+       to_char(w.workEnd,'hh24:mi') AS workEnd,
+       TRUNC(
+ 				(TO_DATE(TO_CHAR(w.workend,'HH24:MI:SS'), 'HH24:MI:SS')
+ 				-TO_DATE(TO_CHAR(w.workstart,'HH24:MI'), 'HH24:MI:SS')
+ 				)*(24),0
+ 			) AS sumTime   
+     FROM employees e, work w
+     WHERE w.empNum = e.empNum 
+     AND e.storeId = 'test'
+     AND to_char(w.workend,'YYYY-MM')='2020-07'
+     AND e.empNum = 41;
+     
+     select   
+     				TO_DATE(TO_CHAR(workend), 'HH24:MI:SS')
+     				-TO_DATE(TO_CHAR(workstart), 'HH24:MI:SS')
+     				
+     from work
+     
+     select workend, workstart
+     from work
+     
+     select * from work
+   
+     
+			

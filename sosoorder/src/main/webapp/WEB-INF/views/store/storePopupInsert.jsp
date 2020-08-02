@@ -52,7 +52,14 @@
 					<textarea cols="30" rows="10"
 					name="popContents" class="form-control popContents"
 					aria-label="" aria-describedby="basic-addon1" 
-					>${popupOne.popContents} </textarea>
+					> </textarea>
+					<script>
+						var text = '${popupOne.popContents}';
+						var result = text.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+						$('.popContents').html(result);
+						console.log(result);
+					</script>
+
 				</div>
 			</div>
 			

@@ -6,7 +6,7 @@
 #footerWrap {position:relative; width:100%;}
 #wrapper{min-height:100%;}
 #wrapper #content-wrapper{min-height:100%;}
-.container-fluid{padding-top: 1.5rem;}
+.container-fluid{/* padding-top: 1.5rem; */ width:80%;}
 
 
 /*Header*/

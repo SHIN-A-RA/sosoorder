@@ -13,5 +13,7 @@ public interface HomeMapper {
 	public AdminVO getMenuCategory(AdminVO adminVO);
 	public void cartInert(List<OrderCptVO> list);
 	public OrderCptVO getOrderNum(OrderCptVO orderCptVO);
+	public List<OrderCptVO> starListHome();
+	
 	
 }

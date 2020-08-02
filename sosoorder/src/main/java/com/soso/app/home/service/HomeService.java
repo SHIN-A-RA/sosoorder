@@ -12,6 +12,7 @@ public interface HomeService {
 	public List<AdminVO> getStoreIdList(AdminVO adminVO);
 	public void cartInert(List<OrderCptVO> list);
 	public OrderCptVO getOrderNum(OrderCptVO orderCptVO);
+	public List<OrderCptVO> starListHome();
 	
 
 }
