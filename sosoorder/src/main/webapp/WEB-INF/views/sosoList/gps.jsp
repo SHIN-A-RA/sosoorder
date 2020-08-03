@@ -7,9 +7,13 @@
         width: 100%;  /* The width is the width of the web page */
        		}
     </style>
- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
-&callback=initMap"></script>
+ <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M"></script>
     <script>
+    $(function(){
+    	getLocation();
+    	locationP();
+	});
+    
     function getLocation() {
     	  if (navigator.geolocation) { // GPS를 지원하면
     	    navigator.geolocation.getCurrentPosition(function(position) {
@@ -31,31 +35,33 @@
     </script>
     <script>
     function locationP(){
-	var latitud = $('.p_latitud').val();
+	var latitude = $('.p_latitude').val();
 	var longitude = $('.p_longitude').val();
 			$.ajax({ 
 			    url: "sosoOrder", 
-			    type: 'GET', 
+			    type: 'PUT', 
 			    dataType: 'json', 
-			    data: JSON.stringify({ latitude: latitude, longitude:longitude}),
-			    success: function(data) { 
-			    	success:locationResult
-			    },
+			    data: JSON.stringify({latitude: latitude, longitude: longitude}),
+			    contentType: 'application/json',
+			    success:locationResult,
 			    error:function(xhr, status, message) { 
 			        alert(" status: "+status+" er:"+message);
 			    }
 			});
+			
+			
+			
 	}
 	</script>
 	<script>
 		function locationResult(){
-			$.each(data,function(idx,item){
+			/* 	$.each(data,function(idx,item){
 				$(".test")
 				.append($("<div>").html(item.지원))
 				.append($("<div>").html(item.지원))
 				.append($("<div>").html(item.지원))
-			});//each
-		}	
+			});//each*/
+		}	 
 	</script>
 	<div class="test"></div>
     <input class="p_latitude" name="latitude" value="">

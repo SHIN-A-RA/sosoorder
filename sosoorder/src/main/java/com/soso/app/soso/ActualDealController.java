@@ -8,28 +8,39 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.XML;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
  
 @RestController
 public class ActualDealController {
  
+	
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
-    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
-    public Map<String, Object> getActualDealPrice(@RequestParam Map<String, Object> paramMap) throws Exception {
+    @RequestMapping(value="/sosoOrder", method=RequestMethod.PUT, consumes="application/json" )
+    @ResponseBody
+    public Map<String, Object> getActualDealPrice(@RequestParam Map<String, Object> paramMap,
+    		@RequestBody SosoVO sosoVO) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
         Map<String, Object> resultMap = new HashMap<>();
+        String a = sosoVO.getLatitude();
+        String b = sosoVO.getLongitude();
+        
+        System.out.println(a + ":"+ b);
  
         try {
         	
-        	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius"); /*URL*/
-        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
+        	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius&callback=initMap"); /*URL*/
+        	urlBuilder.append("&"+URLEncoder.encode("radius", "UTF-8")+"=500");
             urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=128.5896283");
             urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=35.8704736");
 
