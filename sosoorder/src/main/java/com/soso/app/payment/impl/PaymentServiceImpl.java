@@ -36,4 +36,19 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.salesData(vo);
 	}
 
+	
+	/*=========================================
+	 *  메뉴 매출량 및 판매량에 따른 차트와 리스트 
+	 *  =======================================*/
+	@Override
+	public List<Map<String, Object>>  menuSalesChart(PaymentVO vo) {
+		return paymentMapper.menuSalesChart(vo);
+	}
+
+	@Override
+	public List<Map> menuSales(PaymentVO vo) {
+		return paymentMapper.menuSales(vo);
+	}
+
+
 }

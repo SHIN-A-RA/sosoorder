@@ -7686,11 +7686,20 @@ var FullCalendar = (function (exports) {
 START OF CHART
 
 ============================================================================*/
+if (props.title.length == 11){
+yearSales = props.title.substring(0,4);
+daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");	
+}else{
+	yearSales = props.title.substring(0,4);
+	monthSales = props.title.substring(0,addr.indexOf("월", 0));
+}
+/*
+
 yearSales = props.title.substring(0,4);
 monthSales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");
-daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");
+daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");*/
 
-
+console.log(props.title.length)
 google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
       var chartdata =[];
@@ -7698,7 +7707,7 @@ google.charts.load('current', {'packages':['bar']});
 			function autoChart(){
 			        $.ajax({
 		        	url : "salesData",
-		        	async : false, //동기식
+		        	async : false,
 					data : {'yearSales':yearSales,'monthSales':monthSales,'daySales':daySales},
 		        	success : function(result) {
 		        		for(i=0; i<result.length; i++) {

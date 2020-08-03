@@ -15,7 +15,7 @@
    <select id="getDayTotal" parameterType="PaymentVO" resultType="PaymentVO">
 	SELECT DISTINCT(TO_Char(payday, 'mm/DD')),
 	 		sum(totalpay) FROM payment 
-	 group by (TO_Char(payday, 'mm/DD'));
+	 group by (TO_Char(payday, 'mm/DD'))
    </select>
    
 <!-- payment 월별 매출량 -->
@@ -23,7 +23,7 @@
 SELECT TO_Char(payday, 'mm') ,
  			sum(totalpay) FROM payment
  group by TO_Char(payday, 'mm') 
- order by to_char(payday,'mm') ASC;
+ order by to_char(payday,'mm') ASC
    </select>   
    
    
@@ -34,11 +34,42 @@ SELECT TO_Char(payday, 'mm') ,
 	 	  (select sum(totalpay) FROM payment where to_char(payday,'yyyy/mm/')= #{monthSales}) "monthSales",
 	      (select TRUNC(sum(totalpay),0) from payment where to_char(payday,'yyyy/mm/dd') = #{daySales}) "daySales"
      FROM payment
-     WHERE rownum =1;  
- 	</select>  
-   
-  
-   
-   
+     WHERE rownum =1; 
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+<!--===================================================== 
+ 	order mapper.xml로 옮길 가능성 높음   
+=====================================================-->
+ 	
+ 	<!-- 매출관리 리스트 출력부(순위포함)    -->
+ 	<select id ="menuSales" resultType = "map">
+ 		SELECT
+			m.menuName AS menuName,
+			m.menuPrice AS menuPrice,
+			NVL(sum(o.orderCount),0) AS AllAcount,
+			NVL(sum(o.orderCount)*m.menuPrice,0) AS salesValues,
+			RANK() OVER(order BY NVL(sum(o.orderCount),0) DESC) AS salesRank
+		FROM MENU m, OrderCpt o
+		WHERE
+			m.menuNum = o.menuNum(+)
+		AND m.storeId = #{storeId}
+		AND m.menucheck = 1 
+		GROUP BY m.menuNum ,m.menuName,m.menuPrice, m.storeId
+		ORDER BY salesRank DESC 
+ 	</select>
+
+<!-- 메뉴 매출관리 차트 데이터 -->
+	<select id = "menuSalesChart" resultType="map">	
+	 	SELECT
+		  	m.menuName AS MENUNAME,
+	      	NVL(sum(o.orderCount),0) AS AllACOUNT
+			FROM MENU m, OrderCpt o
+			WHERE m.menuNum = o.menuNum(+)
+			AND m.storeId = #{storeId}
+				GROUP BY m.menuNum ,m.menuName,m.menuPrice, m.storeId
+	</select>  	
 </mapper>
 
