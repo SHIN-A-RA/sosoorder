@@ -39,7 +39,7 @@ public class ActualDealController {
         try {
         	
         	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius"); /*URL*/
-        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
+        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=100");
             urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=128.5896283");
             urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=35.8704736");
 

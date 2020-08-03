@@ -6,10 +6,12 @@
         height: 400px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        		}
-    </style>
 
+ 	</style>
 
-	<div class="test"></div>
+	<div class ="all" style="width:100%; overflow:hidden;"> 
+	
+	<div class="test" style="float:left; width:48%;"></div>
     <input class="p_latitude" name="latitude" value="">
     <input class="p_longitude" name="longitude" value="">
  	<input type="hidden" name="m_marker" id="mar">
@@ -17,6 +19,8 @@
  	<!-- 지도 -->
 
  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
     <script>
     
     
@@ -46,7 +50,7 @@
     	}
     
     /*-----------------------------
-	 반경 1km 주변 상점 불러오기
+	 반경 1km 주변 상점 불러오기 ajax 호출
 	-------------------------------*/
     function locationP(){
 	var latitude = $('.p_latitude').val();
@@ -64,26 +68,34 @@
 			        alert(" status: "+status+" er:"+message);
 			    }
 			});			
-	}   
+	} 
+    
+    /*-----------------------------
+	 반경 1km 주변 상점 불러오기 ajax 콜백
+	-------------------------------*/
 	function locationResult(data){
 		 	$.each(data.data,function(idx,item){
-		 	$("<div>")
-			.append($("<div>").html(item.bizesNm))
-			.append($("<div>").html(item.rdnmAdr))
-			.append($("<div>").html(item.indsSclsNm))
-			.append($("<div>").html(item.lon))
-			.append($("<div>").html(item.lat))
-			.appendTo(".test");
-			 
-
+		 	$(".test")
+			.append($("<h3>").addClass('locationCl').html(item.bizesNm))
+		 	.append($("<div>").addClass('locDiv')
+		 					.append($('<p>').text(item.rdnmAdr))
+							  .append($('<p>').text(item.indsSclsNm))
+							  .append($("<input>").addClass("lat").val(item.lat))
+							  .append($("<input>").addClass("lon").val(item.lon))
+			        ) 
 		});//each
+		locationCl();
+	 	 $( ".test" ).accordion();
+		
 		var map_view = $('.p_latitude').val()  + "," + $('.p_longitude').val();// 지도 지정위치 
 		// var map_marker = "37.554531,126.970663,서울역|37.554400,126.972263,서울역 1호선 1번출구"; //마커위치 구분자 "|" 로 구분 (좌표1,좌표2,마커이름)
 		 var zoom = 17; //지도 확대,축소 , 숫자가 낮을수록 축소 1~21 , 기본 9설정
 		 var map_id = "map";
-		googleMap(map_view,data,zoom,map_id);
+		googleMap(map_view,data,zoom,map_id);	
+
+		
 	}	
-	
+		
     /*-----------------------------
 	 지도 그리기 
 	-------------------------------*/
@@ -133,12 +145,24 @@
 	$(document).ready(function(){
 	 
  	 getLocation();
+
 	
 	});
+	
+	function locationCl(){
+		$('.locationCl').on('click',function(){
+			var lan = $(this).next(".locDiv").find(".lat").val();
+			var lag = $(this).next(".locDiv").find(".lon").val();
+			$('.p_latitude').val(lan);
+		    $('.p_longitude').val(lag); 
+			
+		    getLocation();
+		});
+	}
  
 
 
 	</script>
-	<div id="map" style="width: 728px; height: 420px; margin: 0 auto;"></div>
+	<div id="map" style="width: 48%; float:right;" class="b"></div>
 	
-	 
+	 </div>
