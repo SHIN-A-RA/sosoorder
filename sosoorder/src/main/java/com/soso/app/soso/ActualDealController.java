@@ -26,10 +26,9 @@ public class ActualDealController {
 	
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
-    @RequestMapping(value="/sosoOrder", method=RequestMethod.PUT, consumes="application/json" )
+    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getActualDealPrice(@RequestParam Map<String, Object> paramMap,
-    		@RequestBody SosoVO sosoVO) throws Exception {
+    public Map<String, Object> getActualDealPrice(SosoVO sosoVO) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
         Map<String, Object> resultMap = new HashMap<>();
         String a = sosoVO.getLatitude();
