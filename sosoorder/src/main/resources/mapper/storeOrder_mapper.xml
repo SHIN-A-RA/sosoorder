@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.store.mapper.StoreOrderMapper">
+
+	 
+<!-- 	 <update id="storeCouponUpdate" parameterType="StoreCouponVO">   
+		UPDATE coupon
+		SET
+		expStart = to_date(#{expStart}, 'YYYYMMDD'),
+		expEnd = to_date(#{expEnd}, 'YYYYMMDD'),
+		discount = #{discount}
+		WHERE
+		serialNum = #{serialNum}
+	 </update> -->
+</mapper>
