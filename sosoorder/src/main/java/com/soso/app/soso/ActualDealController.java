@@ -39,8 +39,8 @@ public class ActualDealController {
  
         try {
         	
-        	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius&callback=initMap"); /*URL*/
-        	urlBuilder.append("&"+URLEncoder.encode("radius", "UTF-8")+"=500");
+        	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius"); /*URL*/
+        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
             urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=128.5896283");
             urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=35.8704736");
 
@@ -81,7 +81,7 @@ public class ActualDealController {
             Map<String, Object> dataResponse = (Map<String, Object>) map.get("response");
             Map<String, Object> body = (Map<String, Object>) dataResponse.get("body");
             Map<String, Object> items = null;
-            List<Map<String, Object>> itemList = null;
+            List<Map<String, Object>> itemList;
             items = (Map<String, Object>) body.get("items");
             itemList = (List<Map<String, Object>>) items.get("item");
             System.out.println("### map="+map);
@@ -91,9 +91,9 @@ public class ActualDealController {
             System.out.println("### itemList="+itemList);
  
             resultMap.put("Result", "0000");
-            resultMap.put("numOfRows", body.get("numOfRows"));
-            resultMap.put("pageNo", body.get("pageNo"));
-            resultMap.put("totalCount", body.get("totalCount"));
+            //resultMap.put("numOfRows", body.get("numOfRows"));
+            //resultMap.put("pageNo", body.get("pageNo"));
+            //resultMap.put("totalCount", body.get("totalCount"));
             resultMap.put("data", itemList);
  
         } catch (Exception e) {
