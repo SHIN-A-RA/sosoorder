@@ -211,3 +211,4 @@ INSERT INTO call
  select * from seat;
  select * from call;
  select * from orderCpt;
+ select * from admin;

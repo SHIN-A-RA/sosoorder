@@ -65,7 +65,7 @@ div:hover, div:hover code, div:focus, div:focus code {
 .menu_list .col-item{ border: 1px solid #E1E1E1; border-radius: 5px; background: #FFF;}
 .menu_list .col-item .photo{ height:350px;background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;}
+    background-size: cover;}
 .menu_list .col-item .info{ padding: 10px; border-radius: 0 0 5px 5px; margin-top: 1px;}
 .menu_list .col-item:hover .info { background-color: #F5F5DC;}
 .menu_list .col-item .price{ float: left; margin-top: 5px;}
