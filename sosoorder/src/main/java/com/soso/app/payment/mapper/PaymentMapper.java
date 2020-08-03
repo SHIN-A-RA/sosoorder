@@ -12,7 +12,10 @@ public interface PaymentMapper {
 	public List<Map<String, Object>> getMonthTotal();
 	
 	
-	
+	/* 매출과 관련된 메소드 */
 	public List<Map> salesData(PaymentVO vo);
 	
+	/* 메뉴 매출에 관한 메소드 */
+	public List<Map> menuSales(PaymentVO vo);
+	public List<Map<String, Object>>  menuSalesChart(PaymentVO vo);
 }
