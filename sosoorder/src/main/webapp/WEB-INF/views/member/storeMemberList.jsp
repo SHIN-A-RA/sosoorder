@@ -13,15 +13,15 @@
 <div
 	class="d-sm-flex align-items-center justify-content-between mb-4 pd15"
 	style="border-bottom: 1px solid #d2d2d2">
-	<h1 class="h3 mb-0 text-gray-800">점포관리 - 회원 리스트</h1>
+	<h1 class="h3 mb-0 text-gray-800">점포관리 - 회원 목록</h1>
 </div>
 <div align="center">
-	<h3>회원 리스트</h3>
+	<h3>회원 목록</h3>
 </div>
 <div class="row">
 	<div class="col">
 		<div id="storeMemberList">
-			<table id="table_id" class="display">
+			<table id="table_id" class="display tb_style">
 				<thead>
 					<tr>
 						<th>핸드폰번호</th>

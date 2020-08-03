@@ -15,13 +15,13 @@
 	<h1 class="h3 mb-0 text-gray-800">점포관리 - 좌석관리</h1>
 </div>
 <div align="center">
-	<h3>좌석 리스트</h3>
+	<h3>좌석 목록</h3>
 </div>
-
+<br>
 <div class="row">
 	<div class="col">
 		<div id="seatList">
-			<table id="table_id" class="display">
+			<table id="table_id" class="display tb_style">
 				<thead>
 					<tr>
 						<th>No.</th>
@@ -58,6 +58,7 @@
 		});
 	});
 </script>
+<br><br>
 <form action="seatInsert" method="post" enctype="multipart/form-data">
 	<div>
 		<div align="center">

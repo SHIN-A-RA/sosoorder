@@ -9,9 +9,10 @@
 		<ul class="gnb_dp2_wrap">
 			<li class="gnb_dp2"><a href="#">일/월 매출 관리</a></li>
 			<li class="gnb_dp2"><a href="#">메뉴분석</a></li>
-			<li class="gnb_dp2"><a href="#">회원목록</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/storeMenuList">메뉴관리</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/storeMemberList">회원목록</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storePopupListForm">팝업관리</a></li>
-			<li class="gnb_dp2"><a href="#">테이블관리</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/seatInsertForm">좌석관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/mailList">리오더관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeCouponListForm">쿠폰관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeOrderList">주문현황</a></li>

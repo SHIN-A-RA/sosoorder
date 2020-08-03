@@ -57,6 +57,7 @@
   <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/jw.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/hw.css" rel="stylesheet">
    <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/ara.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/gr.css" rel="stylesheet">
 </head>
 
 <body id="page-top">

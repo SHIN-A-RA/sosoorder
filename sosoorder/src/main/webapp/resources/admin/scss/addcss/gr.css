@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+@media (max-width:1660px) {
+	#table_id.tb_style {
+		font-size: 15px;
+		display: block;
+		z-index: 2;
+		border-left: 1px solid rgba(255, 255, 255, 0.2);
+	}
+}
+
+@media  (max-width:1280px) {
+	#table_id.tb_style {
+		font-size: 12px;
+		display: block;
+		z-index: 2;
+		border-left: 1px solid rgba(255, 255, 255, 0.2);
+	}
+}
+
+@media  (max-width:880px) {
+	#table_id.tb_style {
+		font-size: 10px;
+		display: block;
+		z-index: 2;
+		border-left: 1px solid rgba(255, 255, 255, 0.2);
+	}
+}
+
+@media  (max-width:550px) {
+	#table_id.tb_style {
+		font-size: 5px;
+		display: block;
+		z-index: 2;
+		border-left: 1px solid rgba(255, 255, 255, 0.2);
+	}
+}

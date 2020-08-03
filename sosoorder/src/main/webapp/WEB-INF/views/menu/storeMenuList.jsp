@@ -4,8 +4,10 @@
 
 <style>
 #un {
-	text-decoration: underline;
+	text-decoration: underline; # grid { display : grid;
+	grid-template-columns: 150px 1fr;
 }
+
 </style>
 
 <link rel="stylesheet" type="text/css"
@@ -18,28 +20,32 @@
 <div class="slick_box menu_category">
 	<div class="menu_bar"></div>
 	<script>
-		var jbString = "${menuCategory.storeMenu}" ;
-	    var jbSplit = jbString.split("|");
-	    for ( var i in jbSplit ) {
-	  	  $(".menu_bar").append("<div><a class='MCategory'>" + jbSplit[i] + "</a></div>" );
-	    }
+		var jbString = "${menuCategory.storeMenu}";
+		var jbSplit = jbString.split("|");
+		for ( var i in jbSplit) {
+			$(".menu_bar").append(
+					"<div><a class='MCategory'>" + jbSplit[i] + "</a></div>");
+		}
 	</script>
-	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left" aria-hidden="true"></i>
-	</span> <span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"
+		aria-hidden="true"></i> </span> <span class="next" id="aro_next1"><i
+		class="fa fa-caret-right" aria-hidden="true"></i></span>
+</div>
+<br><br><br><br>
+<!-- Page Heading -->
+<div
+	class="d-sm-flex align-items-center justify-content-between mb-4 pd15"
+	style="border-bottom: 1px solid #d2d2d2">
+	<h1 class="h3 mb-0 text-gray-800">점포관리 - 메뉴 관리</h1>
 </div>
 <div>
-	<h3 id="un">메뉴관리</h3>
+	<h3 align="center">메뉴목록</h3>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <div class="row">
 	<div class="col">
-		<div>목록</div>
 		<div id="empList">
-			<table id="table_id" class="display">
+			<table id="table_id" class="display tb_style">
 				<thead>
 					<tr>
 						<th>메뉴 카테고리</th>
@@ -104,10 +110,10 @@
 	});
 </script>
 <script>
-$(function(){
-	$('.MCategory').on('click', function(){
-		category = $(this).html();
-		location.href = "storeMenuList?menuCategory=" + category;
-	});
-})
+	$(function() {
+		$('.MCategory').on('click', function() {
+			category = $(this).html();
+			location.href = "storeMenuList?menuCategory=" + category;
+		});
+	})
 </script>
