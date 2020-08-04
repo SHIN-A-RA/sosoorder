@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.soso.mapper.SosoListMapper">
+
+<!-- 소소 쿠폰 조회 -->
+<!-- by아라 -->
+	<select id="sosoList" parameterType="adminVO" resultType="adminVO">
+		SELECT distinct 
+		a.storeId "storeId",
+		a.storeName "storeName"
+		FROM admin a, coupon c
+		<where>
+   		 a.storeId = c.storeId
+		</where>
+ 	</select>
+	<select id="sosoCoupon" parameterType="adminVO" resultType="StoreCouponVO">
+		 select * from coupon where storeId = 
+		 (select storeId from admin where storeName = #{storeName})
+		 
+ 	</select>		
+</mapper>

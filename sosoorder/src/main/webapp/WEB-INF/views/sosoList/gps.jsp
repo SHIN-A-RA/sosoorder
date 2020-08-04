@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- //by아라 -->
     <style>
        /* Set the size of the div element that contains the map */
       #map {
@@ -8,24 +10,19 @@
        		}
 
  	</style>
-
+	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  
 	<div class ="all" style="width:100%; overflow:hidden;"> 
-	
 	<div class="test" style="float:left; width:48%;"></div>
-    <input class="p_latitude" name="latitude" value="">
-    <input class="p_longitude" name="longitude" value="">
- 	<input type="hidden" name="m_marker" id="mar">
+	<div class="aa" style="float:left; width:48%;"></div>
+    <input type="hidden" class="p_latitude" name="latitude" value="">
+    <input type="hidden" class="p_longitude" name="longitude" value="">
  
- 	<!-- 지도 -->
-
- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
     <script>
-    
-    
+    var gmap;
     //AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
-
     /*-----------------------------
     	현재위치찾기
     -------------------------------*/
@@ -76,20 +73,32 @@
 	function locationResult(data){
 		 	$.each(data.data,function(idx,item){
 		 	$(".test")
-			.append($("<h3>").addClass('locationCl').html(item.bizesNm))
+			.append($("<h3>").html(item.bizesNm))
 		 	.append($("<div>").addClass('locDiv')
-		 					.append($('<p>').text(item.rdnmAdr))
+		 					  .append($('<p>').text(item.rdnmAdr))
 							  .append($('<p>').text(item.indsSclsNm))
-							  .append($("<input>").addClass("lat").val(item.lat))
-							  .append($("<input>").addClass("lon").val(item.lon))
-			        ) 
+							  .append($("<input type='hidden'>").addClass("lat").val(item.lat))
+							  .append($("<input type='hidden'>").addClass("lon").val(item.lon))
+							  .append($("<div>").addClass('couponBtn').addClass(item.bizesNm).attr('name', item.bizesNm).css('display', 'none').html('버튼'))
+		 		) 
 		});//each
-		locationCl();
-	 	 $( ".test" ).accordion();
+		
+		 $.each(data.sosoList,function(idx,item){
+			 $("."+item.storeName).css('display', 'block')
+		}); //each
+		
+	 	 $( ".test" ).accordion({
+	 		  activate: function( event, ui ) {
+	 			var lat = ui.newPanel.find(".lat").val();
+	 			var lon = ui.newPanel.find(".lon").val();
+	 			var center = new google.maps.LatLng(lat, lon);
+	 			gmap.panTo(center);
+	 		  }
+	 	});
 		
 		var map_view = $('.p_latitude').val()  + "," + $('.p_longitude').val();// 지도 지정위치 
 		// var map_marker = "37.554531,126.970663,서울역|37.554400,126.972263,서울역 1호선 1번출구"; //마커위치 구분자 "|" 로 구분 (좌표1,좌표2,마커이름)
-		 var zoom = 17; //지도 확대,축소 , 숫자가 낮을수록 축소 1~21 , 기본 9설정
+		 var zoom = 18; //지도 확대,축소 , 숫자가 낮을수록 축소 1~21 , 기본 9설정
 		 var map_id = "map";
 		googleMap(map_view,data,zoom,map_id);	
 
@@ -97,7 +106,7 @@
 	}	
 		
     /*-----------------------------
-	 지도 그리기 
+	 	지도 그리기 
 	-------------------------------*/
 	
 	function googleMap(map1,map2,map3,id){
@@ -121,7 +130,7 @@
 	  }; //마커로 사용할 이미지 정의
 	  */
 	
-	 var gmap = new google.maps.Map(
+	 gmap = new google.maps.Map(
 	 mymap,{  zoom:map3,  //줌
 			  left:new google.maps.LatLng(latlng[0][0], latlng[0][1]),
 			  center:new google.maps.LatLng(gcenter[0][0], gcenter[0][1]),
@@ -138,7 +147,8 @@
 	   map:gmap, 
 	   title:latlng[i][2]
 	  });
-	 }  
+
+ 	 }  
 
     }  
     
@@ -146,21 +156,13 @@
 	 
  	 getLocation();
 
-	
 	});
 	
-	function locationCl(){
-		$('.locationCl').on('click',function(){
-			var lan = $(this).next(".locDiv").find(".lat").val();
-			var lag = $(this).next(".locDiv").find(".lon").val();
-			$('.p_latitude').val(lan);
-		    $('.p_longitude').val(lag); 
-			
-		    getLocation();
-		});
-	}
- 
+	 function moveToLocation(lat, lng){
+		var center = new google.maps.LatLng(lat, lng);
+		gmap.panTo(center);
 
+	}
 
 	</script>
 	<div id="map" style="width: 48%; float:right;" class="b"></div>

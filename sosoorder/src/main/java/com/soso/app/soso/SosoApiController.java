@@ -9,14 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.soso.app.admin.service.AdminVO;
+import com.soso.app.soso.service.SosoListService;
 import com.soso.app.store.service.StoreCouponService;
 
+//by아라
 @Controller
-public class sosoApiController {
+public class SosoApiController {
 
+	@Autowired
+	SosoListService sosoListService;
+	
 	@RequestMapping("sosoList1")
 	   public String callapihttp(HttpServletResponse reponse) {
 	      StringBuffer result = new StringBuffer();
@@ -40,7 +47,9 @@ public class sosoApiController {
 	   }
 	
 	@RequestMapping("gps")
-	   public String gps(HttpServletResponse reponse) {
+	   public String gps(HttpServletResponse reponse, Model model, AdminVO adminVO) {
+	//	model.addAttribute("sosoList",sosoListService.sosoList(adminVO));
+	//	model.addAttribute("sosoCoupon",sosoListService.sosoCoupon(adminVO));
 		return "sosoList/gps";
 	}
 

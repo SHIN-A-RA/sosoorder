@@ -10,25 +10,27 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.XML;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.soso.app.admin.service.AdminVO;
+import com.soso.app.soso.service.SosoListService;
  
 @RestController
 public class ActualDealController {
- 
+	@Autowired
+	SosoListService sosoListService;
 	
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
     @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getActualDealPrice(SosoVO sosoVO) throws Exception {
+    public Map<String, Object> getActualDealPrice(SosoVO sosoVO, AdminVO adminVO) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
         Map<String, Object> resultMap = new HashMap<>();
         String a = sosoVO.getLatitude();
@@ -94,6 +96,15 @@ public class ActualDealController {
             //resultMap.put("pageNo", body.get("pageNo"));
             //resultMap.put("totalCount", body.get("totalCount"));
             resultMap.put("data", itemList);
+            
+            List<AdminVO> sosoList =  sosoListService.sosoList(adminVO);
+            
+            Map<String, Object> sosoMap = new HashMap<>();
+            for (AdminVO list : sosoList) {
+            	sosoMap.put(list.getStoreName(), list);
+            }
+            
+            resultMap.put("sosoList", sosoMap);
  
         } catch (Exception e) {
             e.printStackTrace();
