@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soso.app.member.service.MemberVO;
 import com.soso.app.order.mapper.OrderMapper;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
@@ -61,7 +62,15 @@ public class OrderServiceImpl implements OrderService{
 	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO) {
 		return orderMapper.showPoint(orderCptVO);
 	}
-	
+
+	@Override
+	public void insertMem(MemberVO memberVO, OrderCptVO orderCptVO) {
+		orderMapper.insertMem(memberVO);
+		orderMapper.insertMemProc(orderCptVO);
+		
+	}
+
+
 	
 	
 	

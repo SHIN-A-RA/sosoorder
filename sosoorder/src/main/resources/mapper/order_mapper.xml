@@ -88,7 +88,7 @@
 		 sysdate, 
 		 NVL(#{pointUse},0), 
 		 NVL(#{couponUse},0),
-		 (SELECT seatNum FROM SEAT WHERE SEAT = #{seat}), 
+		 (SELECT seatNum FROM SEAT WHERE SEAT = #{seat} AND storeId = #{storeId}), 
 		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
 		 #{totalPay}, 
 		 '0')
@@ -119,6 +119,28 @@
 		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
 		 '1')
 	</insert>
+	
+	 <insert id="insertMem" parameterType="MemberVO">  
+      INSERT INTO member
+         (memberNum, 
+         phone, 
+         pwd,
+         email)
+      VALUES
+         ((member_seq.nextval),
+         #{phone},
+         #{pwd},
+         #{email})
+  	 </insert>
+  	 
+  	<select id="insertMemProc"  statementType="CALLABLE"  parameterType="OrderCptVO">
+    { CALL after_insertMem_PROC (
+		    #{orderNum, javaType=java.lang.Integer, jdbcType=DECIMAL } ,
+		    #{storeId},    
+		    #{phone}      
+    ) }
+	</select>
+	
 	<select id="showPoint" parameterType="OrderCptVO" resultType="map">
 	SELECT a.storeName "storeName", 
 			sum(p.point*p.pointCheck) "point"
@@ -128,5 +150,7 @@
 		</where>
 		group by a.storeName
 	</select>
+	
+	
 
 </mapper>
