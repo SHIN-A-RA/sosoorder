@@ -30,7 +30,8 @@ public class StoreOrderController {
 	 * @Autowired StoreOrder storeOrderService;
 	 */
 	@RequestMapping("storeOrderList")
-	public String storeOrderList(Model model) {
+	public String storeOrderList(Model model,  HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
 		return "store/storeOrderList";
 	}
 

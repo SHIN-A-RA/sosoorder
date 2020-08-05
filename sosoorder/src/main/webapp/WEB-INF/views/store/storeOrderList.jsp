@@ -11,41 +11,39 @@
 </script>
 
 
-<div style="width: 100%; height: 100%; border: 1px solid #000; ">
-	<div style="width: 70%; float: left; box-sizing: border-box; background: #dddfeb; padding:100px 20px 100px 20px; ">
- 		<div style="width: 45%;  height: 400px; background: #f4f4f4; position:relative; " >
- 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px;">
- 				<p>테이블 번호 or</p>
- 				<p>주소 : 대구광역시~ </p>
- 				<p style="float: right; color:red; ">※현금결제※</p>
+<div style="width: 100%; padding: 100px 0px 0px 0px;">
+	<div style="width: 100%; float: left; box-sizing: border-box; height: 600px;">
+ 		
+
+ 			<div style="width: 30%;  height: 100%; position: relative; background: #ececec; padding: 25px; border: 1px solid;">
+	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 20%;">
+	 				<p>테이블 번호 or</p>
+	 				<p>주소 : 대구광역시~ </p>
+	 				<p style="float: right; color:red; ">※현금결제※</p>
+	 			</div>
+	 			<div style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 60%;">
+	 				<div style="padding: 15px 60px 40px 60px;">
+		 				<div style="float: left; box-sizing: border-box;">
+		 				 	<h5>메뉴</h5>
+		 				</div>
+		 				<div style="float: right; box-sizing: border-box;">
+		 					<h5>수량</h5>
+		 				</div>
+	 				</div>
+		 				<div style="float: left; box-sizing: border-box;">
+		 					<p>떡볶이</p>
+		 				</div>
+		 				<div style="float: right; box-sizing: border-box;">
+		 					<p>2</p>	 					
+		 				</div>
+	 			</div>
+	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
+	 				<button style="padding: 10px;">조리시작</button>
+	 				<button style="padding: 10px;">조리완료</button>
+	 			</div>
  			</div>
- 			<div style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 20px 40px 150px;  position:relative; height: 230px;">
- 				<div style="float: left; box-sizing: border-box;">
- 				 	<h5>메뉴</h5>
- 				</div>
- 				<div style="float: right; box-sizing: border-box;">
- 					<h5>수량</h5>
- 				</div>
- 			</div>
- 			<div style="padding: 20px; position:absolute; height:50px;">
- 				<button>조리시작</button>
- 				<button>조리완료</button>
- 			</div>
- 		</div>
+
   	</div>
-  	<!-- 호출 -->
- 	<div style="width: 30%; float: right; box-sizing: border-box; background: black; height: 600px; padding: 5px">
-    	<div style="color:white; background-color: red; padding:50px; text-align: center;">
-    		<h3>호출내용</h3>
-    	</div>
-    	<div style="color:white; border-bottom: 1px solid #e4e4e4;">
-    	 <p style="padding:10px">좌석번호: 내용</p> 	 
-    	</div>
-    	<div style="color:white; border-bottom: 1px solid #e4e4e4;">
-    	 <p style="padding:10px">좌석번호: 내용</p> 	 
-    	</div>
-    </div>
-
-
-
+  	<span class="prev" id="aro_prev2"><i class="fas fa-arrow-left"></i></span>
+	<span class="next" id="aro_next2"><i class="fas fa-arrow-right"></i></span>
 </div>

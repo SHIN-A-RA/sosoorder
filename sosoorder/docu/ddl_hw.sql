@@ -104,7 +104,7 @@ BEGIN
 	
 	delete from point where point is null;
 	update POINT set MEMBERNUM=1 where MEMBERNUM=0
-	delete from payment where payNum BETWEEN 129 and 133;
+	delete from PAYMENT where payNum BETWEEN 14 and 95;
 	delete from payment where paycheck is null;
 	delete from payment where MEMBERNUM is null;
 	
@@ -147,14 +147,10 @@ INNER JOIN delivery d
 WHERE s.storeId = 'test'
 	AND p.status = '0'
 
-	
-	SELECT s.seat, d.addr
-	FROM 
-	
-		(select p.paycheck from payment where p.paycheck = '2')
+
 	
 		
-SELECT  DISTINCT s.seat,
+SELECT  s.seat,
 		d.addr,
 		m.menuName,
 		o.orderCount,
@@ -169,22 +165,26 @@ INNER JOIN menu m
 INNER JOIN delivery d
 	ON (p.payNum = d.paynum)
 WHERE s.storeId = 'test'
-	AND p.status = '0'
-	
-			
-SELECT  d.addr,
-		m.menuName,
-		o.orderCount
-FROM payment p
-INNER JOIN orderCpt o
-	ON (p.payNum = o.payNum)
-INNER JOIN menu m
-	ON (o.menuNum = m.menuNum)
-INNER JOIN delivery d
-	ON (p.payNum = d.paynum)
-WHERE m.storeId = 'test'
 	AND NOT p.status = '2'
 	
-	SELECT  d.addr
-	FROM payment p
-	AND p.payNum = '3'
+/* 주문현황 뿌리기 */		
+select  ov.storeId,
+		p.paycheck, 
+		p.payNum,
+		o.orderCount, 
+		m.menuName, 
+		s.seat, 
+		d.addr
+from ORDERALL_VIEW ov, 
+	 payment p, 
+	 orderCpt o, 
+	 menu m, 
+	 seat s, 
+	 delivery d
+where ov.paynum = p.paynum 
+	AND p.payNum = o.payNum 
+	AND o.menuNum = m.menuNum 
+	AND p.seatNum = s.seatNum(+) 
+	AND p.payNum = d.paynum(+)
+    AND s.storeId = 'test'
+    AND NOT p.status = '2';
