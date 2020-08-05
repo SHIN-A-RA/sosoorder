@@ -5,7 +5,7 @@
 <mapper namespace="com.soso.app.order.mapper.CallMapper">
 
 <!-- call 추가 -->
-   <insert id="callInsert" parameterType="com.soso.app.order.service.CallVO">  
+   <insert id="callInsert" parameterType="callVO">  
       INSERT INTO call
          (callNum,
 		 seatNum,
@@ -19,5 +19,19 @@
          '1',
          #{storeId})
    </insert>
+   
+   <select id="callGet" parameterType="callVO" resultType="callVO">
+   	select *
+   	from call
+   	where
+   	storeId = #{storeId}
+   	AND callCheck = '1'
+   </select>
+   
+   <update id="callUpdate" parameterType="callVO">
+   	update call
+   	set callCheck = '0'
+   	where callNum = #{callNum}
+   </update>
 
 </mapper>

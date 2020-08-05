@@ -14,5 +14,16 @@
 			id = #{id}
 		</where>
 	</select>
+	
+	<select id="storeInfo" resultType="adminVO">
+		select *
+		from admin
+		<where>
+			<if test="storeId != null">
+			storeId = #{storeId}
+			</if>
+		</where>
+		
+	</select>
 
 </mapper>
