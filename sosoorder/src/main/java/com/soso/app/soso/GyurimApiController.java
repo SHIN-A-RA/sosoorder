@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class SosoApiController2 {
+public class GyurimApiController {
 	
 	@ResponseBody
 	@RequestMapping("getApi8")
