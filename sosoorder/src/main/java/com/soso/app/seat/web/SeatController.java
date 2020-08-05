@@ -66,4 +66,9 @@ public class SeatController {
 		seatService.seatDelete(seatVO);
 		return "redirect:seatInsertForm";
 	}
+	//인트
+	@RequestMapping("intro")
+	public String intro() {
+		return "seat/intro";
+	}
 }
