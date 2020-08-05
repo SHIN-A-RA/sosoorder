@@ -11,5 +11,8 @@ public class StoreOrderVO {
 	String payCheck;
 	String MenuName;
 	String OrderCount;
-	
+	String seat;
+	String status;
+	String storeId;
+	String addr;
 }

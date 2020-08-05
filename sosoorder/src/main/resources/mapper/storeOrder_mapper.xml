@@ -4,14 +4,42 @@
 
 <mapper namespace="com.soso.app.store.mapper.StoreOrderMapper">
 
+	<select id="getOrderList" resultType="StoreOrderVO" parameterType="map">
+		select m.storeId "storeId",
+				p.paycheck "paycheck", 
+				p.payNum "payNum",
+				o.orderCount "orderCount", 
+				m.menuName "menuName", 
+				s.seat "seat", 
+				d.addr "addr"
+		from payment p, 
+			 orderCpt o, 
+			 menu m, 
+			 seat s, 
+			 delivery d
+		 <where>	 		    
+			p.payNum = o.payNum 
+			AND o.menuNum = m.menuNum 
+			AND p.seatNum = s.seatNum(+) 
+			AND p.payNum = d.paynum(+)
+		    AND NOT p.status = '2'
+			<if test="storeId != null">
+		  	AND s.storeId = #{storeId}
+		    </if>  
+		 </where>
+		 order by p.paynum , m.menuName 
+	 </select>
 	 
-<!-- 	 <update id="storeCouponUpdate" parameterType="StoreCouponVO">   
-		UPDATE coupon
-		SET
-		expStart = to_date(#{expStart}, 'YYYYMMDD'),
-		expEnd = to_date(#{expEnd}, 'YYYYMMDD'),
-		discount = #{discount}
-		WHERE
-		serialNum = #{serialNum}
-	 </update> -->
+	  <update id="oderUpdate1" parameterType="StoreOrderVO">   
+			UPDATE PAYMENT 
+			SET STATUS='1' 
+			WHERE PAYNUM = #{payNum}
+	  </update>
+	  
+	  <update id="oderUpdate2" parameterType="StoreOrderVO">   
+			UPDATE PAYMENT 
+			SET STATUS='2' 
+			WHERE PAYNUM = #{payNum}
+	  </update> 
+
 </mapper>
