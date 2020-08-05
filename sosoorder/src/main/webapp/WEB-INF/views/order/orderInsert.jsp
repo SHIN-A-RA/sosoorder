@@ -241,7 +241,7 @@ function removeChar(event) {
 <!-- 할인 및 포인트 -->
 
 <div class="basic" id="getdiscount"> 
-<c:if test="${memberNum == 0 }">
+<c:if test="${phone != null}">
 	<h3 class="basic_h3">할인 및 포인트</h3>
  <table class="basic_tb">
 
