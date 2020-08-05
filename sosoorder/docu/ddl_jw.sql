@@ -212,3 +212,5 @@ INSERT INTO call
  select * from call;
  select * from orderCpt;
  select * from admin;
+ 
+ alter table call drop constraint CALL_FK;

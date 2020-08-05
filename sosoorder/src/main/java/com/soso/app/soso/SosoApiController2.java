@@ -7,21 +7,23 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.soso.app.store.service.StoreCouponService;
 
 @Controller
-public class sosoApiController {
-
-	@RequestMapping("sosoList1")
-	   public String callapihttp(HttpServletResponse reponse) {
+public class SosoApiController2 {
+	
+	@ResponseBody
+	@RequestMapping("getApi8")
+	   public String getApi8(HttpServletResponse response) {
+		
+		response.setContentType("text/xml;charset=UTF-8");
+		
 	      StringBuffer result = new StringBuffer();
 	      try { 
-	         String urlstr = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius?radius=500&cx=35.8704736&cy=128.5896283&ServiceKey=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D";
+	         String urlstr = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInDong?divId=ctprvnCd&key=11&ServiceKey=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D";
 	      URL url = new URL(urlstr);
 	      HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 	      urlconnection.setRequestMethod("GET");
@@ -38,13 +40,5 @@ public class sosoApiController {
 	      }
 	      return result+"</xmp>";
 	   }
-	
-	@RequestMapping("gps")
-	   public String gps(HttpServletResponse reponse) {
-		return "sosoList/gps";
-	}
 
 }
-
-
-

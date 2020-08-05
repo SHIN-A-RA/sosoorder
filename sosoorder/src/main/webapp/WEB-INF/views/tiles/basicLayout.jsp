@@ -118,8 +118,8 @@
 		<div id="gnb_menu_box" class="gnb_mo_menu">
 			<tiles:insertAttribute name="adminMenu"/>
 			<ul class="con">
-				<li>웰리브의원</li>
-				<li>대구 달서구 갈밭로 6 대곡메디컬빌딩 2층</li>
+				<%-- <li>${storeInfo.storeName}</li>
+				<li>${storeInfo.storeAddr}</li> --%>
 			</ul>
 		</div>
 		<!-- top End-->

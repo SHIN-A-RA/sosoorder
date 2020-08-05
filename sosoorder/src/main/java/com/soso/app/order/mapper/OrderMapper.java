@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.test.context.ContextConfiguration;
 
+import com.soso.app.member.service.MemberVO;
 import com.soso.app.order.service.OrderCptVO;
 
 @ContextConfiguration(locations = "classpath:/config/*-context.xml")
@@ -34,4 +35,11 @@ public interface OrderMapper {
 	
 	//적립금리스트
 	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO);
+	
+	//비회원적립금하기
+	public void insertMem(MemberVO memberVO);
+	
+	
+	//비회원적립프로시저
+	public void insertMemProc(OrderCptVO orderCptVO);
 }

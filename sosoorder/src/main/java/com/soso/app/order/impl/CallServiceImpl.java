@@ -1,5 +1,7 @@
 package com.soso.app.order.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,17 @@ public class CallServiceImpl implements CallService{
 	public void callInsert(CallVO callVO) {
 		callMapper.callInsert(callVO);
 	}
+
+	@Override
+	public List<CallVO> callGet(CallVO callVO) {
+		return callMapper.callGet(callVO);
+	}
+
+	@Override
+	public void callUpdate(CallVO callVO) {
+		callMapper.callUpdate(callVO);
+	}
+	
+	
 
 }

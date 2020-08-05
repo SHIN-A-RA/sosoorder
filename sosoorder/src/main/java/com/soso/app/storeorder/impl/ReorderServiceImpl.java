@@ -11,6 +11,7 @@ import com.soso.app.storeorder.mapper.ReorderMapper;
 import com.soso.app.storeorder.service.ReorderService;
 import com.soso.app.storeorder.service.ReorderVO;
 
+//by아라
 @Service
 public class ReorderServiceImpl implements ReorderService{
 

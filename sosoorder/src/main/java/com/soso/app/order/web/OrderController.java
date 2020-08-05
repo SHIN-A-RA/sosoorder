@@ -73,7 +73,6 @@ public class OrderController {
 
 		orderCptVO.setStoreId(storeId);
 
-		
 		if (phone == null) {
 			orderCptVO.setPhone("0");
 //			orderCptVO.setMemberNum(0);
@@ -125,7 +124,7 @@ public class OrderController {
 		return "empty/order/insertPoint";
 	}
 	
-	
+	//회원 적립금 적립
 	@RequestMapping("insertPo")
 	public String insertPo(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String storeId = (String)session.getAttribute("storeId");
@@ -151,8 +150,19 @@ public class OrderController {
 	        
 	      }
 		orderService.insertPo(orderCptVO);
-		
-		
+			
+		return "empty/order/pointList";
+	}
+	
+	//비회원 적립
+	@RequestMapping("insertMem")
+	public String insertMem(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		orderCptVO.setStoreId(storeId);
+
+		orderService.insertMem(memberVO,orderCptVO); 
+
+        model.addAttribute("pList", orderService.showPoint(orderCptVO));		
 		return "empty/order/pointList";
 	}
 	
@@ -164,6 +174,7 @@ public class OrderController {
 		orderCptVO.setPhone(phone);
 		
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
+		
 		return null;		
 	}
 
