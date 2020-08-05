@@ -168,7 +168,7 @@ NowTime += '-' + Now.getDate();
 
 
 /*=====================================
-달력 출력에 출근한 날 표시 
+달력 출력에 출근한 날 표시
 =======================================*/
 $(function(){
     var calendarEl = document.getElementById('calendar');

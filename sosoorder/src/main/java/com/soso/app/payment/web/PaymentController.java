@@ -86,10 +86,11 @@ public class PaymentController {
 		return paymentService.getDayTotal();
 	}
 	
+	
 	//월별 판매량 조회
 	@RequestMapping("getMonthTotal")
-	public @ResponseBody List<Map<String, Object>> getMonthTotal(){
-		return paymentService.getMonthTotal();
+	public @ResponseBody List<Map<String, Object>> getMonthTotal(PaymentVO vo){
+		return paymentService.getMonthTotal(vo);
 	}
 	
 	
@@ -99,10 +100,6 @@ public class PaymentController {
 	@RequestMapping("salesData")
 	public @ResponseBody List<Map> salesData(PaymentVO vo){
 		
-	System.out.println("컨트롤러 salesData 넘어가는지 체크 "
-			+ vo.getYearSales()+vo.getDaySales()+vo.getMonthSales()
-	);	
-	
 		return paymentService.salesData(vo);
 	}
 	

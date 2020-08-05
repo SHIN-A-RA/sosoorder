@@ -5,9 +5,6 @@ Docs & License: https://fullcalendar.io/
 */
 
 
-var yearSales ='';
-var monthSales ='';
-var daySales ='';
 
 
 
@@ -7681,62 +7678,7 @@ var FullCalendar = (function (exports) {
                     isOnlyButtons = false;
                     children.push(createElement("h2", { className: 'fc-toolbar-title' }, props.title));
 
-/*============================================================================
 
-START OF CHART
-
-============================================================================*/
-if (props.title.length == 11){
-yearSales = props.title.substring(0,4);
-daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");	
-}else{
-	yearSales = props.title.substring(0,4);
-	monthSales = props.title.substring(0,addr.indexOf("월", 0));
-}
-/*
-
-yearSales = props.title.substring(0,4);
-monthSales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");
-daySales = props.title.replace("년", "/").replace("월","/").replace("일","").replace(" ","");*/
-
-console.log(props.title.length)
-google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-      var chartdata =[];
-      function drawChart() {
-			function autoChart(){
-			        $.ajax({
-		        	url : "salesData",
-		        	async : false,
-					data : {'yearSales':yearSales,'monthSales':monthSales,'daySales':daySales},
-		        	success : function(result) {
-		        		for(i=0; i<result.length; i++) {
-		        			chartdata.push([' ',result[i].yearSales, result[i].monthSales,result[i].daySales]);
-		        		}
-		        	}
-		        })
-		   }
-		var data = google.visualization.arrayToDataTable([
-          ['총 매출량', '년 매출', '월 매출', '일 매출' ],chartdata
-			/*[' ', 1000, 400, 200]*/
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-/*============================================================================
-
-END OF CHART
-
-============================================================================*/
                 }
                 else {
                     var ariaAttrs = buttonIcon ? { 'aria-label': buttonName } : {};

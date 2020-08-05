@@ -27,8 +27,8 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getMonthTotal() {
-		return paymentMapper.getMonthTotal();
+	public List<Map<String, Object>> getMonthTotal(PaymentVO paymentVO) {
+		return paymentMapper.getMonthTotal(paymentVO);
 	}
 
 	@Override

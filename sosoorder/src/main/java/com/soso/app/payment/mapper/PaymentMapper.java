@@ -9,7 +9,7 @@ public interface PaymentMapper {
 
 	public List<PaymentVO> getPayment(PaymentVO paymentVO);
 	public List<Map<String, Object>> getDayTotal();
-	public List<Map<String, Object>> getMonthTotal();
+	public List<Map<String, Object>> getMonthTotal(PaymentVO paymentVO);
 	
 	
 	/* 매출과 관련된 메소드 */

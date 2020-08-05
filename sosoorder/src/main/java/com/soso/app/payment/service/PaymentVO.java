@@ -17,8 +17,8 @@ public class PaymentVO {
 	String monthSales;
 	String daySales;
 	
-	
-	
+	String month;
+	String monthTotal;
 	/*메뉴 매출관리와 순위에 대한 추가 VO*/
 	String menuName;
 	String menuPrice;

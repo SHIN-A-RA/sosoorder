@@ -80,7 +80,30 @@
 				<!--  -->
 				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" onclick="location.href='memberLoginForm'">
 	              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                <span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
+	               
+					<c:if test="${empty sessionScope.phone }">
+					<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
+					</c:if>	                
+
+	                <c:if test="${not empty sessionScope.phone }">
+	                <script>
+					$(function(){
+	                var sar = ${sessionScope.phone};
+	                var members = sar.toString().slice(-4);
+	                console.log(members);
+	                $('.mr-phone').html(members+"님");
+					});
+	                </script>
+	                <span class="mr-2 d-none d-lg-inline mr-phone" style="font-size: 21px;"></span>
+	                </c:if>
+	                
+	                 <c:if test="${not empty sessionScope.storeId }">
+	                <span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">${sessionScope.storeId}사장님</span>
+	                </c:if>
+	                
+	                
+	               
+	               
 	                <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
 	              </a>
               </div>

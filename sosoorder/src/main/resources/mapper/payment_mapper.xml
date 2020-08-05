@@ -17,24 +17,40 @@
 	 		sum(totalpay) FROM payment 
 	 group by (TO_Char(payday, 'mm/DD'))
    </select>
+  
+  
    
 <!-- payment 월별 매출량 -->
-   <select id="getMonthTotal" parameterType="PaymentVO" resultType="PaymentVO">
-SELECT TO_Char(payday, 'mm') ,
- 			sum(totalpay) FROM payment
- group by TO_Char(payday, 'mm') 
- order by to_char(payday,'mm') ASC
+   <select id="getMonthTotal" resultType="map">
+SELECT to_char(payday, 'fmmm') AS month,
+ 	   sum(totalpay) AS monthTotal
+ FROM payment 
+ GROUP BY to_char(payday, 'fmmm') 
+ ORDER BY to_char(payday,'fmmm') ASC
    </select>   
+   
+   
+   
+   
    
    
    <!-- 월 평균과 년수입 비교 자료 -->
  	<select id ="salesData" resultType ="map">
-  	 SELECT 
-     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
-	 	  (select sum(totalpay) FROM payment where to_char(payday,'yyyy/mm/')= #{monthSales}) "monthSales",
-	      (select TRUNC(sum(totalpay),0) from payment where to_char(payday,'yyyy/mm/dd') = #{daySales}) "daySales"
-     FROM payment
-     WHERE rownum =1; 
+  	 <if test="daySales == ''">
+		 SELECT   
+		     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
+			 	  NVL((select sum(totalpay) FROM payment where to_char(payday,'yyyy/fmmm')= #{monthSales}),0) "monthSales"
+		     FROM payment
+		     WHERE rownum =1
+     </if>
+     <if test="daySales != ''">
+	  	 SELECT 
+	     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
+		 	  NVL((select sum(totalpay) FROM payment where to_char(payday,'yyyy/fmmm')= #{monthSales}),0) "monthSales",
+		      NVL((select TRUNC(sum(totalpay),0) from payment where to_char(payday,'yyyy/fmmm/dd') = #{daySales}),0) "daySales"
+	     FROM payment
+	     WHERE rownum =1
+ 	</if>
  	</select>
  	
  	

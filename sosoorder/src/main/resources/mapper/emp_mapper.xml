@@ -15,9 +15,7 @@
 	salary,
 	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
-	empClass,
-	storeId
+	empClass
 	FROM employees
 	WHERE storeId = #{storeId}
    </select>
@@ -34,9 +32,7 @@
 	salary,
 	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
-	empClass,
-	storeId
+	empClass
 	FROM employees
 	WHERE empNum = #{empNum}
    </select>
@@ -51,7 +47,6 @@
 	salary,
 	endDate,
 	empPhone,
-	salaryDay,
 	empClass,
 	storeId)
 	VALUES
@@ -63,7 +58,6 @@
 	#{salary},
 	(SELECT sysdate + (INTERVAL '10' YEAR)  FROM dual),
 	#{empPhone},
-	#{salaryDay},
 	#{empClass},
 	#{storeId})
    </insert>
@@ -79,7 +73,6 @@
 	salary,
 	to_char(endDate,'YY-MM-DD') AS endDate,
 	empPhone,
-	to_char(salaryDay,'YY-MM-DD') AS salaryDay,
 	empClass,
 	storeId
 	FROM employees
@@ -97,7 +90,6 @@
 			empName=#{empName},
 			salary=#{salary},
 			empPhone=#{empPhone},
-			salaryDay=#{salaryDay},
 			empClass=#{empClass}
 	WHERE empNum = #{empNum}
 	</update>

@@ -22,6 +22,7 @@ function memberValidCheck() {
 		return;
 	}
 
+	alert((window.document.frm.phone.value).slice(-4)+"님 로그인 되었습니다");
 	frm.submit();
 
 }
