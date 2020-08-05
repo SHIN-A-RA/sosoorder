@@ -214,3 +214,5 @@ INSERT INTO call
  select * from admin;
  
  alter table call drop constraint CALL_FK;
+ 
+ select distinct paynum from orderCpt where orderNum=155

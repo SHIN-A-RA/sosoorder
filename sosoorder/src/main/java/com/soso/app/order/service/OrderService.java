@@ -37,5 +37,8 @@ public interface OrderService {
 
 	//비회원적립금하기
 	public void insertMem(MemberVO memberVO, OrderCptVO orderCptVO);
+	
+	//영수증 출력시 정보가져오기 
+	public OrderCptVO receiptGet(OrderCptVO orderCptVO);
 
 }

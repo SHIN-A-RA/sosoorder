@@ -31,10 +31,14 @@ protected void renderMergedOutputModel(
 		throws Exception {
 		Connection conn = datasource.getConnection();
 		String reportFile = (String)model.get("filename");
+		String downName = "receipt"+System.currentTimeMillis() + ".pdf";
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment; filename=\""	+ downName + "\"");
 		InputStream jasperStream = getClass().getResourceAsStream(reportFile);
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, (Map)model.get("map"), conn);
 		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+
 	}
 }
 
