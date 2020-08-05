@@ -1,4 +1,4 @@
-package com.soso.app.soso;
+package com.soso.app.soso.web;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +21,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soso.app.admin.service.AdminVO;
 import com.soso.app.soso.service.SosoListService;
+import com.soso.app.storeorder.service.ReorderVO;
  
 @RestController
 public class ActualDealController {
 	@Autowired
 	SosoListService sosoListService;
-	
+
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
     @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
@@ -114,5 +116,12 @@ public class ActualDealController {
  
         return resultMap;
     }
+	
+	@RequestMapping("sosoCoupon")
+	public String sosoCoupon(Model model, AdminVO adminVO) {
+		model.addAttribute("sosoCoupon",sosoListService.sosoCoupon(adminVO));
+		return "sosoList/gps";
+		//일반 방식
+	}
 }
  

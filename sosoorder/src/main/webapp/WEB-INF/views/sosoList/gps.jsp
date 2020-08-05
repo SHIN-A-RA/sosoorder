@@ -8,11 +8,11 @@
         height: 400px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        		}
-
  	</style>
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
   
 	<div class ="all" style="width:100%; overflow:hidden;"> 
 	<div class="test" style="float:left; width:48%;"></div>
@@ -23,16 +23,16 @@
     <script>
     var gmap;
     //AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
+    
     /*-----------------------------
     	현재위치찾기
     -------------------------------*/
     function getLocation() {
-    	  if (navigator.geolocation) { // GPS를 지원하면
+    	 if (navigator.geolocation) { // GPS를 지원하면
     	    navigator.geolocation.getCurrentPosition(function(position) {
     	      //alert(position.coords.latitude + ' ' + position.coords.longitude);
     	     $('.p_latitude').val(position.coords.latitude);
     	       $('.p_longitude').val(position.coords.longitude); 
-
     	       locationP();
     	    }, function(error) {
     	      console.error(error);
@@ -41,18 +41,18 @@
     	      maximumAge: 0,
     	      timeout: Infinity
     	    });
-    	  } else {
+    	 } else {
     	    alert('GPS를 지원하지 않습니다');
-    	  }
-    	}
+    	 }
+    }
     
     /*-----------------------------
 	 반경 1km 주변 상점 불러오기 ajax 호출
 	-------------------------------*/
     function locationP(){
-	var latitude = $('.p_latitude').val();
-	var longitude = $('.p_longitude').val();
-	//var m_marker = item.latitude + item.longitude;
+		var latitude = $('.p_latitude').val();
+		var longitude = $('.p_longitude').val();
+		//var m_marker = item.latitude + item.longitude;
 			$.ajax({ 
 			    url: "sosoOrder", 
 			    type: 'GET', 
@@ -71,7 +71,7 @@
 	 반경 1km 주변 상점 불러오기 ajax 콜백
 	-------------------------------*/
 	function locationResult(data){
-		 	$.each(data.data,function(idx,item){
+		 $.each(data.data,function(idx,item){
 		 	$(".test")
 			.append($("<h3>").html(item.bizesNm))
 		 	.append($("<div>").addClass('locDiv')
@@ -79,14 +79,15 @@
 							  .append($('<p>').text(item.indsSclsNm))
 							  .append($("<input type='hidden'>").addClass("lat").val(item.lat))
 							  .append($("<input type='hidden'>").addClass("lon").val(item.lon))
-							  .append($("<div>").addClass('couponBtn').addClass(item.bizesNm).attr('name', item.bizesNm).css('display', 'none').html('버튼'))
+							  .append($("<button>").addClass('btn btn-primary couponBtn').addClass(item.bizesNm).html('버튼').css('display', 'none').attr("type","button"))
 		 		) 
 		});//each
 		
 		 $.each(data.sosoList,function(idx,item){
 			 $("."+item.storeName).css('display', 'block')
-		}); //each
+		}); 
 		
+
 	 	 $( ".test" ).accordion({
 	 		  activate: function( event, ui ) {
 	 			var lat = ui.newPanel.find(".lat").val();
@@ -101,14 +102,44 @@
 		 var zoom = 18; //지도 확대,축소 , 숫자가 낮을수록 축소 1~21 , 기본 9설정
 		 var map_id = "map";
 		googleMap(map_view,data,zoom,map_id);	
+    }
+    
+    
+    /*-----------------------------
+	선택한 상점의 쿠폰 값 조회 요청
+	-------------------------------*/
+   $(function(){
+       $('.test').on('click','.couponBtn', function(){
+         $.ajax({
+              url:'sosoCoupon?storeName=' + storeName,
+              type:'GET',
+              contentType:'application/json;charset=utf-8',
+		      dataType:'json',
+		      error:function(xhr,status,msg){
+				alert("상태값 :" + status + " Http에러메시지 :"+msg);
+			},
+			success:sosoResult
+	     });
+     });
+   });
 
+   /*-----------------------------
+	선택한 상점의 쿠폰 값 조회 콜백
+	-------------------------------*/
+    function sosoResult(data) {
+		$("tbody#sosocoupon").empty();
+		$.each(data,function(idx,item){
+			$('<tr>')
+			.append($('<td>').html(item.storeName))
+			.append($('<td>').html(item.serialNum))
+			.appendTo('tbody');
+		});//each
+	}//sosoResult 
 		
-	}	
-		
+
     /*-----------------------------
 	 	지도 그리기 
-	-------------------------------*/
-	
+	-------------------------------*/	
 	function googleMap(map1,map2,map3,id){
 	 var tmp_map1 = map1.split(",");
 	 var tmp_map2 = map2.data;
@@ -137,7 +168,6 @@
 			  //icon:"./resources/admin/img/icon.png",
 			  mapTypeId:google.maps.MapTypeId.ROADMAP} //맵타입
 	 );
-
 	 var marker, i;
 	
  	 for (i = 0; i < latlng.length; i++) { //미커를 여러개 찍을때 사용
@@ -147,24 +177,24 @@
 	   map:gmap, 
 	   title:latlng[i][2]
 	  });
-
  	 }  
-
     }  
     
+    /*-----------------------------
+ 		상점 선택시 중심값 이동
+	-------------------------------*/	
 	$(document).ready(function(){
 	 
  	 getLocation();
-
 	});
 	
 	 function moveToLocation(lat, lng){
 		var center = new google.maps.LatLng(lat, lng);
 		gmap.panTo(center);
-
 	}
-
 	</script>
 	<div id="map" style="width: 48%; float:right;" class="b"></div>
-	
+	<table>
+	<tbody id="sosocoupon"></tbody>
+	</table>
 	 </div>

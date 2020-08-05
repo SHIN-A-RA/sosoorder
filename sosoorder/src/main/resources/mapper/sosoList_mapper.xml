@@ -9,12 +9,15 @@
 	<select id="sosoList" parameterType="adminVO" resultType="adminVO">
 		SELECT distinct 
 		a.storeId "storeId",
-		a.storeName "storeName"
+		a.storeName "storeName",
+		c.serialNum "serialNum"
 		FROM admin a, coupon c
 		<where>
    		 a.storeId = c.storeId
+   		 
 		</where>
  	</select>
+ 	
 	<select id="sosoCoupon" parameterType="adminVO" resultType="StoreCouponVO">
 		 select * from coupon where storeId = 
 		 (select storeId from admin where storeName = #{storeName})

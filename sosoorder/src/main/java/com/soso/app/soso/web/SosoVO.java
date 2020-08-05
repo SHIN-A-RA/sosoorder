@@ -1,4 +1,4 @@
-package com.soso.app.soso;
+package com.soso.app.soso.web;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
