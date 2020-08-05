@@ -10,10 +10,10 @@
 	empNum,
 	empName,
 	workPart,
-	to_char(hireDate,'YY-MM-DD') AS hireDate,
-	to_char(empBirth,'YY-MM-DD') AS empBirth,
+	to_char(hireDate,'YYYY-MM-DD') AS hireDate,
+	to_char(hireDate,'YYYY-MM-DD') AS empBirth,
 	salary,
-	to_char(endDate,'YY-MM-DD') AS endDate,
+	to_char(endDate,'YYYY-MM-DD') AS endDate,
 	empPhone,
 	empClass
 	FROM employees
@@ -27,10 +27,10 @@
 	empNum,
 	empName,
 	workPart,
-	to_char(hireDate,'YY-MM-DD') AS hireDate,
-	to_char(empBirth,'YY-MM-DD') AS empBirth,
+	to_char(hireDate,'YYYY-MM-DD') AS hireDate,
+	to_char(empBirth,'YYYY-MM-DD') AS empBirth,
 	salary,
-	to_char(endDate,'YY-MM-DD') AS endDate,
+	to_char(endDate,'YYYY-MM-DD') AS endDate,
 	empPhone,
 	empClass
 	FROM employees
@@ -53,11 +53,11 @@
 	((employees_seq.nextval),
 	#{empName},
 	#{workPart},
-	#{empBirth},
-	sysdate,
+	to_date(#{empBirth}, 'YYYY-MM-DD'),
+	to_date(#{hireDate}, 'YYYY-MM-DD'),
 	#{salary},
-	(SELECT sysdate + (INTERVAL '10' YEAR)  FROM dual),
-	#{empPhone},
+	to_date(#{endDate}, 'YYYY-MM-DD'),
+	replace(#{empPhone}, '-', ''),
 	#{empClass},
 	#{storeId})
    </insert>
@@ -68,10 +68,10 @@
 	SELECT empNum,
 	empName,
 	workPart,
-	to_char(empBirth,'YY-MM-DD') AS empBirth,
-	to_char(hireDate,'YY-MM-DD') AS hireDate,
+	to_char(empBirth,'YYYY-MM-DD') AS empBirth,
+	to_char(hireDate,'YYYY-MM-DD') AS hireDate,
 	salary,
-	to_char(endDate,'YY-MM-DD') AS endDate,
+	to_char(endDate,'YYYY-MM-DD') AS endDate,
 	empPhone,
 	empClass,
 	storeId
@@ -87,9 +87,12 @@
 	<update id="setUpdateEmp" parameterType="EmpVo">
 	UPDATE employees SET
 			workPart=#{workPart},
+			empBirth=to_date(#{empBirth}, 'YYYY-MM-DD'),
 			empName=#{empName},
+			hireDate=to_date(#{hireDate}, 'YYYY-MM-DD'),
+			endDate=to_date(#{endDate}, 'YYYY-MM-DD'),
 			salary=#{salary},
-			empPhone=#{empPhone},
+			empPhone=replace(#{empPhone}, '-', ''),
 			empClass=#{empClass}
 	WHERE empNum = #{empNum}
 	</update>
