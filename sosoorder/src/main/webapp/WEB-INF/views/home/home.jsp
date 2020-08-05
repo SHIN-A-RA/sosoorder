@@ -169,7 +169,7 @@ myApp.controller("myAppCtrl", function($scope){
 	                   <h5 class="price-text-color">${menu.menuPrice}</h5>
 	               </div>
 	               <div class="rating hidden-sm col-md-6">
-	               		<c:if test="${menu.orderStarAll == null}">
+	               		<c:if test="${menu.orderStarAll != null}">
 		               		<c:forEach begin="1" end="${menu.orderStarAll}" >
 			                   <i class="price-text-color fa fa-star"></i>
 		               		</c:forEach>

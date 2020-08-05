@@ -16,4 +16,17 @@ public class PaymentVO {
 	String yearSales;
 	String monthSales;
 	String daySales;
+	
+	
+	
+	/*메뉴 매출관리와 순위에 대한 추가 VO*/
+	String menuName;
+	String menuPrice;
+	String allAcount;
+
+	String salesValues;
+	String salesRank;
+	String storeId;
+	
+	
 }

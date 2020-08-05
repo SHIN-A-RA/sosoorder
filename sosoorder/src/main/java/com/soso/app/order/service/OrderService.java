@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.soso.app.member.service.MemberVO;
+
 
 public interface OrderService {
 
@@ -32,5 +34,8 @@ public interface OrderService {
 	
 	//적립금리스트
 	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO);
+
+	//비회원적립금하기
+	public void insertMem(MemberVO memberVO, OrderCptVO orderCptVO);
 
 }

@@ -18,9 +18,9 @@
 	   document.getElementById('checkPwd').style.color = "green";
 	   document.getElementById('checkPwd').innerHTML = "비밀번호 일치";
 	   
-	  }
-	  
+	  }	  
 	 }	
+ 
 </script>	 
 <script>
 /* 휴대폰 번호 중복체크 */

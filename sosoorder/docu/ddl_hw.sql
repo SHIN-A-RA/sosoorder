@@ -14,7 +14,7 @@ insert into ORDERCPT values(2, null, 2, 3, 1, null)
 SELECT m.menuName, o.orderCount, m.menuPrice*o.orderCount AS price
 FROM menu m JOIN orderCpt o ON (m.menuNum = o.menuNum)
 WHERE m.storeId = 'test' 
-	AND o.orderNum= 1;
+	AND o.orderNum= 46;
 	
 alter table point add(pointCheck varchar2(2)); 
 
@@ -134,8 +134,7 @@ where storeId = (select storeId from seat where seatNum = '1')
 SELECT s.seat,
 		d.addr,
 		m.menuName,
-		o.orderCount,
-		(select p.paycheck from payment where p.paycheck = '2')
+		o.orderCount
 FROM payment p
 INNER JOIN orderCpt o
 	ON (p.payNum = o.payNum)
@@ -171,3 +170,21 @@ INNER JOIN delivery d
 	ON (p.payNum = d.paynum)
 WHERE s.storeId = 'test'
 	AND p.status = '0'
+	
+			
+SELECT  d.addr,
+		m.menuName,
+		o.orderCount
+FROM payment p
+INNER JOIN orderCpt o
+	ON (p.payNum = o.payNum)
+INNER JOIN menu m
+	ON (o.menuNum = m.menuNum)
+INNER JOIN delivery d
+	ON (p.payNum = d.paynum)
+WHERE m.storeId = 'test'
+	AND NOT p.status = '2'
+	
+	SELECT  d.addr
+	FROM payment p
+	AND p.payNum = '3'

@@ -134,20 +134,5 @@ public class HomeController {
 		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 	}
 	
-	@RequestMapping("callInsertForm")
-	public String callInsertForm(Model model, SeatVO seatVO, HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
-		seatVO.setStoreId(storeId);
-		model.addAttribute("seatListCall", homeService.seatListHome(seatVO));
-		
-		String seat = (String)session.getAttribute("seat");
-		seatVO.setSeat(seat);
-		model.addAttribute("seatCheck", seatVO);
-		return "empty/home/callInsert";
-	}
-	
-	
-
-
 
 }

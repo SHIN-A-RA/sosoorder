@@ -132,21 +132,17 @@ select * from menu
 where
  storeId = 'test' 
 
-
+ 
 SELECT
 round(AVG(o.orderStar),0) "orderStar",
+m.menuName "menuName",
 m.menuNum "menuNum",
-m.menuPrice "menuPrice",
-m.menuImage "menuImage",
-m.menuCategory "menuCategory",
-m.menuContents "menuContents",
-m.menuCheck "menuCheck",
 m.storeId "storeId"
 FROM MENU m, OrderCpt o
 where
 m.menuNum = o.menuNum(+)
 AND m.storeId = 'test' 
-group by m.menuNum ,
+group by m.menuNum ,m.menuName,
 m.menuPrice, m.menuImage, m.menuCategory, m.menuContents, m.menuCheck, m.storeId;
 
 
@@ -191,6 +187,30 @@ SELECT  e.empName,
      from work
      
      select * from work
-   
      
-			
+select * from call
+alter table call add (callcheck varchar2(2));
+alter table call add (storeId varchar2(30));
+ALTER TABLE call ADD FOREIGN KEY (storeId) REFERENCES admin (storeId);
+
+CREATE SEQUENCE seq_call;
+
+INSERT INTO call
+         (callNum,
+		 seatNum,
+		 callContents,
+		 callCheck,
+		 storeId)
+      VALUES
+         (seq_call.nextval,
+        '1',
+         '12',
+         '1',
+         'test')
+         
+ select * from seat;
+ select * from call;
+ select * from orderCpt;
+ select * from admin;
+ 
+ alter table call drop constraint CALL_FK;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,7 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class EchoHandler extends TextWebSocketHandler{
     //세션 리스트
-    private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+    public static List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 
     private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
@@ -28,11 +27,20 @@ public class EchoHandler extends TextWebSocketHandler{
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
+        System.out.println(message.getPayload());
         //모든 유저에게 메세지 출력
         for(WebSocketSession sess : sessionList){
             sess.sendMessage(new TextMessage(message.getPayload()));
         }
     }
+    
+    public static void putMessage() throws Exception {
+        //모든 유저에게 메세지 출력
+        for(WebSocketSession sess : sessionList){
+            sess.sendMessage(new TextMessage("yes"));
+        }
+    }
+    
 
     //클라이언트 연결을 끊었을 때 실행
     @Override

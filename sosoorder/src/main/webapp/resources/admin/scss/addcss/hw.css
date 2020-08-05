@@ -229,6 +229,10 @@ text-align: center;
 height: 80px;
 }
 
+.btn_b{
+	background: #ff541e;
+}
+
 .frm_point{
 padding: 100px 100px 0px 100px;
 margin: auto;
