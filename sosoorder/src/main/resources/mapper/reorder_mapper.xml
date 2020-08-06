@@ -72,6 +72,7 @@
  <select id="getmailList" parameterType="reorderVO" resultType="reorderVO">   
       SELECT * 
       FROM reorder
+      where storeId = #{storeId}
       ORDER BY reorderNum
 
    </select>
