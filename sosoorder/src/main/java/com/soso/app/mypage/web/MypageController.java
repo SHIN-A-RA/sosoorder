@@ -30,7 +30,6 @@ public class MypageController {
 	MypageService mypageService;
 
 	// by아라
-
 	// 마이페이지 적립금목록조회
 
 	@RequestMapping("myPointsList")

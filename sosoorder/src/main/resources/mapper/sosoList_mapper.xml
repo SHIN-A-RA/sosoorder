@@ -19,8 +19,17 @@
  	</select>
  	
 	<select id="sosoCoupon" parameterType="adminVO" resultType="StoreCouponVO">
-		 select * from coupon where storeId = 
-		 (select storeId from admin where storeName = #{storeName})
-		 
- 	</select>		
+		 select 
+		 to_char(expStart,'yyyy/mm/dd') "expStart", 
+		 to_char(expEnd,'yyyy/mm/dd') "expEnd", 
+		 serialNum, storeId, discount
+		 from coupon where storeId = #{storeId}
+ 	</select>
+ 			
+ 	 <insert id="couponInsert" parameterType="hashmap">  
+      INSERT INTO userCoupon (usercouponNum,serialNum,useCheck,memberNum)
+	  values (seq_usercouponNum.nextval, #{serialNum}, '0' ,(select memberNum from member where phone = #{phone}))
+   </insert>
 </mapper>
+
+

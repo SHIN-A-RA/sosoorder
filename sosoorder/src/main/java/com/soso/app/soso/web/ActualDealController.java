@@ -117,11 +117,7 @@ public class ActualDealController {
         return resultMap;
     }
 	
-	@RequestMapping("sosoCoupon")
-	public String sosoCoupon(Model model, AdminVO adminVO) {
-		model.addAttribute("sosoCoupon",sosoListService.sosoCoupon(adminVO));
-		return "sosoList/gps";
-		//일반 방식
+	
 	}
-}
+
  

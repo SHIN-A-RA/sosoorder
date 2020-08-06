@@ -15,7 +15,10 @@
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
   
 	<div class ="all" style="width:100%; overflow:hidden;"> 
-	<div class="test" style="float:left; width:48%;"></div>
+	<form action="couponInsert" method="post"> 
+	<div class="test" style="float:left; width:48%;">
+	</div>
+	</form>
 	<div class="aa" style="float:left; width:48%;"></div>
     <input type="hidden" class="p_latitude" name="latitude" value="">
     <input type="hidden" class="p_longitude" name="longitude" value="">
@@ -27,6 +30,7 @@
     /*-----------------------------
     	현재위치찾기
     -------------------------------*/
+    
     function getLocation() {
     	 if (navigator.geolocation) { // GPS를 지원하면
     	    navigator.geolocation.getCurrentPosition(function(position) {
@@ -79,15 +83,14 @@
 							  .append($('<p>').text(item.indsSclsNm))
 							  .append($("<input type='hidden'>").addClass("lat").val(item.lat))
 							  .append($("<input type='hidden'>").addClass("lon").val(item.lon))
-							  .append($("<button>").addClass('btn btn-primary couponBtn').addClass(item.bizesNm).html('버튼').css('display', 'none').attr("type","button"))
+							  .append($("<button>").addClass('btn btn-primary couponBtn').addClass(item.bizesNm).html('쿠폰보기').css('display', 'none').attr("type","button"))
 		 		) 
 		});//each
 		
 		 $.each(data.sosoList,function(idx,item){
-			 $("."+item.storeName).css('display', 'block')
+			 $("."+item.storeName).attr('name', item.storeId).css('display', 'block')
 		}); 
 		
-
 	 	 $( ".test" ).accordion({
 	 		  activate: function( event, ui ) {
 	 			var lat = ui.newPanel.find(".lat").val();
@@ -109,10 +112,14 @@
 	선택한 상점의 쿠폰 값 조회 요청
 	-------------------------------*/
    $(function(){
+	   couponInsert();
+	   
        $('.test').on('click','.couponBtn', function(){
+    	   var storeId = $(this).attr('name');
          $.ajax({
-              url:'sosoCoupon?storeName=' + storeName,
+              url:'gps2',
               type:'GET',
+              data: {storeId : storeId},
               contentType:'application/json;charset=utf-8',
 		      dataType:'json',
 		      error:function(xhr,status,msg){
@@ -130,11 +137,57 @@
 		$("tbody#sosocoupon").empty();
 		$.each(data,function(idx,item){
 			$('<tr>')
-			.append($('<td>').html(item.storeName))
+			//.append($('<td>').html(item.storeId))
 			.append($('<td>').html(item.serialNum))
+			.append($('<td>').html(item.expStart))
+			.append($('<td>').html(item.expEnd))
+			.append($('<td>').html(item.discount))
+			.append($('<td>').html("<div id ='btnInsert' name='" + item.serialNum + "'>쿠폰저장</div>"))
+			/*mapper 수정*/
+			/*click이벤트로 로그인시 serialNum, session phone값 받아서 */
+			/*session에 값이 없을 시에 알럿창*/
 			.appendTo('tbody');
 		});//each
-	}//sosoResult 
+		couponInsert();
+	}//sosoResult
+	
+	function couponInsert(){
+		//등록 버튼 클릭
+		$('#btnInsert').on('click',function(){
+ 			var serialNum = $(this).attr('name');
+			$.ajax({ 
+			    url: "couponInsert",  
+			    type: 'POST', 
+			    dataType: 'json', 
+			    contentType: 'application/json',
+			    data:JSON.stringify({serialNum:serialNum}),
+			    success: function(response) {
+			    }, 
+			    error:function(xhr, status, message) { 
+			        alert(" status: "+status+" er:"+message);
+			    } 
+			 });  
+		});//등록 버튼 클릭
+	}//userInsert
+	
+	
+	
+	$(function(){
+	       $('.test').on('click','.couponBtn', function(){
+	    	   var storeId = $(this).attr('name');
+	         $.ajax({
+	              url:'gps2',
+	              type:'GET',
+	              data: {storeId : storeId},
+	              contentType:'application/json;charset=utf-8',
+			      dataType:'json',
+			      error:function(xhr,status,msg){
+					alert("상태값 :" + status + " Http에러메시지 :"+msg);
+				},
+				success:sosoResult
+		     });
+	     });
+	   });
 		
 
     /*-----------------------------
@@ -146,7 +199,6 @@
 	 var mymap=document.getElementById(id);
 	 var gcenter = [[tmp_map1[0],tmp_map1[1],4]]; //지도의 중앙
 	 var latlng = new Array(); //마커를 위해 위치 객체 생성(배열가능)
- 
 	 for(var i=0;i < tmp_map2.length;i++){
 		  latlng[i] = [tmp_map2[i].lat,tmp_map2[i].lon,tmp_map2[i].rdnmAdr];		  
 	 }
@@ -197,4 +249,5 @@
 	<table>
 	<tbody id="sosocoupon"></tbody>
 	</table>
+
 	 </div>

@@ -11,4 +11,5 @@ public class StoreCouponVO {
 	String expEnd;
 	String discount;
 	String storeId;
+	String phone;
 }

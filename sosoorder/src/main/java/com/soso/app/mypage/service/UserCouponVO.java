@@ -9,5 +9,6 @@ public class UserCouponVO {
 	String serialNum;
 	String memberNum;
 	String useCheck;
+	String usercouponNum;
 	
 }

@@ -1,5 +1,6 @@
 package com.soso.app.soso.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.soso.app.admin.service.AdminVO;
@@ -10,4 +11,5 @@ public interface SosoListMapper {
 
 	public List<AdminVO> sosoList(AdminVO adminVO);
 	public List<StoreCouponVO> sosoCoupon(AdminVO adminVO);
+	public void couponInsert(HashMap<String, Object> map);
 }
