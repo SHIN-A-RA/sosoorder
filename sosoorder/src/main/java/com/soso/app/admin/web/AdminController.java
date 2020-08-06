@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +34,6 @@ public class AdminController {
 	public String memberLogin(AdminVO vo, Model model, HttpSession session) {
 		String path = null;
 		AdminVO dbVO = adminService.getAdmin(vo);
-		System.out.println(vo.getStoreId());
 
 		// && !vo.getPhone().equals(dbVO.getPhone())
 
@@ -91,10 +89,10 @@ public class AdminController {
 	}
 
 	
-	/*
-	 * ================================================== StoreSales(매출분석)
-	 * ===================================================
-	 */
+	/* ================================================== 
+	 * StoreSales(매출분석)
+	 =================================================== */
+	 
 	@RequestMapping("storeSales")
 	public String storeSales(Model model) {
 		return "admin/storeSales";

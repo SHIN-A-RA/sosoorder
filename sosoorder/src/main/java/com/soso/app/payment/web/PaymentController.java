@@ -58,8 +58,6 @@ public class PaymentController {
 	public List<Map> menuSales(PaymentVO vo,HttpSession session,MenuVO menuvo,Model model){
 		menuvo.setStoreId((String) session.getAttribute("storeId"));
 		vo.setStoreId((String) session.getAttribute("storeId"));
-		
-		System.out.println("Ajax가 작동하는지 보고 싶습니다===================================================================================================");
 		return paymentService.menuSales(vo);
 		
 
