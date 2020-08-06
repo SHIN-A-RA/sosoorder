@@ -7,11 +7,14 @@
 	<select id="getRole" resultType="map">
 		SELECT phone "id", 'ROLE_USER'
 		FROM member
+		<where>
+			phone = #{loginId}
+		</where>
 		UNION
 		SELECT storeId "id", 'ROLE_ADMIN'
 		FROM admin
 		<where>
-			id = #{id}
+			storeId = #{loginId}
 		</where>
 	</select>
 	

@@ -216,3 +216,18 @@ INSERT INTO call
  alter table call drop constraint CALL_FK;
  
  select distinct paynum from orderCpt where orderNum=155
+ 
+ select * from coupon;
+ select * from usercoupon;
+ alter table usercoupon add (usercouponnum varchar2(30));
+ alter table usercoupon drop constraint usercoupon_pk;
+ 
+alter table usercoupon add constraint usercoupon_pk primary key(usercouponnum);
+ 
+
+CREATE UNIQUE INDEX usercoupon_pk ON usercoupon(usercouponnum);
+ALTER TABLE usercoupon ADD  CONSTRAINT usercoupon_pk PRIMARY KEY (usercouponnum) ;
+
+CREATE SEQUENCE seq_usercoupon;
+
+select * from usercoupon
