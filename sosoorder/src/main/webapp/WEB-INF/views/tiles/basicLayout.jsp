@@ -101,11 +101,32 @@
 	             		</c:when>
 	              </c:choose>
 	               
+
 	               
-	                <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	               
+	     <%--           
+					<c:if test="${empty sessionScope.phone }"> phone이 비어있을 때 
+					</c:if>	                
+	                <c:if test="${not empty sessionScope.phone }"> phone이 비어있지 않을 때 
+	                <script>
+					$(function(){
+	                var sar = ${sessionScope.phone};
+	                var members = sar.toString().slice(-4);
+	                console.log(members);
+	                $('.mr-phone').html(members+"님");
+					});
+	                </script>
+	                <span class="mr-2 d-none d-lg-inline mr-phone" style="font-size: 21px;"></span>
+	                </c:if>
+	                
+	                 <c:if test="${not empty sessionScope.storeId }">
+	                <span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">${sessionScope.storeId}사장님</span>
+	                </c:if> --%>
+	               <i class="fa fa-user-circle-o gb_click" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	               
 	              </a>
               </div>
-                        		
+            		
        		<div class="gb_jb">
   				<div class="gb_tb gb_ub">이지원</div>
   				<div class="gb_vb">eo339912@gmail.com</div>
