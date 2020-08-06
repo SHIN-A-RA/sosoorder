@@ -178,7 +178,7 @@ function removeChar(event) {
     					<option value="${seat.seat}">${seat.seat}</option>
     				</c:if>
     				<c:if test="${param.seat == 0}">
-    					<option key="default-empty" hidden></option> 
+    					<option id="empty" key="default-empty" hidden></option> 
     					<option value="${seat.seat}">${seat.seat}</option>
     				</c:if>
    					 </c:forEach>
@@ -210,7 +210,7 @@ function removeChar(event) {
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
 	<h5 style="margin-bottom:20px;"><strong style="color: red;">배달할거에요?</strong>
-	<input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
+	<input type="checkbox" onclick="Show()" class="selectdel"></h5>
 </div>
 <div class="basic"  id="delivery" style="display:none" >
 	<h3 class="basic_h3">배달정보</h3>
@@ -226,7 +226,7 @@ function removeChar(event) {
 </tr>   
 
                 
-<tr >
+<tr>
 	<th class="basic_tb_th">휴대전화 <span class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></span>
 	</th>
     <td class="basic_tb_td">
@@ -241,7 +241,7 @@ function removeChar(event) {
 <!-- 할인 및 포인트 -->
 
 <div class="basic" id="getdiscount"> 
-<c:if test="${memberNum == 0 }">
+<c:if test="${phone != null}">
 	<h3 class="basic_h3">할인 및 포인트</h3>
  <table class="basic_tb">
 
@@ -383,19 +383,40 @@ function removeChar(event) {
 
 <script>
 
+
+/* 결제방법받기 */
+$(function(){
+	$(".payCheck").on("change",function(){
+		$(".payCheckval").val($(this).val());
+	});
+});
+
 /* 좌석값받기 */
-	$(function(){
-		$("#selectSeat").on("change",function(){
-			$(".seat").val($(this).val());
-		});
+$(function(){
+	$("#selectSeat").on("change",function(){
+		$(".seat").val($(this).val());
 	});
+});
 	
-	/* 결제방법받기 */
-	$(function(){
-		$(".payCheck").on("change",function(){
-			$(".payCheckval").val($(this).val());
-		});
-	});
+/* 홀이냐 배달이냐 하나만*/	
+$(function(){
+		$(".selectdel").on("change",function(){
+	        if($(".selectdel").is(":checked")){
+	        	$('#selectSeat').val($(".empty").val());
+	        	$(".seat").val($(".empty").val());
+				$('#selectSeat').attr('disabled', 'true');
+				 alert("배달 주문을 하시겠습니까?");
+	        }else{
+	        	$('#selectSeat').val($(".empty").val());
+	        	$(".seat").val($(".empty").val());
+				$('#selectSeat').removeAttr('disabled'); 
+				alert("홀주문을 하시겠습니까?");
+	        }
+	    });
+		
+		
+});
+
 
 </script>
 
