@@ -75,10 +75,11 @@ public class ReorderController {
 		
 		//업로드 처리
 		MultipartFile file = vo.getUploadFile();
+		String path = request.getSession().getServletContext().getRealPath("resources/download");
 		String filename = "";
 		if(file != null && file.getSize() > 0) {
 			filename = file.getOriginalFilename();
-		    File upFile = FileRenamePolicy.rename(new File("c:/upload", filename));
+		    File upFile = FileRenamePolicy.rename(new File(path, filename));
 			filename = upFile.getName();
 			file.transferTo(upFile);	
 			vo.setProfile(filename);

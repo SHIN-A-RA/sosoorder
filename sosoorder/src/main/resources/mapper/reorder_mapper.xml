@@ -33,10 +33,17 @@
 	</select> -->
 
 	<insert id="mailInsert" parameterType="reorderVO">
-		INSERT INTO reorder (reorderNum,contents,profile,storeId,reorderDate)
+		INSERT INTO reorder (reorderNum,memberNum,title,profile,storeId,reorderDate)
 						VALUES(
 						seq_reorderNum.nextval,
-						#{contents},
+						(select distinct
+							count(m.email)
+							from point p, member m, admin a
+							where p.memberNum = m.memberNum and
+							a.storeid = p.storeid and
+							a.storeId = #{storeId}
+							and m.email is not null),
+						#{title},
 						#{profile},
 						#{storeId}, 
 						sysdate)								
@@ -51,11 +58,22 @@
 		and m.email is not null
  </select>
   
+  <select id="getcountEmail" parameterType="adminVO" resultType="map">   
+	select distinct
+	count(m.email)
+	from point p, member m, admin a
+	where p.memberNum = m.memberNum and
+		a.storeid = p.storeid and
+		a.storeId = #{storeId}
+		and m.email is not null
+		
+ </select>
    
  <select id="getmailList" parameterType="reorderVO" resultType="reorderVO">   
       SELECT * 
       FROM reorder
       ORDER BY reorderNum
+
    </select>
 
 	<!-- <update id="updateSomething" parameterType="#modelname">

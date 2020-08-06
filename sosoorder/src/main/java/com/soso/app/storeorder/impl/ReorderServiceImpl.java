@@ -32,5 +32,9 @@ public class ReorderServiceImpl implements ReorderService{
 	public void mailInsert(ReorderVO reorderVO) {
 		reorderMapper.mailInsert(reorderVO);
 	}
+	@Override
+	public List<Map> getcountEmail(AdminVO adminVO) {
+		return  reorderMapper.getcountEmail(adminVO);
+	}
 }
 

@@ -9,6 +9,6 @@ import com.soso.app.storeorder.service.ReorderVO;
 public interface ReorderMapper {
 	public List<ReorderVO> getmailList(ReorderVO reorderVO);	
 	public List<Map> getEmail(AdminVO adminVO);
-
+	public List<Map> getcountEmail(AdminVO adminVO);
 	public void mailInsert(ReorderVO reorderVO);
 }

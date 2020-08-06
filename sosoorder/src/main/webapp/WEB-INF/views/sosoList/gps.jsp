@@ -9,10 +9,15 @@
         width: 100%;  /* The width is the width of the web page */
        		}
  	</style>
+ 	
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+  
+  
   
 	<div class ="all" style="width:100%; overflow:hidden;"> 
 	<form action="couponInsert" method="post"> 
@@ -221,16 +226,16 @@
 			  mapTypeId:google.maps.MapTypeId.ROADMAP} //맵타입
 	 );
 	 var marker, i;
-	
  	 for (i = 0; i < latlng.length; i++) { //미커를 여러개 찍을때 사용
 	  marker=new google.maps.Marker({
 	   position: new google.maps.LatLng(latlng[i][0], latlng[i][1]),
-	  // icon: "./resources/admin/img/icon.png",
-	   map:gmap, 
-	   title:latlng[i][2]
+	   map:gmap, 	
+	   label:tmp_map2[i].bizesNm 
 	  });
- 	 }  
-    }  
+	  
+	}
+}
+
     
     /*-----------------------------
  		상점 선택시 중심값 이동

@@ -13,3 +13,10 @@ div.mypagelist ul.mypagebtn_ul li a:hover{color:#ca1818}
 .starbtntd{display:none;}
 .starbtntd.s_undefined{display:block !important;}
 .startd.s_undefined{display:none;}
+.label{
+  color:white;
+  background-color:red;
+  font-size:20px;
+  text-align:center;width:80px;height:80px;line-height:80px;border-radius:100%;white-space:nowrap;
+  /*background:red url('img/marker.gif') no-repeat 0 0;*/
+}

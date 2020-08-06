@@ -14,7 +14,7 @@ function myCouponDelete() {
 	//삭제 버튼 클릭
 	$('.table_wrap').on('click','.btnDelete',function(){
 		var serialNum = $(this).attr("name");
-		var result = confirm(serialNum +" 쿠폰을 정말로 삭제하시겠습니까?");
+		var result = confirm("쿠폰을 정말로 삭제하시겠습니까?");
 		if(result) {
 			$.ajax({
 				 url: "myCouponDelete/" + serialNum, 
