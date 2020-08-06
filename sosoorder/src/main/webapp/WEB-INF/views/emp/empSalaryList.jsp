@@ -5,10 +5,7 @@
 <style>
 #un {
 	text-decoration: underline;
-}
-
-<style>
-
+	}
   body {
     margin: 40px 10px;
     padding: 0;
@@ -67,20 +64,14 @@ fullCalendar
 <div class="slick_box menu_category">
 	<div class="menu_bar">
 		<c:forEach var="vo" items="${empSalaryList}">
-		<div><a href='#' id ="run" onclick="javascript:empSel('${vo.empNum}')">${vo.empName}</a></div>
+		<div><a href='#' onclick="javascript:empSel('${vo.empNum}')">${vo.empName}</a></div>
 		</c:forEach>
 	</div>
-	
 	
 	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left" aria-hidden="true"></i>
 	</span> <span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
-<script>
 
-	
-		empSel('${vo.[0].empNum}');
-
-</script>
 
 
 <script>
@@ -174,7 +165,7 @@ NowTime += '-' + Now.getDate();
 
 
 /*=====================================
-달력 출력에 출근한 날 표시
+달력 출력에 출근한 날 표시 
 =======================================*/
 $(function(){
     var calendarEl = document.getElementById('calendar');
@@ -195,7 +186,7 @@ $(function(){
 
     
 /*=====================================
-캘린더 출력
+			캘린더 출력
 =======================================*/
     var calendar = new FullCalendar.Calendar(calendarEl, {
 		      editable: true,
@@ -217,76 +208,80 @@ $(function(){
 /*===============================================================================================
 **********************************이전,다음달로 이동 이벤트 제이쿼리***********************************
 =================================================================================================*/
-    $('.fc-prev-button,.fc-next-button').on('click', function() {
-    	
-    	var month = calendar.getDate().getMonth()+1;
-    	var year = calendar.getDate().getFullYear();
-    	frmEmp.selectMonth.value=year+"-"+(month<10? '0'+month:month);
-    	
-     	autoList()
-     	autoSalry()
-    });
 
-});
+	$('.fc-prev-button,.fc-next-button').on(
+				'click',
+				function() {
+					var month = calendar.getDate().getMonth() + 1;
+					var year = calendar.getDate().getFullYear();
+					frmEmp.selectMonth.value = year + "-"
+							+ (month < 10 ? '0' + month : month);
 
+					autoList();
+					autoSalry();
+				});
 
-/*==================================
-사원 선택시 급여데이터load(empSel())
-=======================================*/
-function empSel(empNum){
-	frmEmp.empNum.value=empNum;
-	autoList()
-	autoSalry()
-}
-  </script>
+		empSel('${empSalaryList[0].empNum}');
+	});
+
+	/*==================================
+	 사원 선택시 급여데이터load(empSel())
+	 =======================================*/
+	function empSel(empNum) {
+		frmEmp.empNum.value = empNum;
+		autoList();
+		autoSalry();
+	}
+</script>
 
 
 
 <!--====================================
  HTML 캘린더 출력 div 
  =====================================-->
-  <div id='calendar' style="float:left; height: 700px; width: 900px; margin-top: 80px;"></div>
+<div id='calendar' style="float: left; height: 700px; width: 900px; margin-top: 80px;"></div>
 
 
 <form id="frmEmp" name="frmEmp">
-<input type="hidden" name="empNum">
-<input type="hidden" name="selectMonth">
+	<input type="hidden" name="empNum"> <input type="hidden" name="selectMonth">
 </form>
 
 <!--====================================
  받아온 데이터 출력 출근기록 및 근무시간
 =====================================-->
-<div style="height: 400px; width: 450px; overflow-y:auto;overflow-x:hidden;">
-<h3 class="basic_tb_th_up">직원출근현황<span id="today"></span></h3>
-<table  class="table" >
-	 <thead class="thead-dark">
-      <tr>
-        <th>근무요일</th>
-        <th>근무날짜</th>
-        <th>출근시간</th>
-        <th>퇴근시간</th>
-        <th>합계</th>
-      </tr>
-    </thead>
-    <tbody id="empSETable">
-    </tbody>
-</table>	
+<div style="height: 400px; width: 450px; overflow-y: auto; overflow-x: hidden;">
+	<h3 class="basic_tb_th_up">
+		직원출근현황<span id="today"></span>
+	</h3>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>근무요일</th>
+				<th>근무날짜</th>
+				<th>출근시간</th>
+				<th>퇴근시간</th>
+				<th>합계</th>
+			</tr>
+		</thead>
+		<tbody id="empSETable">
+		</tbody>
+	</table>
 </div>
 
 <!--====================================
 시급 계산
 =====================================-->
-<div style="height: 400px; width: 450px; overflow-y:auto;overflow-x:hidden;">
-<table  class="table" >
-	 <thead class="thead-dark">
-      <tr>
-        <th>근무 총시간</th>
-        <th>총 급여</th>
-      </tr>
-    </thead>
-    <tbody id="totalSalary">
-    </tbody>
-</table>	
+<div style="height: 400px; width: 450px; overflow-y: auto; overflow-x: hidden;">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>근무 총시간</th>
+				<th>총 급여</th>
+			</tr>
+		</thead>
+		<tbody id="totalSalary">
+		</tbody>
+	</table>
 </div>
 
 
