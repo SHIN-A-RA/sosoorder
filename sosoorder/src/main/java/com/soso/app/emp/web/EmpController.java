@@ -104,6 +104,16 @@ public class EmpController {
 	public String getEmpDelete(EmpVO vo,HttpSession sessoin) {
 		empService.getEmpDelete(vo);
 		return "redirect:empList";
-		
 	}
+	
+	
+	//세션 초기화
+	@RequestMapping("removeSession")
+	public String removeSession(HttpSession session) {
+		session.removeAttribute("storeId");
+		session.removeAttribute("phone");
+		return "redirect:/";
+	}
+	
+	
 }

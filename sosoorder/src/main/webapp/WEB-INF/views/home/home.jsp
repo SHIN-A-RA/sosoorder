@@ -9,7 +9,7 @@
 var myApp = angular.module("myApp",[]);
 myApp.controller("myAppCtrl", function($scope){
 	var product = sessionStorage.getItem('cart');
-	var number;
+	var number = '0';
 	if(product == null)
 		product = [];
 	else
@@ -59,9 +59,9 @@ myApp.controller("myAppCtrl", function($scope){
 		var ordernum = user.orderNum;
 		var price = user.menuPrice;
 		var count = user.orderCount + 1; 
-	 	
-		$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
-		$scope.products.splice(value, 1);
+		$scope.products[value] = {menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum};
+		//$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
+		//$scope.products.splice(value, 1);
 
 		sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
 	    
@@ -78,12 +78,14 @@ myApp.controller("myAppCtrl", function($scope){
 		var price = user.menuPrice;
 		var count = user.orderCount - 1; 
 		if(count>0){
-			$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
-			$scope.products.splice(value, 1);
-			sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+			$scope.products[value] = {menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum};
+			//$scope.products.push({menuName : name, menuNum : num, menuPrice : price, orderCount : count, orderNum : ordernum});
+			//$scope.products.splice(value, 1);
 		}else if(count == 0){
 			$scope.products.splice(value, 1);
 		}
+		sessionStorage.setItem('cart', JSON.stringify($scope.products)); 
+
 	    cartNum();
 	    totalPay();
 	}
@@ -105,7 +107,14 @@ myApp.controller("myAppCtrl", function($scope){
 	/*cart에 들어가는 숫자  */	
 	cartNum();
 	function cartNum(){
- 		number = $scope.products.length;
+		var values = $scope.products;
+		number = 0;
+		angular.forEach(values, function(value, key){
+			number += value.orderCount
+		});
+		
+ 		//number = $scope.products.length;
+ 		
 		$(".shoping-cart-cnt").html(number);
 	}
 	

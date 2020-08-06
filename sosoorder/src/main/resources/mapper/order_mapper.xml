@@ -27,10 +27,10 @@
 			<if test="storeId != null">
 				 storeId = #{storeId}
 			</if>
-			<if test="memberNum != null">
+			<if test="phone != null">
 				AND memberNum = (SELECT memberNum FROM member WHERE phone = #{phone})      
-			</if>	
-		</where>
+			</if>	  
+		</where>  
 	</select>
 	
 		<!-- 쿠폰조회  -->

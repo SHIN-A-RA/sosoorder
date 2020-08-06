@@ -57,7 +57,6 @@ public class WorkController {
 	
 	
 	
-	
 	//총 급여 조회("getEmpSalAjax")
 	@RequestMapping("totalSalAjax")
 	@ResponseBody
@@ -65,8 +64,6 @@ public class WorkController {
 		seldateVO.setStoreId((String) session.getAttribute("storeId"));
 		return workService.totalSalAjax(seldateVO);
 	}
-	
-	
 	
 	
 	
@@ -90,6 +87,16 @@ public class WorkController {
 		String storeId = (String) session.getAttribute("storeId");
 		return workService.getWorkTimeData(storeId);
 	}
+	
+	//리로드 테이블
+	@RequestMapping("reloadTable")
+	public String reloadTable(Model model,HttpSession session){
+		String storeId = (String) session.getAttribute("storeId");
+		model.addAttribute("getEmpListTime", workService.getEmpListTime(storeId));
+		return "noLayout/emp/reloadTable";
+	}
+		
+	
 	
 	
 }//end of controller

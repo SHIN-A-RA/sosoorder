@@ -49,7 +49,8 @@ var NowTime = Now.getFullYear();
 NowTime += '-' + (Now.getMonth() + 1) ;
 NowTime += '-' + Now.getDate();
 
-$(function(){
+
+$(function workTimeData(){
     var calendarEl = document.getElementById('calendar');
     var workTimeData = [];
     $.ajax({
@@ -85,7 +86,7 @@ $(function(){
 //오늘 날짜 출력
 
 //출근 버튼  
-	$(".workStart").on("click",function(){
+	$('#reloadTalbe').on("click",".workStart",function(){
 		$(this).css("display","none");   
 		$(this).next().css("display","block");
 		var workStart = $(this).attr('data-empNum');
@@ -94,16 +95,16 @@ $(function(){
 		data : {'empNum':workStart},
 		method: 'post'
 		}).done(function(){
-			location.reload('#start');
 			autoList(NowTime);
-			$('#today').html(NowTime);
 			
-			/* $('#start').reload(location.href + '#start'); */
-		/* 	location.reload();   */
+			
+			$('#today').html(NowTime);
+			reloadTable();
 		})
 	});
+    
 //퇴근 버튼
-	$(".workEnd").on("click",function(){
+	$('#reloadTalbe').on("click",".workEnd",function(){
 		$(this).css("display","none");   
 		$(this).prev().css("display","block");
 		var workEnd = $(this).attr('data-empNum');
@@ -114,8 +115,8 @@ $(function(){
 		}).done(function(){
 			autoList(NowTime);
 			$('#today').html(NowTime);
-			$('#end').reload(location.href + '#end');
-			/* location.reload();  */
+			reloadTable();
+			
 		})
 	});
 	
@@ -144,39 +145,30 @@ $(function(){
 			.fail(function(result){}) //서버 에러 발생시
 			.always(function(result){}); //정상이든 에러든 무조건 실행
 	}
-}); 
+	
+	function reloadTable(){
+		$('#reloadTalbe').load('reloadTable');
+	};
+
+	reloadTable();
+	autoList(NowTime);//첫 실행시 오늘 날짜로 조회
+	
+	
+});
+
+
+
 </script>
 
-</head>
 <!-- 캘린더 출력 div -->
   <div id='calendar' style="float:left; height: 700px; width: 900px;"></div>
 
 <!-- 출퇴근 버튼 table -->	
-<div class="div_f" >
+<div class="div_f">
 	<h3 class="basic_tb_th_up">직원목록<span id="workingDate"></span></h3>
-	
-		<table  class="basic_tb" border=1>		
-		 <c:forEach items="${getEmpListTime}" var="emp">		
-			<tr>
-			  <td class="basic_tb_tdd">${emp.empName}</td>
-			 <td class="basic_tb_tdd"> 
-			 	<jsp:useBean id="now" class="java.util.Date" />
-			 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="nowDate" />   
-			  	<c:if test="${emp.workStart < nowDate || emp.workStart == null}">
-				  	<button type="button" class="btn btn-primary workStart" data-empNum="${emp.empNum}" id="start">출근</button>
-			  	</c:if>
-			  	<c:if test="${emp.workEnd != emp.workStart}">
-				 	<button type="button" class="btn btn-danger workEnd" data-empNum="${emp.empNum}" id="end">퇴근</button>
-			  	</c:if>
-			  	
-			  	<c:if test="${emp.workStart == nowDate && emp.workEnd == emp.workStart}">
-				  	<button type="button" class="btn btn-primary workStart" data-empNum="${emp.empNum}" id="start">재출근</button>
-			  	</c:if>
-			 </td> 			      
-			</tr>
-		</c:forEach>	
-		</table>
-		
+		<div id="reloadTalbe">
+			<!-- 버튼이벤트에 따라 ajax로 가져옴 -->
+		</div> 
 </div>
 
 

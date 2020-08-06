@@ -20,6 +20,16 @@ public class StoreOrderServiceImpl  implements StoreOrderService{
 		return storeOrderMapper.getOrderList(storeOrderVO);
 	}
 
+	@Override
+	public void orderUpdate1(StoreOrderVO storeOrderVO) {
+		storeOrderMapper.orderUpdate1(storeOrderVO);		
+	}
+
+	@Override
+	public void orderUpdate2(StoreOrderVO storeOrderVO) {
+		storeOrderMapper.orderUpdate2(storeOrderVO);		
+	}
+
 	
 	
 

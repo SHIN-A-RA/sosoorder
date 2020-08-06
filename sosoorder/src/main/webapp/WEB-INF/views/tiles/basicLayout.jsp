@@ -78,36 +78,65 @@
 				<div id="gnb_menu" class="hd_gnb_menu"><span></span></div>				
 				<tiles:insertAttribute name="menu"/>
 				<!--  -->
-				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" onclick="location.href='memberLoginForm'">
+				<script>
+				/* =============================
+							세션 제거 
+				=============================*/
+				function removeSession(){
+					location.href="removeSession";
+				};
+				</script>
+				
+				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" onclick="location.href='/sosoroder/memberLoginForm'">
 	              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	               
-					<c:if test="${empty sessionScope.phone }">
-					<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
-					</c:if>	                
-
-	                <c:if test="${not empty sessionScope.phone }">
-	                <script>
-					$(function(){
-	                var sar = ${sessionScope.phone};
-	                var members = sar.toString().slice(-4);
-	                console.log(members);
-	                $('.mr-phone').html(members+"님");
-					});
-	                </script>
-	                <span class="mr-2 d-none d-lg-inline mr-phone" style="font-size: 21px;"></span>
-	                </c:if>
-	                
-	                 <c:if test="${not empty sessionScope.storeId }">
-	                <span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">${sessionScope.storeId}사장님</span>
-	                </c:if>
-	                
-	                
+	              <c:choose>
+	              		<c:when test="${empty sessionScope.phone || empty sessionScope.storeId}">
+							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
+	              		</c:when>
+		               	<c:when test="${not empty sessionScope.phone}">
+			               	  <script>
+				               	$(function(){
+					                var sar = ${sessionScope.phone};
+					                var members = sar.toString().slice(-4);
+					                $('.mr-phone').html(members+"님");
+					                $('.gb_ub').html(members+"님");
+								});		               	
+			               	  </script>
+		               	  	<span class="mr-2 d-none d-lg-inline mr-phone" style="font-size: 21px;"></span>
+		               	</c:when>
+		               		<c:when test="${not empty sessionScope.storeId}">
+		               			  <script>
+					               	$(function(){
+						                var storeId = ${sessionScope.storeId};
+						                $('.mr-storeId').html(storeId+"사장님");
+						                $('.gb_ub').html(storeId+"사장님");
+									});		               	
+				               	  </script>
+		             			<span class="mr-2 d-none d-lg-inline mr-storeId" style="font-size: 21px;"></span>
+		             		</c:when>
+	              </c:choose>
+	               <i class="fa fa-user-circle-o gb_click" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
 	               
-	               
-	                <i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
 	              </a>
               </div>
-            
+            		
+       		<div class="gb_jb">
+  				<div class="gb_tb gb_ub"></div>
+  				<div class="gb_vb">eo339912@gmail.com</div>
+   				<input type="button" class="logout" onclick='removeSession' value="Logout"/>
+      		</div>
+      		<script>
+      			$(function(){
+      				$('.gb_jb').hide();
+      				$('.gb_click').on("mouseenter", function(){
+      			        $('.gb_jb').show();
+      			    });
+      			  $('.gb_jb').on("mouseleave", function(){
+    			        $('.gb_jb').hide();
+    			    });
+      			});
+      		</script>
 				<!--  -->
 				
 			</div>

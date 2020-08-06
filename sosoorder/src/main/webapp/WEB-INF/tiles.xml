@@ -13,6 +13,9 @@ Configuration 2.1//EN"
 	</definition>
 	
 	<!--empty -->
+	<definition name="noLayout/*/*" template="/WEB-INF/views/tiles/noLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />	
+	</definition>
 	<definition name="empty/*/*" template="/WEB-INF/views/tiles/emptyLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />	
 	</definition>

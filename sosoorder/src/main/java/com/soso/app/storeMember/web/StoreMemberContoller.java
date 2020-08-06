@@ -46,8 +46,8 @@ public class StoreMemberContoller {
 //		adminService.getMenuUpdate(adminVO);
 //	}
 
-	// 회원정보 수정 페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
-	@RequestMapping("storeMemberUpdateForm") // insertForm
+	// admin이 회원정보 수정 페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
+	@RequestMapping("storeMemberUpdateForm")
 	public String storeMemberUpdateForm(StoreMemberVO vo, Model model, HttpSession session) {
 		String storeId = (String) session.getAttribute("storeId");
 		vo.setStoreId(storeId);
@@ -56,6 +56,16 @@ public class StoreMemberContoller {
 		}
 		return "member/storeMemberUpdateForm";
 	}
+	// 회원이 회원정보 수정 페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
+		@RequestMapping("memberUpdateForm")
+		public String MemberUpdateForm(StoreMemberVO vo, Model model, HttpSession session) {
+			String phone = (String) session.getAttribute("phone");
+			vo.setPhone(phone);
+			if (vo.getPhone() != null && !vo.getPhone().isEmpty()) {
+				model.addAttribute("oneSm", storeMemberService.getStoreMember(vo));// oneSm=단건조회
+			}
+			return "member/memberUpdateForm";
+		}
 
 	// 회원정보 수 처리하고 관리페이지로 이동
 	@RequestMapping("storeMemberUpdate")

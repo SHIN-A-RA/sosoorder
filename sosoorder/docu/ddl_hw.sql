@@ -56,7 +56,7 @@ WHERE u.serialNum = c.serialNum
 
 alter table payment drop column amount;
 
-alter table payment add(status varchar2(5));
+alter table delivery add(cellphone varchar2(30));
 
 (SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT)
 
@@ -104,11 +104,13 @@ BEGIN
 	
 	delete from point where point is null;
 	update POINT set MEMBERNUM=1 where MEMBERNUM=0
+	
 	/* 결제 주문 지우기*/
-	delete from PAYMENT where payNum BETWEEN 17 and 30;
-	delete from ordercpt where payNum BETWEEN 17 and 30;
+	delete from PAYMENT where payNum BETWEEN 10 and 63;
+	delete from ordercpt where payNum BETWEEN 10 and 63;
 	delete from payment where paycheck is null;
 	delete from payment where MEMBERNUM is null;
+	delete from point where point is null;
 	
 	create table Address(
 		deliveryNum NUMBER(10),
@@ -191,4 +193,12 @@ where 	p.payNum = o.payNum
 	    order by paynum , menuName ;
 	    
 UPDATE PAYMENT SET STATUS='1' WHERE PAYNUM = #{payNum}
+
+UPDATE PAYMENT SET STATUS='2' WHERE PAYNUM = #{payNum}
+
+
+select sum(point*pointCheck) AS totalPoint 
+from point
+where storeId = 'test'
+	and memberNum = 1;
     

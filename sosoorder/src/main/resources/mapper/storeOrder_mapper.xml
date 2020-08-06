@@ -11,6 +11,7 @@
 				o.orderCount "orderCount", 
 				m.menuName "menuName", 
 				s.seat "seat", 
+				p.status "status",
 				d.addr "addr"
 		from payment p, 
 			 orderCpt o, 
@@ -26,17 +27,17 @@
 			<if test="storeId != null">
 		  	AND s.storeId = #{storeId}
 		    </if>  
-		 </where>
+		 </where>  
 		 order by p.paynum , m.menuName 
 	 </select>
 	 
-	  <update id="oderUpdate1" parameterType="StoreOrderVO">   
+	  <update id="orderUpdate1" parameterType="StoreOrderVO">   
 			UPDATE PAYMENT 
 			SET STATUS='1' 
 			WHERE PAYNUM = #{payNum}
 	  </update>
 	  
-	  <update id="oderUpdate2" parameterType="StoreOrderVO">   
+	  <update id="orderUpdate2" parameterType="StoreOrderVO">   
 			UPDATE PAYMENT 
 			SET STATUS='2' 
 			WHERE PAYNUM = #{payNum}
