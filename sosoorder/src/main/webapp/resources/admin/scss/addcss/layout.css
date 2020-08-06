@@ -15,7 +15,7 @@
 #hd_top .hd_logo a{margin:35px auto 15px; display:inline-block; width:165px; height:55px; overflow:hidden; background:url(/images/common/hd_logo.png) no-repeat center center;}
 #hd_top{position:relative; z-index:8; width:100%; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center;}
 
-#hd_gnb{position:relative; z-index:8;  width:100%; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; color:#FFF;}
+#hd_gnb{position:relative; z-index:8;  width:100%; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; color:#FFF;}
 #hd_gnb .gnb_dp1_wrap{width: max-content; margin:0 auto; overflow:hidden;}
 #hd_gnb .gnb_dp1_wrap li.gnb_dp1{float:left; }
 #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span{cursor:pointer; font-size:18px; display:inline-block;padding:16px 57px; position:relative}
