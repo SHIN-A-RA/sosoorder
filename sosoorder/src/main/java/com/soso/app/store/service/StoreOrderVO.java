@@ -15,4 +15,5 @@ public class StoreOrderVO {
 	String status;
 	String storeId;
 	String addr;
+	
 }
