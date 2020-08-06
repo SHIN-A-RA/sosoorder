@@ -195,4 +195,10 @@ where 	p.payNum = o.payNum
 UPDATE PAYMENT SET STATUS='1' WHERE PAYNUM = #{payNum}
 
 UPDATE PAYMENT SET STATUS='2' WHERE PAYNUM = #{payNum}
+
+
+select sum(point*pointCheck) AS totalPoint 
+from point
+where storeId = 'test'
+	and memberNum = 1;
     
