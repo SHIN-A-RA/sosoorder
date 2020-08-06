@@ -42,4 +42,7 @@ public interface OrderMapper {
 	
 	//비회원적립프로시저
 	public void insertMemProc(OrderCptVO orderCptVO);
+	
+	//영수증 출력시 정보가져오기 
+	public OrderCptVO receiptGet(OrderCptVO orderCptVO);
 }

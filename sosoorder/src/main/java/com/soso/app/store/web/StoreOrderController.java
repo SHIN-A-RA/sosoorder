@@ -1,41 +1,39 @@
 package com.soso.app.store.web;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.soso.app.common.FileRenamePolicy;
-import com.soso.app.store.service.StoreCouponVO;
-import com.soso.app.store.service.StorePopupService;
-import com.soso.app.store.service.StorePopupVO;
+
+import com.soso.app.store.service.StoreOrderService;
+import com.soso.app.store.service.StoreOrderVO;
+
 
 
 @Controller
 public class StoreOrderController {
-	/*
-	 * @Autowired StoreOrder storeOrderService;
-	 */
+
+   @Autowired StoreOrderService storeOrderService;
+
+	@RequestMapping("getOrderList")
+	public @ResponseBody List<Map<String,Object>> getOrderList(Model model, StoreOrderVO storeOrderVO){
+		
+		return storeOrderService.getOrderList(storeOrderVO);
+	}
+	
 	@RequestMapping("storeOrderList")
-	public String storeOrderList(Model model,  HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
+	public String storeOrderList(Model model,HttpSession session, StoreOrderVO storeOrderVO) {
+		model.addAttribute("orderList", storeOrderService.getOrderList(storeOrderVO));
 		return "store/storeOrderList";
 	}
-
-
+		
 
 }
 

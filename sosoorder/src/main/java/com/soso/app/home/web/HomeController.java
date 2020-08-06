@@ -127,12 +127,21 @@ public class HomeController {
 		JasperReport jasperReport = JasperCompileManager.compileReport(stream);
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
-//		map.put("p_departmentId", request.getParameter("dept"));
 		map.put("p_payNum", request.getParameter("payNum"));
 		
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
 		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 	}
+	
+	@RequestMapping("reportDown")
+	public String report(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("p_payNum", request.getParameter("payNum"));
+		model.addAttribute("filename", "/receipt/receipt.jasper");
+		model.addAttribute("map", map);
+		return "pdfView";
+	}
+	
 	
 
 }

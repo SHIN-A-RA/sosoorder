@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.soso.app.user.mapper.userMapper">
+<mapper namespace="com.soso.app.user.mapper.UserMapper">
 
 	<select id="getRole" resultType="map">
 		SELECT phone "id", 'ROLE_USER'
@@ -15,7 +15,7 @@
 		</where>
 	</select>
 	
-	<select id="storeInfo" resultType="adminVO">
+	<select id="storeInfo" parameterType="adminVO"  resultType="adminVO">
 		select *
 		from admin
 		<where>

@@ -30,6 +30,7 @@
 		<typeAlias type="com.soso.app.work.service.SelDateVO" alias="SelDateVO"/> 
 		<typeAlias type="com.soso.app.storeMember.service.StoreMemberVO" alias="StoreMemberVO"/> 
 		<typeAlias type="com.soso.app.order.service.CallVO" alias="callVO"/> 
+		<typeAlias type="com.soso.app.store.service.StoreOrderVO" alias="StoreOrderVO"/> 
 	</typeAliases>
 
 </configuration>

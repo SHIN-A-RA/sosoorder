@@ -82,6 +82,7 @@ public class MemberController {
 	@GetMapping("phoneCheck")
 	public @ResponseBody int phoneCheck(@RequestParam("phone")String phone) {
 		int cnt=memberService.phoneCheck(phone);
+		System.out.println(cnt);
 		return cnt;
 	}
 	

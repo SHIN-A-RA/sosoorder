@@ -31,6 +31,9 @@ div:hover, div:hover code, div:focus, div:focus code {
 .slick_box .prev{left:10%;}
 .slick_box .next{right:10%;}
 
+.slick_box.order .prev{left:0; margin-left:-5%;}
+.slick_box.order .next{right:0; margin-right:-5%;}
+
 /* main_slick */
 .slick_box.menu_list_wrap .prev{left:0; margin-left:-5%;}
 .slick_box.menu_list_wrap .next{right:0; margin-right:-5%;}

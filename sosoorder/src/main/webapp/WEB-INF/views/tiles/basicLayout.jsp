@@ -118,8 +118,8 @@
 		<div id="gnb_menu_box" class="gnb_mo_menu">
 			<tiles:insertAttribute name="adminMenu"/>
 			<ul class="con">
-				<%-- <li>${storeInfo.storeName}</li>
-				<li>${storeInfo.storeAddr}</li> --%>
+				<li><%= request.getAttribute("s_storeName") %></li>
+				<li><%= request.getAttribute("s_storeAddr") %></li>
 			</ul>
 		</div>
 		<!-- top End-->

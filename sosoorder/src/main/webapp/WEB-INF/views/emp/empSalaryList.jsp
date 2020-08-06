@@ -67,14 +67,20 @@ fullCalendar
 <div class="slick_box menu_category">
 	<div class="menu_bar">
 		<c:forEach var="vo" items="${empSalaryList}">
-		<div><a href='#' onclick="javascript:empSel('${vo.empNum}')">${vo.empName}</a></div>
+		<div><a href='#' id ="run" onclick="javascript:empSel('${vo.empNum}')">${vo.empName}</a></div>
 		</c:forEach>
 	</div>
+	
 	
 	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left" aria-hidden="true"></i>
 	</span> <span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
+<script>
 
+	
+		empSel('${vo.[0].empNum}');
+
+</script>
 
 
 <script>

@@ -21,10 +21,7 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 	
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo;
-	
+	document.form.roadFullAddr.value = roadFullAddr;
 }
 
 function Show() {
@@ -167,8 +164,6 @@ function removeChar(event) {
 	
 	
 </script>
-<div class="div_f"> 
-
    <!-- 컨텐츠영역 -->
 
    <div class="div-tt">
@@ -176,14 +171,18 @@ function removeChar(event) {
    </div>
     <div class="basic">
     	<span>좌석번호
-  			 <c:if test="${!empty seat}">
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
-    					<option key="default-empty" hidden></option> 
     				<c:forEach var="seat" items="${seat}">
+    				<c:if test="${param.seat != 0 }">
+    					<option selected hidden>${param.seat}</option>
     					<option value="${seat.seat}">${seat.seat}</option>
+    				</c:if>
+    				<c:if test="${param.seat == 0}">
+    					<option id="empty" key="default-empty" hidden></option> 
+    					<option value="${seat.seat}">${seat.seat}</option>
+    				</c:if>
    					 </c:forEach>
    				 </select>
-   			 </c:if>
     	</span>
     </div>
   <div class="basic">  
@@ -211,7 +210,7 @@ function removeChar(event) {
 <!-- 배달 체크시 펼치기-->
 <div class="basic">
 	<h5 style="margin-bottom:20px;"><strong style="color: red;">배달할거에요?</strong>
-	<input type="checkbox" onclick="Show()"> 배달 주문시, 자동 회원가입 됩니다. </h5>
+	<input type="checkbox" onclick="Show()" class="selectdel"></h5>
 </div>
 <div class="basic"  id="delivery" style="display:none" >
 	<h3 class="basic_h3">배달정보</h3>
@@ -222,25 +221,17 @@ function removeChar(event) {
 	<th class="basic_tb_th">주소
     </th>
          <td class="basic_tb_td">
-             <input class="basic_input" id="zipNo"  name="zipNo"  size="6" maxlength="6" type="text" readonly="1">  <a onclick="goPopup()" class="btn_post">주소찾기</a><br>
-              <input class="basic_input" id="roadAddrPart1"  name="roadAddrPart1" fw-label="주문자 주소1"  size="60" readonly="1"  type="text"> <span>기본주소</span><br>
-              <input class="basic_input" id="addrDetail"  name="addrDetail"  size="60"  type="text"> <span class="txtInfo">나머지주소</span><span>(선택입력가능)</span>
+              <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65"  type="text"><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
          </td>
 </tr>   
 
                 
-<tr >
+<tr>
 	<th class="basic_tb_th">휴대전화 <span class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></span>
 	</th>
     <td class="basic_tb_td">
-     <select class="basic_input" fw-label="주문자 핸드폰번호" > 
-		<option value="010">010</option>
-		<option value="011">011</option>
-		<option value="016">016</option>
-		<option value="017">017</option>
-		<option value="018">018</option>
-		<option value="019">019</option>
-	</select>-<input class="basic_input"  maxlength="4" fw-label="주문자 핸드폰번호" size="4" value="" type="text">-<input class="basic_input" maxlength="4" fw-label="주문자 핸드폰번호"  size="4" value="" type="text"></td>
+		<input class="basic_input" name="phone"  size="20"  type="text" value="${phone}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> 
+	</td>
  </tr>
 </table>
 </div>  
@@ -248,7 +239,9 @@ function removeChar(event) {
 </div>
 
 <!-- 할인 및 포인트 -->
+
 <div class="basic" id="getdiscount"> 
+<c:if test="${phone != null}">
 	<h3 class="basic_h3">할인 및 포인트</h3>
  <table class="basic_tb">
 
@@ -264,7 +257,7 @@ function removeChar(event) {
 	<tr>
 		<th class="basic_tb_th">적립금 </th>
 		    <td class="basic_tb_td" >
-		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2"  type="text" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'">		    	
+		    	<p><input id="pointDiscount" name="pointDiscount" class="basic_input2"  type="text" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>		    	
 		    	(총 적립금:<strong style="color: #E91E63;" id="totalPoint">${point[0].point}</strong>원)</p>
 		    	<div class="l">
 		    	<span id="pointContents"></span>
@@ -275,7 +268,8 @@ function removeChar(event) {
 			</td>	    	
 
 	</tr>
- </table> 
+ </table>
+</c:if>
 	<!-- 모달 -->
 <div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
   <div class="modal-dialog modal-80size modal-center" role="document">
@@ -343,7 +337,7 @@ function removeChar(event) {
 					<ul id="payTypeList" class="type-selector-list">
 
 						<li id="" class="">
-							<input class="payCheck" type="radio" name="payCheck"value="0">
+							<input class="payCheck" type="radio" name="payCheck" value="0" checked>
 							<label >
 								<span>계좌이체</span>
 							</label>
@@ -376,8 +370,8 @@ function removeChar(event) {
     </div>
 <form action="payInsert?orderNum=${param.orderNum}" method="post">
 <input class="couponUse" name="couponUse" type="hidden" value="">
-<input class="payCheckval" name="payCheck" type="hidden" value="">
-<input class="seat" name="seat" type="hidden" value="">
+<input class="payCheckval" name="payCheck" type="hidden" value="0">
+<input class="seat" name="seat" type="hidden" value="${param.seat}">
 <input class="pointUse" name="pointUse" type="hidden" value="">
 <input class="total" name="totalPay" type="hidden" value="${totalPrice}">
 <input class="serialNum" name="serialNum" type="hidden" value="">
@@ -386,23 +380,43 @@ function removeChar(event) {
 </div>
 </form>
 
-</div>
 
 <script>
 
+
+/* 결제방법받기 */
+$(function(){
+	$(".payCheck").on("change",function(){
+		$(".payCheckval").val($(this).val());
+	});
+});
+
 /* 좌석값받기 */
-	$(function(){
-		$("#selectSeat").on("change",function(){
-			$(".seat").val($(this).val());
-		});
+$(function(){
+	$("#selectSeat").on("change",function(){
+		$(".seat").val($(this).val());
 	});
+});
 	
-	/* 결제방법받기 */
-	$(function(){
-		$(".payCheck").on("change",function(){
-			$(".payCheckval").val($(this).val());
-		});
-	});
+/* 홀이냐 배달이냐 하나만*/	
+$(function(){
+		$(".selectdel").on("change",function(){
+	        if($(".selectdel").is(":checked")){
+	        	$('#selectSeat').val($(".empty").val());
+	        	$(".seat").val($(".empty").val());
+				$('#selectSeat').attr('disabled', 'true');
+				 alert("배달 주문을 하시겠습니까?");
+	        }else{
+	        	$('#selectSeat').val($(".empty").val());
+	        	$(".seat").val($(".empty").val());
+				$('#selectSeat').removeAttr('disabled'); 
+				alert("홀주문을 하시겠습니까?");
+	        }
+	    });
+		
+		
+});
+
 
 </script>
 

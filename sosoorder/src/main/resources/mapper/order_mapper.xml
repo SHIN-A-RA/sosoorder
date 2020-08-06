@@ -151,6 +151,10 @@
 		group by a.storeName
 	</select>
 	
+	<select id="receiptGet" resultType="OrderCptVO">
+	select distinct paynum from orderCpt where orderNum=#{orderNum}
+	</select>
+	
 	
 
 </mapper>

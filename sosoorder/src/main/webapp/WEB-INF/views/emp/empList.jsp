@@ -16,15 +16,18 @@
 		});
 	});
 </script>
+<div class="div-tt">
+   <h2>직원목록</h2>
+</div><br>
 	<div class="row">
 		<div class="col">
 			<table class="display" id="empList">
 				<thead class="thead-dark">
 					<tr>
-						<th>직원번호</th>
+						<th style="display:none;">직원번호</th>
 						<th>직원이름</th>
 						<th>업무파트</th>
-						<th>생일</th>
+						<th>생년월일</th>
 						<th>입사일</th>
 						<th>급여</th>
 						<th>퇴사일</th>
@@ -35,7 +38,7 @@
 				<tbody>
 					<c:forEach items="${emp}" var="emp">
 						<tr>
-							<td>${emp.empNum}</td>
+							<td style="display:none;">${emp.empNum}</td>
 							<td>${emp.empName}</td>
 							<td><c:choose>
 									<c:when test="${emp.workPart == 1}">
@@ -48,20 +51,27 @@
 								</c:choose></td>
 							<td>${emp.empBirth}</td>
 							<td>${emp.hireDate}</td>
-							<td>${emp.salary}</td>
+							<c:choose>
+								<c:when test="${emp.empClass eq 1}">
+									<td>${emp.salary}만원</td>
+								</c:when>
+								<c:when test="${emp.empClass eq 2}">
+								     <td>${emp.salary}(시급)</td>
+								</c:when>
+							</c:choose>
 							<td>${emp.endDate}</td>
 							<td>${emp.empPhone}</td>
 							<td><c:choose>
-									<c:when test="${emp.empClass == 1}">
-					        	아르바이트
+									<c:when test="${emp.empClass eq 1}">
+					        	정직원
 					    </c:when>
-									<c:otherwise>정직원</c:otherwise>
+									<c:otherwise>아르바이트</c:otherwise>
 								</c:choose></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<input type="button" class="btn btn-danger"
+			<input type="button" class="btn btn-primary"
 				onClick="location.href='empInsertForm'" value="등록" />
 		</div>
 	</div>

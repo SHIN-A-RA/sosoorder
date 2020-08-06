@@ -20,7 +20,7 @@
 	   
 	  }	  
 	 }	
- 
+ $(document).on("keyup", ".phone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
 </script>	 
 <script>
 /* 휴대폰 번호 중복체크 */
@@ -122,7 +122,7 @@ $(document).ready(function(){
 		<form action="memberInsert" method="post" name="frm">
 			<div class="form-item">
 				<p class="formLabel">Phone</p>
-				<input type="text" name="phone" id="phone" class="form-style"
+				<input type="text" name="phone" id="phone" class="form-style phone"
 					autocomplete="off" />
 			</div>
 			<p><span id = "temp"></span></p>

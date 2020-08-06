@@ -34,6 +34,7 @@ public class EmpController {
 		@RequestMapping("empInsertForm")
 		public String empInsertForm(EmpVO vo,Model model) {
 			if(vo.getEmpNum() != null && !vo.getEmpNum().isEmpty()) {
+				System.out.println("========================================="+empService.getEmpNum(vo));
 				model.addAttribute("one", empService.getEmpNum(vo));
 			}
 			//비어있는 form으로 보냄
