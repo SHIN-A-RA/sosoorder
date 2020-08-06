@@ -150,7 +150,7 @@ to {
 			<div class="col" align="center">
 				<span class="label_set"> <label for="rdnmcounty1"
 					class="sr_only">시군구</label> <select name="rdnmcounty1"
-					id="rdnmcounty1" class="select" onchange="changeAreaList2();"
+					id="rdnmcounty1" class="select" onchange="viewData();"
 					title="시군구 선택">
 						<option value="">::선택::</option>
 				</select>
@@ -171,9 +171,7 @@ to {
 						<tbody>
 							<c:forEach items="" var="List">
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
