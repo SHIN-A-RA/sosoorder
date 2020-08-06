@@ -50,5 +50,40 @@ public class GyurimApiController {
 		response.setContentType("application/xml;charset=UTF-8");
 		response.getWriter().print(result.toString());
 	}
+	
+	
 
+	// 업종,상호명, 주소 가져오는.
+	
+	@RequestMapping("getDataApi")
+	public void getDataApi(HttpServletResponse response, @RequestParam String name) throws IOException {
+	
+		StringBuffer result = new StringBuffer();
+		try {
+			StringBuilder urlstr = new StringBuilder(
+					"http://apis.data.go.kr/B553077/api/open/sdsc/baroApi?resId=store&catId=dong&divId=ctprvnCd");
+			urlstr.append("&" + URLEncoder.encode("key", "UTF-8") + "=" + name);
+			urlstr.append("&" + URLEncoder.encode("ServiceKey", "UTF-8")
+					+ "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*
+																																 * Service
+																																 * Key
+																																 */
+			URL url = new URL(urlstr.toString());
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			String returnLine;
+			result.append("<xmp>");
+			while ((returnLine = br.readLine()) != null) {
+				result.append(returnLine + "\n");
+			}
+			urlconnection.disconnect();
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		result.append("</xmp>");
+		response.setContentType("application/xml;charset=UTF-8");
+		response.getWriter().print(result.toString());
+	}
 }

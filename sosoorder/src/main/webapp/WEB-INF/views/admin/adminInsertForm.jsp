@@ -26,7 +26,6 @@
 	src="//cdn.jsdelivr.net/gh/stove99/jquery-modal-sample@v1.4/js/modal.js"></script>
 
 <script>
-
 	//필수 입력 체크, 정규식
 	function validCheck() {
 
@@ -138,41 +137,79 @@
 </select>
 
 <script>
-/* 
-시군구 가져오는.
-*/
-function viewSigoongoo(){
-			var sido = $('#rdnmcity1').val();
-			$.ajax({ 
-			    url: 'getSiGoongooApi', 
-			    type: 'GET',
-			    data: {name:sido},
-			    dataType: 'xml',
-/* 			    contentType: 'application/json; charset=utf8',
-			    crossDomain:true,
- */  		    success: function(result) {
-	 				$("#rdnmcounty1").empty();
-			    	var sis = $(result).find('item');
-			    	console.log(sis);
-			    	$.each(sis, function(idx, item) {
-			    		console.log($(item).children().eq(2).text());
-			    		$("#rdnmcounty1")
-			    		.append($("<option>").val($(item).children().eq(2).text()).text($(item).children().eq(3).text()))
-			    		
-			    	})
-			    },
-			    error:function(xhr, status, message) { 
-			        alert(" status: "+status+" er:"+message);
-			    }
-			});			
-	} 
-function jsonCallback(e) {
-	alert(e)
-	//function(result) {
-    	//console.log(result);
-    	//$('#rdnmcity1').val(result);
-    //}
-}
+	/* 
+	 시군구 가져오는.
+	 */
+	function viewSigoongoo() {
+		var sido = $('#rdnmcity1').val();
+		$.ajax({
+			url : 'getSiGoongooApi',
+			type : 'GET',
+			data : {
+				name : sido
+			},
+			dataType : 'xml',
+			/* 			    contentType: 'application/json; charset=utf8',
+			 crossDomain:true,
+			 */success : function(result) {
+				console.log(result);
+				$("#rdnmcounty1").empty();
+				var sis = $(result).find('item');
+				console.log(sis);
+				$.each(sis, function(idx, item) {
+					//console.log($(item).children().eq(2).text());
+					$("#rdnmcounty1").append(
+							$("<option>").val($(item).children().eq(2).text())
+									.text($(item).children().eq(3).text()))
+
+				})
+			},
+			error : function(xhr, status, message) {
+				alert(" status: " + status + " er:" + message);
+			}
+		});
+	}
+	/* function jsonCallback(e) {
+	 alert(e)
+	 //function(result) {
+	 //console.log(result);
+	 //$('#rdnmcity1').val(result);
+	 //}
+	 } */
+</script>
+<script>
+	/* 상호명, 업종,주소가져오는. */
+	function viewData() {
+		var data = $('#rdnmcounty1').val();
+		var sido = $('#rdnmcity1').val();
+		$.ajax({
+			url : 'getDataApi',
+			type : 'GET',
+			data : {
+				name : sido
+			},
+			dataType : 'xml',
+			success : function(result) {
+				console.log(result);
+				$("#table_id").empty();
+				var sis = $(result).find('item');
+				console.log(sis);
+				$.each(sis, function(idx, item) {
+					if( data==$(item).children().eq(13).text()){
+						/* console.log($(item).children().eq(6).text())
+						console.log($(item).children().eq(1).text())
+						console.log($(item).children().eq(31).text()) */
+						
+					$("#table_id").append($("<td>")).text($(item).children().eq(6).innerHTML())
+					.append($("<td>")).text($(item).children().eq(1).text())
+					.append($("<td>")).text($(item).children().eq(31).text())}
+				})
+			},
+			error : function(xhr, status, message) {
+				alert(" status: " + status + " er:" + message);
+			}
+		});
+	}
 </script>
 
 <meta charset="UTF-8">
