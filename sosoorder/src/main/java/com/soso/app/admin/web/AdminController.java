@@ -84,10 +84,9 @@ public class AdminController {
 		return "admin/adminInsert";
 	}
 
-	// test
-	@RequestMapping(value = "/testForm", method = RequestMethod.GET)
+	//모달컨텐츠
+	@RequestMapping(value = "/adminNameSch", method = RequestMethod.GET)
 	public String adminNameSch() {
-
 		return "empty/admin/adminNameSch";
 	}
 

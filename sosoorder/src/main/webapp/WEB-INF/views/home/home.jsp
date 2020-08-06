@@ -130,7 +130,7 @@ myApp.controller("myAppCtrl", function($scope){
 			contentType: 'application/json'
         }).done(function(){
         	deleteMenu();
-        	window.location.href = "/sosoroder/orderInsert?orderNum="+ ${menuOrderNum.orderNum+1} ;
+        	window.location.href = "/sosoroder/orderInsert?orderNum="+ ${menuOrderNum.orderNum+1}+"&seat="+${seat.seat} ;
         })
 	}); 
 	

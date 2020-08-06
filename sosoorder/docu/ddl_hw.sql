@@ -104,7 +104,9 @@ BEGIN
 	
 	delete from point where point is null;
 	update POINT set MEMBERNUM=1 where MEMBERNUM=0
-	delete from PAYMENT where payNum BETWEEN 14 and 95;
+	/* 결제 주문 지우기*/
+	delete from PAYMENT where payNum BETWEEN 17 and 30;
+	delete from ordercpt where payNum BETWEEN 17 and 30;
 	delete from payment where paycheck is null;
 	delete from payment where MEMBERNUM is null;
 	
@@ -168,23 +170,25 @@ WHERE s.storeId = 'test'
 	AND NOT p.status = '2'
 	
 /* 주문현황 뿌리기 */		
-select  ov.storeId,
+select  m.storeId,
 		p.paycheck, 
 		p.payNum,
 		o.orderCount, 
 		m.menuName, 
 		s.seat, 
 		d.addr
-from ORDERALL_VIEW ov, 
-	 payment p, 
+from payment p, 
 	 orderCpt o, 
 	 menu m, 
 	 seat s, 
 	 delivery d
-where ov.paynum = p.paynum 
-	AND p.payNum = o.payNum 
-	AND o.menuNum = m.menuNum 
-	AND p.seatNum = s.seatNum(+) 
-	AND p.payNum = d.paynum(+)
-    AND s.storeId = 'test'
-    AND NOT p.status = '2';
+where 	p.payNum = o.payNum 
+		AND o.menuNum = m.menuNum 
+		AND p.seatNum = s.seatNum(+) 
+		AND p.payNum = d.paynum(+)
+	    AND s.storeId = 'test'
+	    AND NOT p.status = '2'
+	    order by paynum , menuName ;
+	    
+UPDATE PAYMENT SET STATUS='1' WHERE PAYNUM = #{payNum}
+    

@@ -16,15 +16,6 @@ public class UserController {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@RequestMapping("storeInfo")
-	public void storeInfo(Model model, AdminVO adminVO, HttpSession session) {
-		
-		//세션 가져오기
-		String storeId = (String)session.getAttribute("storeId");
-		adminVO.setStoreId(storeId);
-		model.addAttribute("storeInfo", userMapper.storeInfo(adminVO));
-	
-	}
 	
 
 }

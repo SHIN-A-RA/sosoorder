@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
 <script src="resources/admin/scss/addcss/adminInsertValued.js"></script>
@@ -129,7 +130,50 @@
 		});
 	});
 </script>
+<select>
+	<option></option>
+	<option></option>
+	<option></option>
+	<option></option>
+</select>
 
+<script>
+/* 
+시군구 가져오는.
+*/
+function viewSigoongoo(){
+			var sido = $('#rdnmcity1').val();
+			$.ajax({ 
+			    url: 'getSiGoongooApi', 
+			    type: 'GET',
+			    data: {name:sido},
+			    dataType: 'xml',
+/* 			    contentType: 'application/json; charset=utf8',
+			    crossDomain:true,
+ */  		    success: function(result) {
+	 				$("#rdnmcounty1").empty();
+			    	var sis = $(result).find('item');
+			    	console.log(sis);
+			    	$.each(sis, function(idx, item) {
+			    		console.log($(item).children().eq(2).text());
+			    		$("#rdnmcounty1")
+			    		.append($("<option>").val($(item).children().eq(2).text()).text($(item).children().eq(3).text()))
+			    		
+			    	})
+			    },
+			    error:function(xhr, status, message) { 
+			        alert(" status: "+status+" er:"+message);
+			    }
+			});			
+	} 
+function jsonCallback(e) {
+	alert(e)
+	//function(result) {
+    	//console.log(result);
+    	//$('#rdnmcity1').val(result);
+    //}
+}
+</script>
 
 <meta charset="UTF-8">
 <div id="formWrapper">
@@ -220,6 +264,13 @@
 						class="btn btn-secondary" data-toggle="modal"
 						data-target="#myModal">찾기</button>
 				</div>
+				<script>
+					// Get the modal
+					var modal = document.getElementById("myModal");
+
+					// Get the button that opens the modal
+					var btn = document.getElementById("myBtn");
+				</script>
 				<!-- The Modal -->
 				<div class="modal" id="myModal">
 					<div class="modal-dialog modal-lg">
@@ -230,17 +281,9 @@
 				</div>
 			</div>
 			<script>
-				// Get the modal
-				var modal = document.getElementById("myModal");
-
-				// Get the button that opens the modal
-				var btn = document.getElementById("myBtn");
-			</script>
-			<script>
 				//content사이에 adminnamesch 너어주는 쇼이벤트
 				$('#myModal').on('shown.bs.modal', function() {
-					$('.modal-content').load('testForm')
-
+					$('.modal-content').load('adminNameSch')
 				})
 			</script>
 

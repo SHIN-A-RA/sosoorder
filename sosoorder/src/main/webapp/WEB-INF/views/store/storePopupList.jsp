@@ -9,7 +9,7 @@
 
  <!-- Page Heading -->
    <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
-      <h1 class="h3 mb-0 text-gray-800">쿠폰관리</h1>
+      <h1 class="h3 mb-0 text-gray-800">팝업관리</h1>
     </div>
     
 <div class="row">

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
-	xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -29,11 +29,14 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="2"></beans:property>
+		<beans:property name="order" value="3"></beans:property>
 	</beans:bean>
 
 	<context:component-scan
 		base-package="com.soso.app" />
+	
+	<beans:bean p:order="1"
+	class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
 
 	<!-- Tiles -->
 	<beans:bean id="tilesConfigurer"
@@ -48,7 +51,7 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
-		<beans:property name="order" value="1" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 
 	<!-- MultipartResolver 설정 -->
@@ -86,6 +89,21 @@
 	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
 <!-- 	<task:scheduler id="jobScheduler" pool-size="10" />
 	<task:annotation-driven scheduler="jobScheduler" /> -->
+	
+	<!-- Interceptors -->
+	<interceptors>
+         <interceptor>
+                  <mapping path="/**" /> 
+                  <!--mvc 인터셉터를 거치지 않고 예외 시킬 URL 요청들 정의 -->
+ 				  <exclude-mapping path="/"/>
+ 				  <exclude-mapping path="/memberLoginForm"/>
+ 				  <exclude-mapping path="/memberInsertForm"/>
+ 				  <exclude-mapping path="/adminInsertForm"/>
+                  <beans:bean class="com.soso.app.common.MyInterceptor" />
+         </interceptor>
+	</interceptors>
 
 
 </beans:beans>
+
+

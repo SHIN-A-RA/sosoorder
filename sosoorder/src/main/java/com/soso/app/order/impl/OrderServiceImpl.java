@@ -70,9 +70,12 @@ public class OrderServiceImpl implements OrderService{
 		
 	}
 
+	@Override
+	public OrderCptVO receiptGet(OrderCptVO orderCptVO) {
+		return orderMapper.receiptGet(orderCptVO);
+	}
 
-	
-	
+
 	
 
 	
