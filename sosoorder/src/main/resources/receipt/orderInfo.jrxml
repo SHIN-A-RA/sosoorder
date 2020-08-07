@@ -29,7 +29,7 @@ where payNum =  $P{p_payNum}]]>
 			<textField>
 				<reportElement x="2" y="0" width="550" height="60" uuid="c0a729a4-84ad-43a4-9325-a5e51bcc16f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="19"/>
+					<font fontName="맑은고딕" size="19"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{STORENAME}]]></textFieldExpression>
 			</textField>
