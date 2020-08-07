@@ -129,12 +129,7 @@
 		});
 	});
 </script>
-<select>
-	<option></option>
-	<option></option>
-	<option></option>
-	<option></option>
-</select>
+
 
 <script>
 	/* 
@@ -191,7 +186,7 @@
 			dataType : 'xml',
 			success : function(result) {
 				console.log(result);
-				$("#table_id").empty();
+				$("#tbody").empty();
 				var sis = $(result).find('item');
 				console.log(sis);
 				$.each(sis, function(idx, item) {
@@ -199,11 +194,14 @@
 						/* console.log($(item).children().eq(6).text())
 						console.log($(item).children().eq(1).text())
 						console.log($(item).children().eq(31).text()) */
-						
-					$("#table_id").append($("<td>")).text($(item).children().eq(6).innerHTML())
-					.append($("<td>")).text($(item).children().eq(1).text())
-					.append($("<td>")).text($(item).children().eq(31).text())}
+					
+					 $("<tr>").append($("<td>").text($(item).children().eq(6).text()))
+					.append($("<td>").text($(item).children().eq(1).text()))
+					.append($("<td>").text($(item).children().eq(31).text()))
+					.appendTo('#tbody')
+					} 
 				})
+				addrAdd();
 			},
 			error : function(xhr, status, message) {
 				alert(" status: " + status + " er:" + message);
@@ -211,6 +209,7 @@
 		});
 	}
 </script>
+ 
 
 <meta charset="UTF-8">
 <div id="formWrapper">

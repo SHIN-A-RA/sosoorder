@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-	
+
 <script>
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
@@ -28,8 +28,6 @@
 			modal.style.display = "none";
 		}
 	}
-
-	 
 </script>
 
 
@@ -121,10 +119,8 @@ to {
 	<div class="address_area">
 		<div class="sort_box row">
 			<div class="col" align="center">
-				<span class="label_set"> 
-				<label for="rdnmcity1"
-					class="sr_only">시도</label> 
-					<select name="rdnmcity1" id="rdnmcity1"
+				<span class="label_set"> <label for="rdnmcity1"
+					class="sr_only">시도</label> <select name="rdnmcity1" id="rdnmcity1"
 					class="select" onchange="viewSigoongoo();" title="시도선택">
 						<option value="" style="text-align: center;">::선택::</option>
 						<option value="11" title="서울특별시">서울특별시</option>
@@ -163,36 +159,45 @@ to {
 					<table id="table_id" class="display tb_style">
 						<thead>
 							<tr>
-								<th>업소명</th>
 								<th>업종</th>
+								<th>상호명</th>
 								<th>주소</th>
 							</tr>
 						</thead>
-						<tbody>
-							<c:forEach items="" var="List">
-								<tr>
-									
-								</tr>
-							</c:forEach>
+						<tbody id="tbody">
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-		<script>
-			$(function() {
-				//데이터테이블
-				var otable = $('#table_id').DataTable({});
-			});
-		</script>
+	<script>
+	function() {
+		
+	function addrAdd() {
+		//데이터테이블
+		var otable = $('#table_id').DataTable({});
+		$('#table_id tbody').on('click', 'tr', function() {
+			$(.SA).val($(this).find('td').eq(1).text());
+			var col1 = $(this).find('td').eq(1).text();
+			//console.log(col1);
+			//var data = otable.row(this).data();
+			//var col1 = data[1];
+			
+			 //"adminNameSch?SA=" + col1
+		}
+		});
+		});
+	
+</script> 
 
 
 		<div class="complete_zone">
-			<h4>도로명 조회결과</h4>
-			<input type="text" value="" id="addrValue" readonly="readonly"
-				title="도로명 조회 결과">
-			<div id="menuExplain">※ 목록에서 도로명 클릭 후 선택버튼을 누르시면 검색창에 입력됩니다.</div>
-			<label data-toggle="modal" data-target="#contentModal">asdfasdf</label>
+			<h4>- 선택 된 상호 명 -</h4>
+			<input type="text" value="" name="SA" id="SA"
+				readonly="readonly" title="도로명 조회 결과">
+			<div id="menuExplain">※ 목록에서 상호명 클릭 후 선택버튼을 누르시면 회원가입 페이지(상호명)에
+				입력됩니다.</div>
 		</div>
 	</div>
 </div>

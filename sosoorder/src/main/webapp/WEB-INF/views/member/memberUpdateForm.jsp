@@ -13,9 +13,8 @@
 <br>
 <br>
 <br>
-<form action="MemberUpdate" method="post"
-	enctype="multipart/form-data" name="MemberUpdate"
-	id="MemberUpdate">
+<form action="memberUpdate" method="post" enctype="multipart/form-data"
+	name="memberUpdate" id="memberUpdate">
 	<input type="hidden" name="memberNum" value="${oneSm.memberNum}" />
 	<div class="row">
 		<div class="col">
@@ -39,5 +38,8 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="dress" id="btn">
+		<input type="submit" class="btn btn-primary" value="수정" />
+	</div>
+
 </form>
