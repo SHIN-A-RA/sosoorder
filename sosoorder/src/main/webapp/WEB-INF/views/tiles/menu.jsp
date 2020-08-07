@@ -6,7 +6,7 @@
 	<!-- 고객메뉴 -->
 	<li class="gnb_dp1 menu1"><span><a href="/sosoroder/homeSample"><i class="fa fa-cutlery" aria-hidden="true"></i> 메뉴</a></span></li>
 	<!-- 내 주변 쿠폰 -->
-	<li class="gnb_dp1 menu2"><span><a><i class="fa fa-map-marker" aria-hidden="true"></i> 내 주변 쿠폰</a></span></li>
+	<li class="gnb_dp1 menu2"><span><a href="/sosoroder/gps"><i class="fa fa-map-marker" aria-hidden="true"></i> 내 주변 쿠폰</a></span></li>
 	<!-- 호출 -->
 	<li class="gnb_dp1 menu3">
 		<span>
@@ -16,5 +16,5 @@
 		</span>
 	</li>
 	<!-- 마이페이지 -->
-	<li class="gnb_dp1 menu2"><span><a><i class="fa fa-id-card-o" aria-hidden="true"></i> 마이페이지</a></span></li>
+	<li class="gnb_dp1 menu2"><span><a href="/sosoroder/myPointsList"><i class="fa fa-id-card-o" aria-hidden="true"></i> 마이페이지</a></span></li>
 </ul>

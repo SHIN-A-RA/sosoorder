@@ -39,8 +39,6 @@ public class ReorderController {
 		return "reorder/mail";
 	}
   
-	
-	
 	// mailSending 코드
 	@RequestMapping("mailSending")
 	public String mailSending(HttpServletRequest request) {
@@ -66,7 +64,6 @@ public class ReorderController {
 		return "emp/empList";
 	}
 	
-
 	@RequestMapping("sendMailAttach")
 	public String sendMailAttach(final ReorderVO vo, MemberVO memberVO, HttpServletRequest request,Model model, 
 			ReorderVO reorderVO, HttpSession session,AdminVO adminVO
@@ -124,13 +121,13 @@ public class ReorderController {
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
 		return "reorder/mailList";
 	}
-	
 	//목록조회
 	@RequestMapping("mailList")
-	public String mailList(Model model, ReorderVO reorderVO) {
+	public String mailList(Model model, ReorderVO reorderVO,HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		reorderVO.setStoreId(storeId);
 		model.addAttribute("mailList",reorderService.getmailList(reorderVO));
 		return "reorder/mailList";
 		//일반 방식
-	
 	}
 }

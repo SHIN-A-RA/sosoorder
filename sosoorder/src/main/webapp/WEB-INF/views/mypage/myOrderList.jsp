@@ -64,14 +64,13 @@
 					<td>${order.storeName}</td>
 					<td>${order.menuName}</td>
 					<td align='center'><input type=submit name="${order.payNum}"
-						value="별점주기" style="width: 50%" class="btnadd"></td>
+						value="상세보기/별점" style="width: 50%" class="btnadd"></td>
 
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div class="container">
-
 
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal">
@@ -122,8 +121,7 @@
 						<h4 class="modal-title">별점등록</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-
-						
+		
 						<table class="table table-white">
 							<thead>
 								<tr>
@@ -133,8 +131,7 @@
 							<tbody id="starOrderListTBody2">
 
 							</tbody>
-						</table>
-					
+						</table>	
 					<!-- Modal body -->
 				<form action="orderStarUpdate" method="post" >
       				<input type="hidden" name="orderStar" id="starC">
@@ -249,7 +246,6 @@
 			});
 		});//조회 버튼 클릭
 	}//starOrderList
-
 	//주문내역 조회 응답
 	function starOrderListResult(myOrder) {
 		$("#starOrderListTBody").empty();
@@ -257,7 +253,7 @@
 							$('<tr>')
 									.append($('<td>').html(item.menuName))
 									.append($('<td>').html(item.orderCount))
-									.append($('<td>').addClass("s_"+item.orderStar+" starbtntd").html("<button name='"+ item.menuOrderNum+"' type='button' class='btn btn-primary btnadd2 mcheck_" + item.menuCheck + "' data-toggle='modal' data-target='#myModal2'>별점추가</button>"))
+									.append($('<td>').addClass("s_"+item.orderStar+" starbtntd").html("<button name='"+ item.menuOrderNum+"' type='button' class='btn btn-primary btnadd2 mcheck_" + item.menuCheck + "' data-toggle='modal' data-target='#myModal2'>별점등록</button>"))
 									.append($('<td>').addClass("s_"+item.orderStar+" startd"))
 									.appendTo("#starOrderListTBody");
 						});//each

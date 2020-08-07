@@ -12,6 +12,7 @@ import com.soso.app.admin.service.AdminVO;
 @Service
 public class AdminServiceImpl implements AdminService {
 
+	
 	@Autowired
 	AdminMapper adminMapper;
 
