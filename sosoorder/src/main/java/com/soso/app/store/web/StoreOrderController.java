@@ -21,14 +21,17 @@ public class StoreOrderController {
 
    @Autowired StoreOrderService storeOrderService;
 
-	@RequestMapping("getOrderList")
-	public @ResponseBody List<Map<String,Object>> getOrderList(Model model, StoreOrderVO storeOrderVO){
-		
-		return storeOrderService.getOrderList(storeOrderVO);
-	}
+	/*
+	 * @RequestMapping("getOrderList") public @ResponseBody List<Map<String,Object>>
+	 * getOrderList(Model model, StoreOrderVO storeOrderVO){
+	 * 
+	 * return storeOrderService.getOrderList(storeOrderVO); }
+	 */
 	
 	@RequestMapping("storeOrderList")
 	public String storeOrderList(Model model,HttpSession session, StoreOrderVO storeOrderVO) {
+		String storeId = (String)session.getAttribute("storeId");
+		storeOrderVO.setStoreId(storeId);
 		model.addAttribute("orderList", storeOrderService.getOrderList(storeOrderVO));
 		return "store/storeOrderList";
 	}

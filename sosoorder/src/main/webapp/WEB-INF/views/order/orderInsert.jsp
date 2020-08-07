@@ -403,7 +403,7 @@ $(function(){
 		$(".selectdel").on("change",function(){
 	        if($(".selectdel").is(":checked")){
 	        	$('#selectSeat').val($(".empty").val());
-	        	$(".seat").val($(".empty").val());
+	        	$(".seat").val($(".empty").val()); 
 				$('#selectSeat').attr('disabled', 'true');
 				 alert("배달 주문을 하시겠습니까?");
 	        }else{
