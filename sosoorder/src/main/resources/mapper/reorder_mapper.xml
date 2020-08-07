@@ -74,7 +74,7 @@
       FROM reorder
       where storeId = #{storeId}
       ORDER BY reorderNum
-
+       
    </select>
 
 	<!-- <update id="updateSomething" parameterType="#modelname">
