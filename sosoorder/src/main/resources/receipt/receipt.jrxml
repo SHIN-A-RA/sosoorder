@@ -172,7 +172,7 @@ where payNum =  $P{p_payNum}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="542" splitType="Stretch">
+		<band height="324" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="150" width="554" height="30" forecolor="#FFFFFF" backcolor="#B8B8B8" uuid="0cfd1d18-bb3a-4362-b5d6-43765c9dd962"/>
 			</rectangle>
@@ -283,33 +283,37 @@ where payNum =  $P{p_payNum}]]>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/receipt/orderInfo.jasper"]]></subreportExpression>
 			</subreport>
-			<staticText>
-				<reportElement style="b_txt" x="1" y="330" width="98" height="30" uuid="13e39a5a-f2f8-4d67-9bf3-5bd1a6074df6"/>
-				<text><![CDATA[합      계 :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="b_txt" x="1" y="360" width="99" height="30" uuid="a1b19d84-26cb-41a7-b05a-90da012d55da"/>
-				<text><![CDATA[할인금액 :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="b_txt" x="1" y="390" width="98" height="30" uuid="a1e15c38-5397-4e48-876f-7e3655f8d64f"/>
-				<text><![CDATA[받을금액 :]]></text>
-			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="106">
 			<textField>
-				<reportElement style="b_txt" x="350" y="330" width="194" height="30" uuid="59fab746-38ee-40c2-b323-cdf04bfeba01"/>
+				<reportElement style="b_txt" x="360" y="0" width="194" height="30" uuid="f6c5e36d-c276-4099-baa4-2c2d2abd6675"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{TOTALPAY}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement style="b_txt" x="11" y="0" width="98" height="30" uuid="6ffa8deb-4df7-4c02-9e4e-3f1952beedee"/>
+				<text><![CDATA[합      계 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="b_txt" x="11" y="60" width="98" height="30" uuid="5990e083-11f5-4928-9573-c876ea70b8f7"/>
+				<text><![CDATA[받을금액 :]]></text>
+			</staticText>
 			<textField>
-				<reportElement style="b_txt" x="211" y="360" width="332" height="30" uuid="85577b5f-e4fc-4d56-abc4-511c8dfab51f"/>
+				<reportElement style="b_txt" x="221" y="30" width="332" height="30" uuid="001bdef9-2f0e-47b4-b12e-351291a7e03a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[Integer.parseInt($F{POINTUSE})+Integer.parseInt($F{COUPONUSE})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="b_txt" x="99" y="390" width="443" height="30" uuid="b053cbbb-267e-42b5-af31-0eca88fdbd1d"/>
+				<reportElement style="b_txt" x="109" y="60" width="443" height="30" uuid="657ba65a-88b9-494c-b3db-86ea8b2fee4d"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{TOTALPAY}.intValue()-Integer.parseInt($F{COUPONUSE})-Integer.parseInt($F{POINTUSE})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement style="b_txt" x="11" y="30" width="99" height="30" uuid="9b2feaa6-9b61-48f1-a600-7e58461658a4"/>
+				<text><![CDATA[할인금액 :]]></text>
+			</staticText>
 		</band>
-	</detail>
+	</columnFooter>
 </jasperReport>
