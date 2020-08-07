@@ -172,13 +172,14 @@ function removeChar(event) {
     <div class="basic">
     	<span>좌석번호
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
-    				<c:forEach var="seat" items="${seat}">
     				<c:if test="${param.seat != 0 }">
-    					<option selected hidden>${param.seat}</option>
-    					<option value="${seat.seat}">${seat.seat}</option>
+    					<option selected>${param.seat}</option>
     				</c:if>
     				<c:if test="${param.seat == 0}">
-    					<option id="empty" key="default-empty" hidden></option> 
+    					<option id="empty" key="default-empty"></option> 
+    				</c:if>
+    				<c:forEach var="seat" items="${seat}">
+    				<c:if test="${param.seat != seat.seat}">
     					<option value="${seat.seat}">${seat.seat}</option>
     				</c:if>
    					 </c:forEach>

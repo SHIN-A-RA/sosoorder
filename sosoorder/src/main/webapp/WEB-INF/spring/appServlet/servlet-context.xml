@@ -99,6 +99,7 @@
  				  <exclude-mapping path="/memberLoginForm"/>
  				  <exclude-mapping path="/memberInsertForm"/>
  				  <exclude-mapping path="/adminInsertForm"/>
+ 				  <exclude-mapping path="/jusoPopup"/>
                   <beans:bean class="com.soso.app.common.MyInterceptor" />
          </interceptor>
 	</interceptors>

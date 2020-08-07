@@ -35,7 +35,9 @@ display:none;
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
-
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+<script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.js"></script>
+<script src="resources/admin/scss/toastChart/tui-chart-all.min.js"></script>
 
 
 
@@ -142,9 +144,93 @@ google.charts.setOnLoadCallback(drawChart2);// chart 시작하자마자 그리�
    	      monthSales ='';
    	      daySales ='';
       }
+      
+      
+    
 /*============================================================================
-    	END OF 년/월/일CHART
+    	END OF 달CHART
 ============================================================================*/
+
+$(function drawChart3(){
+var container = document.getElementById('chart-area');
+var categoriesData=[];
+var seriesData=[];
+	$.ajax({
+		url : "getMonthTotal",
+		async : false,
+		success : function(result) {
+			for(i=0; i<result.length; i++) {
+				categoriesData.push(result[i].MONTH);
+				seriesData.push(parseInt(result[i].MONTHTOTAL));
+			}
+		}
+	});
+	console.log(categoriesData);
+	console.log(seriesData);
+var data = {
+    categories: categoriesData,
+    
+    series: [
+        {
+            name: '매달 매출',
+            data: seriesData
+        }
+    ]
+};
+var options = {
+    chart: {
+        width: 1160,
+        height: 540,
+        title: '달별 총 수입'
+    },
+    yAxis: {
+        title: '금액 단위',
+    },
+    xAxis: {
+        title: '달',
+        pointOnColumn: true,
+        dateFormat: 'MMM',
+        tickInterval: 'auto'
+    },
+    series: {
+        showDot: false,
+        zoomable: true
+    },
+    tooltip: {
+        suffix: '°C'
+    },
+    plot: {
+        bands: [
+            {
+                range: ['03/01/2016', '05/01/2016'],
+                color: 'gray',
+                opacity: 0.2
+            }
+        ],
+        lines: [
+            {
+                value: '03/01/2016',
+                color: '#fa2828'
+            }
+        ]
+    }
+};
+var theme = {
+    series: {
+        colors: [
+            '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
+            '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
+        ]
+    }
+};
+// For apply theme
+// tui.chart.registerTheme('myTheme', theme);
+// options.theme = 'myTheme';
+var chart = tui.chart.lineChart(container, data, options);
+
+});
+
+
 
 
 function drawChart2() {
@@ -179,7 +265,7 @@ function drawChart2() {
 
     var chart = new google.charts.Line(document.getElementById('line_top_x'));
     chart.draw(data, google.charts.Line.convertOptions(options));
-  }
+  } 
 </script>
 
 <!-- ==================================
@@ -194,5 +280,8 @@ function drawChart2() {
  <!-- ==================================
 				차트2(달별)
 ====================================== -->
-<div id="line_top_x" style="width:49%; float:right;"></div>
+       
 </div>
+
+<div id="chart-area"></div>
+
