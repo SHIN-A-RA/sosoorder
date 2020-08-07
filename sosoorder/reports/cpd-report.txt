@@ -1,0 +1,556 @@
+Found a 29 line (130 tokens) duplication in the following files: 
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\common\FileRenamePolicy.java
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\common\FileRenamePolicy.java
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeorder\web\FileRenamePolicy.java
+
+public class FileRenamePolicy {
+	public static File rename(File f) {             //File f?äî ?õêÎ≥? ?åå?ùº
+	    if (!f.exists()) return f;        //?Éù?Ñ±?êú fÍ∞? Ï§ëÎ≥µ?êòÏß? ?ïä?úºÎ©? Î¶¨ÌÑ¥
+	     
+	    String name = f.getName();
+	    String body = null;
+	    String ext = null;
+	 
+	    int dot = name.lastIndexOf(".");
+	    if (dot != -1) {                              //?ôï?û•?ûêÍ∞? ?óÜ?ùÑ?ïå
+	      body = name.substring(0, dot);
+	      ext = name.substring(dot);
+	    } else {                                     //?ôï?û•?ûêÍ∞? ?ûà?ùÑ?ïå
+	      body = name;
+	      ext = "";
+	    }
+	 
+	    int count = 0;
+	    //Ï§ëÎ≥µ?êú ?åå?ùº?ù¥ ?ûà?ùÑ?ïå
+	    //?åå?ùº?ù¥Î¶ÑÎí§?óê a?à´?ûê.?ôï?û•?ûê ?ù¥?†áÍ≤? ?ì§?ñ¥Í∞?Í≤? ?êò?äî?ç∞ ?à´?ûê?äî 9999ÍπåÏ? ?êú?ã§.
+	    while ( f.exists() && count < 9999) { 
+	      count++;
+	      String newName = body + count + ext;
+	      f = new File(f.getParent(), newName);
+	    }
+	    return f;
+	  }
+	 
+}
+=====================================================================
+Found a 28 line (98 tokens) duplication in the following files: 
+Starting at line 13 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\mapper\OrderMapper.java
+Starting at line 12 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\service\OrderService.java
+
+public interface OrderMapper {
+	
+	//Ï£ºÎ¨∏Î©îÎâ¥Î¶¨Ïä§?ä∏
+	public List<Map<String, Object>> getOrder(OrderCptVO orderCptVO);	
+	
+	//by?òú?õê, Ï¥ùÏ†ÅÎ¶ΩÍ∏à ?ôï?ù∏
+	public List<OrderCptVO> getTotalPoint(OrderCptVO orderCptVO);	
+	
+	//by?òú?õê, Ïø†Ìè∞Ï°∞Ìöå
+	public List<Map<String, Object>> findCoupon(OrderCptVO orderCptVO);
+	
+	// Ï¢åÏÑùÏ°∞Ìöå
+	public List<OrderCptVO> getSeat(OrderCptVO orderCptVO);	
+	
+	//Í≤∞Ï†ú?ì±Î°?
+	public void payInsert(OrderCptVO orderCptVO);
+	
+	//Í≤∞Ï†ú?îÑÎ°úÏãú??
+	public void paymentProc(HashMap<String, Object> map);
+	
+	//?†ÅÎ¶ΩÍ∏à?†ÅÎ¶ΩÌïòÍ∏?
+	public void insertPo(OrderCptVO orderCptVO);
+	
+	//?†ÅÎ¶ΩÍ∏àÎ¶¨Ïä§?ä∏
+	public List<Map<String, Object>> showPoint(OrderCptVO orderCptVO);
+	
+	//ÎπÑÌöå?õê?†ÅÎ¶ΩÍ∏à?ïòÍ∏?
+	public void insertMem(MemberVO memberVO);
+=====================================================================
+Found a 17 line (97 tokens) duplication in the following files: 
+Starting at line 60 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\soso\web\ActualDealController.java
+Starting at line 27 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\soso\web\ApiExplorer2.java
+
+            conn.setRequestProperty("Content-Type", "application/json");
+           // System.out.println("Response Code:"+conn.getResponseCode());
+ 
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+ 
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line=rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+=====================================================================
+Found a 16 line (86 tokens) duplication in the following files: 
+Starting at line 82 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\web\MenuController.java
+Starting at line 55 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StorePopupController.java
+
+		MultipartFile file = vo.getUploadFile();
+		String filename = "";
+		if (file != null && file.getSize() > 0) {
+			filename = file.getOriginalFilename();
+			File upFile = FileRenamePolicy.rename(new File(path, filename)); // ?åå?ùº ?ù¥Î¶ÑÏù¥ rename?êò?ñ¥ // ?ò¨?ùºÍ∞??èÑÎ°?
+			filename = upFile.getName();
+			try {
+				file.transferTo(upFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+=====================================================================
+Found a 12 line (81 tokens) duplication in the following files: 
+Starting at line 15 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\mypage\mapper\MypageMapper.java
+Starting at line 11 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\mypage\service\MypageService.java
+
+public interface MypageMapper {
+
+
+//	public List<Map> getPointsList(MemberVO memberVO);
+	public List<Map> getPointsList(HashMap<String, Object> map);
+	public List<Map> getStoreList(HashMap<String, Object> map);
+	public List<Map> getOrderList(MemberVO memberVO);
+	public void orderStarUpdate(OrderCptVO ordercptVO);
+	public List<Map> StarOrderList(PaymentVO paymentVO);
+	public List<Map> getCoupon(HashMap<String, Object> map);
+	public void myCouponDelete(UserCouponVO usercouponVO);
+}
+=====================================================================
+Found a 8 line (80 tokens) duplication in the following files: 
+Starting at line 37 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\mypage\web\MypageController.java
+Starting at line 79 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\mypage\web\MypageController.java
+
+	public String getPointsList(MemberVO memberVO, Model model, HttpSession session,
+			@RequestParam(required = false, value="storeId") String storeId) {
+		String phone = (String)session.getAttribute("phone");
+		memberVO.setPhone(phone);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("phone", phone);
+		map.put("storeId", storeId);
+		model.addAttribute("myPointsList", mypageService.getPointsList(map));
+=====================================================================
+Found a 17 line (61 tokens) duplication in the following files: 
+Starting at line 82 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+Starting at line 106 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+
+		session.setAttribute("storeInfo", storeId);
+		
+		//?Ñ∏?Öò Í∞??†∏?ò§Í∏?
+		//(String)session.getAttribute("storeId")
+		//adminVO.setStoreId(storeId);
+		//menuVO.setStoreId(storeId);
+		seatVO.setSeat("0");
+		model.addAttribute("seat", seatVO);
+		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
+		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
+		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
+		return "home/home";
+	}
+	
+
+	
+	@RequestMapping("homeSample")
+=====================================================================
+Found a 14 line (54 tokens) duplication in the following files: 
+Starting at line 64 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+Starting at line 88 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+Starting at line 107 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+
+		session.setAttribute("seat", seat);
+		
+		//?Ñ∏?Öò Í∞??†∏?ò§Í∏?
+		//(String)session.getAttribute("storeId")
+		//adminVO.setStoreId(storeId);
+		//menuVO.setStoreId(storeId);
+		model.addAttribute("seat", seatVO);
+		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
+		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
+		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
+		return "home/home";
+	}
+	
+	@RequestMapping("homeSample/{storeId}")
+=====================================================================
+Found a 9 line (52 tokens) duplication in the following files: 
+Starting at line 36 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\OrderController.java
+Starting at line 69 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\OrderController.java
+
+   public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
+      
+      String storeId = (String)session.getAttribute("storeId");
+      String phone = (String)session.getAttribute("phone");
+      
+      orderCptVO.setStoreId(storeId);
+      
+      if (phone == null) {
+         orderCptVO.setPhone("null");
+=====================================================================
+Found a 10 line (50 tokens) duplication in the following files: 
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\mapper\EmpMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\service\EmpService.java
+
+public interface EmpMapper {
+
+	public List<EmpVO> getEmp(Object object);
+	public void empInsert(EmpVO employeesVO);
+	public List<EmpVO> getEmpList(String storeId);
+	public void getEmpDelete(EmpVO empVO);
+	public EmpVO getEmpNum(EmpVO empVO);
+	public void setUpdateEmp(EmpVO empVO);
+	
+}
+=====================================================================
+Found a 8 line (47 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\mapper\StorePopupMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\service\StorePopupService.java
+
+public interface StorePopupMapper {
+	public void storePopupInsert(StorePopupVO storePopupVO);
+	public List<StorePopupVO> storePopupList(StorePopupVO storePopupVO);
+	public StorePopupVO storePopupOne(StorePopupVO storePopupVO);
+	public void storePopupUpdate(StorePopupVO storePopupVO);
+	public void storePopupDelete(StorePopupVO storePopupVO);
+	public void storePopupListPro(StorePopupVO storePopupVO);
+}
+=====================================================================
+Found a 5 line (44 tokens) duplication in the following files: 
+Starting at line 82 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\web\MenuController.java
+Starting at line 77 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeorder\web\ReorderController.java
+
+		MultipartFile file = vo.getUploadFile();
+		String filename = "";
+		if (file != null && file.getSize() > 0) {
+			filename = file.getOriginalFilename();
+			File upFile = FileRenamePolicy.rename(new File(path, filename)); // ?åå?ùº ?ù¥Î¶ÑÏù¥ rename?êò?ñ¥ // ?ò¨?ùºÍ∞??èÑÎ°?
+=====================================================================
+Found a 4 line (44 tokens) duplication in the following files: 
+Starting at line 13 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\work\mapper\WorkMapper.java
+Starting at line 16 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\work\service\WorkService.java
+
+	public void workStart(String empNum);
+	public void workEnd(String empNum);
+	public List<Map<String, Object>> getWorkTimeData(String storeId);
+	public List<Map<String, Object>> getEmpListTime(String storeId);
+=====================================================================
+Found a 11 line (40 tokens) duplication in the following files: 
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\admin\mapper\AdminMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\admin\service\AdminService.java
+
+public interface AdminMapper {
+
+	public AdminVO getAdmin(AdminVO adminVO);
+	
+	// ?äà?çº Í¥?Î¶¨ÏûêÎß? ?Ç¨?ö© Í∞??ä•?ïò?èÑÎ°? ?ÇòÏ§ëÏóê Î≥ÑÎèÑÎ°? ?Ñ§?†ï?ï¥?ïº?ï®
+	 public List<AdminVO> getAdminList(AdminVO adminVO); 
+
+	public void adminInsert(AdminVO adminVO);
+	public int idCheck(String id);
+	public void getMenuUpdate(AdminVO adminVO);
+}
+=====================================================================
+Found a 8 line (40 tokens) duplication in the following files: 
+Starting at line 14 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\mapper\HomeMapper.java
+Starting at line 13 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\service\HomeService.java
+
+	public AdminVO getMenuCategory(AdminVO adminVO);
+	public void cartInert(List<OrderCptVO> list);
+	public OrderCptVO getOrderNum(OrderCptVO orderCptVO);
+	public List<OrderCptVO> starListHome();
+	public List<SeatVO> seatListHome(SeatVO seatVO);
+	
+	
+}
+=====================================================================
+Found a 4 line (40 tokens) duplication in the following files: 
+Starting at line 47 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\web\PaymentController.java
+Starting at line 70 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\web\PaymentController.java
+
+	public String storeMng(PaymentVO vo, HttpSession session,MenuVO menuvo){
+		menuvo.setStoreId((String) session.getAttribute("storeId"));
+		vo.setStoreId((String) session.getAttribute("storeId"));
+		return "admin/storeMng";
+=====================================================================
+Found a 8 line (40 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\seat\mapper\SeatMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\seat\service\SeatService.java
+
+public interface SeatMapper {
+	public String getSeat(SeatVO seatVO);
+	public List<SeatVO> getSeatList(SeatVO seatVO);	
+	public void seatInsert(SeatVO seatVO);
+	public void seatUpdate(SeatVO seatVO);
+	public void seatDelete(SeatVO seatVO);
+	
+}
+=====================================================================
+Found a 7 line (40 tokens) duplication in the following files: 
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\mapper\StoreCouponMapper.java
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\service\StoreCouponService.java
+
+public interface StoreCouponMapper {
+	public void storeCouponInsert(StoreCouponVO storeCouponVO);
+	public List<Map> storeCouponList(StoreCouponVO storeCouponVO);
+	public void storeCouponDelete(StoreCouponVO storeCouponVO);
+	public StoreCouponVO storeCouponOne(StoreCouponVO storeCouponVO);
+	public void storeCouponUpdate(StoreCouponVO storeCouponVO);
+}
+=====================================================================
+Found a 5 line (40 tokens) duplication in the following files: 
+Starting at line 55 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StorePopupController.java
+Starting at line 77 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeorder\web\ReorderController.java
+
+		MultipartFile file = storePopupVO.getUploadFile();
+		String filename = "";
+		if (file != null && file.getSize() > 0) {
+			filename = file.getOriginalFilename();
+			File upFile = FileRenamePolicy.rename(new File(path, filename)); // ?åå?ùº ?ù¥Î¶ÑÏù¥ rename?êò?ñ¥ // ?ò¨?ùºÍ∞??èÑÎ°?
+=====================================================================
+Found a 3 line (38 tokens) duplication in the following files: 
+Starting at line 129 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\OrderController.java
+Starting at line 157 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\OrderController.java
+
+   public String insertPo(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+      String storeId = (String)session.getAttribute("storeId");
+      orderCptVO.setStoreId(storeId);
+=====================================================================
+Found a 5 line (37 tokens) duplication in the following files: 
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\mapper\PaymentMapper.java
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\service\PaymentService.java
+
+public interface PaymentMapper {
+
+	public List<PaymentVO> getPayment(PaymentVO paymentVO);
+	public List<Map<String, Object>> getDayTotal();
+	public List<Map<String, Object>> getMonthTotal(PaymentVO paymentVO);
+=====================================================================
+Found a 7 line (36 tokens) duplication in the following files: 
+Starting at line 10 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\mapper\MenuMapper.java
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\service\MenuService.java
+
+	public List<MenuVO> getMenuList(MenuVO menuVO);	
+	public List<MenuVO> getMenuCategory(MenuVO menuVO);
+	public void menuInsert(MenuVO menuVO);
+	public void menuUpdate(MenuVO menuVO);
+	public void menuDelete(MenuVO menuVO);
+	
+}
+=====================================================================
+Found a 9 line (34 tokens) duplication in the following files: 
+Starting at line 52 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\soso\web\ActualDealController.java
+Starting at line 22 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\soso\web\ApiExplorer2.java
+
+            urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*Service Key*/
+
+            URL url = new URL(urlBuilder.toString());
+ 
+           // System.out.println("###url=>"+url);
+ 
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+=====================================================================
+Found a 9 line (33 tokens) duplication in the following files: 
+Starting at line 9 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\member\mapper\MemberMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\member\service\MemberService.java
+
+public interface MemberMapper {
+
+	public MemberVO getMember(MemberVO memberVO);
+	
+	public List<MemberVO> getMemberList(MemberVO memberVO);
+
+	public void memberInsert(MemberVO memberVO);
+	public int phoneCheck(String phone);
+}
+=====================================================================
+Found a 6 line (33 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeMember\mapper\StoreMemberMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeMember\service\StoreMemberService.java
+
+public interface StoreMemberMapper {
+	public List<StoreMemberVO> getStoreMemberList(StoreMemberVO storeMemberVO);
+	public StoreMemberVO getStoreMember(StoreMemberVO storeMemberVO);
+	public void storeMemberDelete(StoreMemberVO storeMemberVO);
+	public void storeMemberUpdate(StoreMemberVO storeMemberVO);
+}
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 55 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\web\EmpController.java
+Starting at line 51 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeMember\web\StoreMemberContoller.java
+
+		public String employeesInsert(EmpVO vo, Model model, HttpSession session) {
+			String storeId = (String) session.getAttribute("storeId");
+			vo.setStoreId(storeId);
+			if(vo.getEmpNum()!= null && !vo.getEmpNum().isEmpty()) {			
+=====================================================================
+Found a 5 line (31 tokens) duplication in the following files: 
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\mapper\StoreOrderMapper.java
+Starting at line 6 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\service\StoreOrderService.java
+
+public interface StoreOrderMapper {
+	public List<Map<String, Object>> getOrderList(StoreOrderVO storeOrderVO);
+	public void orderUpdate1(StoreOrderVO storeOrderVO);
+	public void orderUpdate2(StoreOrderVO storeOrderVO);
+}
+=====================================================================
+Found a 2 line (30 tokens) duplication in the following files: 
+Starting at line 129 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+Starting at line 138 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\home\web\HomeController.java
+
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("p_payNum", request.getParameter("payNum"));
+=====================================================================
+Found a 3 line (30 tokens) duplication in the following files: 
+Starting at line 47 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\web\PaymentController.java
+Starting at line 58 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\web\PaymentController.java
+Starting at line 70 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\payment\web\PaymentController.java
+
+	public String storeMng(PaymentVO vo, HttpSession session,MenuVO menuvo){
+		menuvo.setStoreId((String) session.getAttribute("storeId"));
+		vo.setStoreId((String) session.getAttribute("storeId"));
+=====================================================================
+Found a 3 line (29 tokens) duplication in the following files: 
+Starting at line 55 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\web\EmpController.java
+Starting at line 82 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\web\EmpController.java
+
+		public String employeesInsert(EmpVO vo, Model model, HttpSession session) {
+			String storeId = (String) session.getAttribute("storeId");
+			vo.setStoreId(storeId);
+=====================================================================
+Found a 3 line (29 tokens) duplication in the following files: 
+Starting at line 61 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\callController.java
+Starting at line 70 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\callController.java
+
+	public String callListForm(Model model, CallVO callVO, HttpSession session) {
+		String storeId = (String)session.getAttribute("storeId");
+		callVO.setStoreId(storeId);
+=====================================================================
+Found a 3 line (29 tokens) duplication in the following files: 
+Starting at line 37 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\seat\web\SeatController.java
+Starting at line 49 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\seat\web\SeatController.java
+
+	public String seatInsertForm(SeatVO seatVO, Model model, HttpSession session) {
+		String storeId = (String) session.getAttribute("storeId");
+		seatVO.setStoreId(storeId);
+=====================================================================
+Found a 7 line (29 tokens) duplication in the following files: 
+Starting at line 74 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StoreCouponController.java
+Starting at line 108 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StorePopupController.java
+
+		storeCouponService.storeCouponDelete(storeCouponVO);
+		Map result = new HashMap<String, Object>();
+		result.put("result", Boolean.TRUE);
+		return result;
+	}
+	
+	@RequestMapping(value="storeCouponOne", method=RequestMethod.GET)
+=====================================================================
+Found a 6 line (29 tokens) duplication in the following files: 
+Starting at line 9 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeorder\mapper\ReorderMapper.java
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeorder\service\ReorderService.java
+
+public interface ReorderMapper {
+	public List<ReorderVO> getmailList(ReorderVO reorderVO);	
+	public List<Map> getEmail(AdminVO adminVO);
+
+	public void mailInsert(ReorderVO reorderVO);
+}
+=====================================================================
+Found a 3 line (27 tokens) duplication in the following files: 
+Starting at line 82 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\emp\web\EmpController.java
+Starting at line 51 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\storeMember\web\StoreMemberContoller.java
+
+	  @RequestMapping("empSalaryList") public String empBarList(EmpVO vo,Model model,HttpSession session) { 
+		  String storeId = (String) session.getAttribute("storeId");
+		  vo.setStoreId(storeId);  
+=====================================================================
+Found a 9 line (26 tokens) duplication in the following files: 
+Starting at line 38 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\admin\web\AdminController.java
+Starting at line 45 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\member\web\MemberController.java
+
+		System.out.println(vo.getStoreId());
+
+		// && !vo.getPhone().equals(dbVO.getPhone())
+
+		if (dbVO == null) {
+			model.addAttribute("errorMsg", "id?ò§Î•?");
+			path = "member/memberLoginForm";
+
+		} else if (!vo.getStorePwd().equals(dbVO.getStorePwd())) {
+=====================================================================
+Found a 5 line (26 tokens) duplication in the following files: 
+Starting at line 93 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\mypage\web\MypageController.java
+Starting at line 74 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StoreCouponController.java
+Starting at line 108 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\store\web\StorePopupController.java
+
+		mypageService.myCouponDelete(usercouponVO);
+		Map result = new HashMap<String, Object>();
+		result.put("result", Boolean.TRUE);
+		return result;
+	}
+=====================================================================
+Found a 10 line (26 tokens) duplication in the following files: 
+Starting at line 7 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\mapper\CallMapper.java
+Starting at line 5 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\service\CallService.java
+
+public interface CallMapper {
+	//?öîÏ≤??ì±Î°?
+	public void callInsert(CallVO callVO);
+	
+	//?öîÏ≤? Î¶¨Ïä§?ä∏
+	public List<CallVO> callGet(CallVO callVO);
+	
+	//?öîÏ≤? ?ôï?ù∏?ãú ?óÖ?ç∞?ù¥?ä∏
+	public void callUpdate(CallVO callVO);
+}
+=====================================================================
+Found a 9 line (26 tokens) duplication in the following files: 
+Starting at line 9 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\user\mapper\UserMapper.java
+Starting at line 8 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\user\service\UserService.java
+
+public interface UserMapper {
+	//?Ç¨?óÖ?ûê?†ïÎ≥?
+	public AdminVO storeInfo(AdminVO adminVO);
+	
+	//Ï°∞Ìöå
+	public UserVO getUser(UserVO userVO);
+	//?ì±Î°?
+	public List<Map> getRole(UserVO userVO);
+}
+=====================================================================
+Found a 3 line (25 tokens) duplication in the following files: 
+Starting at line 50 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\member\web\MemberController.java
+Starting at line 139 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\order\web\OrderController.java
+
+	      } else if (!vo.getPwd().equals(dbVO.getPwd())) {
+	    	  model.addAttribute("errorMsg", "pwd?ò§Î•?");
+	    	  path = "member/memberLoginForm";
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 41 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\web\MenuController.java
+Starting at line 67 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\menu\web\MenuController.java
+
+	public String menuManager(Model model, MenuVO menuVO, AdminVO adminVO, HttpSession session) {
+		String storeId = (String) session.getAttribute("storeId");
+		 
+		adminVO.setStoreId(storeId);
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 43 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\work\web\WorkController.java
+Starting at line 52 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\work\web\WorkController.java
+Starting at line 64 of C:\Users\User\git\sosoorder\sosoorder\src\main\java\com\soso\app\work\web\WorkController.java
+
+	public List<Map> getEmpAjax(HttpSession session,SelDateVO seldateVO) {
+		//?Å¥Î¶??ãú ?ç∞?ù¥?ä∏?? ?ä§?Ü†?ñ¥?ïÑ?ù¥?îîÎ•? Í∞??†∏?ò¥
+		seldateVO.setStoreId((String) session.getAttribute("storeId"));
+		return workService.empNum(seldateVO);

@@ -119,7 +119,7 @@ public class StorePopupController {
 	@RequestMapping(value="/storePopupListPro", method=RequestMethod.GET)
 	@ResponseBody
 	public List<StorePopupVO> storePopupListPro(Model model, StorePopupVO storePopupVO, HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
+		String storeId = (String)session.getAttribute("storeInfo");
 		storePopupVO.setStoreId(storeId);
 		storePopupService.storePopupListPro(storePopupVO);
 		return storePopupVO.getPopList();

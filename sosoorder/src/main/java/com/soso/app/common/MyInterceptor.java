@@ -35,7 +35,7 @@ public class MyInterceptor implements HandlerInterceptor{
 		
 		//세션 가져오기
 		HttpSession session = request.getSession();
-		String storeId = (String)session.getAttribute("storeId");
+		String storeId = (String)session.getAttribute("storeInfo");
 		AdminVO adminVO = new AdminVO();
 		adminVO.setStoreId(storeId);
 		AdminVO storeInfo = userService.storeInfo(adminVO);
