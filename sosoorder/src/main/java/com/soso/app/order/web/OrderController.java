@@ -35,7 +35,7 @@ public class OrderController {
    @RequestMapping("/orderInsert")
    public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
       
-      String storeId = (String)session.getAttribute("storeId");
+      String storeId = (String)session.getAttribute("storeInfo");
       String phone = (String)session.getAttribute("phone");
       
       orderCptVO.setStoreId(storeId);
@@ -68,7 +68,7 @@ public class OrderController {
    @RequestMapping("payInsert")
    public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
       
-      String storeId = (String)session.getAttribute("storeId");
+      String storeId = (String)session.getAttribute("storeInfo");
       String phone = (String)session.getAttribute("phone");
 
       orderCptVO.setStoreId(storeId);
@@ -117,7 +117,7 @@ public class OrderController {
    @RequestMapping("insertPoint")
    public String insertPoint(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
       String orderNum = request.getParameter("orderNum");
-      String storeId = (String)session.getAttribute("storeId");
+      String storeId = (String)session.getAttribute("storeInfo");
       orderCptVO.setStoreId(storeId);
       
       
@@ -127,7 +127,7 @@ public class OrderController {
    //회원 적립금 적립
    @RequestMapping("insertPo")
    public String insertPo(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-      String storeId = (String)session.getAttribute("storeId");
+      String storeId = (String)session.getAttribute("storeInfo");
       orderCptVO.setStoreId(storeId);
       
       String path = null;
@@ -155,7 +155,7 @@ public class OrderController {
    //비회원 적립
    @RequestMapping("insertMem")
    public String insertMem(Model model, MemberVO memberVO,OrderCptVO orderCptVO, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-      String storeId = (String)session.getAttribute("storeId");
+      String storeId = (String)session.getAttribute("storeInfo");
       orderCptVO.setStoreId(storeId);
 
       orderService.insertMem(memberVO,orderCptVO); 

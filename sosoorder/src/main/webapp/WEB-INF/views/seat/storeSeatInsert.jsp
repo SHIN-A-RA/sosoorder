@@ -24,8 +24,8 @@
 			<table id="table_id" class="display tb_style">
 				<thead>
 					<tr>
-						<th>No.</th>
-						<th>테이블 수</th>
+						<th>테이블 번호</th>
+						<th>인원 수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,8 +68,8 @@
 		<div align="center">
 			<p></p>
 			<span> <span><input type="text" id="seatNum"
-					name="seatNum" placeholder="번호"></span> <span><input type="text" id="seat"
-					name="seat" placeholder="테이블 수"></span>
+					name="seatNum" placeholder="테이블 번호"></span> <span><input type="text" id="seat"
+					name="seat" placeholder="인원 수"></span>
 
 			</span> <span><input type="submit" class="btn btn-success"
 				value="테이블등록" /></span> <span> <input type="button"
