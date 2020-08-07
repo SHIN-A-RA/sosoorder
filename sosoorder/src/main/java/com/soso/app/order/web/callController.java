@@ -31,7 +31,7 @@ public class callController {
 	
 	@RequestMapping("callInsertForm")
 	public String callInsertForm(Model model, SeatVO seatVO, HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
+		String storeId = (String)session.getAttribute("storeInfo");
 		seatVO.setStoreId(storeId);
 		model.addAttribute("seatListCall", homeService.seatListHome(seatVO));
 		
@@ -44,7 +44,7 @@ public class callController {
 	@RequestMapping(value="/callInsert", method=RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	public CallVO callInsert(@RequestBody CallVO callVO, HttpSession session) {
-		String storeId = (String)session.getAttribute("storeId");
+		String storeId = (String)session.getAttribute("storeInfo");
 		callVO.setStoreId(storeId);
 		callService.callInsert(callVO);
 		try {

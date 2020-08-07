@@ -7,6 +7,24 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+		<!--  <security:http pattern="/css/**" security="none"/> -->
+		<!-- <security:http>
+			<security:intercept-url pattern="/top.jsp" access="permitAll()"/>
+			<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/**" access="isAuthenticated()"/>
+			<security:form-login default-target-url="/top.jsp"/>
+			<security:logout logout-url="/logout" logout-success-url="/top.jsp"/>
+			<security:csrf disabled="true"/>
+		</security:http>
+		
+		<security:authentication-manager>
+			<security:authentication-provider user-service-ref="userService">
+				<security:password-encoder hash="bcrypt"/> 암호화 방식
+			</security:authentication-provider>
+		</security:authentication-manager>
+		
+		<context:component-scan base-package="com.soso"/> -->
+		
 	<!-- Root Context: defines shared resources visible to all other web components -->
 <!-- 	<security:http>
 		<security:intercept-url pattern="/home.jsp"
@@ -31,11 +49,7 @@
 		<security:access-denied-handler
 			error-page="/accessDenied.jsp"/>
 	</security:http>
-	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userService">
-			<security:password-encoder hash="bcrypt"/> 암호화 방식
-		</security:authentication-provider>
-	</security:authentication-manager>
+	
 	
 	<context:component-scan base-package="com.soso"/> -->
 </beans>

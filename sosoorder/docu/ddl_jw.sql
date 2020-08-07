@@ -230,4 +230,13 @@ ALTER TABLE usercoupon ADD  CONSTRAINT usercoupon_pk PRIMARY KEY (usercouponnum)
 
 CREATE SEQUENCE seq_usercoupon;
 
-select * from usercoupon
+select * from admin
+
+		SELECT phone "id", pwd, 1
+		FROM member
+		UNION
+		SELECT storeId "id", storepwd, 1
+		FROM admin
+		
+select * from admin;
+update admin set storepwd = 'test8' where storeid =  'test8';

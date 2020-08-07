@@ -60,7 +60,7 @@ public class HomeController {
 			@PathVariable String seat
 			) {
 		//세션 저장
-		session.setAttribute("storeId", storeId);
+		session.setAttribute("storeInfo", storeId);
 		session.setAttribute("seat", seat);
 		
 		//세션 가져오기
@@ -79,7 +79,7 @@ public class HomeController {
 			HttpSession session, @PathVariable String storeId, SeatVO seatVO
 			) {
 		//세션 저장
-		session.setAttribute("storeId", storeId);
+		session.setAttribute("storeInfo", storeId);
 		
 		//세션 가져오기
 		//(String)session.getAttribute("storeId")
@@ -100,7 +100,7 @@ public class HomeController {
 			HttpSession session, SeatVO seatVO) {
 		
 		//세션 가져오기
-		String storeId = (String)session.getAttribute("storeId");
+		String storeId = (String)session.getAttribute("storeInfo");
 		
 		adminVO.setStoreId(storeId);
 		menuVO.setStoreId(storeId);

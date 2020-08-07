@@ -3,15 +3,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.soso.app.user.mapper.UserMapper">
-
-	<select id="getRole" resultType="map">
-		SELECT phone "id", 'ROLE_USER'
+	
+	<select id="getUser" resultType="UserVO">
+		SELECT phone "id", pwd, 1
 		FROM member
 		<where>
 			phone = #{loginId}
 		</where>
 		UNION
-		SELECT storeId "id", 'ROLE_ADMIN'
+		SELECT storeId "id", storepwd, 1
+		FROM admin
+		<where>
+			storeId = #{loginId}
+		</where>
+	</select>
+	
+	<select id="getRole" resultType="map">
+		SELECT phone "id", 'ROLE_USER' "ROLE_NAME"
+		FROM member
+		<where>
+			phone = #{loginId}
+		</where>
+		UNION
+		SELECT storeId "id", 'ROLE_ADMIN' "ROLE_NAME"
 		FROM admin
 		<where>
 			storeId = #{loginId}
