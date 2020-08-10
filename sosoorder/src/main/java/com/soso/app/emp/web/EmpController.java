@@ -62,18 +62,13 @@ public class EmpController {
 			return "redirect:empList";
 		}
 
-		 // employees 목록조회
-		 @RequestMapping("empList")
-		 public String empList(EmpVO vo,Model model,HttpSession session) { 
-				String storeId = (String) session.getAttribute("storeId");
-				model.addAttribute("emp", empService.getEmp(storeId));
-				return "emp/empList";
-			}
-	  
-	  
-	  
-	  
-	  
+		// employees 목록조회
+		@RequestMapping("empList")
+		public String empList(EmpVO vo, Model model, HttpSession session) {
+			String storeId = (String) session.getAttribute("storeId");
+			model.addAttribute("emp", empService.getEmp(storeId));
+			return "emp/empList";
+		}
 	  
 	  
 	  
@@ -105,14 +100,6 @@ public class EmpController {
 		return "redirect:empList";
 	}
 	
-	
-	//세션 초기화
-	@RequestMapping("removeSession")
-	public String removeSession(HttpSession session) {
-		session.removeAttribute("storeId");
-		session.removeAttribute("phone");
-		return "redirect:/";
-	}
 	
 	
 }

@@ -153,8 +153,6 @@ INNER JOIN delivery d
 WHERE s.storeId = 'test'
 	AND p.status = '0'
 
-
-	
 		
 SELECT  s.seat,
 		d.addr,

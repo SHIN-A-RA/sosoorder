@@ -86,6 +86,10 @@ public class OrderController {
       System.out.println("orderCptVO" + orderCptVO);
       orderService.payInsert(orderCptVO);
       
+      
+      String payNum = (String)session.getAttribute("payNum");
+      orderCptVO.setPayNum(payNum);
+      
       //페이먼트 프로시저
       HashMap<String, Object> map = new HashMap<String, Object>();
       

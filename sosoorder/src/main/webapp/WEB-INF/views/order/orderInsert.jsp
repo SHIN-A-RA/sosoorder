@@ -36,14 +36,11 @@ function Show() {
 	
 
 //결제정보처리
-$(function(){
-	
+$(function(){	
 	function printPay() {
 		var totalPrice = parseInt($("#totalPrice").text());
-		$("#totalPay").text(totalPrice);
-		
+		$("#totalPay").text(totalPrice);		
 	}
-	
 	printPay();
 	
   //적립금
@@ -340,21 +337,21 @@ function removeChar(event) {
 					<ul id="payTypeList" class="type-selector-list">
 
 						<li id="" class="">
-							<input class="payCheck" type="radio" name="payCheck" value="0" checked>
+							<input class="payCheck" type="radio" name="payCheck" value="0" id="transfer" checked>
 							<label >
 								<span>계좌이체</span>
 							</label>
 						</li>
 							
 						<li id="" class="">
-							<input class="payCheck" type="radio" name="payCheck" value="1">
+							<input class="payCheck" type="radio" name="payCheck" value="1" id="card">
 							<label>
 								<span>신용/체크카드</span>							
 							</label>
 						</li>
 			
 						<li id="" class="">
-									<input class="payCheck" type="radio" name="payCheck" value="2">
+									<input class="payCheck" type="radio" name="payCheck" value="2" id="cash">
 									<label>
 										<span>현금</span>
 									</label>
@@ -371,7 +368,7 @@ function removeChar(event) {
 <div style="margin: 20px; text-align: center; margin-bottom: 20px;">
         위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
     </div>
-<form action="payInsert?orderNum=${param.orderNum}" method="post">
+<form action="payInsert?orderNum=${param.orderNum}" method="post" name="frm_pay">
 <input class="couponUse" name="couponUse" type="hidden" value="">
 <input class="payCheckval" name="payCheck" type="hidden" value="0">
 <input class="seat" name="seat" type="hidden" value="${param.seat}">
@@ -379,85 +376,59 @@ function removeChar(event) {
 <input class="total" name="totalPay" type="hidden" value="${totalPrice}">
 <input class="serialNum" name="serialNum" type="hidden" value="">
 <div class="div_pay">
-<button class="btn_pay" type="submit" onclick="requestPay()"><span class="txt_payment">결제하기</span></button>
+<button class="btn_pay" type="button" onclick="goSubmit()" ><span class="txt_payment">결제하기</span></button>
 </div>
 </form>
 
 
 <script>
 
-var IMP=window.IMP;
-IMP.init("imp24229204");
+var IMP = window.IMP; 
+IMP.init("iamport");
+var totalPrice = $(".total").val();
 
- function requestPay(payNum, totalpay) {
-      // IMP.request_pay(param, callback) 호출
-       IMP.request_pay({ // param
-          pg: "inicis",
-          pay_method: "card",
-          merchant_uid: "SHOW" + new Date().getTime(), //결제내역 DB에서 Primary Key 가져오기	       
- 
-          name: payNum,
-          amount: totalpay	//DB에서 결제내역의 PAYMENT_SUM 불러오기
-
-      }, 
-      function (rsp) {
-          if (rsp.success) {
-              jQuery.ajax({
-                  url: "payInsert.do", // 가맹점 서버
-                  method: "POST",
-                  dataType:"json",
-                  data: { payment_approval_number:rsp.merchant_uid, payment_type:rsp.pay_method, payment_sum:rsp.paid_amount, 
-                	  customer_id:rsp.buyer_name	                		  
-              	}
-              }).done(function (data) {
-                // 가맹점 서버 결제 API 성공시 로직
-            	  var msg = '결제가 완료되었습니다.\n';
-			        msg += '카드 승인번호 : ' + 'rsp.apply_num' + '\n';
-			        msg += '결제 번호: ' + 'rsp.name' + '\n'; 
-			        msg += '결제 방식 : ' + 'rsp.pay_method' + '\n';
-			        msg += '결제 금액 : ' + 'rsp.paid_amount' + '\n';
-			        alert(msg); 
-              })
-            } else {
-            	 var msg = '결제에 실패하였습니다.';
+// 결제
+$(function(){
+	$(".btn_pay").on("click",function(){
+		if( $("#transfer").is(":checked") ){
+			alert("결제완료 페이지에서 계좌번호를 확인해주세요.")
+			frm_pay.submit();
+		}else if( $("#cash").is(":checked") ){
+			alert("현금결제시 결제는 데스크에서 완료해주세요.")
+			frm_pay.submit();
+		}else if( $("#card").is(":checked") ){
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명:결제테스트',
+			    amount : totalPrice,
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '구매자이름',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456',
+			    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;		        
+			        frm_pay.submit();
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
-			    	alert(msg);
 			    }
-          });
- }
-  
- 
+			    alert(msg);
+			});			
+		}
+	});
+});
 
-//결제
-/* 	
- function requestPay(payNum, totalpay) {
-      // IMP.request_pay(param, callback) 호출
-      IMP.request_pay({ // param
-          pg: "html5_inicis",
-          pay_method: "card",
-          merchant_uid: "ORD20180131-0000011",
-          name: "노르웨이 회전 의자",
-          amount: 64900,
-          buyer_email: "gildong@gmail.com",
-          buyer_name: "홍길동",
-          buyer_tel: "010-4242-4242",
-          buyer_addr: "서울특별시 강남구 신사동",
-          buyer_postcode: "01181"
-      }, function (rsp) { // callback
-          if (rsp.success) {
-              ...,
-              // 결제 성공 시 로직,
-              ...
-          } else {
-              ...,
-              // 결제 실패 시 로직,
-              ...
-          }
-      });
-    }
 
- */
-
+/* 결제방법받기 */
 $(function(){
 	$(".payCheck").on("change",function(){
 		$(".payCheckval").val($(this).val());
@@ -486,7 +457,7 @@ $(function(){
 				alert("홀주문을 하시겠습니까?");
 	        }
 	    });
-		
+});		
 		
 
 

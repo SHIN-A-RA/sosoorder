@@ -127,27 +127,32 @@ fullCalendar
 		.always(function(result){}); //정상이든 에러든 무조건 실행
 }; 
 
-function autoSalry(){
-	var empNumMonthDate = $("#frmEmp").serialize() ;
-		$.ajax({
-		url:"totalSalAjax",
-		method: 'post',
-		data :empNumMonthDate,
-		dataType:'json' 
-		}).done(function(result){
-			  var table = document.getElementById("totalSalary");
-			  table.innerHTML = "";
-			for(i=0; i<result.length; i++){
-				  var row = table.insertRow(0);
-				  var cell1 = row.insertCell(0);
-				  var cell2 = row.insertCell(1);
-				  cell1.innerHTML = result[i].TOTALTIME+"시간";
-				  cell2.innerHTML = result[i].TOTALSAL.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-			}
-	})
-		.fail(function(result){}) //서버 에러 발생시
-	.always(function(result){}); //정상이든 에러든 무조건 실행
-}; 
+	function autoSalry(){
+		var empNumMonthDate = $("#frmEmp").serialize() ;
+			$.ajax({
+			url:"totalSalAjax",
+			method: 'post',
+			data :empNumMonthDate,
+			dataType:'json' 
+			}).done(function(result){
+				  var table = document.getElementById("totalSalary");
+				  table.innerHTML = "";
+				for(i=0; i<result.length; i++){
+					
+						  var row = table.insertRow(0);
+						  var cell1 = row.insertCell(0);
+						  var cell2 = row.insertCell(1);
+						  cell1.innerHTML = result[i].TOTALTIME+"시간";
+				  if(result[i].EMPCLASS == 2 ){//아르바이트:2번 정직원 :1번 
+						  cell2.innerHTML = result[i].TOTALSAL.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+					}else{
+						  cell2.innerHTML = "월급:"+SALARY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"만원";
+					}
+			}//end of for
+		})//end of done
+			.fail(function(result){}) //서버 에러 발생시
+		.always(function(result){}); //정상이든 에러든 무조건 실행
+	}; 
 
 </script>
 

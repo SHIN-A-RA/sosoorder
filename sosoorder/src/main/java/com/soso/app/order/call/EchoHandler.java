@@ -16,7 +16,7 @@ public class EchoHandler extends TextWebSocketHandler{
 
     private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
-    //클라이언트가 연결 되었을 때 실행
+    //클라이언트가 연결 되었을 때 실행 //webSocket 연결이 열리고 준비될 때 호출
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessionList.add(session);
@@ -40,7 +40,6 @@ public class EchoHandler extends TextWebSocketHandler{
             sess.sendMessage(new TextMessage("yes"));
         }
     }
-    
 
     //클라이언트 연결을 끊었을 때 실행
     @Override

@@ -38,7 +38,9 @@
 <!-- getEmpSalAjax 계산 및 조회 -->
    <select id="totalSalAjax" resultType="map">   
 SELECT TRUNC(sum(TRUNC((workend -workstart)*24,1)),2) AS totalTime,
-	    TRUNC(sum(TRUNC((workend -workstart)*24,0))*8350,0) AS totalSal
+	    TRUNC(sum(TRUNC((workend -workstart)*24,0))*8350,0) AS totalSal,
+	    e.empClass AS empClass,
+	    e.salary AS salary
 FROM work w ,employees e
 WHERE w.empNum = e.empNum 
 AND storeId = #{storeId}

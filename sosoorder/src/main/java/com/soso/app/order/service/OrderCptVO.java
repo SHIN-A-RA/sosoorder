@@ -1,10 +1,5 @@
 package com.soso.app.order.service;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.soso.app.menu.service.MenuVO;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +11,6 @@ public class OrderCptVO {
 	String menuNum;
 	String orderCount;
 	Integer orderNum;
-	String paynum;
 	String price;
 	Integer memberNum;
 	String storeId;
