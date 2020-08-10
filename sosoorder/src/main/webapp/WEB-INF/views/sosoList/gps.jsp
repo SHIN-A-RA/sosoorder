@@ -8,6 +8,9 @@
         height: 400px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        		}
+	  .button:hover {
+	  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		}
  	</style>
  	
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
@@ -137,21 +140,33 @@
 
    /*-----------------------------
 	선택한 상점의 쿠폰 값 조회 콜백
-	-------------------------------*/
+	-------------------------------*//* border="1" style="width: 50%; margin: auto;" */
     function sosoResult(data) {
-		$("tbody#sosocoupon").empty();
+		$(".tbWrap").empty();
 		$.each(data,function(idx,item){
-			$('<tr>')
-			//.append($('<td>').html(item.storeId))
-			.append($('<td>').html(item.serialNum))
-			.append($('<td>').html(item.expStart))
-			.append($('<td>').html(item.expEnd))
-			.append($('<td>').html(item.discount))
-			.append($('<td>').html("<div id ='btnInsert' name='" + item.serialNum + "'>쿠폰저장</div>"))
-			/*mapper 수정*/
-			/*click이벤트로 로그인시 serialNum, session phone값 받아서 */
-			/*session에 값이 없을 시에 알럿창*/
-			.appendTo('tbody');
+			$('<table>').css('width', '30%').css('margin', 'auto')
+						.html(
+						'<tr style="border:1px solid #333">' +
+							'<th style="background-color: #cc87d8; width: 30%; text-align: center;">' +
+								'<p style="color: white">' + item.discount + '원</p>'+
+								'<p style="color: white">할인쿠폰</p>'+
+							'</th>'+
+							'<td style="padding: 10px 10px 10px 10px;">'+
+								 '<p>' + item.expStart + '</p>'+
+								'<p>' + item.expEnd + '까지 </p>'+
+								 '<p> 쿠폰번호:' + item.serialNum + '</p>'+
+								'<p>' + item.discount + '원 할인</p>'+
+							'</td>'+
+							'<td style="padding: 10px 10px 10px 10px;">'+
+							 '<button id ="btnInsert"  class="button" name="' + item.serialNum + '">쿠폰저장</button>' +
+						'</td>'+
+						'</tr>'+
+						'<tr style="height: 20px;">'+
+						'</tr>'
+							
+			).appendTo('.tbWrap');
+			
+
 		});//each
 		couponInsert();
 	}//sosoResult
@@ -251,8 +266,5 @@
 	}
 	</script>
 	<div id="map" style="width: 48%; float:right;" class="b"></div>
-	<table>
-	<tbody id="sosocoupon"></tbody>
-	</table>
-
-	 </div>
+		<div class="tbWrap"></div>
+	</div>

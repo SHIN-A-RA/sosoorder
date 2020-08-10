@@ -83,7 +83,6 @@
 		where menuOrderNum = #{menuOrderNum}
 	</update>
 		
-		
 		<!--쿠폰함 담기 -->
 		<!-- by아라 -->
 	<select id="getCoupon" parameterType="hashmap" resultType="map">
@@ -96,7 +95,7 @@
 		from
 		userCoupon u, admin a, member m, point p, coupon c
 		where u.memberNum  = 1
-		and m.membernum = p.membernum
+		and m.memberNum = p.memberNum
 	    and p.storeId = a.storeId
 	    and c.storeId = a.storeId
 	    and c.expEnd > sysdate
@@ -109,7 +108,6 @@
 		</if>
 		order by a.storeName
 	</select>
-	
 	
 	
 	<!--쿠폰 삭제 -->

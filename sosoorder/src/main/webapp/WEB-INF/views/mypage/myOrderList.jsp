@@ -78,8 +78,7 @@
 				<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">
-							주문내역</h4>
+						<h4 class="modal-title">주문내역</h4>
 
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
@@ -95,7 +94,6 @@
 								</tr>
 							</thead>
 							<tbody id="starOrderListTBody">
-
 							</tbody>
 						</table>
 					</div>
@@ -121,31 +119,30 @@
 						<h4 class="modal-title">별점등록</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-		
-						<table class="table table-white">
-							<thead>
-								<tr>
-									<th scope="col">별점</th>
-								</tr>
-							</thead>
-							<tbody id="starOrderListTBody2">
 
-							</tbody>
-						</table>	
+					<table class="table table-white">
+						<thead>
+							<tr>
+								<th scope="col">별점</th>
+							</tr>
+						</thead>
+						<tbody id="starOrderListTBody2">
+						</tbody>
+					</table>
 					<!-- Modal body -->
-				<form action="orderStarUpdate" method="post" >
-      				<input type="hidden" name="orderStar" id="starC">
-      				<input type="hidden" name="menuOrderNum" id="menuOrderNum">
-        			<div class="starRev">
-            		<span class="starR on">별1</span>
-               		 <span class="starR">별2</span>
-                	<span class="starR">별3</span>
-                	<span class="starR">별4</span>
-                	<span class="starR">별5</span>
-            </div>
-            <button class="btn2starBtn" style="margin-top:20px"data-dismiss="modal">등록</button>   
-            
-		</form>  
+					<form action="starOrderList" method="post">
+						<input type="hidden" name="orderStar" id="starC"> <input
+							type="hidden" name="menuOrderNum" id="menuOrderNum"><input
+							type="hidden" name="payNum" id="payNum">
+						<div class="starRev">
+							<span class="starR on">별1</span> <span class="starR">별2</span> <span
+								class="starR">별3</span> <span class="starR">별4</span> <span
+								class="starR">별5</span>
+						</div>
+						<button class="btn2starBtn" style="margin-top: 20px"
+							data-dismiss="modal">등록</button>
+
+					</form>
 				</div>
 			</div>
 		</div>
@@ -181,18 +178,19 @@
 			$('.btn2starBtn').click(function() {
 				var orderStar =$('input:hidden[name="orderStar"]').val();
 				var menuOrderNum =$('input:hidden[name="menuOrderNum"]').val();
+				var payNum = $('input:hidden[name="payNum"]').val();
 			$.ajax({
 				url : 'orderStarUpdate',
 				type : 'PUT',
 				contentType:'application/json;charset=utf-8',
 				data: JSON.stringify({orderStar: orderStar, menuOrderNum: menuOrderNum}),
-				dataType : 'json'
-					
+				dataType : 'json',
+				success: function(){
+					orderList(payNum);
+				}
 			});
-			location.reload(); 
 		});
 	}
-
 </script>
 
 <script>
@@ -222,33 +220,38 @@
 			}
 		});
 	});
-	function test() {
+	function test(payNum) {
 		$('.btnadd2').on('click', function() {
 			var num = $(this).attr("name");
 			$('#menuOrderNum').val(num);
+			$('#payNum').val(payNum);
 		});
 	}
 	//조회 요청
 	function starOrderList() {
-		//쿠폰 조회
 		$('.btnadd').on('click', function() {
 			var payNum = $(this).attr("name");
-			//특정 쿠폰 조회
-			$.ajax({
-				url : 'StarOrderList?payNum=' + payNum,
-				type : 'GET',
-				//contentType:'application/json;charset=utf-8',
-				dataType : 'json',
-				error : function(xhr, status, msg) {
-					alert("상태값 :" + status + " Http에러메시지 :" + msg);
-				},
-				success : starOrderListResult
-			});
+			orderList(payNum);
+			
 		});//조회 버튼 클릭
 	}//starOrderList
+	
+	function orderList(payNum){
+		$("#starOrderListTBody").empty();
+		$.ajax({
+			url : 'StarOrderList?payNum=' + payNum,
+			type : 'GET',
+			//contentType:'application/json;charset=utf-8',
+			dataType : 'json',
+			error : function(xhr, status, msg) {
+				alert("상태값 :" + status + " Http에러메시지 :" + msg);
+			},
+			success : starOrderListResult
+		});
+	}
 	//주문내역 조회 응답
 	function starOrderListResult(myOrder) {
-		$("#starOrderListTBody").empty();
+	
 		$.each(myOrder,function(idx, item) {
 							$('<tr>')
 									.append($('<td>').html(item.menuName))
@@ -256,8 +259,8 @@
 									.append($('<td>').addClass("s_"+item.orderStar+" starbtntd").html("<button name='"+ item.menuOrderNum+"' type='button' class='btn btn-primary btnadd2 mcheck_" + item.menuCheck + "' data-toggle='modal' data-target='#myModal2'>별점등록</button>"))
 									.append($('<td>').addClass("s_"+item.orderStar+" startd"))
 									.appendTo("#starOrderListTBody");
-						});//each
-		test();
+						});
+		test(myOrder[0].payNum);
 		$(".s_1").html("★☆☆☆☆");
 		$(".s_2").html("★★☆☆☆");
 		$(".s_3").html("★★★☆☆");

@@ -43,9 +43,8 @@ function myCouponDelete() {
 </div>
 
 <div style="padding-top:100px">
-
     <c:forEach
-				items="${getCoupon}" var="coupon">
+				items="${myCouponList}" var="coupon">
 				<table border="1" style="width: 50%; margin: auto;"
 					class="table_wrap">
 					<tr>
@@ -58,7 +57,7 @@ function myCouponDelete() {
 							<p>${coupon.storeName}</p>
 							<p>${coupon.expStart}</p>
 							<p>${coupon.expEnd}</p>
-							<%-- <p>${coupon.serialNum}</p> --%>
+							 <p>${coupon.serialNum}</p>
 							<p>${coupon.discount}원 할인</p>
 							<button class="btnDelete" name="${coupon.serialNum}">삭제</button>
 						</td>

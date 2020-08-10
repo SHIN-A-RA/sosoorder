@@ -28,10 +28,8 @@ public class MypageController {
 
 	@Autowired
 	MypageService mypageService;
-
 	// by아라
 	// 마이페이지 적립금목록조회
-
 	@RequestMapping("myPointsList")
 	public String getPointsList(MemberVO memberVO, Model model, HttpSession session,
 			@RequestParam(required = false, value="storeId") String storeId) {
@@ -65,13 +63,13 @@ public class MypageController {
 		return mypageService.StarOrderList(paymentVO);
 	}
 	
-	
 	@RequestMapping(value="orderStarUpdate", method=RequestMethod.PUT)
-	public void orderStarUpdate(@RequestBody OrderCptVO vo, HttpServletRequest request) {
+	@ResponseBody
+	public OrderCptVO orderStarUpdate(@RequestBody OrderCptVO vo, HttpServletRequest request) {
 		mypageService.orderStarUpdate(vo);
+		return vo;
 		
 	}
-
 	//마이페이지 나의 쿠폰함
 
 	@RequestMapping("myCouponList")
@@ -82,10 +80,11 @@ public class MypageController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("phone", phone);
 		map.put("storeId", storeId);
-		model.addAttribute("getCoupon", mypageService.getCoupon(map));
+		model.addAttribute("myCouponList", mypageService.getCoupon(map));
 	return "mypage/myCouponList";
-	
 	}
+	
+	
 	@RequestMapping(value="myCouponDelete/{serialNum}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public Map myCouponDelete(@PathVariable String serialNum, UserCouponVO usercouponVO) {
