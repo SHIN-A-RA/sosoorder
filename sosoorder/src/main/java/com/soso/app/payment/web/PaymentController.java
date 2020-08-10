@@ -80,14 +80,18 @@ public class PaymentController {
 	 *  =====================*/	
 	//일별 판매량 조회
 	@RequestMapping("getDayTotal")
-	public @ResponseBody List<Map<String, Object>> getDayTotal() {
+	public @ResponseBody List<Map<String, Object>> getDayTotal(PaymentVO vo,HttpSession session,MenuVO menuvo,Model model) {
+		menuvo.setStoreId((String) session.getAttribute("storeId"));
+		vo.setStoreId((String) session.getAttribute("storeId"));
 		return paymentService.getDayTotal();
 	}
 	
 	
 	//월별 판매량 조회
 	@RequestMapping("getMonthTotal")
-	public @ResponseBody List<Map<String, Object>> getMonthTotal(PaymentVO vo){
+	public @ResponseBody List<Map<String, Object>> getMonthTotal(PaymentVO vo,HttpSession session,MenuVO menuvo,Model model){
+		menuvo.setStoreId((String) session.getAttribute("storeId"));
+		vo.setStoreId((String) session.getAttribute("storeId"));
 		return paymentService.getMonthTotal(vo);
 	}
 	
@@ -96,8 +100,9 @@ public class PaymentController {
 	
 	//총 매출 데이터 조회(일,월,년)
 	@RequestMapping("salesData")
-	public @ResponseBody List<Map> salesData(PaymentVO vo){
-		
+	public @ResponseBody List<Map> salesData(PaymentVO vo,HttpSession session,MenuVO menuvo,Model model){
+		menuvo.setStoreId((String) session.getAttribute("storeId"));
+		vo.setStoreId((String) session.getAttribute("storeId"));
 		return paymentService.salesData(vo);
 	}
 	
