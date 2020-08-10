@@ -17,11 +17,7 @@ import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 
 /**
- * 
- * 
  * 이대연
- * 
- * 
  *
  * */
 
@@ -37,6 +33,7 @@ public class MemberController {
 	public String memberLoginForm(MemberVO vo, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		return "member/memberLoginForm";
 	}
+	
 	
 	//member로그인DB처리
 	@RequestMapping("memberLogin")
@@ -59,6 +56,7 @@ public class MemberController {
 	      }
 		return path;
 	}
+	
 	
 	//member가입 페이지 이동
 	@RequestMapping("memberInsertForm")
@@ -85,6 +83,16 @@ public class MemberController {
 		return cnt;
 	}
 	
+	
+	
+	//세션 초기화
+	@RequestMapping("removeSession")
+	public String removeSession(HttpSession session) {
+		session.removeAttribute("storeId");
+		session.removeAttribute("phone");
+		return "redirect:/";
+	};
+
 	
 	
 

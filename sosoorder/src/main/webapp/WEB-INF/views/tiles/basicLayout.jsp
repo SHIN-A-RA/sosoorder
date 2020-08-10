@@ -77,22 +77,18 @@
 			<div id="hd_gnb" class="gnb_pc">
 				<div id="gnb_menu" class="hd_gnb_menu"><span></span></div>				
 				<tiles:insertAttribute name="menu"/>
-				<!--  -->
 				<script>
-				/* =============================
-							세션 제거 
-				=============================*/
 				function removeSession(){
 					location.href="removeSession";
 				};
 				</script>
 				
-				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" onclick="location.href='/sosoroder/memberLoginForm'">
+				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" >
 	              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	               
 	              <c:choose>
-	              		<c:when test="${empty sessionScope.phone || empty sessionScope.storeId}">
-							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;">로그인</span>
+	              		<c:when test="${empty sessionScope.phone || empty sessionScope.storeInfo}">
+							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;" onclick="location.href='/sosoroder/memberLoginForm'">로그인</span>
 	              		</c:when>
 		               	<c:when test="${not empty sessionScope.phone}">
 			               	  <script>
@@ -108,7 +104,7 @@
 		               		<c:when test="${not empty sessionScope.storeId}">
 		               			  <script>
 					               	$(function(){
-						                var storeId = ${sessionScope.storeId};
+						                var storeInfo = ${sessionScope.storeId};
 						                $('.mr-storeId').html(storeId+"사장님");
 						                $('.gb_ub').html(storeId+"사장님");
 									});		               	
@@ -124,7 +120,7 @@
        		<div class="gb_jb">
   				<div class="gb_tb gb_ub"></div>
   				<div class="gb_vb">eo339912@gmail.com</div>
-   				<input type="button" class="logout" onclick='removeSession' value="Logout"/>
+   				<input type="button" class="logout" onclick='removeSession()' value="Logout"/>
       		</div>
       		<script>
       			$(function(){
@@ -138,7 +134,9 @@
       			});
       		</script>
 				<!--  -->
-				
+<!--===============================================================================================================
+			End of 로그인/로그아웃 
+=============================================================================================================== -->
 			</div>
 			<!-- hd_gnb -->
 			<div class="hd_bg"></div>
