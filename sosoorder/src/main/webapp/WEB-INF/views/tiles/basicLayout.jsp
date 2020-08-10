@@ -84,6 +84,12 @@
 					location.href="/sosoroder/removeSession";
 				};
 				</script>
+				<script>
+				function memberUpdateForm(){
+					location.href="/sosoroder/memberUpdateForm";
+				}
+				</script>
+				
 				
 				<div class="nav-item dropdown no-arrow" style="position: absolute; right: 0; top: 0; z-index: 9;" >
 	              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -119,7 +125,7 @@
        		<div class="gb_jb">
   				<div class="gb_tb gb_ub"></div>
   				<c:if test="${not empty sessionScope.phone}">
-   					<input type="button" class="myUpdate" onclick='' value="정보수정"/>
+   					<input type="button" class="myUpdate" onclick='memberUpdateForm()' value="정보수정"/>
    				</c:if>
    				<input type="button" class="logout" onclick='removeSession()' value="Logout"/>
       		</div>

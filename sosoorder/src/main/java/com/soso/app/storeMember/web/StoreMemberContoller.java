@@ -58,27 +58,27 @@ public class StoreMemberContoller {
 	}
 	// 회원이 회원정보 수정 페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
 		@RequestMapping("memberUpdateForm")
-		public String MemberUpdateForm(StoreMemberVO vo, Model model, HttpSession session) {
+		public String MemberUpdateForm(MemberVO vo, Model model, HttpSession session) {
 			String phone = (String) session.getAttribute("phone");
 			vo.setPhone(phone);
-			vo.setStoreId("test");
+			
 			if (vo.getPhone() != null && !vo.getPhone().isEmpty()) {
-				model.addAttribute("oneSm", storeMemberService.getStoreMember(vo));// oneSm=단건조회
+				model.addAttribute("oneSmm", storeMemberService.getMember(vo));// oneSm=단건조회
 			}
 			return "member/memberUpdateForm";
 		}
 
-	// 회원정보 수 처리하고 관리페이지로 이동(어드민)
-	@RequestMapping("storeMemberUpdate")
-	public String storeMemberUpdate(StoreMemberVO vo, // 1. 커맨트 객체
-			Model model, HttpServletRequest request) {
-		storeMemberService.storeMemberUpdate(vo);
-		return "redirect:storeMemberList";
-	}
+//	// 회원정보 수정 처리하고 관리페이지로 이동(어드민)
+//	@RequestMapping("storeMemberUpdate")
+//	public String storeMemberUpdate(StoreMemberVO vo, // 1. 커맨트 객체
+//			Model model, HttpServletRequest request) {
+//		storeMemberService.storeMemberUpdate(vo);
+//		return "redirect:storeMemberList";
+//	}
 	
 	// 회원정보 수 처리하고 관리페이지로 이동(회원)
 		@RequestMapping("memberUpdate")
-		public String memberUpdate(StoreMemberVO vo, // 1. 커맨트 객체
+		public String memberUpdate(MemberVO vo, // 1. 커맨트 객체
 				Model model, HttpServletRequest request) {
 			storeMemberService.storeMemberUpdate(vo);
 			return "redirect:storeMemberList";

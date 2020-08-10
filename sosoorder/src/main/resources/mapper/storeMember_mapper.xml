@@ -13,21 +13,30 @@
 		where storeId = #{storeId}
 		order by phone
 	</select>
-	<!--회원정보 단건조회 -->
+	<!-- 사업자회원정보 단건조회 -->
 	<select id="getStoreMember" parameterType="storeMemberVO" resultType="storeMemberVO">
 		select *
 		FROM memberAdmin
 		where storeId = #{storeId} and
 		phone = #{phone}
 	</select>
+	<!-- 일반회원정보 단건조회 -->
+	<select id="getMember" parameterType="memberVO" resultType="memberVO">
+		select *
+		FROM member
+		where 
+		phone = #{phone}
+	</select>
 	
-	<!--회원정보 수정 -->
-	 <update id="storeMemberUpdate" parameterType="storeMemberVO">
+	<!-- 개인 회원정보 수정 store지만 사업자가아니고 개인회원 수정임. 사업자는 수정이없음. -->
+	 <update id="storeMemberUpdate" parameterType="memberVO">
 		Update member
 		set phone = #{phone}, delAddr = #{delAddr}
 		where memberNum = #{memberNum}
 		
 	</update> 
+	
+	
 	<!--회원 삭제 -->
 	<delete id="storeMemberDelete" parameterType="storeMemberVO">
 		Delete point

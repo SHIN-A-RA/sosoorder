@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soso.app.member.service.MemberVO;
 import com.soso.app.storeMember.mapper.StoreMemberMapper;
 import com.soso.app.storeMember.service.StoreMemberService;
 import com.soso.app.storeMember.service.StoreMemberVO;
@@ -31,9 +32,13 @@ public class StoreMemberServiceImpl implements StoreMemberService{
 	}
 
 	@Override
-	public void storeMemberUpdate(StoreMemberVO storeMemberVO) {
-		storeMemberMapper.storeMemberUpdate(storeMemberVO);
+	public void storeMemberUpdate(MemberVO memberVO) {
+		storeMemberMapper.storeMemberUpdate(memberVO);
 		
+	}
+	@Override
+	public MemberVO getMember(MemberVO memberVO) {
+		return storeMemberMapper.getMember(memberVO);
 	}
 	
 
