@@ -51,7 +51,6 @@ public class MemberController {
 	      } else {
 	         session.setAttribute("phone", vo.getPhone());
 	         
-	         
 	         path = "redirect:/";
 	      }
 		return path;

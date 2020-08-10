@@ -164,26 +164,86 @@ $(function workTimeData(){
   <div id='calendar' style="float:left; height: 700px; width: 900px;"></div>
 
 <!-- 출퇴근 버튼 table -->	
-<div class="div_f">
-	<h3 class="basic_tb_th_up">직원목록<span id="workingDate"></span></h3>
-		<div id="reloadTalbe">
-			<!-- 버튼이벤트에 따라 ajax로 가져옴 -->
-		</div> 
-</div>
+ <div class="col-xl-8 col-lg-7">
+   <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+       <h6 class="m-0 font-weight-bold text-primary">직원 출/퇴근</h6>
+       <div class="dropdown no-arrow">
+         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-800"></i>
+         </a>
+       </div>
+     </div>
+     <!-- Card Body -->
+     <div class="card-body">
+       <div class="chart-area2">
+		<div class="table-responsive">
+  <!--Table-->
+  <table class="table">
+
+    <!--Table head-->
+    <thead>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody id="reloadTalbe">
+    </tbody>
+    <!--Table body-->
+
+  </table>
+  <!--Table-->
+
+</div>  
+       </div>
+     </div>
+   </div>
+ </div>
+
 
 
 <!-- 출퇴근 시간확인용 테이블 생성 -->
-<div style="height: 400px; width: 450px; overflow-y:auto;overflow-x:hidden;">
-<h3 class="basic_tb_th_up">직원출근현황<span id="today"></span></h3>
-<table  class="table" >
-	 <thead class="thead-dark">
+ <div class="col-xl-8 col-lg-7">
+   <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+       <h6 class="m-0 font-weight-bold text-primary">출퇴근 시간</h6>
+       <div class="dropdown no-arrow">
+         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-800"></i>
+         </a>
+       </div>
+     </div>
+     <!-- Card Body -->
+     <div class="card-body">
+       <div class="chart-area2">
+		<div class="table-responsive">
+  <!--Table-->
+  <table class="table">
+
+    <!--Table head-->
+    <thead>
       <tr>
-        <th>직원이름</th>
-        <th>출근시간</th>
-        <th>퇴근시간</th>
+        <th class="th-lg">직원이름</th>
+        <th class="th-lg">출근시간</th>
+        <th class="th-lg">총 퇴근시간</th>
       </tr>
     </thead>
+    <!--Table head-->
+
+    <!--Table body-->
     <tbody id="empSETable">
     </tbody>
-</table>	
-</div>
+    <!--Table body-->
+
+  </table>
+  <!--Table-->
+
+</div>  
+       </div>
+     </div>
+   </div>
+ </div>
+
+

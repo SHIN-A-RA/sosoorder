@@ -24,7 +24,7 @@ function memberValidCheck() {
 
 	
 	frm.submit();
-	alert((window.document.frm.phone.value).slice(-4)+"님 로그인 되었습니다");
+	/* alert((window.document.frm.phone.value).slice(-4)+"님 로그인 되었습니다"); */
 }
 
 function adminValidCheck() {
@@ -119,7 +119,7 @@ function adminValidCheck() {
 				<input type="password" name="storePwd" id="storePwd" class="form-style" />
 				<!-- <div class="pw-view"><i class="fa fa-eye"></i></div> -->
 			</div>
-			<button type="button" class="btn btn-success" onclick="adminValidCheck()">로그인</button>
+			<button type="button" class="btn btn-warning btn-block" onclick="adminValidCheck()">사업자 로그인</button>
 </form>
 
 <p></p>
@@ -134,10 +134,12 @@ function adminValidCheck() {
 				<input type="password" name="pwd" id="pwd" class="form-style" />
 				<p></p>
 			</div>
-			<button type="button" class="btn btn-success" onclick="memberValidCheck()">로그인</button>
+			<button type="button" class="btn btn-success btn-block" onclick="memberValidCheck()">개인 로그인</button>
+			
 </form>
-			<button type="button" class="btn btn-primary" onclick="location.href='memberInsertForm'">일반가입</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='adminInsertForm'">사업자가입</button>
+			<button type="button" class="btn btn-primary btn-block" onclick="location.href='memberInsertForm'">일반가입</button>
+			<button type="button" class="btn btn-primary btn-block" onclick="location.href='adminInsertForm'">사업자가입</button>
+			
 			
 		
 </div>
