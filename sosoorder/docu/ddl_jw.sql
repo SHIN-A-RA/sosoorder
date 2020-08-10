@@ -15,6 +15,8 @@ insert into seat values(1,'test', 1);
 
 select * from call
 
+delete from ordercpt where paynum is null;
+
 
 
 commit;

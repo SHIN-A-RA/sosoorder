@@ -88,9 +88,12 @@ public class MemberController {
 	//세션 초기화
 	@RequestMapping("removeSession")
 	public String removeSession(HttpSession session) {
-		session.removeAttribute("storeId");
-		session.removeAttribute("phone");
-		return "redirect:/";
+		if(session.getAttribute("storeId") != null) {
+			session.removeAttribute("storeId");
+		}else if(session.getAttribute("phone") != null) {
+			session.removeAttribute("phone");
+		}
+		return "redirect:/homeSample";
 	};
 
 	
