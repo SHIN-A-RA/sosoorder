@@ -9,25 +9,25 @@
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
 <script>
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
+	// 모달을 닫는 <span> 요소를 가져옵니다.
+	//var span = document.getElementsByClassName("close")[0];
 
-	// When the user clicks the button, open the modal 
-	btn.onclick = function() {
-		modal.style.display = "block";
-	}
+	// 사용자가 버튼을 클릭하면 모달을 엽니다.
+	//btn.onclick = function() {
+		//modal.style.display = "block";
+	//}
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-		modal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
+	// 사용자가 <span> (x)를 클릭하면 모달을 닫습니다.
+	//span.onclick = function() {
+	//	modal.style.display = "none";
+	//}
+	
+	// 모달창 밖을 누르면 모달닫기
+	//window.onclick = function(event) {
+	//	if (event.target == modal) {
+	//		modal.style.display = "none";
+	// }
+	//}
 </script>
 
 
@@ -110,7 +110,11 @@ to {
 <div class="modal-header">
 	<header class="row">
 		<h2 id="title_search_country">전국 소상공 업체 조회</h2>
-		<h2 class="close">&times;</h2>
+		<button type="button" class="close" data-dismiss="modal"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span><!-- &times <--엑스모양 -->
+		</button>
+
 	</header>
 </div>
 
@@ -171,45 +175,52 @@ to {
 				</div>
 			</div>
 		</div>
-	<script>
-	function() {
 		
-	function addrAdd() {
-		//데이터테이블
-		var otable = $('#table_id').DataTable({});
-		$('#table_id tbody').on('click', 'tr', function() {
-			$(.SA).val($(this).find('td').eq(1).text());
-			var col1 = $(this).find('td').eq(1).text();
-			//console.log(col1);
-			//var data = otable.row(this).data();
-			//var col1 = data[1];
+		<script>
+		var col1 = '';
+		//console.log(col2);  
+			function addrAdd() {
+				//데이터테이블
+				var otable = $('#table_id').DataTable({});
+				$('#table_id tbody').on('click', 'tr', function() {
+					$().val($(this).find('td').eq(1).text());
+					var col1 = $(this).find('td').eq(1).text();
+					
+					var data = otable.row(this).data();
+					var col1 = data[1];
+					
+					$('#SA').val(col1);
+					//col2 = col1;
+				});
+			};
 			
-			 //"adminNameSch?SA=" + col1
-		}
-		});
-		});
+		</script>
+		
 	
-</script> 
-
 
 		<div class="complete_zone">
 			<h4>- 선택 된 상호 명 -</h4>
-			<input type="text" value="" name="SA" id="SA"
-				readonly="readonly" title="도로명 조회 결과">
+			<input type="text" value="" name="SA" id="SA" readonly="readonly"
+				title="도로명 조회 결과">
 			<div id="menuExplain">※ 목록에서 상호명 클릭 후 선택버튼을 누르시면 회원가입 페이지(상호명)에
 				입력됩니다.</div>
 		</div>
 	</div>
 </div>
-<div class="modal-footer row">
-	<div class="col">
-		<button id="search_country_Button" type="button"
-			onclick="javascript:inputTxt();">선택</button>
-	</div>
-	<div class="col">
-		<button type="button" class="js_dialog_close" onclick="">
-			<span class="ir_wa">팝업닫기</span>
-		</button>
-	</div>
+<script>
+ $('#sbn').on('click', function() {
+	 var col1 = $('#SA').val();
+	$('#storeName').val(col1);
+	//modal.Close;
+	$('.close');
+}) 
+
+
+</script>
+
+<div class="modal-footer">
+	
+		<button type="button" class="btn btn-primary btn-block" id="sbn" data-dismiss="modal">선택</button>
+	
 </div>
 

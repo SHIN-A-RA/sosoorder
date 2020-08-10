@@ -292,7 +292,7 @@
 				<div class="col">
 					<p class="formLabel">상호명</p>
 					<input type="text" name="storeName" id="storeName"
-						class="form-style" autocomplete="off" />
+						value="" class="form-style" autocomplete="off" />
 				</div>
 
 				<div class="col">
@@ -302,10 +302,10 @@
 				</div>
 				<script>
 					// Get the modal
-					var modal = document.getElementById("myModal");
+					//var modal = document.getElementById("myModal");
 
 					// Get the button that opens the modal
-					var btn = document.getElementById("myBtn");
+					//var btn = document.getElementById("myBtn");
 				</script>
 				<!-- The Modal -->
 				<div class="modal" id="myModal">
@@ -321,6 +321,8 @@
 				$('#myModal').on('shown.bs.modal', function() {
 					$('.modal-content').load('adminNameSch')
 				})
+			
+
 			</script>
 
 
