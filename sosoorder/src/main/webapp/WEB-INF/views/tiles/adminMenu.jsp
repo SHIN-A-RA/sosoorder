@@ -7,8 +7,7 @@
 	<li class="gnb_dp1">
 		<span>점포관리</span>
 		<ul class="gnb_dp2_wrap">
-			<li class="gnb_dp2"><a href="/sosoroder/storeSales">일/월 매출 관리</a></li>
-			<li class="gnb_dp2"><a href="/sosoroder/storeMng">메뉴분석</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/storeSales">메뉴분석 및 매출관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeMenuList">메뉴관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeMemberList">회원목록</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storePopupListForm">팝업관리</a></li>

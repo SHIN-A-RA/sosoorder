@@ -1,6 +1,7 @@
 
 package com.soso.app.order.web;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.soso.app.home.service.HomeService;
 import com.soso.app.order.call.EchoHandler;
@@ -47,12 +50,6 @@ public class callController {
 		String storeId = (String)session.getAttribute("storeInfo");
 		callVO.setStoreId(storeId);
 		callService.callInsert(callVO);
-		try {
-			EchoHandler.putMessage();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return callVO;
 	}
@@ -62,7 +59,7 @@ public class callController {
 		String storeId = (String)session.getAttribute("storeId");
 		callVO.setStoreId(storeId);
 		model.addAttribute("callListget", callService.callGet(callVO));
-		return "empty/order/callList";
+		return "order/callList";
 	}
 	
 	@RequestMapping(value="/callList", method=RequestMethod.GET, consumes="application/json")

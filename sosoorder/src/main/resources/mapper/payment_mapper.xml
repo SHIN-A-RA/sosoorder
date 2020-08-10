@@ -14,7 +14,11 @@
 <!-- payment 일별 매출량-->
    <select id="getDayTotal" parameterType="PaymentVO" resultType="PaymentVO">
 	SELECT DISTINCT(TO_Char(payday, 'mm/DD')),
-	 		sum(totalpay) FROM payment 
+	 		sum(totalpay) 
+      FROM admin a , menu m, orderCpt o,payment p
+  where a.storeId =m.storeId and m.menuNum = o.menuNum and
+  o.paynum = p.paynum
+  and a.storeId= #{storeId}
 	 group by (TO_Char(payday, 'mm/DD'))
    </select>
   
@@ -24,7 +28,10 @@
    <select id="getMonthTotal" resultType="map">
 SELECT to_char(payday, 'fmmm') AS month,
  	   sum(totalpay) AS monthTotal
- FROM payment 
+ FROM admin a , menu m, orderCpt o,payment p
+  where a.storeId =m.storeId and m.menuNum = o.menuNum and
+  o.paynum = p.paynum
+  and a.storeId= #{storeId}
  GROUP BY to_char(payday, 'fmmm') 
  ORDER BY to_char(payday,'fmmm') ASC
    </select>   
@@ -40,16 +47,22 @@ SELECT to_char(payday, 'fmmm') AS month,
 		 SELECT   
 		     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
 			 	  NVL((select sum(totalpay) FROM payment where to_char(payday,'yyyy/fmmm')= #{monthSales}),0) "monthSales"
-		     FROM payment
-		     WHERE rownum =1
+		          FROM admin a , menu m, orderCpt o,payment p
+			      where a.storeId =m.storeId and m.menuNum = o.menuNum and
+			      o.paynum = p.paynum
+			      and a.storeId= #{storeId}
+		          AND rownum =1
      </if>
      <if test="daySales != ''">
 	  	 SELECT 
 	     (select TRUNC(sum(totalpay)/12,0) from payment where to_char(payday,'yyyy') = #{yearSales}) "yearSales",
 		 	  NVL((select sum(totalpay) FROM payment where to_char(payday,'yyyy/fmmm')= #{monthSales}),0) "monthSales",
 		      NVL((select TRUNC(sum(totalpay),0) from payment where to_char(payday,'yyyy/fmmm/dd') = #{daySales}),0) "daySales"
-	     FROM payment
-	     WHERE rownum =1
+	          FROM admin a , menu m, orderCpt o,payment p
+			  where a.storeId =m.storeId and m.menuNum = o.menuNum and
+			  o.paynum = p.paynum
+			  and a.storeId= #{storeId}
+	    	  AND rownum =1
  	</if>
  	</select>
  	

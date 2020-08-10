@@ -28,7 +28,8 @@
     <!-- Bootstrap core JavaScript-->
    <script src="${pageContext.request.contextPath}/resources/admin/vendor/jquery/jquery.min.js"></script> 
   <script src="${pageContext.request.contextPath}/resources/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+  <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
   <!-- slick -->
   
   <script src="${pageContext.request.contextPath}/resources/admin/js/slick/slick.min.js"></script>
@@ -58,6 +59,43 @@
   <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/hw.css" rel="stylesheet">
    <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/ara.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin/scss/addcss/gr.css" rel="stylesheet">
+    
+    <script type="text/javascript">
+
+		let sock = new SockJS("http://localhost/sosoroder/echo/");
+		sock.onmessage = onMessage;
+		sock.onclose = onClose;
+		
+		// 메시지 전송
+		function sendMessage(msg) {					
+			sock.send(JSON.stringify(msg)); 
+		}
+		
+		// 서버로부터 메시지를 받았을 때
+		function onMessage(msg) {
+			
+			 msg = JSON.parse(msg.data);
+			if(msg.cmd == 'callInsert') {
+				callList();	
+			} else if(msg.cmd == 'orderInsert'){
+				
+			} else if(msg.cmd == 'startCook'){
+				
+			} else if(msg.cmd == 'endCook'){
+				
+			} 
+					
+			
+			
+		}
+		// 서버와 연결을 끊었을 때
+		function onClose(evt) {
+			$("#messageArea").append("연결 끊김");
+		
+		}
+		
+	</script>
+    
 </head>
 
 <body id="page-top">
@@ -78,6 +116,8 @@
 				<div id="gnb_menu" class="hd_gnb_menu">
 					<c:if test="${sessionScope.storeId != null}"><span></span></c:if>	
 				</div>
+				
+				
 				<tiles:insertAttribute name="menu"/>
 				<script>
 				function removeSession(){
@@ -167,6 +207,10 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div> -->
+          
+          
+
+
 
        <!-- 컨텐츠 영역 -->
        	<tiles:insertAttribute name="content"/>
@@ -217,7 +261,6 @@
       </div>
     </div>
   </div>
-
 
  
 </body>

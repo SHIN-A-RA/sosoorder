@@ -23,29 +23,6 @@
 </div>
 
 <script type="text/javascript">
-
-	let sock = new SockJS("http://localhost/sosoroder/echo/");
-	sock.onmessage = onMessage;
-	sock.onclose = onClose;
-	// 메시지 전송
-	function sendMessage() {
-		
-		msg = { cmd : "msg",
-				seat : $("#seat").val(),
-				msg : $("#message").val()
-			 	}
-		sock.send(JSON.stringify(msg)); 
-			
-	}
-	// 서버로부터 메시지를 받았을 때
-	function onMessage(msg) {
-		callList();
-	}
-	// 서버와 연결을 끊었을 때
-	function onClose(evt) {
-		$("#messageArea").append("연결 끊김");
-
-	}
 	
 	$(function(){
 		callList();
