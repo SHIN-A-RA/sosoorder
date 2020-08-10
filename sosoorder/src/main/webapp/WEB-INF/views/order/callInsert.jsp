@@ -42,7 +42,8 @@
 	sock.onclose = onClose;
 	// 메시지 전송
 	function sendMessage() {
-		msg = { seatNum : $("#seat").val(),
+		msg = { cmd :'callInsert', 
+			    seatNum : $("#seat").val(),
 				callContents : $("#message").val() }
 		sock.send(JSON.stringify(msg)); 
 		
