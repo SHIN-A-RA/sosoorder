@@ -25,7 +25,7 @@
 			AND p.payNum = d.paynum(+)
 		    AND NOT p.status = '2'
 			<if test="storeId != null">
-		  	AND s.storeId = #{storeId}
+		  	AND m.storeId = #{storeId}
 		    </if>  
 		 </where>  
 		 order by p.paynum , m.menuName 
