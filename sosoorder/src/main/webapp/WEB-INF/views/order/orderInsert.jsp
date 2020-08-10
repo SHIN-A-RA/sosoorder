@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="resources/admin/scss/addcss/hw.css" rel="stylesheet" type="text/css">
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script language="javascript">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+  
+<script>
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
-
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
@@ -377,15 +379,85 @@ function removeChar(event) {
 <input class="total" name="totalPay" type="hidden" value="${totalPrice}">
 <input class="serialNum" name="serialNum" type="hidden" value="">
 <div class="div_pay">
-<button class="btn_pay" type="submit"><span class="txt_payment">결제하기</span></button>
+<button class="btn_pay" type="submit" onclick="requestPay()"><span class="txt_payment">결제하기</span></button>
 </div>
 </form>
 
 
 <script>
 
+var IMP=window.IMP;
+IMP.init("imp24229204");
 
-/* 결제방법받기 */
+ function requestPay(payNum, totalpay) {
+      // IMP.request_pay(param, callback) 호출
+       IMP.request_pay({ // param
+          pg: "inicis",
+          pay_method: "card",
+          merchant_uid: "SHOW" + new Date().getTime(), //결제내역 DB에서 Primary Key 가져오기	       
+ 
+          name: payNum,
+          amount: totalpay	//DB에서 결제내역의 PAYMENT_SUM 불러오기
+
+      }, 
+      function (rsp) {
+          if (rsp.success) {
+              jQuery.ajax({
+                  url: "payInsert.do", // 가맹점 서버
+                  method: "POST",
+                  dataType:"json",
+                  data: { payment_approval_number:rsp.merchant_uid, payment_type:rsp.pay_method, payment_sum:rsp.paid_amount, 
+                	  customer_id:rsp.buyer_name	                		  
+              	}
+              }).done(function (data) {
+                // 가맹점 서버 결제 API 성공시 로직
+            	  var msg = '결제가 완료되었습니다.\n';
+			        msg += '카드 승인번호 : ' + 'rsp.apply_num' + '\n';
+			        msg += '결제 번호: ' + 'rsp.name' + '\n'; 
+			        msg += '결제 방식 : ' + 'rsp.pay_method' + '\n';
+			        msg += '결제 금액 : ' + 'rsp.paid_amount' + '\n';
+			        alert(msg); 
+              })
+            } else {
+            	 var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    	alert(msg);
+			    }
+          });
+ }
+  
+ 
+
+//결제
+/* 	
+ function requestPay(payNum, totalpay) {
+      // IMP.request_pay(param, callback) 호출
+      IMP.request_pay({ // param
+          pg: "html5_inicis",
+          pay_method: "card",
+          merchant_uid: "ORD20180131-0000011",
+          name: "노르웨이 회전 의자",
+          amount: 64900,
+          buyer_email: "gildong@gmail.com",
+          buyer_name: "홍길동",
+          buyer_tel: "010-4242-4242",
+          buyer_addr: "서울특별시 강남구 신사동",
+          buyer_postcode: "01181"
+      }, function (rsp) { // callback
+          if (rsp.success) {
+              ...,
+              // 결제 성공 시 로직,
+              ...
+          } else {
+              ...,
+              // 결제 실패 시 로직,
+              ...
+          }
+      });
+    }
+
+ */
+
 $(function(){
 	$(".payCheck").on("change",function(){
 		$(".payCheckval").val($(this).val());
@@ -416,7 +488,7 @@ $(function(){
 	    });
 		
 		
-});
+
 
 
 </script>

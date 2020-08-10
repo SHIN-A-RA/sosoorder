@@ -1,4 +1,6 @@
 
+CREATE SEQUENCE seq_ordercpt; .nextval;
+CREATE SEQUENCE seq_parkco;
 /*쿠폰 적용 누르면 쿠폰할인금액 받아오기*/
 select c.discount 
 FROM COUPON C JOIN USERCOUPON U ON(C.SERIALNUM = U.SERIALNUM)
@@ -112,7 +114,7 @@ BEGIN
 	delete from payment where MEMBERNUM is null;
 	delete from point where point is null;
 	
-	create table Address(
+	create table delivery(
 		deliveryNum NUMBER(10),
 		memberNum NUMBER(10),
 		addr  VARCHAR2(30),
@@ -201,4 +203,7 @@ select sum(point*pointCheck) AS totalPoint
 from point
 where storeId = 'test'
 	and memberNum = 1;
+	
+alter table point add(pointCheck varchar2(2)); 
+alter table payment add (status varchar2(5));
     

@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
@@ -105,6 +107,19 @@ public class OrderController {
       
       return "order/orderConfirm";
    }
+   
+   
+	@RequestMapping(value="payInsert.do" , method=RequestMethod.POST)
+	@ResponseBody
+	public OrderCptVO PaymentResult(OrderCptVO orderCptVO) throws Exception {
+		
+		System.out.println(orderCptVO);
+		orderService.payInsert(orderCptVO);
+		
+		return orderCptVO;
+	}
+	
+	
    
    @RequestMapping("/orderConfirm")
    public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request) {
