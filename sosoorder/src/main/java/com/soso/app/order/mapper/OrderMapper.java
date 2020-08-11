@@ -45,4 +45,8 @@ public interface OrderMapper {
 	
 	//영수증 출력시 정보가져오기 
 	public OrderCptVO receiptGet(OrderCptVO orderCptVO);
+	
+	//주소가져오기
+	public List<OrderCptVO> getAddr(OrderCptVO orderCptVO);
+	
 }

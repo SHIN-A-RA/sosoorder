@@ -57,6 +57,7 @@ public class OrderController {
 
 		model.addAttribute("oderList", orderService.getOrder(orderCptVO));
 		model.addAttribute("point", orderService.getTotalPoint(orderCptVO));
+		model.addAttribute("addr", orderService.getAddr(orderCptVO));
 		model.addAttribute("coupon", orderService.findCoupon(orderCptVO));
 		model.addAttribute("seat", orderService.getSeat(orderCptVO));
 
@@ -88,19 +89,6 @@ public class OrderController {
 		System.out.println("orderCptVO" + orderCptVO);
 		orderService.payInsert(orderCptVO);
 
-		String payNum = (String) session.getAttribute("payNum");
-		orderCptVO.setPayNum(payNum);
-
-		// 스토어쪽에 메세지 푸시
-		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(storeId);
-
-		try {
-			socketSession.sendMessage(new TextMessage("주문접수"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		// 페이먼트 프로시저
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -117,20 +105,28 @@ public class OrderController {
 
 		String pointUse = orderCptVO.getPointUse();
 		map.put("pointUse", pointUse);
+		
+		String addr = orderCptVO.getAddr();
+		map.put("addr", addr);
+		
+		String cellphone = orderCptVO.getCellPhone();
+		map.put("cellphone", cellphone);
 
 		orderService.paymentProc(map);
+		
+		String payNum = (String) session.getAttribute("payNum");
+		orderCptVO.setPayNum(payNum);
+
+//		// 스토어쪽에 메세지 푸시
+//		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(storeId);
+//
+//		try {
+//			socketSession.sendMessage(new TextMessage("결제번호:" +payNum+ "주문이 들어왔습니다."));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		return "order/orderConfirm";
-	}
-
-	@RequestMapping(value = "payInsert.do", method = RequestMethod.POST)
-	@ResponseBody
-	public OrderCptVO PaymentResult(OrderCptVO orderCptVO) throws Exception {
-
-		System.out.println(orderCptVO);
-		orderService.payInsert(orderCptVO);
-
-		return orderCptVO;
 	}
 
 	@RequestMapping("/orderConfirm")

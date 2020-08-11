@@ -75,9 +75,11 @@ public class OrderServiceImpl implements OrderService{
 		return orderMapper.receiptGet(orderCptVO);
 	}
 
+	@Override
+	public List<OrderCptVO> getAddr(OrderCptVO orderCptVO) {
+		return orderMapper.getAddr(orderCptVO);
+	}
+
 
 	
-
-	
-
 }

@@ -34,5 +34,7 @@ public class OrderCptVO {
 	String payCheck;
 	String totalPay;
 	String payNum;
+	String addr;
+	String cellPhone;
 
 }

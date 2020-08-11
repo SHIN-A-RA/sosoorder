@@ -1,8 +1,10 @@
 package com.soso.app.store.web;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
-
+import com.soso.app.order.call.EchoHandler;
 import com.soso.app.store.service.StoreOrderService;
 import com.soso.app.store.service.StoreOrderVO;
 
@@ -31,14 +35,34 @@ public class StoreOrderController {
 	
 	@RequestMapping(value="orderUpdate1", method=RequestMethod.POST)
 	@ResponseBody
-	public void oderUpdate1(StoreOrderVO storeOrderVO) {
+	public void oderUpdate1(StoreOrderVO storeOrderVO, HttpServletRequest request) {	
 		storeOrderService.orderUpdate1(storeOrderVO);
+		
+//		String payNum = request.getParameter("payNum");
+//		// 스토어쪽에 메세지 푸시
+//		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(payNum);
+//		try {
+//			socketSession.sendMessage(new TextMessage("조리가 시작되었습니다."));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+	
 	}
 	
 	@RequestMapping(value="orderUpdate2", method=RequestMethod.POST)
 	@ResponseBody
-	public void oderUpdate2(StoreOrderVO storeOrderVO) {
+	public void oderUpdate2(StoreOrderVO storeOrderVO, HttpServletRequest request) {
 		storeOrderService.orderUpdate2(storeOrderVO);
+		
+//		String payNum = request.getParameter("payNum");
+//		// 스토어쪽에 메세지 푸시
+//		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(payNum);
+//		try {
+//			socketSession.sendMessage(new TextMessage("조리가 완료되었습니다."));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
 	}
 
 }

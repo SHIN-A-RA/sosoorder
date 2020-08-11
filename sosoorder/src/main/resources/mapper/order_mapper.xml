@@ -99,7 +99,9 @@
 		    #{serialNum},
 		    #{pointUse},
 		    #{storeId},
-		    #{phone}
+		    #{phone},
+		    #{addr},
+		    #{cellphone}
     ) }
 	</select>
 	
@@ -155,6 +157,16 @@
 	select distinct paynum from orderCpt where orderNum=#{orderNum}
 	</select>
 	
+	<!-- 주소뿌리기 -->
+	<select id="getAddr" parameterType="OrderCptVO" resultType="OrderCptVO">
+	select addr from delivery 
+		<where>
+			DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery)
+		<if test="phone != null">
+			And memberNum = (SELECT memberNum FROM member WHERE phone = #{phone}) 
+		</if>	
+		</where>
+	</select>
 	
 
 </mapper>

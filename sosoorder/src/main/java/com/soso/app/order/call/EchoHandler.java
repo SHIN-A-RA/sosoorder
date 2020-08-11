@@ -12,6 +12,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.soso.app.order.service.MessageVO;
+
 public class EchoHandler extends TextWebSocketHandler{
     //세션 리스트
     public static List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
@@ -40,7 +43,21 @@ public class EchoHandler extends TextWebSocketHandler{
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         logger.info("========================{}로 부터 {} 받음", session.getId(), message.getPayload());
-        System.out.println(message.getPayload());
+        
+      //JSON from String to Object
+        ObjectMapper mapper = new ObjectMapper();
+        MessageVO msgVO = mapper.readValue(message.getPayload(), MessageVO.class);
+        
+        if(msgVO.getCmd().equals("callInsert")) {
+        	map.get(msgVO.getStore()).sendMessage(new TextMessage(message.getPayload()));
+        }else if(msgVO.getCmd().equals("orderInsert")) {
+        	map.get(msgVO.getStore()).sendMessage(new TextMessage(message.getPayload()));
+        }else if(msgVO.getCmd().equals("startCook")) {
+        	map.get(msgVO.getMember()).sendMessage(new TextMessage(message.getPayload()));
+        }else if(msgVO.getCmd().equals("endCook")) {
+        	map.get(msgVO.getMember()).sendMessage(new TextMessage(message.getPayload()));
+        }
+     
         //모든 유저에게 메세지 출력
         for(WebSocketSession sess : sessionList){
         	if(sess != session)

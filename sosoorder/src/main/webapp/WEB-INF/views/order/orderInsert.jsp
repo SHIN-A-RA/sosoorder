@@ -220,17 +220,17 @@ function removeChar(event) {
  <tr>
 	<th class="basic_tb_th">주소
     </th>
-         <td class="basic_tb_td">
-              <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65"  type="text"><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
-         </td>
-</tr>   
-
-                
+	         <td class="basic_tb_td">
+	         <c:forEach var="list" items="${addr}">
+	              <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value="${list.addr}" ><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
+	        	</c:forEach>
+	         </td>
+</tr>                  
 <tr>
 	<th class="basic_tb_th">휴대전화 <span class=""><img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"></span>
 	</th>
     <td class="basic_tb_td">
-		<input class="basic_input" name="phone"  size="20"  type="text" value="${phone}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> 
+		<input class="basic_input" id="cellphone" name="cellphone"  size="20"  type="text" value="${phone}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> 
 	</td>
  </tr>
 </table>
@@ -375,8 +375,10 @@ function removeChar(event) {
 <input class="pointUse" name="pointUse" type="hidden" value="">
 <input class="total" name="totalPay" type="hidden" value="${totalPrice}">
 <input class="serialNum" name="serialNum" type="hidden" value="">
+<input class="addr" name="addr" type="hidden" value="">
+<input class="cellphone" name="cellPhone" type="hidden" value=""> 
 <div class="div_pay">
-<button class="btn_pay" type="button" onclick="goSubmit()" ><span class="txt_payment">결제하기</span></button>
+<button class="btn_pay" type="button"><span class="txt_payment">결제하기</span></button>
 </div>
 </form>
 
@@ -450,6 +452,10 @@ $(function(){
 	        	$(".seat").val($(".empty").val()); 
 				$('#selectSeat').attr('disabled', 'true');
 				 alert("배달 주문을 하시겠습니까?");
+  				var addr = $('#roadFullAddr').val();
+				$('.addr').val(addr);
+				var cellphone = $('#cellphone').val();
+				$('.cellphone').val(cellphone);  
 	        }else{
 	        	$('#selectSeat').val($(".empty").val());
 	        	$(".seat").val($(".empty").val());
