@@ -204,4 +204,6 @@ where storeId = 'test'
 	
 alter table point add(pointCheck varchar2(2)); 
 alter table payment add (status varchar2(5));
+
+SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
     

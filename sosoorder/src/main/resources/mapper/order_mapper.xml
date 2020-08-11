@@ -72,6 +72,9 @@
 	</select>
 	
 	<insert id="payInsert" parameterType="OrderCptVO">  
+	 <selectKey resultType="string" keyProperty="payNum" order="BEFORE">
+        SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT       
+    </selectKey>  
 	INSERT INTO PAYMENT 
 		(PAYNUM, 
 		PAYCHECK, 
@@ -83,7 +86,7 @@
 		TOTALPAY, 
 		STATUS)
 	VALUES(
-		(SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT), 
+		#{payNum}, 
 		 #{payCheck}, 
 		 sysdate, 
 		 NVL(#{pointUse},0), 

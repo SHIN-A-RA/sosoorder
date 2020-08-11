@@ -88,6 +88,9 @@ public class OrderController {
 
 		System.out.println("orderCptVO" + orderCptVO);
 		orderService.payInsert(orderCptVO);
+		
+		session.setAttribute("payNum",orderCptVO.getPayNum());
+
 
 		// 페이먼트 프로시저
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -111,28 +114,19 @@ public class OrderController {
 		
 		String cellphone = orderCptVO.getCellPhone();
 		map.put("cellphone", cellphone);
-
+		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
 		
-		String payNum = (String) session.getAttribute("payNum");
-		orderCptVO.setPayNum(payNum);
+	
 
-//		// 스토어쪽에 메세지 푸시
-//		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(storeId);
-//
-//		try {
-//			socketSession.sendMessage(new TextMessage("결제번호:" +payNum+ "주문이 들어왔습니다."));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 
-		return "order/orderConfirm";
+		return "redirect:orderConfirm";
 	}
 
 	@RequestMapping("/orderConfirm")
-	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request) {
-
-		return "";
+	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
+		
+		return "order/orderConfirm";
 
 	}
 

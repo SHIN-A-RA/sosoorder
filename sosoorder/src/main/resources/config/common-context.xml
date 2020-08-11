@@ -33,8 +33,12 @@
 		
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:handshake-interceptors>
+			<bean class="com.soso.app.common.HandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs />
-	</websocket:handlers>
+		
+		</websocket:handlers>
     
 	<bean id="echoHandler" class="com.soso.app.order.call.EchoHandler"/>
 	
