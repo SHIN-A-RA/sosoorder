@@ -32,10 +32,16 @@ public class StoreMemberServiceImpl implements StoreMemberService{
 	}
 
 	@Override
-	public void storeMemberUpdate(MemberVO memberVO) {
-		storeMemberMapper.storeMemberUpdate(memberVO);
+	public void memberUpdate(MemberVO memberVO) {
+		storeMemberMapper.memberUpdate(memberVO);
 		
 	}
+	@Override
+	public void storeMemberUpdate(StoreMemberVO storeMemberVO) {
+		storeMemberMapper.storeMemberUpdate(storeMemberVO);
+		
+	}
+	
 	@Override
 	public MemberVO getMember(MemberVO memberVO) {
 		return storeMemberMapper.getMember(memberVO);

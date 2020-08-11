@@ -52,7 +52,7 @@
 						<th>메뉴 이름</th>
 						<th>가격</th>
 						<th>메뉴사진</th>
-						<th>주/부 메뉴 코드</th>
+						<!-- <th>주/부 메뉴 코드</th> -->
 						<th>메뉴 소개</th>
 					</tr>
 				</thead>
@@ -64,7 +64,7 @@
 							<td>${menu.menuPrice}원</td>
 							<td><img src="resources/download/${menu.menuImage}"
 								style="width: 80px;"></td>
-							<td>${menu.menuCheck}</td>
+							<%-- <td>${menu.menuCheck}</td> --%>
 							<td>${menu.menuContents}</td>
 						</tr>
 					</c:forEach>

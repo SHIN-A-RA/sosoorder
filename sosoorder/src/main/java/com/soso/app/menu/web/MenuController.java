@@ -70,7 +70,7 @@ public class MenuController {
 		adminService.getMenuUpdate(adminVO);
 	}
 
-	// 메뉴 등록 처리하고 관리페이지로 이동
+	// 메뉴 등록 처리하고 관리페이지로 이동(수정부분도 여기있음)
 	@RequestMapping("menuInsert")
 	public String menuInsert(@ModelAttribute("evo") MenuVO vo, // 1. 커맨트 객체
 			Model model, HttpServletRequest request
@@ -104,7 +104,7 @@ public class MenuController {
 				vo.setMenuImage(updateFileName);
 				menuService.menuUpdate(vo);
 			}else {
-				menuService.menuUpdate(vo);
+				menuService.menuUpdate(vo);//메뉴번호가 있으면 수정, 없으면 등록
 			}
 		} else {
 			menuService.menuInsert(vo);

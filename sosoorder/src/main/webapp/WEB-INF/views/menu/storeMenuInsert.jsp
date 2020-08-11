@@ -156,12 +156,12 @@
 					<select class="form-control" name="menuCheck"
 						id="exampleFormControlSelect1">
 						<c:if test="${oneMenu.menuCheck!=1}">
-							<option selected>0</option>
-							<option>1</option>
+							<option value="0"selected>부메뉴</option>
+							<option value="1">주메뉴</option>
 						</c:if>
 						<c:if test="${oneMenu.menuCheck==1}">
-							<option>0</option>
-							<option selected>1</option>
+							<option value="0">부메뉴</option>
+							<option value="1" selected>주메뉴</option>
 						</c:if>
 					</select>
 				</div>

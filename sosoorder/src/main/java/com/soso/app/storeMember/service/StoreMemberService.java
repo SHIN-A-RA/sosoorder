@@ -11,7 +11,8 @@ public interface StoreMemberService {
 
 	public void storeMemberDelete(StoreMemberVO storeMemberVO);
 	
-	public void storeMemberUpdate(MemberVO memberVO);
+	public void memberUpdate(MemberVO memberVO);
+	public void storeMemberUpdate(StoreMemberVO storeMemberVo);
 	
 	public MemberVO getMember(MemberVO memberVO);
 }

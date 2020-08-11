@@ -9,6 +9,7 @@ public interface StoreMemberMapper {
 	public List<StoreMemberVO> getStoreMemberList(StoreMemberVO storeMemberVO);
 	public StoreMemberVO getStoreMember(StoreMemberVO storeMemberVO);
 	public void storeMemberDelete(StoreMemberVO storeMemberVO);
-	public void storeMemberUpdate(MemberVO memberVO);
+	public void memberUpdate(MemberVO memberVO);
+	public void storeMemberUpdate(StoreMemberVO storeMemberVo);
 	public MemberVO getMember(MemberVO memberVO);
 }
