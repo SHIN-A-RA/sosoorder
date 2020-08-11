@@ -139,7 +139,10 @@ function adminValidCheck() {
 </form>
 			<button type="button" class="btn btn-primary btn-block" onclick="location.href='memberInsertForm'">일반가입</button>
 			<button type="button" class="btn btn-primary btn-block" onclick="location.href='adminInsertForm'">사업자가입</button>
-			
+			<div id="kakao_id_login" style="text-align: center"> 
+				<a href="${kakao_url}"> 
+				<img width="223" src="resources/admin/scss/kakao/kakao_login_medium_wide.png" /></a> 
+			</div>
 			
 		
 </div>
