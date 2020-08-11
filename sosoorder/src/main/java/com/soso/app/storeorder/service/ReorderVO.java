@@ -16,7 +16,7 @@ public class ReorderVO {
 	String reorderNum;
 	String memberNum;
 	String storeId;
-	Date reorderDate;
+	String reorderDate;
 	String frommail;
 	String filename;
 	String profile;
@@ -61,13 +61,6 @@ MultipartFile uploadFile;
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
-	public Date getReorderDate() {
-		return reorderDate;
-	}
-	public void setReorderDate(Date reorderDate) {
-		this.reorderDate = reorderDate;
-	}
-
 
 	public String getFrommail() {
 		return frommail;

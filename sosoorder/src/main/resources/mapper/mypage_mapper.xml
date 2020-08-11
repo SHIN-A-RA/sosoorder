@@ -22,7 +22,7 @@
 			<if test="storeId != null">
 			and a.storeId = #{storeId}
 			</if>
-			order by p.pointDate
+			   order by to_char(p.pointDate,'yyyy/mm/dd') ASC
 		</select>
 		
 	<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->

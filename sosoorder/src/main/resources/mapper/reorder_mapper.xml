@@ -73,7 +73,7 @@
       SELECT * 
       FROM reorder
       where storeId = #{storeId}
-      ORDER BY reorderNum
+      ORDER BY reorderDate DESC
        
    </select>
 
