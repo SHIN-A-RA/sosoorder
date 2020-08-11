@@ -36,4 +36,4 @@ function goPointInsert() {
 		<p><a class="btn_home" href="/sosoroder/homeSample">홈으로</a></p>
 	</div>
 </div>
-
+${storeInfo } ${payNum }

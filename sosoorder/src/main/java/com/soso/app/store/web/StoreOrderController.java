@@ -35,18 +35,10 @@ public class StoreOrderController {
 	
 	@RequestMapping(value="orderUpdate1", method=RequestMethod.POST)
 	@ResponseBody
-	public void oderUpdate1(StoreOrderVO storeOrderVO, HttpServletRequest request) {	
+	public String oderUpdate1(StoreOrderVO storeOrderVO, HttpServletRequest request) {	
 		storeOrderService.orderUpdate1(storeOrderVO);
 		
-//		String payNum = request.getParameter("payNum");
-//		// 스토어쪽에 메세지 푸시
-//		WebSocketSession socketSession = (WebSocketSession) EchoHandler.map.get(payNum);
-//		try {
-//			socketSession.sendMessage(new TextMessage("조리가 시작되었습니다."));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-	
+		return "ok";
 	}
 	
 	@RequestMapping(value="orderUpdate2", method=RequestMethod.POST)

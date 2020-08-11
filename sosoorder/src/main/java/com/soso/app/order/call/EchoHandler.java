@@ -43,7 +43,8 @@ public class EchoHandler extends TextWebSocketHandler{
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         logger.info("========================{}로 부터 {} 받음", session.getId(), message.getPayload());
-        
+        System.out.println(message.getPayload()+"====================");
+        System.out.println(map);
       //JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
         MessageVO msgVO = mapper.readValue(message.getPayload(), MessageVO.class);
@@ -56,12 +57,6 @@ public class EchoHandler extends TextWebSocketHandler{
         	map.get(msgVO.getMember()).sendMessage(new TextMessage(message.getPayload()));
         }else if(msgVO.getCmd().equals("endCook")) {
         	map.get(msgVO.getMember()).sendMessage(new TextMessage(message.getPayload()));
-        }
-     
-        //모든 유저에게 메세지 출력
-        for(WebSocketSession sess : sessionList){
-        	if(sess != session)
-        		sess.sendMessage(new TextMessage(message.getPayload()));
         }
     }
     

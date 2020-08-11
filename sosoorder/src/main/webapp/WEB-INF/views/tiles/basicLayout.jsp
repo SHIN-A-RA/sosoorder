@@ -80,7 +80,7 @@
 			} else if(msg.cmd == 'orderInsert'){
 				
 			} else if(msg.cmd == 'startCook'){
-				
+				$("#cook").html(msg.msg)
 			} else if(msg.cmd == 'endCook'){
 				
 			} 
@@ -137,6 +137,9 @@
 	              		<c:if test="${empty sessionScope.phone && empty sessionScope.storeId}">
 							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;" onclick="location.href='/sosoroder/memberLoginForm'">로그인</span>
 	              		</c:if>
+	<div id="cook">
+	
+	</div>              		
 		               	<c:if test="${not empty sessionScope.phone}">
 			               	  <script>
 				               	$(function(){
