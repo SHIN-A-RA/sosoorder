@@ -164,7 +164,7 @@
 	<select id="getAddr" parameterType="OrderCptVO" resultType="OrderCptVO">
 	select addr from delivery 
 		<where>
-			DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery)
+			DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
 		<if test="phone != null">
 			And memberNum = (SELECT memberNum FROM member WHERE phone = #{phone}) 
 		</if>	

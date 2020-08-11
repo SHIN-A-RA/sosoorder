@@ -18,14 +18,11 @@ function goPopup(){
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, reizable=yes"); 
 }
-
-
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 	
 	document.form.roadFullAddr.value = roadFullAddr;
 }
-
 function Show() {
 	if (delivery.style.display == "") {
 		delivery.style.display = "none"
@@ -34,7 +31,6 @@ function Show() {
 	}
 	};
 	
-
 //결제정보처리
 $(function(){	
 	function printPay() {
@@ -68,7 +64,6 @@ $(function(){
 		$(".serialNum").val(serial);
 		finalPay();
 	});
-
 	//총결제금액계산
 	function finalPay() {
 	    pointDiscount = parseInt(nvl($("#pointUse").text(),0));
@@ -125,8 +120,6 @@ function removeChar(event) {
     else
         event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
-
-
 	/* 모달 */
 	jQuery.fn.center = function() {
 		this.css('top', Math.max(0, (($(window).height() - $(this)
@@ -139,21 +132,17 @@ function removeChar(event) {
 				+ 'px');
 		return this;
 	}
-
 	function wrapWindowByMask() {
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
-
 		$('#mask').css({
 			'width' : maskWidth,
 			'height' : maskHeight
 		});
 		$('#mask').fadeTo(10, 0.8);
-
 		$('.ModalPopup').show();
 		$('.ModalPopup').center();
 	}
-
 	$(function() {
 		$('.openMask').click(function(e) {
 			e.preventDefault();
@@ -384,11 +373,9 @@ function removeChar(event) {
 
 
 <script>
-
 var IMP = window.IMP; 
 IMP.init("iamport");
 var totalPrice = $(".total").val();
-
 // 결제
 $(function(){
 	$(".btn_pay").on("click",function(){
@@ -428,15 +415,12 @@ $(function(){
 		}
 	});
 });
-
-
 /* 결제방법받기 */
 $(function(){
 	$(".payCheck").on("change",function(){
 		$(".payCheckval").val($(this).val());
 	});
 });
-
 /* 좌석값받기 */
 $(function(){
 	$("#selectSeat").on("change",function(){
@@ -455,7 +439,16 @@ $(function(){
   				var addr = $('#roadFullAddr').val();
 				$('.addr').val(addr);
 				var cellphone = $('#cellphone').val();
-				$('.cellphone').val(cellphone);  
+				$('.cellphone').val(cellphone); 
+							
+					$('#roadFullAddr').on("textchange",function(){
+						$('.addr').val($(this).val());
+					});
+					
+					$('#cellphone').on("change",function(){
+						$('.cellphone').val($(this).val());
+					});
+				
 	        }else{
 	        	$('#selectSeat').val($(".empty").val());
 	        	$(".seat").val($(".empty").val());
@@ -465,12 +458,4 @@ $(function(){
 	    });
 });		
 		
-
-
-
 </script>
-
-            
-   
-    
-    
