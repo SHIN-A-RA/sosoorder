@@ -22,7 +22,11 @@
 			<if test="storeId != null">
 			and a.storeId = #{storeId}
 			</if>
+<<<<<<< HEAD
 				order by to_char(p.pointDate,'yyyy/mm/dd') ASC
+=======
+			   order by to_char(p.pointDate,'yyyy/mm/dd') ASC
+>>>>>>> branch 'master' of https://github.com/SHIN-A-RA/sosoorder.git
 		</select>
 		
 	<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->

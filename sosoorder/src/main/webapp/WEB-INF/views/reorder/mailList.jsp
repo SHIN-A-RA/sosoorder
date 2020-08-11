@@ -5,10 +5,11 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script>
 
-    //목록
-    $(function(){
-      $('#table_id').DataTable();
-    });
+    $(document).ready(function() {
+        $('#table_id').DataTable( {
+            "order": [[ 3, "desc" ]]
+        } );
+    } );
     </script>    
 
 
@@ -20,7 +21,7 @@
 	<table id="table_id" class="display">
           <thead>
               <tr>
-                  <th>번호</th>
+                  <th>번호</th> 
                   <th>발송내역</th>
                   <th>발송건수</th>
                   <th>날짜</th>
@@ -29,13 +30,11 @@
           <tbody>
          <c:forEach items ="${mailList}" var="reorder">
 		 	<tr>
-		 		<td>${reorder.reorderNum }</td>
+		 		<td>${reorder.reorderNum }</td> 
 		 		<td> ${reorder.title }</td>
 		 		<td> ${reorder.memberNum }</td>
 		 		<td> ${reorder.reorderDate }</td>
-
 		 	</tr>	
-		 
 		 </c:forEach>
 		 
           </tbody>
