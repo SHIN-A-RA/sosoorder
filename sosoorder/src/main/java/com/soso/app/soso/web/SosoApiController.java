@@ -52,6 +52,7 @@ public class SosoApiController {
 		map.put("phone", phone);
 		map.put("serialNum", serialNum);
 		sosoListService.couponInsert(map);
+		System.out.println("출력");
 		return map;
 	}
 	

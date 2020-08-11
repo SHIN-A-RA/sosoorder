@@ -93,9 +93,9 @@
 							  .append($("<input type='hidden'>").addClass("lon").val(item.lon))
 							  .append($("<button>").addClass('btn btn-primary couponBtn').addClass(item.bizesNm).html('쿠폰보기').css('display', 'none').attr("type","button"))
 		 		) 
+		 		 
 		});//each
-		
-		 $.each(data.sosoList,function(idx,item){
+		$.each(data.sosoList,function(idx,item){
 			 $("."+item.storeName).attr('name', item.storeId).css('display', 'block')
 		}); 
 		
@@ -158,7 +158,7 @@
 								'<p>' + item.discount + '원 할인</p>'+
 							'</td>'+
 							'<td style="padding: 10px 10px 10px 10px;">'+
-							 '<button id ="btnInsert"  class="button" name="' + item.serialNum + '">쿠폰저장</button>' +
+							 '<button class ="btnInsert"  class="button" name="' + item.serialNum + '">쿠폰저장</button>' +
 						'</td>'+
 						'</tr>'+
 						'<tr style="height: 20px;">'+
@@ -173,7 +173,7 @@
 	
 	function couponInsert(){
 		//등록 버튼 클릭
-		$('#btnInsert').on('click',function(){
+		$('.btnInsert').on('click',function(){
  			var serialNum = $(this).attr('name');
 			$.ajax({ 
 			    url: "couponInsert",  
@@ -182,6 +182,7 @@
 			    contentType: 'application/json',
 			    data:JSON.stringify({serialNum:serialNum}),
 			    success: function(response) {
+			    	alert('쿠폰이 저장되었습니다.');
 			    }, 
 			    error:function(xhr, status, message) { 
 			        alert(" status: "+status+" er:"+message);
