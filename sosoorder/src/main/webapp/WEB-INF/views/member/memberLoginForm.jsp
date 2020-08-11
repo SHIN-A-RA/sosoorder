@@ -8,6 +8,12 @@
 .toggleFG{background: #FFFFFF; width: 30px; height: 30px; border: none; border-radius: 15px; position: relative; left: 0px;}	
 </style>
 <script>
+$(function(){
+	
+	if( '${param.msgCheck}' ){
+		alert('${param.msgCode}');
+	}
+});
 function memberValidCheck() {
 
 	//필수 입력 체크

@@ -1,59 +1,60 @@
-//package com.soso.app.common;
-//
-//import java.util.HashMap;
-//import java.util.StringTokenizer;
-//
-//import javax.servlet.ServletException;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.HttpSession;
-//
-//import org.springframework.web.servlet.ModelAndView;
-//import org.springframework.web.servlet.ModelAndViewDefiningException;
-//import org.springframework.web.servlet.mvc.WebContentInterceptor;
-//
-//public class AuthInterceptor extends WebContentInterceptor{
-//
-//	 /**
-//     * 세션에 계정정보가 있는지 여부로 인증 여부를 체크한다. 계정정보가 없다면, 로그인 페이지로 이동한다.
-//     */
-//    @Override
-//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException {
-//        
-//    	//세션 가져오기
-//    	HttpSession session = request.getSession();
-//    	String storeId = (String)session.getAttribute("storeId");
-//    	
-//    	if(storeId != null) {
-//    		return true;
-//    	}else {
-//    		ModelAndView mav = new ModelAndView("redirect:/forward.do");
-//            mav.addObject("msgCode", "세션값만료.");
-//            mav.addObject("returnUrl", "/index.do");
-//            throw new ModelAndViewDefiningException(mav);
-//    	}
-//    	
-//    }
-//
-//    /**
-//     * 세션에 메뉴권한이 있는지 여부로 메뉴권한 여부를 체크한다. 계정정보가 없다면, 로그인 페이지로 이동한다.
-//     */
-//    @Override
-//    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-//        String requestURI = request.getRequestURI();
-//        
-//        //세션 가져오기
-//    	HttpSession session = request.getSession();
-//    	String storeId = (String)session.getAttribute("storeId");
-//        
-//    	try {
-//            if (requestURI.equals("스토어 아이디가 가야되는 페이지")) {
-//
-//                if (storeId == null) { // 세션이 있을 경우만 체크
-//                        ModelAndView mav = new ModelAndView("redirect:/forward.do");
-//                        mav.addObject("msgCode", "권한이 없습니다.");
-//                        mav.addObject("returnUrl", "/index.do");
-//                        throw new ModelAndViewDefiningException(mav);
-//                    }
-//            }
-//}
+package com.soso.app.common;
+
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+public class AuthInterceptor extends HandlerInterceptorAdapter {
+	
+	//컨트롤러 실행 직전에 동작.
+	//반환 값이 true일 경우 정상적으로 진행, false일 경우 실행이 멈춤
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return super.preHandle(request, response, handler);
+	}
+	//컨트롤러 진입 후 view가 랜더링 되기 전 수행.
+	//modelAndView을 통해 화면 단에 들어가는 데이터 등의 조작이 가능.
+	//메뉴체크
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		//스토어아이디
+		HttpSession session = request.getSession();
+		String storeId = (String)session.getAttribute("storeId");
+		String phone = (String)session.getAttribute("phone");
+		String requestURI = request.getRequestURI(); //페이지의 uri를 가져옴
+		
+		if(	requestURI.contains("store") || 
+			requestURI.contains("emp") ||
+			requestURI.contains("seatInsertForm") ||
+			requestURI.contains("mailList")
+			) { //해당 페이지에서
+			if(storeId == null) {	//session에 storeId가 없을 경우
+				 ModelAndView mav = new ModelAndView("redirect:/memberLoginForm"); //로그인페이지로 이동한다.
+                 mav.addObject("msgCode", "관리자 로그인이 필요한 서비스입니다.");
+                 mav.addObject("msgCheck", "true");
+                 throw new ModelAndViewDefiningException(mav);
+			}
+		}else if(requestURI.contains("myPointsList") || 
+			  	 requestURI.contains("myCouponList") ||
+				 requestURI.contains("myOrderList")
+				) {
+			if(phone == null) {	//session에 storeId가 없을 경우
+				ModelAndView mav = new ModelAndView("redirect:/memberLoginForm"); //로그인페이지로 이동한다.
+				mav.addObject("msgCode", "회원 로그인이 필요한 서비스입니다.");
+				mav.addObject("msgCheck", "true");
+                throw new ModelAndViewDefiningException(mav);
+			}
+		}
+		
+	}
+	
+}
