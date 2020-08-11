@@ -72,7 +72,7 @@ public class MenuController {
 
 	// 메뉴 등록 처리하고 관리페이지로 이동(수정부분도 여기있음)
 	@RequestMapping("menuInsert")
-	public String menuInsert(@ModelAttribute("evo") MenuVO vo, // 1. 커맨트 객체
+	public String menuInsert(@ModelAttribute("evo") MenuVO vo, AdminVO adminVO, HttpSession session,  // 1. 커맨트 객체
 			Model model, HttpServletRequest request
 
 	) {
@@ -95,7 +95,9 @@ public class MenuController {
 				e.printStackTrace();
 			}
 		}
-		vo.setStoreId("test");
+//		vo.setStoreId("test");
+		String storeId = (String) session.getAttribute("storeId");
+		vo.setStoreId(storeId);
 		vo.setMenuImage(filename);
 		// 서비스호출
 		if (vo.getMenuNum() != null && !vo.getMenuNum().isEmpty()) {

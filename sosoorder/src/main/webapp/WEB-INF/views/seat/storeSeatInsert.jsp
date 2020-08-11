@@ -24,15 +24,15 @@
 			<table id="table_id" class="display tb_style">
 				<thead align="center">
 					<tr>
-						 <th>테이블 번호</th>
-						<th>테이블 번호</th>
+						 <th>No.</th>
+						 <th>테이블 번호</th> 
 					</tr>
 				</thead>
 				<tbody align="center">
 					<c:forEach items="${SeatList}" var="List">
 						<tr>
 							 <td>${List.seatNum}</td> 
-							<td>${List.seat}</td>
+							 <td>${List.seat}</td> 
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -48,8 +48,10 @@
 				<br> <br>
 				<div align="center">
 					<p></p>
-					<span> <span><input type="text" id="seatNum" name="seatNum"
-							placeholder="테이블 번호"></span><input type="text" id="seat" name="seat"
+					<span> <span>
+					<input type="hidden" id="seatNum" name="seatNum"
+							placeholder="테이블 번호"></span>
+							<input type="text" id="seat" name="seat"
 							placeholder="테이블 번호"></span>
 
 					<span><input type="submit" class="btn btn-success"
