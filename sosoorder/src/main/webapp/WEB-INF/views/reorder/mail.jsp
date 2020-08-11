@@ -25,9 +25,12 @@ position: absolute;
     margin: 0;
     height: 18px;
 }
+
+
  </style>
 
 <head><title></title>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 </head>
 <body>
 <div class="centered">
@@ -47,14 +50,28 @@ position: absolute;
         class="form-control">
       </div>
       
-        <p>
+        <!-- <p>
           <div align="center">
-          <!-- 내용 -->
+          내용
             <textarea name="contents" cols="120" rows="12"
             style="width: 100%; resize: none" placeholder="내용"
             class="form-control"></textarea>
           </div>
-        <p>
+        <p> -->
+        
+    <!--     <textarea name="content" id="editor" cols="120" rows="30"
+            style="width: 100%; resize: none;" placeholder="내용" class="form-control"></textarea>
+    <script>
+    // 3. CKEditor5를 생성할 textarea 지정
+    ClassicEditor
+        .create( document.querySelector( '#editor' ),{
+        	 removePlugins: [ 'ImageUpload' ]
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script> -->
+
       <div align="center">
         <input type="submit" value="메일 보내기" class="btn btn-warning">
       </div>
@@ -76,5 +93,6 @@ position: absolute;
     </form>
     </div> </div>
 </body>
+
 </html>
 <!-- by 아라 -->
