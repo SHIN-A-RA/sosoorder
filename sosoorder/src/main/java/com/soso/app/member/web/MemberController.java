@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 
@@ -27,10 +29,15 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
     
+	@Autowired
+	KakaoController kakaoController;
 	
 	//member로그인 페이지 이동
 	@RequestMapping("memberLoginForm")
 	public String memberLoginForm(MemberVO vo, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
+		String kakaoUrl = kakaoController.getAuthorizationUrl(session);
+		  model.addAttribute("kakao_url", kakaoUrl);
+		  
 		return "member/memberLoginForm";
 	}
 	
@@ -97,5 +104,40 @@ public class MemberController {
 
 	
 	
+	
+	@RequestMapping(value = "/memberloginform.do", method = RequestMethod.GET) 
+	public ModelAndView memberLoginForm(HttpSession session) { 
+		ModelAndView mav = new ModelAndView(); 
+		/*인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */ 
+		String kakaoUrl = kakaoController.getAuthorizationUrl(session); /* 생성한 인증 URL을 View로 전달 */ 
+		mav.setViewName("memberloginform"); // mav.addObject("naver_url", naverAuthUrl); 
+		// 카카오 로그인
+		mav.addObject("kakao_url", kakaoUrl); 
 
+		
+		return mav; 
+		}// end memberLoginForm()
+	
+	
+	@RequestMapping(value = "/kakaologin.do")
+	public String getKakaoSignIn(Model model,@RequestParam("code") String code, HttpSession session,MemberVO vo) throws Exception {
+
+	  JsonNode userInfo = kakaoController.getKakaoUserInfo(code);
+     
+		 String kakaoId = userInfo.get("id").toString();
+		 JsonNode properties = userInfo.get("properties");
+		 String nickname =properties.get("nickname").toString();
+	  System.out.println("=================="+kakaoId+"====================");
+	  	  session.setAttribute("phone",nickname); //나중에 따로 바꾸기
+		  session.setAttribute("kakaoId", kakaoId);
+		  
+	 
+	  
+	  return "redirect:/homeSample";
+	}
+	
+	
 }
+	
+
+
