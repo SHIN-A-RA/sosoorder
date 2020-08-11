@@ -22,7 +22,7 @@
 			<if test="storeId != null">
 			and a.storeId = #{storeId}
 			</if>
-			order by p.pointDate
+				order by to_char(p.pointDate,'yyyy/mm/dd') ASC
 		</select>
 		
 	<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
@@ -87,7 +87,7 @@
 		
 		<!--쿠폰함 담기 -->
 		<!-- by아라 -->
-	<select id="getCoupon" parameterType="hashmap" resultType="map">
+	<select id="getCoupon" parameterType="memberVO" resultType="map">
 		select distinct
 		u.serialNum "serialNum", u.useCheck "useCheck",
 		a.storeName "storeName", 
@@ -102,10 +102,7 @@
    		and u.usecheck = 0
 		 <if test="phone != null">
   	    and m.phone = #{phone}
-  	    </if> 
-  	    <if test="storeId != null">
-		and a.storeId = #{storeId}
-		</if>
+  	    </if>
 		order by a.storeName
 	</select>
 	

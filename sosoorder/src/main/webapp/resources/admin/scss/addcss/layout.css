@@ -12,14 +12,16 @@
 /*Header*/
 #hd_wrap{width:100%; position:absolute; top:0; left:0; box-sizing:border-box; z-index:9;}
 
-#hd_top .hd_logo a{margin:35px auto 15px; display:inline-block; width:165px; height:55px; overflow:hidden; background:url(/images/common/hd_logo.png) no-repeat center center;}
+#hd_top .hd_logo a{margin:35px auto 15px; display:inline-block; width:165px; height:55px; overflow:hidden;}
 #hd_top{position:relative; z-index:8; width:100%; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center;}
 
 #hd_gnb{position:relative; z-index:8;  width:100%; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; color:#FFF;}
 #hd_gnb .gnb_dp1_wrap{width: max-content; margin:0 auto; overflow:hidden;}
 #hd_gnb .gnb_dp1_wrap li.gnb_dp1{float:left; }
 #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span{cursor:pointer; font-size:18px; display:inline-block;padding:16px 57px; position:relative}
-#hd_gnb .gnb_dp1_wrap li.gnb_dp1 span:after{content:""; width:80%; height:3px; background:#de1515; display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transition:all .3s; transform:scaleX(0); z-index:2}
+#hd_gnb .gnb_dp1_wrap li.gnb_dp1 span:after{content:""; width:80%; height:3px;
+ background-color: red; background-image: linear-gradient(to right, #F98344 ,#F8645C, #F84B71); 
+display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transition:all .3s; transform:scaleX(0); z-index:2}
 #hd_gnb .gnb_dp1_wrap .gnb_dp2_wrap{display:none; width:100%; overflow:hidden; margin:15px 0px; border-left:1px solid #ccc; min-height:156px;}
 #hd_gnb .gnb_dp1_wrap li.gnb_dp1:last-child .gnb_dp2_wrap{border-right:1px solid #ccc;}
 #hd_gnb .gnb_dp1_wrap li.gnb_dp2{}
@@ -67,8 +69,12 @@
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover span,
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover a{color: #de1515;}
 
+#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a{font-size: 1.1em;}
+#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a i,
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover span,
-#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1.active a{color: #de1515;}
+#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1.active a{
+	color:#ff3d33;
+	}
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1.active span:after {transform:scaleX(1);}
 
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a:hover{font-weight:500;}

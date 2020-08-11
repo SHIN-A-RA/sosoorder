@@ -42,8 +42,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public List<Map> getCoupon(HashMap<String, Object> map) {
-		return mypageMapper.getCoupon(map);
+	public List<Map> getCoupon(MemberVO memberVO) {
+		return mypageMapper.getCoupon(memberVO);
 	}
 	@Override
 	public void myCouponDelete(UserCouponVO usercouponVO) {

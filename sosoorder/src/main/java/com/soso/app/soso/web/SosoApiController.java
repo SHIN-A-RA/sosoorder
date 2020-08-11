@@ -30,30 +30,7 @@ public class SosoApiController {
 
 	@Autowired
 	SosoListService sosoListService;
-	
-	
-	@RequestMapping("sosoList1")
-	   public String callapihttp(HttpServletResponse reponse) {
-	      StringBuffer result = new StringBuffer();
-	      try { 
-	         String urlstr = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius?radius=500&cx=35.8704736&cy=128.5896283&ServiceKey=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D";
-	      URL url = new URL(urlstr);
-	      HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-	      urlconnection.setRequestMethod("GET");
-	      BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
-	      String returnLine;
-	      result.append("<xmp>");
-	      while((returnLine = br.readLine()) != null) {
-	         result.append(returnLine + "\n");
-	      }
-	      urlconnection.disconnect();
-	      System.out.println(result);
-	      }catch(Exception e) {
-	         e.printStackTrace();
-	      }
-	      return result+"</xmp>";
-	   }
-	
+		
 	@RequestMapping("gps")
 	   public String gps(HttpServletResponse reponse) {
 		return "sosoList/gps";

@@ -222,7 +222,7 @@ myApp.controller("myAppCtrl", function($scope){
   	<i class="fa fa-shopping-cart" aria-hidden="true"></i>
   </div>
   <!-- Title -->
-  <div class="title">
+  <div class="title gd_bg1">
     Shopping Bag
     <c:if test="${seat.seat != 0}" >
     	<span class="fr">테이블 번호 : ${seat.seat}</span>
