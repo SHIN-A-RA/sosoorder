@@ -13,7 +13,7 @@
 		to_char(p.pointDate,'yyyy/mm/dd') "pointDate", 
 		a.STORENAME "storeName"
 		FROM point p, admin a, member m
-		<where>
+		where
 		p.storeId = a.storeId 
 		and m.membernum = p.membernum
 			<if test="phone != null">
@@ -22,9 +22,10 @@
 			<if test="storeId != null">
 			and a.storeId = #{storeId}
 			</if>
-		</where>
+			order by p.pointDate
+		</select>
+		
 	<!-- 로그인 아이디 세션에서 받아오기 하기하기하기 -->
-	</select>
 	
 	<select id="getStoreList" parameterType="hashmap" resultType="map">
 		SELECT 	distinct
@@ -40,6 +41,7 @@
 			and a.storeId = #{storeId}
 			</if> -->
 		</where>
+		
 	</select>
 	
 	<!-- 전체(상호)주문내역리스트 -->
@@ -87,19 +89,17 @@
 		<!-- by아라 -->
 	<select id="getCoupon" parameterType="hashmap" resultType="map">
 		select distinct
-		u.serialNum "serialNum", u.memberNum "memberNum", u.useCheck "useCheck",
+		u.serialNum "serialNum", u.useCheck "useCheck",
 		a.storeName "storeName", 
 		to_char(c.expStart,'yyyy/mm/dd') "expStart", 
 		to_char(c.expEnd,'yyyy/mm/dd') "expEnd", 
 		c.discount "discount"
-		from
-		userCoupon u, admin a, member m, point p, coupon c
-		where u.memberNum  = 1
-		and m.memberNum = p.memberNum
-	    and p.storeId = a.storeId
-	    and c.storeId = a.storeId
-	    and c.expEnd > sysdate
-		and u.usecheck = 0
+		from userCoupon u, coupon c, admin a, member m
+		where u.serialnum = c.serialnum
+  		and c.storeid = a.storeid
+  		and u.membernum = m.membernum
+  		and c.expEnd > sysdate
+   		and u.usecheck = 0
 		 <if test="phone != null">
   	    and m.phone = #{phone}
   	    </if> 
@@ -108,7 +108,6 @@
 		</if>
 		order by a.storeName
 	</select>
-	
 	
 	<!--쿠폰 삭제 -->
  <delete id="myCouponDelete" parameterType="userCouponVO" >
