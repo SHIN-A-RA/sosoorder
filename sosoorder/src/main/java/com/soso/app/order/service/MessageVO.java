@@ -10,5 +10,8 @@ public class MessageVO {
 	String msg;
 	String member;
 	String store;
+	
+
+	
 
 }

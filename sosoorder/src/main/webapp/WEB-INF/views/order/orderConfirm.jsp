@@ -25,7 +25,10 @@ function goPointInsert() {
 		<h3 style="padding: 50px;">주문이 완료되었습니다.</h3>
 		<div style="padding:10px; color:red;">
 			<p>※현금결제시 데스크에서 결제를 완료해주세요</p>
-			<p>※이메일 등록시 다양한 할인정보를 확인할 수 있습니다</p>	
+			<p>※이메일 등록시 다양한 할인정보를 확인할 수 있습니다</p>
+			<c:forEach var="admin" items="${admin}">
+			<p>${admin.accountNum}</p>
+			</c:forEach>	
 		</div>
 	</div>	
 	<div class="div_text2">
@@ -36,4 +39,4 @@ function goPointInsert() {
 		<p><a class="btn_home" href="/sosoroder/homeSample">홈으로</a></p>
 	</div>
 </div>
-${storeInfo } ${payNum }
+${storeInfo } ${payNum } 

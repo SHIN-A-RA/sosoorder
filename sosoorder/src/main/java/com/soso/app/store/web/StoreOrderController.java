@@ -25,6 +25,7 @@ public class StoreOrderController {
 
    @Autowired StoreOrderService storeOrderService;
 
+
 	@RequestMapping("storeOrderList")
 	public String storeOrderList(Model model,HttpSession session, StoreOrderVO storeOrderVO) {
 		String storeId = (String)session.getAttribute("storeId");

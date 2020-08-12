@@ -28,7 +28,7 @@
 		  	AND m.storeId = #{storeId}
 		    </if>  
 		 </where>  
-		 order by p.paynum , m.menuName 
+		 order by p.paynum , m.menuName
 	 </select>
 	 
 	  <update id="orderUpdate1" parameterType="StoreOrderVO">   

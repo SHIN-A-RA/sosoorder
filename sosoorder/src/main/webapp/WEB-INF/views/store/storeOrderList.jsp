@@ -23,7 +23,7 @@
 		</c:if> 
 		
 		<c:if test="${list.payNum != payNum}">
- 			<div style="width: 30%; float: left; margin:10px; height: 580px; position: relative; background: #ececec; padding: 25px; border: 1px solid;">
+ 			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
 	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
 	 			<p>결제번호 ${list.payNum}</p>
 	 				<c:if test="${list.seat != null}">
@@ -60,10 +60,10 @@
 	 		</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
 		 			<c:if test="${list.status == 0}">
-		 				<button onclick="orderUpdate(${list.payNum},this)" style="background:#ff5722; padding: 10px;">조리시작1</button>
+		 				<button onclick="orderUpdate(${list.payNum},this)" style="background:#ff5722; padding: 10px;">조리시작</button>
 		 			</c:if>
 		 			<c:if test="${list.status == 1}">
-		 				<button onclick="orderUpdate2(${list.payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료1</button>
+		 				<button onclick="orderUpdate2(${list.payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료</button>
 		 			</c:if>
 	 			</div>
  			</div>
@@ -72,12 +72,44 @@
 	<c:set var="status" value="${list.status}"></c:set>	
   </c:forEach>
   </div>
-	<!--<span class="prev" id="aro_prev2"><i class="fas fa-arrow-left"></i></span>
-		<span class="next" id="aro_next2"><i class="fas fa-arrow-right"></i></span> -->
+  
+	
 </div>
-
+<!--주문탬플릿  -->
+<div id="orderTem" style=" display:none;">
+ 			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
+	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
+	 				<p>테이블 번호 or</p>
+	 				<p>주소 : 대구광역시~ </p>
+	 				<p style="float: right; color:red; ">※현금결제※</p>
+	 			</div>
+	 			<div style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
+	 				<div style="padding: 15px 60px 40px 60px;">
+		 				<div style="float: left; box-sizing: border-box;">
+		 				 	<h5>메뉴</h5>
+		 				</div>
+		 				<div style="float: right; box-sizing: border-box;">
+		 					<h5>수량</h5>
+		 				</div>
+	 				</div>
+		 				<div style="float: left; box-sizing: border-box;">
+		 					<p>떡볶이</p>
+		 				</div>
+		 				<div style="float: right; box-sizing: border-box;">
+		 					<p>2</p>	 					
+		 				</div>
+	 			</div>
+	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
+	 				<button style="background:#ff5722; padding: 10px;">조리시작</button>
+	 			</div>
+ 			</div>
+ 	</div>	
 <script>
 
+function orderInsert(){
+	$(".orderwrap").prepend($("#orderTem").children().first().clone());
+	
+}
 
 //수정 요청
 function orderUpdate(p, e){

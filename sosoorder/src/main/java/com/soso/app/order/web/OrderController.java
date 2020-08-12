@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.soso.app.admin.service.AdminService;
+import com.soso.app.admin.service.AdminVO;
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 import com.soso.app.order.call.EchoHandler;
@@ -37,6 +42,10 @@ public class OrderController {
 
 	@Autowired
 	MemberService memberService;
+	
+	 @Autowired
+	 AdminService adminService;
+		 
 
 	// by혜원, 주문페이지
 	@RequestMapping("/orderInsert")
@@ -73,7 +82,7 @@ public class OrderController {
 	}
 
 	@RequestMapping("payInsert")
-	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
+	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session) throws IOException {
 
 		String storeId = (String) session.getAttribute("storeInfo");
 		String phone = (String) session.getAttribute("phone");
@@ -122,17 +131,17 @@ public class OrderController {
 		//string jason으로 변환 
 //		ObjectMapper objectMapper = new ObjectMapper();	
 //		MessageVO msg = new MessageVO();
-//		msg.setCmd("orderInsert");
-//	    String msgJson = objectMapper.writeValueAsString(msg);
-//		msg.setMsg("msgJson");
-//		
-//		EchoHandler.map.get(storeId).sendMessage();
+//	    String msgJson = objectMapper.writeValueAsString(orderCptVO);
+//	    
+//	    msg.setMsg(msgJson);
+//		EchoHandler.map.get(storeId).sendMessage(new TextMessage( objectMapper.writeValueAsString(msg)) );
 		return "redirect:orderConfirm";
 	}
 
 	@RequestMapping("/orderConfirm")
-	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
+	public String orderConfirm(Model model, OrderCptVO orderCptVO, AdminVO adminVO,HttpServletRequest request, HttpSession session) {
 		
+		/* model.addAttribute("admin", adminService.getAdmin(adminVO)); */
 		return "order/orderConfirm";
 
 	}

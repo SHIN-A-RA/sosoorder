@@ -78,13 +78,13 @@
 			if(msg.cmd == 'callInsert') {
 				callList();	
 			} else if(msg.cmd == 'orderInsert'){
-				
+				order = JSON.parse(msg.msg);
+				orderInsert(order);
 			} else if(msg.cmd == 'startCook'){
 				$("#cook").html(msg.msg)
 			} else if(msg.cmd == 'endCook'){
-				
+				$("#cook").html(msg.msg)
 			} 
-					
 			
 			
 		}
