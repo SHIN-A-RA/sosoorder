@@ -65,7 +65,13 @@ public class WorkController {
 		return workService.totalSalAjax(seldateVO);
 	}
 	
-	
+	//직원 전체 급여만
+	@RequestMapping("allEmpSal")
+	@ResponseBody
+	public List<Map> allEmpSal(HttpSession session,SelDateVO seldateVO) {
+		seldateVO.setStoreId((String) session.getAttribute("storeId"));
+		return workService.allEmpSal(seldateVO);
+	}
 	
 	//업무 시작(workStart)
 	@RequestMapping("workStart")

@@ -17,4 +17,5 @@ public interface WorkService {
 	public void workEnd(String empNum);
 	public List<Map<String, Object>> getWorkTimeData(String storeId);
 	public List<Map<String, Object>> getEmpListTime(String storeId);
+	public List<Map> allEmpSal(SelDateVO vo);
 }

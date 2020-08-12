@@ -19,5 +19,5 @@ public interface WorkMapper {
 	public List<Map> empNum(SelDateVO vo);
 	public List<Map> getEmpSalAjax(SelDateVO vo);
 	public List<Map> totalSalAjax(SelDateVO vo);
-	
+	public List<Map> allEmpSal(SelDateVO vo);
 }

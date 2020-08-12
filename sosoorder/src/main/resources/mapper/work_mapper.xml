@@ -46,13 +46,24 @@ WHERE w.empNum = e.empNum
 AND storeId = #{storeId}
 AND to_char(w.workend,'YYYY-MM')=#{selectMonth}
 AND e.empNum = #{empNum}
+group by e.empClass, e.salary
 </select>
 
-
+<select id="allEmpSal" resultType="map">
+SELECT e.empName,
+	    TRUNC(sum(TRUNC((workend -workstart)*24,0))*8350,0) AS totalSal,
+	    e.empClass AS empClass,
+	    e.salary AS salary
+FROM work w ,employees e
+WHERE w.empNum = e.empNum 
+AND storeId = #{storeId}
+AND to_char(add_months(w.workend,+1),'YYYY-MM')=#{selectMonth}
+group by e.empClass, e.salary, e.empName
+</select>
 
 <!--work 시작-->
    <insert id="workStart" parameterType="String">
-	INSERT INTO work(workNum,empNum,workStart) values(work_seq.nextval,#{empNum},SYSDATE)
+	INSERT INTO work(workNum,empNum,workStart) values(work_seq.nextval,#{empNum},SYSDATE) 
    </insert>
    
    
@@ -82,6 +93,7 @@ select e.empName, to_char(w.workstart,'YYYY-MM-DD') AS workStart
    group by e.empName, e.empNum
    order by e.empNum
    </select>
+
 
 
 </mapper>

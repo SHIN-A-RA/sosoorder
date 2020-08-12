@@ -50,39 +50,9 @@ NowTime += '-' + (Now.getMonth() + 1) ;
 NowTime += '-' + Now.getDate();
 
 
-$(function workTimeData(){
-    var calendarEl = document.getElementById('calendar');
-    var workTimeData = [];
-    $.ajax({
-    	url:"workTimeData",
-    	async : false,	 //동기식
-    	success:function(dataResult){
-			    	for(i=0; i<dataResult.length; i++){
-			    		workTimeData.push({
-			    	          title: dataResult[i].EMPNAME,
-			    	          start: dataResult[i].WORKSTART
-			    		});	
-			    	}
-    	}
-    });
-    
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      editable: true,
-      locale: 'ko',
-      selectable: true,
-      businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: workTimeData,
-      
-      dateClick: function(info) {
-    	  autoList(info.dateStr);
-    	 $('#today').html(info.dateStr);
-    	 
-    			
-    	  }//end of dateClick
-    });//end of calendar = new FullCalendar
- 
-    calendar.render(); //캘런더 그리는 함수
+	
+$(function(){
+	workTimeData();
 //오늘 날짜 출력
 
 //출근 버튼  
@@ -96,10 +66,9 @@ $(function workTimeData(){
 		method: 'post'
 		}).done(function(){
 			autoList(NowTime);
-			
-			
 			$('#today').html(NowTime);
 			reloadTable();
+			workTimeData();
 		})
 	});
     
@@ -116,7 +85,7 @@ $(function workTimeData(){
 			autoList(NowTime);
 			$('#today').html(NowTime);
 			reloadTable();
-			
+			workTimeData();
 		})
 	});
 	
@@ -153,15 +122,50 @@ $(function workTimeData(){
 	reloadTable();
 	autoList(NowTime);//첫 실행시 오늘 날짜로 조회
 	
-	
 });
+
+function workTimeData(){
+    var calendarEl = document.getElementById('calendar');
+    var workTimeData = [];
+    $.ajax({
+    	url:"workTimeData",
+    	async : false,	 //동기식
+    	success:function(dataResult){
+			    	for(i=0; i<dataResult.length; i++){
+			    		workTimeData.push({
+			    	          title: dataResult[i].EMPNAME,
+			    	          start: dataResult[i].WORKSTART
+			    		});	
+			    	}
+    	}
+    });
+    
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      editable: true,
+      locale: 'ko',
+      selectable: true,
+      businessHours: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: workTimeData,
+      
+      dateClick: function(info) {
+    	  autoList(info.dateStr);
+    	 $('#today').html(info.dateStr);
+    	 
+    			
+    	  }//end of dateClick
+    });//end of calendar = new FullCalendar
+ 
+    calendar.render(); //캘런더 그리는 함수
+		
+	} 
 
 
 
 </script>
 
 <!-- 캘린더 출력 div -->
-  <div id='calendar' style="float:left; height: 700px; width: 900px;"></div>
+  <div id='calendar' style="float:left; height: 600px; width: 800px;"></div>
 
 <!-- 출퇴근 버튼 table -->	
  <div class="col-xl-8 col-lg-7">

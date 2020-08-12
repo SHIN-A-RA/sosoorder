@@ -146,7 +146,7 @@ fullCalendar
 				  if(result[i].EMPCLASS == 2 ){//아르바이트:2번 정직원 :1번 
 						  cell2.innerHTML = result[i].TOTALSAL.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 					}else{
-						  cell2.innerHTML = "월급:"+SALARY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"만원";
+						  cell2.innerHTML = "월급:"+result[i].SALARY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"만원";
 					}
 			}//end of for
 		})//end of done
@@ -154,6 +154,36 @@ fullCalendar
 		.always(function(result){}); //정상이든 에러든 무조건 실행
 	}; 
 
+	
+ 	function allEmpSal(){
+		var empNumMonthDate = $("#frmEmp").serialize() ;
+ 		$.ajax({
+			url:"allEmpSal",
+			method: 'post',
+			data :empNumMonthDate,
+			dataType:'json' 
+			}).done(function(result){
+				  var table = document.getElementById("allEmpSal");
+				  table.innerHTML = "";
+				for(i=0; i<result.length; i++){
+					  var row = table.insertRow(0);
+					  var cell1 = row.insertCell(0);
+					  var cell2 = row.insertCell(1);
+					  
+					  cell1.innerHTML = result[i].EMPNAME;
+					  if(result[i].EMPCLASS ==2){
+						  cell2.innerHTML = result[i].TOTALSAL.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+					  }else{
+						  cell2.innerHTML = result[i].SALARY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"만원";
+					  }
+				 }
+			})
+ 		.fail(function(result){}) //서버 에러 발생시
+		.always(function(result){}); //정상이든 에러든 무조건 실행
+}; 
+	
+	
+	
 </script>
 
 
@@ -224,6 +254,7 @@ $(function(){
 
 					autoList();
 					autoSalry();
+					allEmpSal();
 				});
 
 		empSel('${empSalaryList[0].empNum}');
@@ -236,6 +267,8 @@ $(function(){
 		frmEmp.empNum.value = empNum;
 		autoList();
 		autoSalry();
+		allEmpSal();
+		
 	}
 </script>
 
@@ -269,6 +302,24 @@ $(function(){
 			</tr>
 		</thead>
 		<tbody id="empSETable">
+		</tbody>
+	</table>
+</div>
+<!--====================================
+ 전직원 월급
+=====================================-->
+<div style="height: 400px; width: 300px; overflow-y: auto; overflow-x: hidden;">
+	<h3 class="basic_tb_th_up">
+		전 달 월급<span id="today"></span>
+	</h3>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>직원 이름</th>
+				<th>급여</th>
+			</tr>
+		</thead>
+		<tbody id="allEmpSal">
 		</tbody>
 	</table>
 </div>

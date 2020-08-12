@@ -51,6 +51,11 @@ public class WorkServiceImpl implements WorkService {
 		return workMapper.totalSalAjax(vo);
 	}
 
+	@Override
+	public List<Map> allEmpSal(SelDateVO vo) {
+		return workMapper.allEmpSal(vo);
+	}
+
 	
 	
 }
