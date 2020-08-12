@@ -164,7 +164,7 @@ public class OrderController {
 		orderService.insertPo(orderCptVO);
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 
-		return "redirect:pointList";
+		return "redirect:showPoint";
 	}
 
 	// 비회원 적립
@@ -177,7 +177,7 @@ public class OrderController {
 		orderService.insertMem(memberVO, orderCptVO);
 
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
-		return "redirect:pointList";
+		return "redirect:showPoint";
 	}
 
 	// 적립금리스트보여주기
