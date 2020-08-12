@@ -357,7 +357,7 @@ function removeChar(event) {
 <div style="margin: 20px; text-align: center; margin-bottom: 20px;">
         위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
     </div>
-<form action="payInsert?orderNum=${param.orderNum}" method="post" name="frm_pay">
+<form action="payInsert?payNum=${param.payNum}" method="post" name="frm_pay">
 <input class="couponUse" name="couponUse" type="hidden" value="">
 <input class="payCheckval" name="payCheck" type="hidden" value="0">
 <input class="seat" name="seat" type="hidden" value="${param.seat}">

@@ -47,7 +47,7 @@ $(function() {
 		<tr>
 			<th class="tbp_th">Phone</th>
 			<td><input name="phone" id="phone" class="point_input" size="30" >
-			<input type="hidden" name="orderNum" value="${param.orderNum}">
+			<input type="hidden" name="payNum" value="${payNum}">
 			</td>
 		</tr>
 		<tr>
@@ -63,7 +63,7 @@ $(function() {
 	
 <div class="show2" style="display:none">
 	<form action="insertMem" class="frm_point" method="post" >
-	<input type="hidden" name="orderNum" value="${param.orderNum}">
+	<input type="hidden" name="payNum" value="${payNum}">
 	<table style="width: 100%; text-align: center;">
 		<tr>
 			<th class="tbp_th">Phone</th>

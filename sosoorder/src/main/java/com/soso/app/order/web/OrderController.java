@@ -86,7 +86,6 @@ public class OrderController {
 			orderCptVO.setPhone(phone);
 		}
 
-		System.out.println("orderCptVO" + orderCptVO);
 		orderService.payInsert(orderCptVO);
 		
 		session.setAttribute("payNum",orderCptVO.getPayNum());
@@ -114,6 +113,7 @@ public class OrderController {
 		
 		String cellphone = orderCptVO.getCellPhone();
 		map.put("cellphone", cellphone);
+		
 		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
 		
@@ -132,7 +132,6 @@ public class OrderController {
 
 	@RequestMapping("insertPoint")
 	public String insertPoint(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
-		String orderNum = request.getParameter("orderNum");
 		String storeId = (String) session.getAttribute("storeInfo");
 		orderCptVO.setStoreId(storeId);
 
@@ -165,7 +164,7 @@ public class OrderController {
 		orderService.insertPo(orderCptVO);
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 
-		return "empty/order/pointList";
+		return "redirect:pointList";
 	}
 
 	// 비회원 적립
@@ -178,7 +177,7 @@ public class OrderController {
 		orderService.insertMem(memberVO, orderCptVO);
 
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
-		return "empty/order/pointList";
+		return "redirect:pointList";
 	}
 
 	// 적립금리스트보여주기
@@ -190,7 +189,7 @@ public class OrderController {
 
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 
-		return null;
+		return "empty/order/pointList";
 	}
 
 	// 영수증

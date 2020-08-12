@@ -15,7 +15,7 @@ function goPointInsert() {
 	  var posL=( screenW-popW ) / 2;   // 띄울창의 가로 포지션 
 	  var posT=( screenH-popH ) / 2;   // 띄울창의 세로 포지션 
 
-    window.open("./insertPoint?orderNum=${param.orderNum}" , "_blank", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
+    window.open("./insertPoint?payNum=${payNum}" , "_blank", 'width='+ popW +',height='+ popH +',top='+ posT +',left='+ posL +',resizable=no,scrollbars=no');
 }
 
 </script>

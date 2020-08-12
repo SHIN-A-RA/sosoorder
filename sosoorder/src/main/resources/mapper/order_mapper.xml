@@ -104,7 +104,8 @@
 		    #{storeId},
 		    #{phone},
 		    #{addr},
-		    #{cellphone}
+		    #{cellphone},
+		    #{payNum}
     ) }
 	</select>
 	
@@ -119,7 +120,7 @@
 	values(
 		(SELECT NVL(max(POINTNUM), 0)+1 FROM POINT), 
 		sysdate,
-		(SELECT totalpay *(3/100) FROM payment WHERE payNum = (select distinct payNum FROM orderCpt WHERE orderNum= #{orderNum})), 
+		(SELECT totalpay *(3/100) FROM payment WHERE payNum = #{payNum}), 
 		#{storeId},
 		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
 		 '1')
@@ -140,9 +141,10 @@
   	 
   	<select id="insertMemProc"  statementType="CALLABLE"  parameterType="OrderCptVO">
     { CALL after_insertMem_PROC (
-		    #{orderNum, javaType=java.lang.Integer, jdbcType=DECIMAL } ,
+		   <!--  #{orderNum, javaType=java.lang.Integer, jdbcType=DECIMAL } , -->
 		    #{storeId},    
-		    #{phone}      
+		    #{phone} ,
+		    #{payNum}     
     ) }
 	</select>
 	
@@ -167,7 +169,7 @@
 			DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
 		<if test="phone != null">
 			And memberNum = (SELECT memberNum FROM member WHERE phone = #{phone}) 
-		</if>	
+		</if>	 
 		</where>
 	</select>
 	
