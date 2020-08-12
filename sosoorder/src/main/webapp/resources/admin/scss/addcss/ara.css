@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 
-div.mypagelist{width:100%;position: absolute;z-index: 6; top: 60px;left: 0; 
+div.mypagelist{width:100%;/* position: absolute; */z-index: 6; top: 60px;left: 0; 
 			background: #fff;    padding: 0 10%;}
 div.mypagelist ul.mypagebtn_ul{width:100%; display: table; text-align: center; }
 div.mypagelist ul.mypagebtn_ul li {display: table-cell;}

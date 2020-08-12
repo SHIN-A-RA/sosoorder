@@ -68,8 +68,7 @@ public class ReorderController {
 	public String sendMailAttach(final ReorderVO vo, MemberVO memberVO, HttpServletRequest request,Model model, 
 			ReorderVO reorderVO, HttpSession session,AdminVO adminVO
 			) throws IllegalStateException, IOException {
-		
-		
+
 		//업로드 처리
 		MultipartFile file = vo.getUploadFile();
 		String path = request.getSession().getServletContext().getRealPath("resources/download");
@@ -110,7 +109,8 @@ public class ReorderController {
 					helper.setText(vo.getContents(), true);
 					if(vo.getProfile()  != null )
 					{
-						helper.addAttachment(vo.getProfile(), new File("c:/upload", vo.getProfile()));
+						helper.addAttachment(vo.getProfile(), new File(path, vo.getProfile()));
+						
 					}
 				}
 			};

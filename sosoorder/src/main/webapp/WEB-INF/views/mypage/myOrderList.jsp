@@ -4,8 +4,6 @@
 
 <!--by아라 -->
 
-
-<h2>나의 주문내역</h2>
 <head>
 <style type="text/css">
 .starR {
@@ -52,7 +50,13 @@
 
 </head>
 <body>
-
+<div class="mypagelist">
+	<ul class="mypagebtn_ul">
+		<li><a href="myPointsList">나의 적립금</a>
+		<li><a href="myCouponList">나의 쿠폰함</a>
+		<li><a href="myOrderList">나의 주문내역</a>
+	</ul>
+</div>
 	<table class="table table-white">
 		<thead>
 			<tr>
@@ -150,13 +154,6 @@
 	</div>
 </body>
 
-<div class="mypagelist">
-	<ul class="mypagebtn_ul">
-		<li><a href="myPointsList">나의 적립금</a>
-		<li><a href="myCouponList">나의 쿠폰함</a>
-		<li><a href="myOrderList">나의 주문내역</a>
-	</ul>
-</div>
 
 <script>
 	$(function() {

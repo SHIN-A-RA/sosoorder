@@ -82,12 +82,4 @@ MultipartFile uploadFile;
 				+ uploadFile + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

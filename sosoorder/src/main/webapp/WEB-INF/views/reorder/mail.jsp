@@ -65,7 +65,7 @@ position: absolute;
                        <div class="file_wr write_div">
                      <%--  // <img src="${pageContext.request.contextPath }${url }" style="width:150px"> --%>
                         <label for="file" class="lb_icon"><i class="fa fa-download" aria-hidden="true"></i></label>
-                        <input type="file" name="UploadFile" id="filename" class="frm_file ">
+                        <input type="file" name="uploadFile" id="filename" class="frm_file ">
                       
                        </div>
                   </div>

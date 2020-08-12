@@ -12,12 +12,10 @@
 	  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 		}
  	</style>
- 	
 	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3VmoY7UaGpP-jb98kOQmdTnyqJkJgXfQ"></script>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-
 	<div class ="all" style="width:100%; overflow:hidden;"> 
 	<form action="couponInsert" method="post"> 
 	<div class="test" style="float:left; width:48%;">
@@ -29,7 +27,6 @@
     <script>
     var gmap;
     //AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
-    
     /*-----------------------------
     	현재위치찾기
     -------------------------------*/
@@ -108,7 +105,6 @@
 		 var map_id = "map";
 		googleMap(map_view,data,zoom,map_id);	
     }
-    
     
     /*-----------------------------
 	선택한 상점의 쿠폰 값 조회 요청
@@ -215,14 +211,14 @@
 		  latlng[i] = [tmp_map2[i].lat,tmp_map2[i].lon,tmp_map2[i].rdnmAdr];		  
 	 }
 	 console.log(latlng); 
-/* 
-	// var image= {  
-	   url: "./resources/admin/img/icon.png", //마커이미지 
-	   size: new google.maps.Size(18, 27),  //마커사이즈
-	   origin: new google.maps.Point(0, 0),  
-	   anchor: new google.maps.Point(9, 27)
+
+	 var image= {  
+	   url: "./resources/admin/img/icon5.png", //마커이미지 
+	   size: new google.maps.Size(32, 38),
+       scaledSize: new google.maps.Size(32, 38),
+       labelOrigin: new google.maps.Point(10, -8)
 	  }; //마커로 사용할 이미지 정의
-	  */
+	
 	
 	 gmap = new google.maps.Map(
 	 mymap,{  zoom:map3,  //줌
@@ -235,8 +231,9 @@
  	 for (i = 0; i < latlng.length; i++) { //미커를 여러개 찍을때 사용
 	  marker=new google.maps.Marker({
 	   position: new google.maps.LatLng(latlng[i][0], latlng[i][1]),
+	   icon: image,
 	   map:gmap, 	
-	   label:tmp_map2[i].bizesNm 
+	   label:tmp_map2[i].bizesNm,
 	  });
 	  
 	}

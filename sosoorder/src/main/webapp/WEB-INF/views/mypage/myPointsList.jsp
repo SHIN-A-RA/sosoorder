@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-		
-<h2>적립금 리스트</h2>
 <style>
 .btn-group .button {
   background-color: #4CAF50; /* Green */
@@ -75,14 +73,6 @@
 	</tbody>
 </table>
 
-<div class="mypagelist">
-	<ul class="mypagebtn_ul">
-		<li><a href="myPointsList">나의 적립금</a> 
-		<li><a href="myCouponList">나의 쿠폰함</a>
-		<li><a href="myOrderList">나의 주문내역</a>
-	
-	</ul>
-</div>
    <div  style="width:340px; height:40px; text-align:center; padding-top:7px; 
 		font-size:16px; border:1px solid; margin:auto;">총적립금: ${total}원</div>
 
