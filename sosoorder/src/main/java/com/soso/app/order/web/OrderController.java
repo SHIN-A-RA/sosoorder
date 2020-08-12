@@ -125,6 +125,7 @@ public class OrderController {
 		String cellphone = orderCptVO.getCellPhone();
 		map.put("cellphone", cellphone);
 		
+		//mybatis select로 paynum 받기
 		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
 		
