@@ -42,6 +42,7 @@ $(function() {
 </div>
 
 <div class="show1">
+	<div>${errorMsg}</div>
 	<form action="insertPo" class="frm_point" method="post">
 	<table style="width: 100%; text-align: center;" >
 		<tr>

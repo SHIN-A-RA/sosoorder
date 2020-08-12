@@ -65,8 +65,9 @@
 			   seatnum
 		FROM seat  		
 		<where>
+			userCheck ='1'
 			<if test="storeId != null">
-				 storeId = #{storeId}
+			and storeId = #{storeId}
 			</if>
 		</where>
 	</select>
