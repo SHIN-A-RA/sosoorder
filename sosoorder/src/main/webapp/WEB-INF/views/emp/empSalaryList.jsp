@@ -7,15 +7,16 @@
 	text-decoration: underline;
 	}
   body {
-    margin: 40px 10px;
+    /* margin: 40px 10px; */
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
 
   #calendar {
-    max-width: 1100px;
+    /* max-width: 1100px; */
     margin: 0 auto;
+    margin-bottom: 30px;
   }
   
  
@@ -57,7 +58,6 @@ fullCalendar
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
-	
 <!--========================
   직원bar에서 직원 클릭시 이벤트
 ========================-->
@@ -71,6 +71,12 @@ fullCalendar
 	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left" aria-hidden="true"></i>
 	</span> <span class="next" id="aro_next1"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
 </div>
+
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2; margin-top: 85px;">
+  <h1 class="h3 mb-0 text-gray-800">급여관리</h1>
+</div>	
 
 
 
@@ -277,7 +283,7 @@ $(function(){
 <!--====================================
  HTML 캘린더 출력 div 
  =====================================-->
-<div id='calendar' style="float: left; height: 700px; width: 900px; margin-top: 80px;"></div>
+<div id='calendar' class="col-xl-8 fl mb-4" style="height: 700px;"></div>
 
 
 <form id="frmEmp" name="frmEmp">
@@ -287,47 +293,51 @@ $(function(){
 <!--====================================
  받아온 데이터 출력 출근기록 및 근무시간
 =====================================-->
-<div style="height: 400px; width: 450px; overflow-y: auto; overflow-x: hidden;">
+<div class="col-xl-4 fl mb-4" style="">
 	<h3 class="basic_tb_th_up">
 		직원출근현황<span id="today"></span>
 	</h3>
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th>근무요일</th>
-				<th>근무날짜</th>
-				<th>출근시간</th>
-				<th>퇴근시간</th>
-				<th>합계</th>
-			</tr>
-		</thead>
-		<tbody id="empSETable">
-		</tbody>
-	</table>
+	<div style="height: 300px; overflow-y: auto; overflow-x: hidden;">
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>근무요일</th>
+					<th>근무날짜</th>
+					<th>출근시간</th>
+					<th>퇴근시간</th>
+					<th>합계</th>
+				</tr>
+			</thead>
+			<tbody id="empSETable">
+			</tbody>
+		</table>
+	</div>
 </div>
 <!--====================================
  전직원 월급
 =====================================-->
-<div style="height: 400px; width: 300px; overflow-y: auto; overflow-x: hidden;">
+<div class="col-xl-4 fl mb-4">
 	<h3 class="basic_tb_th_up">
 		전 달 월급<span id="today"></span>
 	</h3>
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th>직원 이름</th>
-				<th>급여</th>
-			</tr>
-		</thead>
-		<tbody id="allEmpSal">
-		</tbody>
-	</table>
+	<div style="height: 230px; overflow-y: auto; overflow-x: hidden;">
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>직원 이름</th>
+					<th>급여</th>
+				</tr>
+			</thead>
+			<tbody id="allEmpSal">
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <!--====================================
 시급 계산
 =====================================-->
-<div style="height: 400px; width: 450px; overflow-y: auto; overflow-x: hidden;">
+<div class="col-xl-4 fl mb-4">
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>

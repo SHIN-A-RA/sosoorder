@@ -8,15 +8,16 @@
 <style>
 
   body {
-    margin: 40px 10px;
+    /* margin: 40px 10px; */
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
 
   #calendar {
-    max-width: 1100px;
+    /* max-width: 1100px; */
     margin: 0 auto;
+    margin-bottom: 30px;
   }
   
  
@@ -163,12 +164,16 @@ function workTimeData(){
 
 
 </script>
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
+  <h1 class="h3 mb-0 text-gray-800">근태관리</h1>
+</div>
 
 <!-- 캘린더 출력 div -->
-  <div id='calendar' style="float:left; height: 600px; width: 800px;"></div>
+  <div id="calendar" class="col-xl-8 fl" style="height: 600px;" ></div>
 
 <!-- 출퇴근 버튼 table -->	
- <div class="col-xl-8 col-lg-7">
+ <div class="col-xl-4 col-lg-7  fl">
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -208,7 +213,7 @@ function workTimeData(){
 
 
 <!-- 출퇴근 시간확인용 테이블 생성 -->
- <div class="col-xl-8 col-lg-7">
+ <div class="col-xl-4 col-lg-7 fl">
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
