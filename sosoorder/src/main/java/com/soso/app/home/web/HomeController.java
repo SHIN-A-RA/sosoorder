@@ -121,22 +121,27 @@ public class HomeController {
     }
 	
 	@RequestMapping("report.do")
-	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void report(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		Connection conn = datasource.getConnection();
 		InputStream stream = getClass().getResourceAsStream("/receipt/receipt.jrxml");
 		JasperReport jasperReport = JasperCompileManager.compileReport(stream);
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("p_payNum", request.getParameter("payNum"));
+		//세션 가져오기
+		String payNum = (String)session.getAttribute("payNum");
+		map.put("p_payNum", payNum);
 		
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
 		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 	}
 	
 	@RequestMapping("reportDown")
-	public String report(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String report(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws Exception {
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("p_payNum", request.getParameter("payNum"));
+		//세션 가져오기
+		String payNum = (String)session.getAttribute("payNum");
+		map.put("p_payNum", payNum);
+		
 		model.addAttribute("filename", "/receipt/receipt.jasper");
 		model.addAttribute("map", map);
 		return "pdfView";

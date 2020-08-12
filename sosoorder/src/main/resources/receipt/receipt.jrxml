@@ -268,7 +268,7 @@ where payNum =  $P{p_payNum}]]>
 									<reportElement style="txt" x="0" y="0" width="253" height="30" uuid="f15ea684-b4df-4c33-9428-369d78ca7e43"/>
 									<box rightPadding="15"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{MENUPRICE}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[new DecimalFormat("#,##0").format($F{MENUPRICE})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -290,7 +290,7 @@ where payNum =  $P{p_payNum}]]>
 			<textField>
 				<reportElement style="b_txt" x="360" y="0" width="194" height="30" uuid="f6c5e36d-c276-4099-baa4-2c2d2abd6675"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{TOTALPAY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0").format($F{TOTALPAY})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="b_txt" x="11" y="0" width="98" height="30" uuid="6ffa8deb-4df7-4c02-9e4e-3f1952beedee"/>
@@ -303,12 +303,12 @@ where payNum =  $P{p_payNum}]]>
 			<textField>
 				<reportElement style="b_txt" x="221" y="30" width="332" height="30" uuid="001bdef9-2f0e-47b4-b12e-351291a7e03a"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[Integer.parseInt($F{POINTUSE})+Integer.parseInt($F{COUPONUSE})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0").format(Integer.parseInt($F{POINTUSE})+Integer.parseInt($F{COUPONUSE}))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="b_txt" x="109" y="60" width="443" height="30" uuid="657ba65a-88b9-494c-b3db-86ea8b2fee4d"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{TOTALPAY}.intValue()-Integer.parseInt($F{COUPONUSE})-Integer.parseInt($F{POINTUSE})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0").format($F{TOTALPAY}.intValue()-Integer.parseInt($F{COUPONUSE})-Integer.parseInt($F{POINTUSE}))]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="b_txt" x="11" y="30" width="99" height="30" uuid="9b2feaa6-9b61-48f1-a600-7e58461658a4"/>
