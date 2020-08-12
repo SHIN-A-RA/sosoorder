@@ -138,7 +138,7 @@
 							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;" onclick="location.href='/sosoroder/memberLoginForm'">로그인</span>
 	              		</c:if>
 	<div id="cook">
-	
+	 ${payNum}
 	</div>              		
 		               	<c:if test="${not empty sessionScope.phone}">
 			               	  <script>

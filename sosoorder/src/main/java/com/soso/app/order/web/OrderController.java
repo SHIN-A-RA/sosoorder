@@ -195,8 +195,7 @@ public class OrderController {
 	// 영수증
 	@RequestMapping("/receipt")
 	public String receipt(Model model, OrderCptVO orderCptVO) {
-		System.out.println(orderCptVO.getOrderNum());
-		model.addAttribute("receipt", orderService.receiptGet(orderCptVO));
+
 		return "order/receipt";
 	}
 

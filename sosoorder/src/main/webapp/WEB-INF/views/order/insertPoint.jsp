@@ -45,7 +45,7 @@ $(function() {
 	<form action="insertPo" class="frm_point" method="post">
 	<table style="width: 100%; text-align: center;" >
 		<tr>
-			<th class="tbp_th">${payNum}Phone</th>
+			<th class="tbp_th">Phone</th>
 			<td><input name="phone" id="phone" class="point_input" size="30" >
 			<input type="hidden" name="payNum" value="${payNum}">
 			</td>
@@ -66,7 +66,7 @@ $(function() {
 	<input type="hidden" name="payNum" value="${payNum}">
 	<table style="width: 100%; text-align: center;">
 		<tr> 
-			<th class="tbp_th">${payNum}Phone</th>
+			<th class="tbp_th">Phone</th>
 			<td><input name="phone" class="point_input" size="30" ></td>
 		</tr>
 		<tr>
