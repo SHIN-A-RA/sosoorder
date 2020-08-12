@@ -8,17 +8,31 @@
 ========================-->
 <style>
   body {
-    margin: 40px 10px;
+    /* margin: 40px 10px; */
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
   #calendar {
-    max-width: 1100px;
+   /*  max-width: 1100px; */
     margin: 0 auto;
   }
 .fc-view-harness{
 display:none;
+}
+.chart-pie {
+    height: calc(20rem - 43px) !important;
+}
+/* #menuChart .tui-chart.tui-pie-chart > svg{
+	width:100%  !important;
+}
+#menuChart .tui-chart.tui-pie-chart > svg > rect{
+	width:100%  !important;
+} */
+@media (min-width: 768px){
+	.chart-area { 
+		height:calc(20rem - 43px) !important;
+	}
 }
 </style>
 
@@ -107,6 +121,11 @@ var daySales ='';
     
 }); //end of addEventListener
 </script>
+
+<!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
+    <h1 class="h3 mb-0 text-gray-800">메뉴분석 및 매출관리</h1>
+  </div>
 <!-- ==================================
 			Full Calender 출력 태그
 ====================================== -->
@@ -115,7 +134,7 @@ var daySales ='';
  <!--===========================================
  				년월일 판매량 차트
  ============================================-->
-            <div class="col-xl-4 col-lg-5">
+            <div class="col-xl-4 col-md-12 fl">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -138,7 +157,7 @@ var daySales ='';
 <!--===========================================
  				달 차트 출력
  ============================================-->
- <div class="col-xl-8 col-lg-7">
+ <div class="col-xl-8 col-md-12 fl">
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -168,7 +187,7 @@ var daySales ='';
 <!--===========================================
  				메뉴 분석 차트
  ============================================-->
- <div class="col-xl-8 col-lg-7">
+ <div class="col-xl-6 col-md-12 fl">
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -223,7 +242,7 @@ var daySales ='';
 <!--===========================================
  메뉴 순위 테이블
  ============================================-->
- <div class="col-xl-8 col-lg-7">
+ <div class="col-xl-6 col-md-12 fl">
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

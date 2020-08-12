@@ -82,7 +82,7 @@
 			} else if(msg.cmd == 'startCook'){
 				$("#cook").html(msg.msg)
 			} else if(msg.cmd == 'endCook'){
-				$("#cook").html(msg.msg)
+				
 			} 
 					
 			
