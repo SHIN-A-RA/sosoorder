@@ -148,23 +148,20 @@ public class OrderController {
 		String path = null;
 		MemberVO dbVO = memberService.getMember(memberVO);
 		if (dbVO == null) {
-			model.addAttribute("errorMsg", "없는 휴대폰번호");
-			path = "order/insertPoint";
+			model.addAttribute("errorMsg", "없는 휴대폰번호 입니다.");
+			path = "empty/order/insertPoint";
 
 		} else if (!memberVO.getPwd().equals(dbVO.getPwd())) {
-			model.addAttribute("errorMsg", "pwd오류");
-			path = "order/insertPoint";
+			model.addAttribute("errorMsg", "pwd 오류입니다.");
+			path = "empty/order/insertPoint";
 
 		} else {
 			session.setAttribute("phone", memberVO.getPhone());
-			String phone = (String) session.getAttribute("phone");
-			orderCptVO.setPhone(phone);
+		    path= "redirect:showPoint";
+		    orderService.insertPo(orderCptVO);
+		    model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		}
-
-		orderService.insertPo(orderCptVO);
-		model.addAttribute("pList", orderService.showPoint(orderCptVO));
-
-		return "redirect:showPoint";
+		return path;
 	}
 
 	// 비회원 적립
@@ -175,7 +172,10 @@ public class OrderController {
 		orderCptVO.setStoreId(storeId);
 
 		orderService.insertMem(memberVO, orderCptVO);
-
+		
+		session.setAttribute("phone", memberVO.getPhone());
+		
+		
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		return "redirect:showPoint";
 	}
