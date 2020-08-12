@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 import com.soso.app.order.call.EchoHandler;
+import com.soso.app.order.service.MessageVO;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.order.service.OrderService;
 
@@ -117,9 +119,14 @@ public class OrderController {
 		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
 		
-	
-
-
+		//string jason으로 변환 
+//		ObjectMapper objectMapper = new ObjectMapper();	
+//		MessageVO msg = new MessageVO();
+//		msg.setCmd("orderInsert");
+//	    String msgJson = objectMapper.writeValueAsString(msg);
+//		msg.setMsg("msgJson");
+//		
+//		EchoHandler.map.get(storeId).sendMessage();
 		return "redirect:orderConfirm";
 	}
 

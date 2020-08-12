@@ -427,6 +427,21 @@ $(function(){
 		$(".seat").val($(this).val());
 	});
 });
+
+// 리드온리 인풋 값 받기
+$(function(){
+    var originalVal = $.fn.val;
+    $.fn.val = function (value) {
+        var res = originalVal.apply(this, arguments);
+ 
+        if (this.is('input:text') && arguments.length >= 1) {
+            // this is input type=text setter
+            this.trigger("input");
+        }
+
+        return res;
+    };
+});
 	
 /* 홀이냐 배달이냐 하나만*/	
 $(function(){
@@ -440,11 +455,18 @@ $(function(){
 				$('.addr').val(addr);
 				var cellphone = $('#cellphone').val();
 				$('.cellphone').val(cellphone); 
-							
-					$('#roadFullAddr').on("textchange",function(){
+										
+			    var $input = $("#roadFullAddr"); // readonly inputBox  
+			        $("#roadFullAddr").on('input', function() {
+			            // Do this when value changes
+			        	$('.addr').val($(this).val());
+			        });
+				/* 
+				$('#roadFullAddr').on("textchange",function(){
 						$('.addr').val($(this).val());
 					});
-					
+					 */
+					 
 					$('#cellphone').on("change",function(){
 						$('.cellphone').val($(this).val());
 					});
@@ -457,5 +479,6 @@ $(function(){
 	        }
 	    });
 });		
+
 		
 </script>

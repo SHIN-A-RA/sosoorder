@@ -104,10 +104,11 @@ function orderUpdate2(p, e){
 		$.ajax({ 
 		    url: "orderUpdate2",  
 		    type: 'POST',  
-		    dataType: 'json', 
 		    data: {payNum: p},
 		    success: function(response) {
-		    	console.log(e)
+		    	var msg = {cmd: 'endCook','member':p,'store':'${storeId}',msg:'조리가 완료되었습니다.'}
+		    	console.log(msg)
+		    	sendMessage(msg);
 		    } 
 		 });  
 	
