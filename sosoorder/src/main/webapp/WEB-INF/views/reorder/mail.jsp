@@ -25,10 +25,7 @@ position: absolute;
     margin: 0;
     height: 18px;
 }
-
-
  </style>
-
 <head><title></title>
 <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 </head>
@@ -40,16 +37,13 @@ position: absolute;
     <form action="sendMailAttach.do" method="post"  enctype = "multipart/form-data" >
        <div align="center">
         <input type="text" name="frommail" size="100"  style="width: 100%" placeholder="보내는 사람 메일">
-       
       </div>
-      
       <div align="center">
         <!-- 제목 -->
         <input type="text" name="title" size="100" rows="30"
         style="width: 100%" placeholder="제목을 입력해주세요"
         class="form-control">
       </div>
-      
         <!-- <p>
           <div align="center">
           내용
@@ -58,24 +52,11 @@ position: absolute;
             class="form-control"></textarea>
           </div>
         <p> -->
-        
-    <!--     <textarea name="content" id="editor" cols="120" rows="30"
+     <textarea name="contents" id="editor" cols="120" rows="30"
             style="width: 100%; resize: none;" placeholder="내용" class="form-control"></textarea>
-    <script>
-    // 3. CKEditor5를 생성할 textarea 지정
-    ClassicEditor
-        .create( document.querySelector( '#editor' ),{
-        	 removePlugins: [ 'ImageUpload' ]
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-    </script> -->
-
       <div align="center">
         <input type="submit" value="메일 보내기" class="btn btn-warning">
       </div>
-      
          <div class="clear"></div>
             <div class="wr_box_wrap">
                <span class="wr_t">파일첨부</span>
@@ -93,6 +74,15 @@ position: absolute;
     </form>
     </div> </div>
 </body>
-
+    <script>
+    // 3. CKEditor5를 생성할 textarea 지정
+    ClassicEditor
+        .create( document.querySelector( '#editor' ),{
+        	 removePlugins: [ 'ImageUpload' ]
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script> 
 </html>
 <!-- by 아라 -->

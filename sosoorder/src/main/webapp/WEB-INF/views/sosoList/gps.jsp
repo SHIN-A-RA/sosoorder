@@ -17,11 +17,7 @@
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-  
-  
-  
-  
-  
+
 	<div class ="all" style="width:100%; overflow:hidden;"> 
 	<form action="couponInsert" method="post"> 
 	<div class="test" style="float:left; width:48%;">
@@ -30,7 +26,6 @@
 	<div class="aa" style="float:left; width:48%;"></div>
     <input type="hidden" class="p_latitude" name="latitude" value="">
     <input type="hidden" class="p_longitude" name="longitude" value="">
- 
     <script>
     var gmap;
     //AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
@@ -71,7 +66,6 @@
 			    dataType: 'json', 
 			    async : false,
 			    data:{latitude: latitude, longitude: longitude},
-			    
 			    success:locationResult,
 			    error:function(xhr, status, message) { 
 			        alert(" status: "+status+" er:"+message);
@@ -120,8 +114,7 @@
 	선택한 상점의 쿠폰 값 조회 요청
 	-------------------------------*/
    $(function(){
-	   couponInsert();
-	   
+	   couponInsert();   
        $('.test').on('click','.couponBtn', function(){
     	   var storeId = $(this).attr('name');
          $.ajax({
@@ -182,17 +175,16 @@
 			    contentType: 'application/json',
 			    data:JSON.stringify({serialNum:serialNum}),
 			    success: function(response) {
-			    	alert('쿠폰이 저장되었습니다.');
+						alert('쿠폰이 저장되었습니다.');
 			    }, 
 			    error:function(xhr, status, message) { 
-			        alert(" status: "+status+" er:"+message);
+			        alert('로그인이 필요한 서비스입니다.');
+			        location.href="memberLoginForm";
 			    } 
 			 });  
 		});//등록 버튼 클릭
 	}//userInsert
-	
-	
-	
+
 	$(function(){
 	       $('.test').on('click','.couponBtn', function(){
 	    	   var storeId = $(this).attr('name');
@@ -209,8 +201,7 @@
 		     });
 	     });
 	   });
-		
-
+	
     /*-----------------------------
 	 	지도 그리기 
 	-------------------------------*/	
@@ -223,8 +214,7 @@
 	 for(var i=0;i < tmp_map2.length;i++){
 		  latlng[i] = [tmp_map2[i].lat,tmp_map2[i].lon,tmp_map2[i].rdnmAdr];		  
 	 }
-	 console.log(latlng);
- 	 
+	 console.log(latlng); 
 /* 
 	// var image= {  
 	   url: "./resources/admin/img/icon.png", //마커이미지 
@@ -252,15 +242,12 @@
 	}
 }
 
-    
     /*-----------------------------
  		상점 선택시 중심값 이동
 	-------------------------------*/	
 	$(document).ready(function(){
-	 
  	 getLocation();
 	});
-	
 	 function moveToLocation(lat, lng){
 		var center = new google.maps.LatLng(lat, lng);
 		gmap.panTo(center);

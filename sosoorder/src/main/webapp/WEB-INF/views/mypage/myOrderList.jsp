@@ -23,6 +23,7 @@
 .starR.on {
 	background-position: 0 0;
 }
+
 </style>
 </head>
 
@@ -43,6 +44,10 @@
 .btn-group .button:hover {
 	background-color: #3e8e41;
 }
+.btn-group .button:visited{
+          color: white;
+            }
+
 </style>
 
 </head>
@@ -71,7 +76,7 @@
 		</tbody>
 	</table>
 	<div class="container">
-
+	
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal">
 			<div class="modal-dialog modal-lg">
@@ -79,10 +84,8 @@
 					<!-- Modal Header -->
 					<div class="modal-header">
 						<h4 class="modal-title">주문내역</h4>
-
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-
 					<!-- Modal body -->
 					<div class="modal-body">
 						<table class="table table-white">
@@ -102,14 +105,11 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div class="container">
-
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal2">
 			<div class="modal-dialog modal-sm">
@@ -135,13 +135,13 @@
 							type="hidden" name="menuOrderNum" id="menuOrderNum"><input
 							type="hidden" name="payNum" id="payNum">
 						<div class="starRev">
-							<span class="starR on">별1</span> <span class="starR">별2</span> <span
+							<span class="starR on">별1</span> 
+							<span class="starR">별2</span> <span
 								class="starR">별3</span> <span class="starR">별4</span> <span
 								class="starR">별5</span>
 						</div>
 						<button class="btn2starBtn" style="margin-top: 20px"
 							data-dismiss="modal">등록</button>
-
 					</form>
 				</div>
 			</div>
@@ -150,7 +150,6 @@
 	</div>
 </body>
 
-
 <div class="mypagelist">
 	<ul class="mypagebtn_ul">
 		<li><a href="myPointsList">나의 적립금</a>
@@ -158,7 +157,6 @@
 		<li><a href="myOrderList">나의 주문내역</a>
 	</ul>
 </div>
-
 
 <script>
 	$(function() {
@@ -260,6 +258,7 @@
 									.append($('<td>').addClass("s_"+item.orderStar+" startd"))
 									.appendTo("#starOrderListTBody");
 						});
+		$('.starR').removeClass('on');
 		test(myOrder[0].payNum);
 		$(".s_1").html("★☆☆☆☆");
 		$(".s_2").html("★★☆☆☆");
