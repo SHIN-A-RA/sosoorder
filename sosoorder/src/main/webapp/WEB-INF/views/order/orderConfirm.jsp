@@ -30,7 +30,7 @@ function goPointInsert() {
 	</div>	
 	<div class="div_text2">
 		<div style="padding: 0px 0px 80px 0px;">
-			<a href="receipt?OrderNum=${param.orderNum}" class="btn_point" style="color:#fff">영수증</a>
+			<a href="receipt?payNum=${payNum}" class="btn_point" style="color:#fff">영수증</a>
 			<a onclick="goPointInsert()" class="btn_point" style="color:#fff">적 립</a>
 		</div>
 		<p><a class="btn_home" href="/sosoroder/homeSample">홈으로</a></p>
