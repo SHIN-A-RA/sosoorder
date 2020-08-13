@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<c:if test="${not empty loginMsg}">
+	<script>
+	alert('${loginMsg}');
+	</script>
+</c:if>
 <script>
 //angularjs를 이용해서 storageSession에 메뉴정보를 저장한다.
 var myApp = angular.module("myApp",[]);

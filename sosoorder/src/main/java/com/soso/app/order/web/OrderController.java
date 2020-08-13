@@ -4,8 +4,11 @@ package com.soso.app.order.web;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,11 +45,8 @@ public class OrderController {
 
 	@Autowired
 	MemberService memberService;
-	
-	 @Autowired
-	 AdminService adminService;
-		 
 
+		
 	// by혜원, 주문페이지
 	@RequestMapping("/orderInsert")
 	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
@@ -71,6 +71,7 @@ public class OrderController {
 		model.addAttribute("addr", orderService.getAddr(orderCptVO));
 		model.addAttribute("coupon", orderService.findCoupon(orderCptVO));
 		model.addAttribute("seat", orderService.getSeat(orderCptVO));
+		model.addAttribute("admin", orderService.getAccount(orderCptVO));
 
 		return "order/orderInsert";
 	}
@@ -82,7 +83,7 @@ public class OrderController {
 	}
 
 	@RequestMapping("payInsert")
-	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session) throws IOException {
+	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session,HttpServletResponse response) throws IOException {
 
 		String storeId = (String) session.getAttribute("storeInfo");
 		String phone = (String) session.getAttribute("phone");
@@ -91,7 +92,6 @@ public class OrderController {
 
 		if (phone == null) {
 			orderCptVO.setPhone("0");
-//         orderCptVO.setMemberNum(0);
 
 		} else {
 			orderCptVO.setPhone(phone);
@@ -129,18 +129,38 @@ public class OrderController {
 		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
 		
-		//string jason으로 변환 
-//		ObjectMapper objectMapper = new ObjectMapper();	
-//		MessageVO msg = new MessageVO();
-//	    String msgJson = objectMapper.writeValueAsString(orderCptVO);
-//	    
-//	    msg.setMsg(msgJson);
-//		EchoHandler.map.get(storeId).sendMessage(new TextMessage( objectMapper.writeValueAsString(msg)) );
+		//주문현황에서 받을 리스트 list에 담아서 map에 담기
+		List orderList = orderService.getOrder(orderCptVO);
+		Map<String, Object> orderMap = new HashMap<String, Object>();
+		orderMap.put("payInfo",orderCptVO);
+		orderMap.put("orderList",orderList);
+
+		//json -> string ->json
+		ObjectMapper objectMapper = new ObjectMapper();	
+		MessageVO msg = new MessageVO();
+		msg.setCmd("orderInsert");
+		//주문정보 string에 담기
+	    String msgJson = objectMapper.writeValueAsString(orderMap);
+	    //msg의 msg에 주문내역 담기
+	    msg.setMsg(msgJson);
+	    //소켓으로 storeId찾아서 sendMessage 하기
+	    if(EchoHandler.map.get(storeId) != null) { 	
+	    	EchoHandler.map.get(storeId).sendMessage(new TextMessage( objectMapper.writeValueAsString(msg) ));
+	    } else if(EchoHandler.map.get(storeId) == null ) {
+	    	PrintWriter out= response.getWriter();
+	    	response.setContentType("text/html; charset=utf-8");
+	    	out.println("<script language='javascript'>");
+	    	out.println("alert('현재 가게가 오픈하지 않았습니다.');");
+	    	out.println("</script>");
+	    	out.flush();
+	    }
 		return "redirect:orderConfirm";
-	}
+			
+		}
+	
 
 	@RequestMapping("/orderConfirm")
-	public String orderConfirm(Model model, OrderCptVO orderCptVO, AdminVO adminVO,HttpServletRequest request, HttpSession session) {
+	public String orderConfirm(Model model, OrderCptVO orderCptVO,HttpServletRequest request, HttpSession session) {
 		
 		/* model.addAttribute("admin", adminService.getAdmin(adminVO)); */
 		return "order/orderConfirm";

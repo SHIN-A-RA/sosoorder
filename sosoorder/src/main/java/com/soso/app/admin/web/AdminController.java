@@ -38,18 +38,17 @@ public class AdminController {
 		// && !vo.getPhone().equals(dbVO.getPhone())
 
 		if (dbVO == null) {
-			model.addAttribute("errorMsg", "id오류");
+			model.addAttribute("errorMsg", "관리자 아이디를 확인해주세요");
 			path = "member/memberLoginForm";
 
-		} else if (!vo.getStorePwd().equals(dbVO.getStorePwd())) {
-			model.addAttribute("errorMsg", "pwd오류");
+		} else if (!vo.getStorePwd().equals(vo.getStorePwd()) ) {
+			model.addAttribute("errorMsg", "관리자 패스워드를 확인해주세요.");
 			path = "member/memberLoginForm";
 
 		} else {
 			session.setAttribute("storeId", vo.getStoreId());
-			session.setAttribute("storePwd", vo.getStorePwd());
-
-			path = "redirect:/";
+			 model.addAttribute("loginMsg", "로그인 되었습니다."); 
+			path = "redirect:/homeSample";
 		}
 		return path;
 	}

@@ -318,7 +318,7 @@ $(function(){
 =====================================-->
 <div class="col-xl-4 fl mb-4">
 	<h3 class="basic_tb_th_up">
-		전 달 월급<span id="today"></span>
+		지난달 월급<span id="today"></span>
 	</h3>
 	<div style="height: 230px; overflow-y: auto; overflow-x: hidden;">
 		<table class="table">

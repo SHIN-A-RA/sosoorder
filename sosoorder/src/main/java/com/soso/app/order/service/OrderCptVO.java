@@ -14,6 +14,7 @@ public class OrderCptVO {
 	String price;
 	Integer memberNum;
 	String storeId;
+	String menuName;
 	
 	String pointNum;
 	String pointDate;
@@ -36,5 +37,5 @@ public class OrderCptVO {
 	String payNum;
 	String addr;
 	String cellPhone;
-
+	String accountNum;
 }

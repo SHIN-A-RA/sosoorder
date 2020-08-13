@@ -69,7 +69,7 @@ group by e.empClass, e.salary, e.empName
    
 <!-- work 종료 -->  
    <update id="workEnd" parameterType="String" >
-	UPDATE work SET workEnd=SYSDATE where empNum=#{empNum}
+	UPDATE work SET workEnd=SYSDATE where empNum=#{empNum} AND workEnd is null
    </update>
 
 <!-- 캘린더 work 데이터 -->

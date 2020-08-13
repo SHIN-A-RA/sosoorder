@@ -156,7 +156,12 @@ function removeChar(event) {
 
    <div class="div-tt">
       <h2>주문/결제</h2> 
+      <!-- 가게 계좌번호 받아오기 -->
+      <c:forEach items="${admin}" var="admin">
+      	<input id="account" name="account" type="hidden"  value="${admin.accountNum}"> 
+      </c:forEach>
    </div>
+  
     <div class="basic">
     	<span>좌석번호
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
@@ -287,7 +292,6 @@ function removeChar(event) {
 	     	</tr>  
 	     	</table>	     		        		
       	 </c:forEach>  
-     
       </div>
     </div>
   </div>
@@ -357,7 +361,7 @@ function removeChar(event) {
 <div style="margin: 20px; text-align: center; margin-bottom: 20px;">
         위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
     </div>
-<form action="payInsert?payNum=${param.payNum}" method="post" name="frm_pay">
+<form action="payInsert?payNum=${payNum}" method="post" name="frm_pay">
 <input class="couponUse" name="couponUse" type="hidden" value="">
 <input class="payCheckval" name="payCheck" type="hidden" value="0">
 <input class="seat" name="seat" type="hidden" value="${param.seat}">
@@ -380,7 +384,8 @@ var totalPrice = $(".total").val();
 $(function(){
 	$(".btn_pay").on("click",function(){
 		if( $("#transfer").is(":checked") ){
-			alert("결제완료 페이지에서 계좌번호를 확인해주세요.")
+			var account = $("#account").val();
+			alert("계좌번호:" + account+  "\n이체를 완료하시면 주문이 완료됩니다.")
 			frm_pay.submit();
 		}else if( $("#cash").is(":checked") ){
 			alert("현금결제시 결제는 데스크에서 완료해주세요.")
@@ -429,7 +434,7 @@ $(function(){
 });
 
 // 리드온리 인풋 값 받기
-$(function(){
+$(function() {
     var originalVal = $.fn.val;
     $.fn.val = function (value) {
         var res = originalVal.apply(this, arguments);
@@ -437,8 +442,7 @@ $(function(){
         if (this.is('input:text') && arguments.length >= 1) {
             // this is input type=text setter
             this.trigger("input");
-        }
-
+        } 
         return res;
     };
 });
@@ -451,8 +455,8 @@ $(function(){
 	        	$(".seat").val($(".empty").val()); 
 				$('#selectSeat').attr('disabled', 'true');
 				 alert("배달 주문을 하시겠습니까?");
-  				var addr = $('#roadFullAddr').val();
-				$('.addr').val(addr);
+   				var addr = $('#roadFullAddr').val();
+				$('.addr').val(addr); 
 				var cellphone = $('#cellphone').val();
 				$('.cellphone').val(cellphone); 
 										
@@ -460,12 +464,14 @@ $(function(){
 			        $("#roadFullAddr").on('input', function() {
 			            // Do this when value changes
 			        	$('.addr').val($(this).val());
+			        	console.log("Input text changed!" + $(this).val());
 			        });
 				/* 
 				$('#roadFullAddr').on("textchange",function(){
 						$('.addr').val($(this).val());
 					});
 					 */
+					 
 					 
 					$('#cellphone').on("change",function(){
 						$('.cellphone').val($(this).val());

@@ -43,6 +43,8 @@ public interface OrderService {
 	
 	//주소가져오기
 	public List<OrderCptVO> getAddr(OrderCptVO orderCptVO);
-
+	
+	//어카운트 뿌리기
+	public List<OrderCptVO> getAccount(OrderCptVO orderCptVO);
 
 }
