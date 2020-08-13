@@ -14,7 +14,7 @@
 	to_char(hireDate,'YYYY-MM-DD') AS empBirth,
 	salary,
 	to_char(endDate,'YYYY-MM-DD') AS endDate,
-	empPhone,
+	REGEXP_REPLACE(empPhone, '(.{3})(.*)(.{4})', '\1-\2-\3') AS empPhone,
 	empClass
 	FROM employees
 	WHERE storeId = #{storeId}

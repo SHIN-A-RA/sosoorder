@@ -164,7 +164,7 @@
 				<input type="button" class="btn btn-danger" onclick="location.href='getEmpDelete?empNum=${one.empNum}'" value="메뉴삭제" />	
 			</c:if>
 			<!-- 수정(등록) 기능 -->
-			<input type="submit" class="btn btn-warning" value="완료" >
+			<input type="submit" class="btn btn-primary" value="완료" >
 			</div>
 	</div>
 </form>
