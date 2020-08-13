@@ -26,6 +26,7 @@ import com.soso.app.admin.service.AdminVO;
 import com.soso.app.home.service.HomeService;
 import com.soso.app.menu.service.MenuService;
 import com.soso.app.menu.service.MenuVO;
+import com.soso.app.order.call.EchoHandler;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.seat.service.SeatVO;
 
@@ -62,7 +63,7 @@ public class HomeController {
 		//세션 저장
 		session.setAttribute("storeInfo", storeId);
 		session.setAttribute("seat", seat);
-		
+
 		//세션 가져오기
 		//(String)session.getAttribute("storeId")
 		//adminVO.setStoreId(storeId);
@@ -71,6 +72,8 @@ public class HomeController {
 		model.addAttribute("menuList", homeService.getMenuListHome(menuVO));
 		model.addAttribute("menuCategory", homeService.getMenuCategory(adminVO));
 		model.addAttribute("menuOrderNum", homeService.getOrderNum(orderCptVO));
+		
+		
 		return "home/home";
 	}
 	
@@ -115,7 +118,7 @@ public class HomeController {
 	@RequestMapping(value="cartList", method=RequestMethod.POST, 
 		   headers = {"Content-type=application/json"})
     @ResponseBody
-    public String cartInert(@RequestBody List<OrderCptVO> ocVO, Model model) {
+    public String cartInert(@RequestBody List<OrderCptVO> ocVO, Model model,HttpSession session) {
 		homeService.cartInert(ocVO);
 		return "order/orderInsert";
     }

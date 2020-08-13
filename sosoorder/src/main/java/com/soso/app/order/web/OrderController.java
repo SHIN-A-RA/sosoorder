@@ -87,18 +87,15 @@ public class OrderController {
 
 		String storeId = (String) session.getAttribute("storeInfo");
 		String phone = (String) session.getAttribute("phone");
-
+		String path = null;
 		orderCptVO.setStoreId(storeId);
 
 		if (phone == null) {
 			orderCptVO.setPhone("0");
-
 		} else {
 			orderCptVO.setPhone(phone);
 		}
-
-		orderService.payInsert(orderCptVO);
-		
+		orderService.payInsert(orderCptVO);		
 		session.setAttribute("payNum",orderCptVO.getPayNum());
 
 
@@ -146,15 +143,17 @@ public class OrderController {
 	    //소켓으로 storeId찾아서 sendMessage 하기
 	    if(EchoHandler.map.get(storeId) != null) { 	
 	    	EchoHandler.map.get(storeId).sendMessage(new TextMessage( objectMapper.writeValueAsString(msg) ));
+	    	path = "redirect:orderConfirm";
 	    } else if(EchoHandler.map.get(storeId) == null ) {
 	    	PrintWriter out= response.getWriter();
 	    	response.setContentType("text/html; charset=utf-8");
 	    	out.println("<script language='javascript'>");
 	    	out.println("alert('현재 가게가 오픈하지 않았습니다.');");
-	    	out.println("</script>");
+	    	out.println("</script>");  
 	    	out.flush();
+	    	path = "redirect:home";
 	    }
-		return "redirect:orderConfirm";
+		return path;
 			
 		}
 	

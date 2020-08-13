@@ -49,7 +49,7 @@ public class EchoHandler extends TextWebSocketHandler{
         ObjectMapper mapper = new ObjectMapper();
         MessageVO msgVO = mapper.readValue(message.getPayload(), MessageVO.class);
         
-
+        try {   	
         	if(msgVO.getCmd().equals("callInsert")) {
         		map.get(msgVO.getStore()).sendMessage(new TextMessage(message.getPayload()));
         	}else if(msgVO.getCmd().equals("orderInsert")) {
@@ -59,6 +59,9 @@ public class EchoHandler extends TextWebSocketHandler{
         	}else if(msgVO.getCmd().equals("endCook")) {
         		map.get(msgVO.getMember()).sendMessage(new TextMessage(message.getPayload()));
         	}      	
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
     
     }
     

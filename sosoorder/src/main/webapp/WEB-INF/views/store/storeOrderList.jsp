@@ -24,7 +24,7 @@
 		
 		<c:if test="${list.payNum != payNum}">
  			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
-	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
+	 			<div  style="border-bottom: 1px solid #c7bebe; padding: 20px; height: 20%;">
 	 			<p>결제번호 ${list.payNum}</p>
 	 				<c:if test="${list.seat != null}">
 	 					<p style="color:red;">Table ${list.seat}</p>
@@ -37,7 +37,7 @@
 	 				</c:if>
 	 			</div>
 	 	   <!-- 주문메뉴부분 -->			
-	 			<div class="menuList" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
+	 			<div class="menuList scrollbar style-4" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 60%;">
 	 				<div style="padding: 15px 60px 40px 60px;">
 		 				<div style="float: left; box-sizing: border-box;">
 		 				 	<h5>메뉴</h5>
