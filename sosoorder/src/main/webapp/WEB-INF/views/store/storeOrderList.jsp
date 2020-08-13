@@ -13,7 +13,7 @@
 	 		</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
 		 			<c:if test="${status == 0}">
-		 				<button onclick="orderUpdate(${payNum},this)" style="background:#ff5722; padding: 10px;">조리시작</button>
+			 			<button type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" data-paynum="${payNum}">조리시작</button>
 		 			</c:if>
 		 			<c:if test="${status == 1}">
 		 				<button onclick="orderUpdate2(${payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료</button>
@@ -56,7 +56,7 @@
 	 		</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
 		 			<c:if test="${list.status == 0}">
-		 				<button onclick="orderUpdate(${list.payNum},this)" style="background:#ff5722; padding: 10px;">조리시작</button>
+		 				<button type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" data-payNum="${list.payNum}">조리시작</button>
 		 			</c:if>
 		 			<c:if test="${list.status == 1}">
 		 				<button onclick="orderUpdate2(${list.payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료</button>
@@ -72,7 +72,6 @@
   	
 </div>
 <!--주문탬플릿  -->
- <c:forEach items="${orderList}" var="list" varStatus="st">
 <div id="orderTem" style=" display:none;">
  			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
 	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
@@ -93,11 +92,10 @@
 	 	
 	 			</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
-	 				<button onclick="orderUpdate(${payNum},this)" style="background:#ff5722; padding: 10px;">조리시작</button>
+	 				<button  type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" >조리시작</button>
 	 			</div>
  			</div>
  	</div>	
- </c:forEach>
 <script>
 
 function orderInsert(orderMap){
@@ -116,44 +114,46 @@ function orderInsert(orderMap){
 		
 	}
 	
+	empty.find(".btn_upt1").data("paynum",orderMap.payInfo.payNum);
+	
 	//내용넣기
-
-
 	empty.find(".payNum").text("주문번호" + orderMap.payInfo.payNum);
 	 if(orderMap.payInfo.seat > 0){
-			empty.find(".seat").text("Table:"+orderMap.payInfo.seat);		 
-		 } else if(orderMap.payInfo.addr != null){
-			empty.find(".addr").text("주소:"+orderMap.payInfo.addr);
-		 } 
+		empty.find(".seat").text("Table:"+orderMap.payInfo.seat);		 
+	 } else if(orderMap.payInfo.addr != null){
+		empty.find(".addr").text("주소:"+orderMap.payInfo.addr);
+	 } 
 	 
 	 if(orderMap.payInfo.payCheck == 0){
-			empty.find(".payCheck").text("계좌이체"); 
-		 } else if(orderMap.payInfo.payCheck == 1) {
-			 empty.find(".payCheck").text("카드결제"); 
-		 } else if(orderMap.payInfo.payCheck == 2) {
-			 empty.find(".payCheck").text("현금결제"); 
-		 }
- 
+		empty.find(".payCheck").text("계좌이체"); 
+	 } else if(orderMap.payInfo.payCheck == 1) {
+		 empty.find(".payCheck").text("카드결제"); 
+	 } else if(orderMap.payInfo.payCheck == 2) {
+		 empty.find(".payCheck").text("현금결제"); 
+	 }
+
 	
 }
 
-//수정 요청
-function orderUpdate(p, e){
+//조리시작
+$(".orderwrap").on("click",".btn_upt1", function(){
+	var p = $(this).data("paynum")
 	//couponUpdate 요청
-		$(e).text("조리완료").css("background",'#c3c3c3').attr("onclick", "orderUpdate2("+p+",this)");
-	
-		$.ajax({ 
-		    url: "orderUpdate1",  
-		    type: 'POST',  
-		    data: {payNum: p},
-		    success: function(response) {
-		    	var msg = {cmd: 'startCook','member':p,'store':'${storeId}',msg:'조리가 시작되었습니다.'}
-		    	console.log(msg)
-		    	sendMessage(msg);
-		    } 
-		 });  
-	
-}
+	$(this).text("조리완료").css("background",'#c3c3c3').attr("onclick", "orderUpdate2("+p+",this)");
+
+	$.ajax({ 
+	    url: "orderUpdate1",  
+	    type: 'POST',  
+	    data: {payNum: p},
+	    success: function(response) {
+	    	var msg = {cmd: 'startCook','member':p,'store':'${storeId}',msg:'조리가 시작되었습니다.'}
+	    	console.log(msg)
+	    	sendMessage(msg);
+	    } 
+	 });  
+
+})
+
 
 function orderUpdate2(p, e){
 	//couponUpdate 요청

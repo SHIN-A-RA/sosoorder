@@ -442,8 +442,7 @@ $(function() {
         if (this.is('input:text') && arguments.length >= 1) {
             // this is input type=text setter
             this.trigger("input");
-        }
- 
+        } 
         return res;
     };
 });
