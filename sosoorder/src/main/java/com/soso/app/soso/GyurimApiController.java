@@ -61,11 +61,11 @@ public class GyurimApiController {
 		StringBuffer result = new StringBuffer();
 		try {
 			StringBuilder urlstr = new StringBuilder(
-					"http://apis.data.go.kr/B553077/api/open/sdsc/baroApi?resId=store&catId=dong&divId=ctprvnCd");
+					"http://apis.data.go.kr/B553077/api/open/sdsc/baroApi?resId=store&catId=dong&divId=signguCd");
 			urlstr.append("&" + URLEncoder.encode("key", "UTF-8") + "=" + name);
 			urlstr.append("&" + URLEncoder.encode("ServiceKey", "UTF-8")
-					+ "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*
-																																 * Service
+					+ "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); 
+			urlstr.append("&"+URLEncoder.encode("indsLclsCd", "UTF-8")+"=Q");													/*																 * Service
 																																 * Key
 																																 */
 			URL url = new URL(urlstr.toString());

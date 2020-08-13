@@ -28,6 +28,7 @@
 	<input type="text" id="message" placeholder="요청사항을 입력하세요"/>
 	<input type="button" id="sendBtn" value="요청하기"/>
 	<input type="hidden" id="msg"/>
+	<div id="messageArea"></div>
 
 </div>
 
@@ -38,7 +39,6 @@
 	});
 
 	let sock = new SockJS("http://localhost/sosoroder/echo/");
-	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	// 메시지 전송
 	function sendMessage() {
@@ -49,13 +49,6 @@
 		
 		$('#msg').val(JSON.stringify(msg));
 		dbInsert();
-	}
-	// 서버로부터 메시지를 받았을 때
-	function onMessage(msg) {
-		console.log(msg);
-		msg = JSON.parse(msg.data);
-		var data = msg.seat + " table. "+ msg.msg;
-		$("#messageArea").append(data + "<br/>");
 	}
 	// 서버와 연결을 끊었을 때
 	function onClose(evt) {

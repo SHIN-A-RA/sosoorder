@@ -181,7 +181,7 @@
 			url : 'getDataApi',
 			type : 'GET',
 			data : {
-				name : sido
+				name : data
 			},
 			dataType : 'xml',
 			success : function(result) {
