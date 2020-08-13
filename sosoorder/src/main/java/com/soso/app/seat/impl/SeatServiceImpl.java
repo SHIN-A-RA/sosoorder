@@ -22,7 +22,7 @@ public class SeatServiceImpl implements SeatService{
 
 	@Override
 	public List<SeatVO> getSeatList(SeatVO seatVO) {
-		// TODO Auto-generated method stub
+		
 		return seatMapper.getSeatList(seatVO);
 	}
 
@@ -43,6 +43,9 @@ public class SeatServiceImpl implements SeatService{
 	public void seatDelete(SeatVO seatVO) {
 		// TODO Auto-generated method stub
 		seatMapper.seatDelete(seatVO);
+	}
+	public List<SeatVO> getRestSeatList(SeatVO seatVO){
+		return seatMapper.getSeatList(seatVO);
 	}
 
 }

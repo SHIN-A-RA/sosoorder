@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.soso.app.common.FileRenamePolicy;
-import com.soso.app.store.service.StoreCouponVO;
+import com.soso.app.seat.service.SeatService;
+import com.soso.app.seat.service.SeatVO;
+
 import com.soso.app.store.service.StorePopupService;
 import com.soso.app.store.service.StorePopupVO;
 
@@ -29,11 +31,42 @@ public class StorePopupController {
 	@Autowired
 	StorePopupService storePopupService;
 	
+	@Autowired
+	SeatService seatService;
+	
+	//좌석 및 팝업관리 등록폼으로 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정)
 	@RequestMapping("storePopupListForm")
-	public String storePopupListForm(Model model) {
+	public String storePopupListForm(Model model, SeatVO seatVO, HttpSession session) {
+		String storeId = (String) session.getAttribute("storeId");
+		seatVO.setStoreId(storeId);
+		model.addAttribute("SeatList", seatService.getSeatList(seatVO));
+		model.addAttribute("RestSeatList", seatService.getRestSeatList(seatVO));
 		return "store/storePopupList";
 	}
 	
+	// 좌석등록
+		@RequestMapping("seatInsert")
+		public String seatInsert(SeatVO seatVO, Model model, HttpSession session) {
+			String storeId = (String) session.getAttribute("storeId");
+			seatVO.setStoreId(storeId);
+			System.out.println(seatVO);
+//			if (seatVO.getSeatNum() != null && !seatVO.getSeatNum().isEmpty()) {
+//				seatService.seatUpdate(seatVO);
+//			} else {
+				seatService.seatInsert(seatVO);
+			//}
+			
+			return "redirect:storePopupListForm";
+			
+		}
+		
+		//좌석삭제
+		@RequestMapping("seatDelete")
+		public String seatDelete(SeatVO seatVO) {
+			seatService.seatDelete(seatVO);
+			return "redirect:storePopupListForm";
+		}
+		
 	@RequestMapping("storePopupList")
 	@ResponseBody
 	public List<StorePopupVO> storePopupList(Model model, StorePopupVO storePopupVO, HttpSession session) {

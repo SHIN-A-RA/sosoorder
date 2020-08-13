@@ -17,6 +17,19 @@
 		</where>
 		order by seatNum
 	</select>
+	<!--빈 좌석 조회 -->
+	<select id="getRestSeatList" parameterType="seatVO"
+		resultType="seatVO">
+		SELECT *
+		FROM seat
+		<where>
+			userCheck = '0'
+			<if test="storeId != null">
+				and storeId = #{storeId}
+			</if>
+		</where>
+		order by seatNum
+	</select>
 	<!--단건조회 -->
 	<select id="getSeat" parameterType="seatVO" resultType="seatVO">
 		select
@@ -36,7 +49,8 @@
 		userCheck)
 		VALUES
 		(
-		(SELECT NVL(max(seatNum), 0)+1 FROM seat),
+		(SELECT NVL(max(seatNum), 0)+1 FROM
+		seat),
 		#{storeId},
 		#{seat},
 		'1')
@@ -53,7 +67,8 @@
 	<update id="seatDelete" parameterType="seatVO">
 		UPDATE seat
 		set
-		userCheck  = '0'
+		userCheck =
+		'0'
 		where seatNum= #{seatNum}
 	</update>
 </mapper>

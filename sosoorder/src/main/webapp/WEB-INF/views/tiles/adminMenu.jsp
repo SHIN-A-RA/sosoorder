@@ -10,8 +10,7 @@
 			<li class="gnb_dp2"><a href="/sosoroder/storeSales">메뉴분석 및 매출관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeMenuList">메뉴관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeMemberList">회원목록</a></li>
-			<li class="gnb_dp2"><a href="/sosoroder/storePopupListForm">팝업관리</a></li>
-			<li class="gnb_dp2"><a href="/sosoroder/seatInsertForm">좌석관리</a></li>
+			<li class="gnb_dp2"><a href="/sosoroder/storePopupListForm">좌석 및 팝업관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/mailList">리오더관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeCouponListForm">쿠폰관리</a></li>
 			<li class="gnb_dp2"><a href="/sosoroder/storeOrderList">주문현황</a></li>

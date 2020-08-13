@@ -10,5 +10,6 @@ public interface SeatMapper {
 	public void seatInsert(SeatVO seatVO);
 	public void seatUpdate(SeatVO seatVO);
 	public void seatDelete(SeatVO seatVO);
+	public List<SeatVO> getRestSeatList(SeatVO seatVO);	
 	
 }
