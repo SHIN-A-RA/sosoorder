@@ -109,7 +109,7 @@ to {
 
 <div class="modal-header">
 	<header class="row">
-		<h2 id="title_search_country">전국 소상공 업체 조회</h2>
+		<h2 id="title_search_country"> 전국 소상공 업체 조회</h2>
 		<button type="button" class="close" data-dismiss="modal"
 			aria-label="Close">
 			<span aria-hidden="true">&times;</span><!-- &times <--엑스모양 -->
@@ -149,7 +149,8 @@ to {
 			</div>
 			<div class="col" align="center">
 				<span class="label_set"> <label for="rdnmcounty1"
-					class="sr_only">시군구</label> <select name="rdnmcounty1"
+					class="sr_only">시군구</label>
+					<select name="rdnmcounty1"
 					id="rdnmcounty1" class="select" onchange="viewData();"
 					title="시군구 선택">
 						<option value="">::선택::</option>
@@ -181,10 +182,19 @@ to {
 		//console.log(col2);  
 			function addrAdd() {
 				//데이터테이블
-				var otable = $('#table_id').DataTable({});
+				var otable = $('#table_id').DataTable({
+					 searching: false,
+		             paging: false,
+		             info: false,
+					 ordering:  false,
+					 responsive: true
+				});
 				$('#table_id tbody').on('click', 'tr', function() {
 					$().val($(this).find('td').eq(1).text());
 					var col1 = $(this).find('td').eq(1).text();
+					
+					$('#table_id tbody tr').css("background", "none");
+					$(this).css("background", "#f0f2fb");
 					
 					var data = otable.row(this).data();
 					var col1 = data[1];
@@ -199,11 +209,11 @@ to {
 	
 
 		<div class="complete_zone">
-			<h4>- 선택 된 상호 명 -</h4>
-			<input type="text" value="" name="SA" id="SA" readonly="readonly"
+			<!-- <h4>- 선택 된 상호 명 -</h4> -->
+			<input type="hidden" value="" name="SA" id="SA" readonly="readonly"
 				title="도로명 조회 결과">
-			<div id="menuExplain">※ 목록에서 상호명 클릭 후 선택버튼을 누르시면 회원가입 페이지(상호명)에
-				입력됩니다.</div>
+			<!-- <div id="menuExplain">※ 목록에서 상호명 클릭 후 선택버튼을 누르시면 회원가입 페이지(상호명)에
+				입력됩니다.</div> -->
 		</div>
 	</div>
 </div>

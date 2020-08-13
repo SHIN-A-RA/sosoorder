@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +20,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soso.app.admin.service.AdminVO;
 import com.soso.app.soso.service.SosoListService;
-import com.soso.app.storeorder.service.ReorderVO;
  
 @RestController
 public class ActualDealController {
@@ -43,15 +41,10 @@ public class ActualDealController {
         try {
         	
         	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius"); /*URL*/
-        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=100");
-        	urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=" + b);
-            urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=" +a);
-        	
-        	//urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"=128.5896283");
-            //urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"=35.8704736");
-
-           // urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"="+URLEncoder.encode(a, "UTF-8"));
-           // urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"="+URLEncoder.encode(b, "UTF-8"));
+        	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
+        	urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"="+b);
+            urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"="+a);
+            urlBuilder.append("&"+URLEncoder.encode("indsLclsCd", "UTF-8")+"=Q");	
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*Service Key*/
 
             URL url = new URL(urlBuilder.toString());
@@ -122,5 +115,3 @@ public class ActualDealController {
 	
 	
 	}
-
- 

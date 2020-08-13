@@ -24,6 +24,7 @@
 	<div class="aa" style="float:left; width:48%;"></div>
     <input type="hidden" class="p_latitude" name="latitude" value="">
     <input type="hidden" class="p_longitude" name="longitude" value="">
+    
     <script>
     var gmap;
     //AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M
@@ -216,7 +217,8 @@
 	   url: "./resources/admin/img/icon5.png", //마커이미지 
 	   size: new google.maps.Size(32, 38),
        scaledSize: new google.maps.Size(32, 38),
-       labelOrigin: new google.maps.Point(10, -8)
+       labelOrigin: new google.maps.Point(10, -8),
+	 	fillColor: '#000000'
 	  }; //마커로 사용할 이미지 정의
 	
 	
@@ -250,6 +252,8 @@
 		gmap.panTo(center);
 	}
 	</script>
+	
+
 	<div id="map" style="width: 48%; float:right;" class="b"></div>
-		<div class="tbWrap"></div>
+	<div class="tbWrap"></div>
 	</div>
