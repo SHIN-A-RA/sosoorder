@@ -11,6 +11,8 @@ public class MessageVO {
 	String member;
 	String store;
 	
+	String seatNum;
+	
 
 	
 

@@ -34,21 +34,21 @@
 
 <script type="text/javascript">
 	$("#sendBtn").click(function() {
-		sendMessage();
+		msg = { cmd :'callInsert', 
+			    seatNum : $("#seat").val(),
+				callContents : $("#message").val(), 
+				storeId: '${sessionScope.storeInfo}'}
+		$('#msg').val(JSON.stringify(msg));
+		
+		dbInsert();
 		$('#message').val('')
 	});
 
 	let sock = new SockJS("http://localhost/sosoroder/echo/");
 	sock.onclose = onClose;
 	// 메시지 전송
-	function sendMessage() {
-		msg = { cmd :'callInsert', 
-			    seatNum : $("#seat").val(),
-				callContents : $("#message").val() }
+	function sendMessage(msg) {
 		sock.send(JSON.stringify(msg)); 
-		
-		$('#msg').val(JSON.stringify(msg));
-		dbInsert();
 	}
 	// 서버와 연결을 끊었을 때
 	function onClose(evt) {
@@ -68,6 +68,11 @@
 		    data: msg,
 		    contentType:'application/json',
 		    success: function(data) { 
+		    	msg = { cmd :'callInsert', 
+					    seatNum : $("#seat").val(),
+						msg : $("#message").val(), 
+						store: '${sessionScope.storeInfo}'}
+		    	sendMessage(msg);
 		    },
 		    error:function(xhr, status, message) { 
 		        alert(" status: "+status+" er:"+message);

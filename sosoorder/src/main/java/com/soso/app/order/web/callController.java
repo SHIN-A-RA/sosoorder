@@ -47,8 +47,11 @@ public class callController {
 	@RequestMapping(value="/callInsert", method=RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	public CallVO callInsert(@RequestBody CallVO callVO, HttpSession session) {
-		callService.callInsert(callVO);
-		
+		try {
+			callService.callInsert(callVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return callVO;
 	}
 	
