@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.soso.app.admin.service.AdminVO;
 import com.soso.app.member.service.MemberService;
 import com.soso.app.member.service.MemberVO;
 
@@ -48,17 +49,17 @@ public class MemberController {
 		String path = null;
 		MemberVO dbVO = memberService.getMember(vo);
 		if (dbVO == null ) {
-	         model.addAttribute("errorMsg", "id오류");
+	         model.addAttribute("errorMsg", "아아디가 잘못되었습니다.");
 	          path = "member/memberLoginForm";
 	         
 	      } else if (!vo.getPwd().equals(dbVO.getPwd())) {
-	    	  model.addAttribute("errorMsg", "pwd오류");
+	    	  model.addAttribute("errorMsg", "패스워드가 잘못되었습니다.");
 	    	  path = "member/memberLoginForm";
 
 	      } else {
 	         session.setAttribute("phone", vo.getPhone());
-	         
-	         path = "redirect:/";
+				 model.addAttribute("loginMsg", "로그인 되었습니다."); 
+	         path = "redirect:/homeSample";
 	      }
 		return path;
 	}

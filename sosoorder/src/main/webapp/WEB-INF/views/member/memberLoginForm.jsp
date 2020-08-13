@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
 <script src="resources/admin/scss/addcss/loginToggle.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
@@ -7,7 +8,15 @@
 .toggleBG{background: #CCCCCC; width: 70px; height: 30px; border: 1px solid #CCCCCC; border-radius: 15px;}
 .toggleFG{background: #FFFFFF; width: 30px; height: 30px; border: none; border-radius: 15px; position: relative; left: 0px;}	
 </style>
+
+
+<c:if test="${not empty errorMsg}">
+	<script>
+	alert('${errorMsg}');
+	</script>
+</c:if>
 <script>
+
 $(function(){
 	
 	if( '${param.msgCheck}' ){
@@ -30,7 +39,6 @@ function memberValidCheck() {
 
 	
 	frm.submit();
-	/* alert((window.document.frm.phone.value).slice(-4)+"님 로그인 되었습니다"); */
 }
 
 function adminValidCheck() {
