@@ -67,6 +67,13 @@ public class StorePopupController {
 			return "redirect:storePopupListForm";
 		}
 		
+		//좌석삭제
+		@RequestMapping("seatUpdate")
+		public String seatUpdate(SeatVO seatVO) {
+			seatService.seatUpdate(seatVO);
+			return "redirect:storePopupListForm";
+		}
+		
 	@RequestMapping("storePopupList")
 	@ResponseBody
 	public List<StorePopupVO> storePopupList(Model model, StorePopupVO storePopupVO, HttpSession session) {

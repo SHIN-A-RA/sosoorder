@@ -10,9 +10,9 @@
 		SELECT *
 		FROM seat
 		<where>
-			userCheck = '1'
+			
 			<if test="storeId != null">
-				and storeId = #{storeId}
+			 storeId = #{storeId}
 			</if>
 		</where>
 		order by seatNum
@@ -59,8 +59,8 @@
 	<update id="seatUpdate" parameterType="seatVO">
 		UPDATE seat
 		set
-		seatNum=#{seatNum},
-		seat=#{seat}
+		userCheck =
+		'1'
 		where seatNum= #{seatNum}
 	</update>
 	<!--좌석 삭제 -->

@@ -29,8 +29,13 @@
 		});
 
 		//삭제
-		$('#seatDelete').on('click', function seatDelete() {
-			location.href = 'seatDelete?seatNum=' + $("#seatNum").val()
+		$('.seatDelete').on('click', function() {
+			location.href = 'seatDelete?seatNum=' + $(this).find(".seatNum").val()
+		});
+		
+		//수정
+		$('.seatUpdate').on('click', function() {
+			location.href = 'seatUpdate?seatNum=' + $(this).find(".seatNum").val()
 		});
 	});
 </script>
@@ -39,13 +44,13 @@
 	<div class="col">
 		<div id="seatList">
 			<table id="table_idd" class="display tb_style"
-				style="width: 70%">
+				style="width: 95%">
 				<thead align="center">
 					<tr>
 						<th style="display: none">seatNum</th>
 						<th>테이블 번호</th>
-						<th>빈좌석으로 변경</th>
-						<th>사용좌석으로 변경</th>
+						<th>사용 유/무</th>
+						<th>사용 변경</th>
 					</tr>
 				</thead>
 				<tbody align="center">
@@ -53,8 +58,25 @@
 						<tr>
 							<td style="display: none">${List.seatNum}</td>
 							<td>${List.seat}</td>
-							<td><input type="button" class="btn btn-outline-danger" id="seatDelete" value="클릭"></td>
-							<td><input type="button" class="btn btn-outline-primary" value="클릭"></td>
+							<c:choose>
+							<c:when test="${List.userCheck==1}">
+							<td>사용중</td>
+							</c:when>
+							<c:otherwise>
+							<td>사용안함</td>
+							</c:otherwise>
+							</c:choose>
+							
+							<c:choose>
+							<c:when test="${List.userCheck==1}">
+							<td><div class="btn btn-outline-danger seatDelete" ><input type="hidden" value="${List.seatNum}" class="seatNum">사용 안함</div></td>
+							</c:when>
+							<c:otherwise>
+							<td><div class="btn btn-outline-danger seatUpdate" ><input type="hidden" value="${List.seatNum}" class="seatNum">좌석 배정</div></td>
+							</c:otherwise>
+							</c:choose>
+							
+							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -94,17 +116,16 @@
 					<br> <br>
 					<div align="center">
 						<p></p>
-						<span> <span> <input type="hidden" id="seatNum"
+						<span> <span> <input type="hidden" class="seatNum"
 								name="seatNum" placeholder="seatNum"></span> 
 								<input type="text"
 							id="seat" name="seat" placeholder="테이블 번호"></span> 
 							<span>
 							<input
 							type="submit" class="btn btn-success" value="새 테이블 등록"/></span>
+							
 							<br><br>
 							<p><h5><-등록하고자 하는 테이블 번호를 입력하고 등록 버튼을 눌러주세요-></h5></p>
-							
-							
 							
 							
 							

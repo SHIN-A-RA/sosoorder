@@ -11,6 +11,7 @@ public class SeatVO {
 	String seatNum;
 	String storeId;
 	String seat;
+	String userCheck;
 	
 
 }
