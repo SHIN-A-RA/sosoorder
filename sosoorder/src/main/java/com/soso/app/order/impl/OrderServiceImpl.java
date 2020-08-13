@@ -80,6 +80,11 @@ public class OrderServiceImpl implements OrderService{
 		return orderMapper.getAddr(orderCptVO);
 	}
 
+	@Override
+	public List<OrderCptVO> getAccount(OrderCptVO orderCptVO) {
+		return orderMapper.getAccount(orderCptVO);
+	}
+
 
 	
 }

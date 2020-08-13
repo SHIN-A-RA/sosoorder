@@ -74,12 +74,12 @@
 		// 서버로부터 메시지를 받았을 때
 		function onMessage(msg) {
 			
-			 msg = JSON.parse(msg.data);
+			 msg = JSON.parse(msg.data);  //messageVO
 			if(msg.cmd == 'callInsert') {
 				callList();	
 			} else if(msg.cmd == 'orderInsert'){
-				order = JSON.parse(msg.msg);
-				orderInsert(order);
+				orderMap = JSON.parse(msg.msg);
+				orderInsert(orderMap);
 			} else if(msg.cmd == 'startCook'){
 				$("#cook").html(msg.msg)
 			} else if(msg.cmd == 'endCook'){

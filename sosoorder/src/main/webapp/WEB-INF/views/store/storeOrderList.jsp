@@ -37,7 +37,7 @@
 	 				</c:if>
 	 			</div>
 	 	   <!-- 주문메뉴부분 -->			
-	 			<div style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
+	 			<div class="menuList" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
 	 				<div style="padding: 15px 60px 40px 60px;">
 		 				<div style="float: left; box-sizing: border-box;">
 		 				 	<h5>메뉴</h5>
@@ -47,13 +47,9 @@
 		 				</div>
 	 				</div> 				
 	 	</c:if>		
-	 				<div class="row">
-	 					<div class="col" style="box-sizing: border-box;">
-		 					<p>${list.menuName}</p>
-		 				</div>
-		 				<div class="col" style="box-sizing: border-box;">
-		 					<p>${list.orderCount}</p>	 					
-		 				</div>
+	 				<div class="row">	 					
+		 					<span class="menuName">${list.menuName}</span>		 				
+		 					<span class="orderCount">${list.orderCount}</span>	
 					</div>	
 		 				
 		<c:if test="${fn:length(orderList) == st.count}">	 		 				
@@ -73,17 +69,19 @@
   </c:forEach>
   </div>
   
-	
+  	
 </div>
 <!--주문탬플릿  -->
+ <c:forEach items="${orderList}" var="list" varStatus="st">
 <div id="orderTem" style=" display:none;">
  			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
 	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
-	 				<p>테이블 번호 or</p>
-	 				<p>주소 : 대구광역시~ </p>
-	 				<p style="float: right; color:red; ">※현금결제※</p>
+	 					<p class="payNum"> </p>
+	 					<p class="seat"> </p>
+	 					<p class="addr"> </p>
+	 				<p class="payCheck"> </p>
 	 			</div>
-	 			<div style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
+	 			<div class="menuList" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
 	 				<div style="padding: 15px 60px 40px 60px;">
 		 				<div style="float: left; box-sizing: border-box;">
 		 				 	<h5>메뉴</h5>
@@ -92,22 +90,50 @@
 		 					<h5>수량</h5>
 		 				</div>
 	 				</div>
-		 				<div style="float: left; box-sizing: border-box;">
-		 					<p>떡볶이</p>
-		 				</div>
-		 				<div style="float: right; box-sizing: border-box;">
-		 					<p>2</p>	 					
-		 				</div>
+	 	
 	 			</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
-	 				<button style="background:#ff5722; padding: 10px;">조리시작</button>
+	 				<button onclick="orderUpdate(${payNum},this)" style="background:#ff5722; padding: 10px;">조리시작</button>
 	 			</div>
  			</div>
  	</div>	
+ </c:forEach>
 <script>
 
-function orderInsert(){
-	$(".orderwrap").prepend($("#orderTem").children().first().clone());
+function orderInsert(orderMap){
+	
+	var empty = $("#orderTem").children().first().clone();
+	$(".orderwrap").prepend(empty);
+	
+	for(i=0; i<orderMap.orderList.length; i++){
+		var menu =	'<div class="row">'+					
+					'<span class="menuName" style="display:inline-block; width:100px;">'+ orderMap.orderList[i].menuName +'</span>'+		 				
+					'<span class="orderCount" style="display:inline-block; width:100px;">'+ orderMap.orderList[i].orderCount +'</span>'	
+		+'</div>';
+	
+		//메뉴리스트 뿌리기
+		empty.find(".menuList").append(menu);	
+		
+	}
+	
+	//내용넣기
+
+
+	empty.find(".payNum").text("주문번호" + orderMap.payInfo.payNum);
+	 if(orderMap.payInfo.seat > 0){
+			empty.find(".seat").text("Table:"+orderMap.payInfo.seat);		 
+		 } else if(orderMap.payInfo.addr != null){
+			empty.find(".addr").text("주소:"+orderMap.payInfo.addr);
+		 } 
+	 
+	 if(orderMap.payInfo.payCheck == 0){
+			empty.find(".payCheck").text("계좌이체"); 
+		 } else if(orderMap.payInfo.payCheck == 1) {
+			 empty.find(".payCheck").text("카드결제"); 
+		 } else if(orderMap.payInfo.payCheck == 2) {
+			 empty.find(".payCheck").text("현금결제"); 
+		 }
+ 
 	
 }
 
