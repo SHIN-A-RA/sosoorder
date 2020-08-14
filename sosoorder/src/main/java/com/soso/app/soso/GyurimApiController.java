@@ -19,7 +19,7 @@ public class GyurimApiController {
 
 	// 시군구가져오는.
 	
-	@RequestMapping("getSiGoongooApi")
+	@RequestMapping(value="getSiGoongooApi" , produces = "application/text; charset=utf8")
 	public void getSiGoongooApi(HttpServletResponse response, @RequestParam String name) throws IOException {
 	
 		StringBuffer result = new StringBuffer();
