@@ -9,7 +9,7 @@
 정규식
 사업자 번호 데이터 장규식  -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function(){
 	var formInputs = $('input[type="text"],input[type="password"]');
 	formInputs.focus(function() {
@@ -49,7 +49,7 @@ function passwordChack() {
         }
     }
 }
-</script>
+</script> -->
 <head>
 
 <style>

@@ -25,7 +25,7 @@
 <script
 	src="//cdn.jsdelivr.net/gh/stove99/jquery-modal-sample@v1.4/js/modal.js"></script>
 
-<script>
+<!-- <script>
 	//필수 입력 체크, 정규식
 	function validCheck() {
 
@@ -129,7 +129,7 @@
 		});
 	});
 </script>
-
+ -->
 
 <script>
 	/* 

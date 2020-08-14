@@ -4,7 +4,7 @@
 
 
 <script src="resources/admin/scss/addcss/login-signUp.js"></script>
-<script src="resources/admin/scss/addcss/memberInsertValued.js"></script>
+<script src="resources/admin/scss/addcss/memberInsertValued.js"></script> 
 <link rel="stylesheet" type="text/css" href="resources/admin/scss/addcss/login-signUp.css"/>
 <script>
  function checkPwd(){
@@ -20,7 +20,7 @@
 	   
 	  }	  
 	 }	
- $(document).on("keyup", ".phone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); });
+/*  $(document).on("keyup", ".phone", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); }); */
 </script>	 
 <script>
 /* 휴대폰 번호 중복체크 */

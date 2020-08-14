@@ -220,4 +220,7 @@ SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
 		 WHERE DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
 		
 			And memberNum = (SELECT memberNum FROM member WHERE phone = '123')
+			
+			alter table admin drop column storemenu
+
     

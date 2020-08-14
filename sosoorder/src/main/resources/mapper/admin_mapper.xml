@@ -27,16 +27,14 @@
          storeNum,
          storeAddr, 
          storeName, 
-         accountNum,
-         storeMenu)
+         accountNum)
       VALUES
          (#{storeId},
          #{storePwd},
-         #{storeNum},
+         #{storeNum},   
          #{storeAddr},
          #{storeName},
-         #{accountNum},
-         #{storeMenu})
+         #{accountNum})
    </insert>
 
 <select id="idCheck" parameterType="String" resultType="int">
