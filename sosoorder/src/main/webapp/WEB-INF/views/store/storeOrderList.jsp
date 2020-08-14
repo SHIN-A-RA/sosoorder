@@ -96,6 +96,8 @@
 	 			</div>
  			</div>
  	</div>	
+ 	<jsp:include page="/WEB-INF/views/order/callList.jsp"/>
+
 <script>
 
 function orderInsert(orderMap){

@@ -304,3 +304,12 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
     font-size: 0.8em; border: 1.5px solid #578ee0;
     padding: 5px 9px;border-radius: 6px;}
 }
+
+#callList{
+	position: absolute;
+    right: 0;
+    top: 59px;
+    height: 100%;
+    width: 20%;
+    background: #fff;
+}

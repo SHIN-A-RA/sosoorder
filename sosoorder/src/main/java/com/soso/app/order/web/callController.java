@@ -60,7 +60,7 @@ public class callController {
 		String storeId = (String)session.getAttribute("storeId");
 		callVO.setStoreId(storeId);
 		model.addAttribute("callListget", callService.callGet(callVO));
-		return "order/callList";
+		return "empty/order/callList";
 	}
 	
 	@RequestMapping(value="/callList", method=RequestMethod.GET, consumes="application/json")

@@ -12,6 +12,7 @@
 .callInsert_wrap #messageArea ul li:nth-child(2){float:right; }
 .callInsert_wrap #messageArea ul li a{}
 </style>
+<div id="callList">
 	 <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
       <h1 class="h3 mb-0 text-gray-800">호출</h1>
@@ -21,7 +22,7 @@
 		
 	</div>
 </div>
-
+</div>
 <script type="text/javascript">
 	
 	$(function(){
