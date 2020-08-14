@@ -47,7 +47,7 @@ public class GyurimApiController {
 			e.printStackTrace();
 		}
 		result.append("</xmp>");
-		response.setContentType("application/xml;charset=UTF-8");
+		response.setContentType("text/xml;charset=UTF-8");
 		response.getWriter().print(result.toString());
 	}
 	
@@ -83,7 +83,7 @@ public class GyurimApiController {
 			e.printStackTrace();
 		}
 		result.append("</xmp>");
-		response.setContentType("application/xml;charset=UTF-8");
+		response.setContentType("text/xml;charset=UTF-8");
 		response.getWriter().print(result.toString());
 	}
 }
