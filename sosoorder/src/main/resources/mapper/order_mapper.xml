@@ -183,6 +183,5 @@
 		storeId = #{storeId}
 		</where>
 	</select>
-	
 
 </mapper>

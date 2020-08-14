@@ -19,7 +19,7 @@ public class GyurimApiController {
 
 	// 시군구가져오는.
 	
-	@RequestMapping(value="getSiGoongooApi" , produces = "application/json; charset=utf8")
+	@RequestMapping(value="getSiGoongooApi" , produces = "text/xml;charset=UTF-8")
 	public void getSiGoongooApi(HttpServletResponse response, @RequestParam String name) throws IOException {
 	
 		StringBuffer result = new StringBuffer();
@@ -55,7 +55,7 @@ public class GyurimApiController {
 
 	// 업종,상호명, 주소 가져오는.
 	
-	@RequestMapping(value="getDataApi", produces = "application/json; charset=utf8")
+	@RequestMapping(value="getDataApi", produces = "text/xml;charset=UTF-8")
 	public void getDataApi(HttpServletResponse response, @RequestParam String name) throws IOException {
 	
 		StringBuffer result = new StringBuffer();
