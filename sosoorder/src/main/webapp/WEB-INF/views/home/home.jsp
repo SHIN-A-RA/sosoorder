@@ -298,17 +298,27 @@ myApp.controller("myAppCtrl", function($scope){
 			fade: false,
 			responsive: [ // 반응형 웹 구현 옵션
 				{  
-					breakpoint: 960, //화면 사이즈 960px
+					breakpoint: 1660, 
 					settings: {
-						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
 						slidesToShow:3 
 					} 
 				},
 				{ 
-					breakpoint: 768, //화면 사이즈 768px
+					breakpoint: 1028,
 					settings: {	
-						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
 						slidesToShow:2 
+					} 
+				},
+				{ 
+					breakpoint: 800,
+					settings: {	
+						slidesToShow:1 
+					} 
+				},
+				{ 
+					breakpoint: 100,
+					settings: {	
+						slidesToShow:1 
 					} 
 				}
 			]

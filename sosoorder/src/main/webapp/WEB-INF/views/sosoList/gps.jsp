@@ -16,14 +16,23 @@
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+	 <!-- Page Heading -->
+   <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
+      <h1 class="h3 mb-0 text-gray-800">쿠폰관리</h1>
+    </div>
+    
 	<div class ="all" style="width:100%; overflow:hidden;"> 
-	<form action="couponInsert" method="post"> 
-	<div class="test" style="float:left; width:48%;">
-	</div>
-	</form>
-	<div class="aa" style="float:left; width:48%;"></div>
-    <input type="hidden" class="p_latitude" name="latitude" value="">
-    <input type="hidden" class="p_longitude" name="longitude" value="">
+		<div class="col-xl-6 fr">
+			<div id="map" class="b"></div>
+			<div class="tbWrap mt11"></div>	
+		</div>
+	
+		<form action="couponInsert" class="col-xl-6 fl" method="post"> 
+			<div class="test"></div>
+		</form>
+		<div class="aa col-xl-6 fl"></div>
+   		<input type="hidden" class="p_latitude" name="latitude" value="">
+    	<input type="hidden" class="p_longitude" name="longitude" value="">
     
     <script>
     var gmap;
@@ -77,13 +86,12 @@
 	function locationResult(data){
 		 $.each(data.data,function(idx,item){
 		 	$(".test")
-			.append($("<h3>").html(item.bizesNm))
+			.append($("<h3>").addClass('couponBtn').addClass(item.bizesNm).html(item.bizesNm))
 		 	.append($("<div>").addClass('locDiv')
 		 					  .append($('<p>').text(item.rdnmAdr))
 							  .append($('<p>').text(item.indsSclsNm))
 							  .append($("<input type='hidden'>").addClass("lat").val(item.lat))
 							  .append($("<input type='hidden'>").addClass("lon").val(item.lon))
-							  .append($("<button>").addClass('btn btn-primary couponBtn').addClass(item.bizesNm).html('쿠폰보기').css('display', 'none').attr("type","button"))
 		 		) 
 		 		 
 		});//each
@@ -121,7 +129,8 @@
               contentType:'application/json;charset=utf-8',
 		      dataType:'json',
 		      error:function(xhr,status,msg){
-				alert("상태값 :" + status + " Http에러메시지 :"+msg);
+				/* alert("상태값 :" + status + " Http에러메시지 :"+msg); */
+				sosoResult();
 			},
 			success:sosoResult
 	     });
@@ -134,25 +143,22 @@
     function sosoResult(data) {
 		$(".tbWrap").empty();
 		$.each(data,function(idx,item){
-			$('<table>').css('width', '30%').css('margin', 'auto')
+			$('<table>').addClass('tb_style_jw')
 						.html(
-						'<tr style="border:1px solid #333">' +
-							'<th style="background-color: #cc87d8; width: 30%; text-align: center;">' +
-								'<p style="color: white">' + item.discount + '원</p>'+
-								'<p style="color: white">할인쿠폰</p>'+
+						'<tr>' +
+							'<th>' +
+								'<p><span>' + item.discount +'</span>원 할인쿠폰</p>'+
+								'<p>' + item.serialNum  + '</p>'+
 							'</th>'+
-							'<td style="padding: 10px 10px 10px 10px;">'+
-								 '<p>' + item.expStart + '</p>'+
-								'<p>' + item.expEnd + '까지 </p>'+
-								 '<p> 쿠폰번호:' + item.serialNum + '</p>'+
+							'<td>'+
+								 '<p> 쿠폰기한 :' + item.expStart + ' ~ '+ item.expEnd + '</p>'+
 								'<p>' + item.discount + '원 할인</p>'+
 							'</td>'+
-							'<td style="padding: 10px 10px 10px 10px;">'+
+							'<td>'+
 							 '<button class ="btnInsert"  class="button" name="' + item.serialNum + '">쿠폰저장</button>' +
 						'</td>'+
 						'</tr>'+
-						'<tr style="height: 20px;">'+
-						'</tr>'
+						'<tr style="height: 20px;"></tr>'
 							
 			).appendTo('.tbWrap');
 			
@@ -182,7 +188,7 @@
 		});//등록 버튼 클릭
 	}//userInsert
 
-	$(function(){
+/* 	$(function(){
 	       $('.test').on('click','.couponBtn', function(){
 	    	   var storeId = $(this).attr('name');
 	         $.ajax({
@@ -192,12 +198,12 @@
 	              contentType:'application/json;charset=utf-8',
 			      dataType:'json',
 			      error:function(xhr,status,msg){
-					alert("상태값 :" + status + " Http에러메시지 :"+msg);
+					alert("상태값 :" + status + " Http에러메시지 :"+msg); 
 				},
 				success:sosoResult
 		     });
 	     });
-	   });
+	   }); */
 	
     /*-----------------------------
 	 	지도 그리기 
@@ -253,7 +259,4 @@
 	}
 	</script>
 	
-
-	<div id="map" style="width: 48%; float:right;" class="b"></div>
-	<div class="tbWrap"></div>
 	</div>

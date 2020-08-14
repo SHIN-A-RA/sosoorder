@@ -1,4 +1,19 @@
 @charset "UTF-8";
+/* .cookWrap{
+	position: absolute;
+    width: 300px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background-color:#fff;
+    border-radius:10px;
+    border:2px solid #333;
+}
+.cookWrap .ex{width:100%; text-align:right; display: inline-block; padding:13px 18px;}
+.cookWrap .ex i{cursor: pointer; font-size:30px}
+.cookWrap #cook{} */
 /*head*/
 .gd_bg1 {
   background-color: red; /* For browsers that do not support gradients */
@@ -22,6 +37,8 @@
     
 .gb_jb a.logout{padding: 5px 34px; background: #fff; border-radius: 50px; margin-top: 10px;
 display: inline-block; border: 1px solid #d2d2d2;}
+
+
 /* home */
 .main_storeList{width:80%; margin:0 auto;}
 .main_storeList h1{text-align: center; padding: 80px; font-weight: 900;}
@@ -39,6 +56,7 @@ div:hover, div:hover code, div:focus, div:focus code {
 }
 .none{display: none !important; }
 .mb11{margin-bottom: 11px;}
+.mt11{margin-top: 11px;}
 .pd30{padding : 30px;}
 .pd15{padding : 15px;}
 .pd_b0{padding-bottom:0;}
@@ -268,5 +286,21 @@ font-size: 32px;
 
 
 
+table.tb_style_jw{width:100%;}
+table.tb_style_jw tr:nth-child(2n-1){border:1px solid #578ee0}
+table.tb_style_jw tr:nth-child(2n-1) th{background-color: #578ee0; width: 30%; text-align: center; padding: 40px 0;}
+table.tb_style_jw tr:nth-child(2n-1) th p{color: white; margin:0; font-weight:333;}
+table.tb_style_jw tr:nth-child(2n-1) th p span{font-size: 1.3em; font-weight:bold;}
+table.tb_style_jw tr:nth-child(2n-1) td{padding: 23px;}
+table.tb_style_jw tr:nth-child(2n-1) td p{margin:0;}
+table.tb_style_jw tr:nth-child(2n-1) td:nth-child(2){width:50%;}
+table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3){padding:0; text-align:center;}
+table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
+    font-size: 0.9em; font-weight: bold; border: 2px solid #578ee0;
+    padding: 6px 11px;border-radius: 6px;color: #578ee0;}
 
-
+@media all and (max-width:700px) {
+	table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{
+    font-size: 0.8em; border: 1.5px solid #578ee0;
+    padding: 5px 9px;border-radius: 6px;}
+}

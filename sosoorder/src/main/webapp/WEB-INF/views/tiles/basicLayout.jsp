@@ -111,13 +111,11 @@
       <div id="content">
 		<!-- top -->
 		<header id="hd_wrap" class="over hd-up">
-
+			
 			<div id="hd_gnb" class="gnb_pc">
 				<div id="gnb_menu" class="hd_gnb_menu">
 					<c:if test="${sessionScope.storeId != null}"><span></span></c:if>	
 				</div>
-				
-				
 				<tiles:insertAttribute name="menu"/>
 				<script>
 				function removeSession(){
@@ -137,9 +135,6 @@
 	              		<c:if test="${empty sessionScope.phone && empty sessionScope.storeId}">
 							<span class="mr-2 d-none d-lg-inline" style="font-size: 21px;" onclick="location.href='/sosoroder/memberLoginForm'">로그인</span>
 	              		</c:if>
-	<div id="cook">
-	 ${payNum}
-	</div>              		
 		               	<c:if test="${not empty sessionScope.phone}">
 			               	  <script>
 				               	$(function(){
@@ -167,10 +162,7 @@
             <c:if test="${not empty sessionScope.phone || not empty sessionScope.storeId}">		
        		<div class="gb_jb">
   				<div class="gb_tb gb_ub"></div>
-  				<c:if test="${not empty sessionScope.phone}">
-   					<input type="button" class="myUpdate" onclick='memberUpdateForm()' value="정보수정"/>
-   				</c:if>
-   				<input type="button" class="logout" onclick='removeSession()' value="Logout"/>
+  				<input type="button" class="logout" onclick='removeSession()' value="Logout"/>
       		</div>
       		</c:if>
       		<script>
@@ -200,20 +192,14 @@
 		
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div> -->
-          
-          
-
-
-
-       <!-- 컨텐츠 영역 -->
-       	<tiles:insertAttribute name="content"/>
-       <!-- 컨텐츠 영역 -->
+			<div class="cookWrap">
+				<!-- <span class="ex"><i class="fa fa-times-circle" aria-hidden="true"></i></span> -->
+				<div id="cook">${payNum}</div>
+			</div> 	
+			
+	       <!-- 컨텐츠 영역 -->
+	       	<tiles:insertAttribute name="content"/>
+	       <!-- 컨텐츠 영역 -->
        
         </div>
         <!-- /.container-fluid -->
@@ -238,12 +224,12 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+<!--   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
+ -->
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -260,7 +246,7 @@
       </div>
     </div>
   </div>
-
+ -->
  
 </body>
 

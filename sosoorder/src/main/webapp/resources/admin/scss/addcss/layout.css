@@ -6,7 +6,7 @@
 #footerWrap {position:relative; width:100%;}
 #wrapper{min-height:100%;}
 #wrapper #content-wrapper{min-height:100%;}
-.container-fluid{/* padding-top: 1.5rem; */ width:80%;}
+.container-fluid{/* padding-top: 1.5rem; */ width:80% !important;padding-bottom: 2%; box-sizing: border-box; }
 
 
 /*Header*/
@@ -69,7 +69,7 @@ display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transiti
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover span,
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover a{color: #de1515;}
 
-#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a{font-size: 1.1em;}
+#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a{font-size: 1.1em; color:#222 !important}
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1 a i,
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover span,
 #hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1.active a{
@@ -131,6 +131,8 @@ display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transiti
 	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span {padding: 16px 13.5px;}
 	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span i {display:none;}
 	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap {}
+	
+	
 }
 
 @media all and (max-width:550px) {
