@@ -57,8 +57,7 @@ public class OrderController {
 		orderCptVO.setStoreId(storeId);
 
 		if (phone == null) {
-			orderCptVO.setPhone("null");
-			orderCptVO.setMemberNum(0);
+			orderCptVO.setPhone("0");
 
 		} else {
 			orderCptVO.setPhone(phone);

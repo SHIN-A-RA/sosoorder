@@ -22,6 +22,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 	
 	document.form.roadFullAddr.value = roadFullAddr;
+	document.frm_pay.addr.value = roadFullAddr;
 }
 function Show() {
 	if (delivery.style.display == "") {
@@ -155,7 +156,7 @@ function removeChar(event) {
    <!-- 컨텐츠영역 -->
 
    <div class="div-tt">
-      <h2>주문/결제</h2> 
+      <h2>주문/결제 </h2>  
       <!-- 가게 계좌번호 받아오기 -->
       <c:forEach items="${admin}" var="admin">
       	<input id="account" name="account" type="hidden"  value="${admin.accountNum}"> 
@@ -216,8 +217,13 @@ function removeChar(event) {
     </th>
 	         <td class="basic_tb_td">
 	         <c:forEach var="list" items="${addr}">
-	              <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value="${list.addr}" ><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
-	        	</c:forEach>
+		         <c:if test="${sessionScope.phone != null}">	         
+		         	 <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value="${list.addr}"><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
+		         </c:if>
+	         </c:forEach>
+	         <c:if test="${sessionScope.phone == null}">	         
+	         	 <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value=""><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
+	         </c:if>
 	         </td>
 </tr>                  
 <tr>
@@ -433,19 +439,7 @@ $(function(){
 	});
 });
 
-// 리드온리 인풋 값 받기
-$(function() {
-    var originalVal = $.fn.val;
-    $.fn.val = function (value) {
-        var res = originalVal.apply(this, arguments);
- 
-        if (this.is('input:text') && arguments.length >= 1) {
-            // this is input type=text setter
-            this.trigger("input");
-        } 
-        return res;
-    };
-});
+
 	
 /* 홀이냐 배달이냐 하나만*/	
 $(function(){
@@ -456,26 +450,13 @@ $(function(){
 				$('#selectSeat').attr('disabled', 'true');
 				 alert("배달 주문을 하시겠습니까?");
    				var addr = $('#roadFullAddr').val();
-				$('.addr').val(addr); 
+				$('.addr').val(addr); 			
 				var cellphone = $('#cellphone').val();
-				$('.cellphone').val(cellphone); 
-										
-			    var $input = $("#roadFullAddr"); // readonly inputBox  
-			        $("#roadFullAddr").on('input', function() {
-			            // Do this when value changes
-			        	$('.addr').val($(this).val());
-			        	console.log("Input text changed!" + $(this).val());
-			        });
-				/* 
-				$('#roadFullAddr').on("textchange",function(){
-						$('.addr').val($(this).val());
-					});
-					 */
-					 
-					 
-					$('#cellphone').on("change",function(){
-						$('.cellphone').val($(this).val());
-					});
+				$('.cellphone').val(cellphone); 					
+				 //변경된 휴대폰 번호 넘기기
+				$('#cellphone').on("change",function(){
+					$('.cellphone').val($(this).val());
+				});
 				
 	        }else{
 	        	$('#selectSeat').val($(".empty").val());
