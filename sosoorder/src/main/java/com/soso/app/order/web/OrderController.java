@@ -46,7 +46,6 @@ public class OrderController {
 	@Autowired
 	MemberService memberService;
 
-		
 	// by혜원, 주문페이지
 	@RequestMapping("/orderInsert")
 	public String orderInsert(Model model, OrderCptVO orderCptVO, HttpSession session) {
@@ -82,7 +81,8 @@ public class OrderController {
 	}
 
 	@RequestMapping("payInsert")
-	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session,HttpServletResponse response) throws IOException {
+	public String payInsert(Model model, OrderCptVO orderCptVO, HttpSession session, HttpServletResponse response)
+			throws IOException {
 
 		String storeId = (String) session.getAttribute("storeInfo");
 		String phone = (String) session.getAttribute("phone");
@@ -94,9 +94,8 @@ public class OrderController {
 		} else {
 			orderCptVO.setPhone(phone);
 		}
-		orderService.payInsert(orderCptVO);		
-		session.setAttribute("payNum",orderCptVO.getPayNum());
-
+		orderService.payInsert(orderCptVO);
+		session.setAttribute("payNum", orderCptVO.getPayNum());
 
 		// 페이먼트 프로시저
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -114,53 +113,56 @@ public class OrderController {
 
 		String pointUse = orderCptVO.getPointUse();
 		map.put("pointUse", pointUse);
-		
+
 		String addr = orderCptVO.getAddr();
 		map.put("addr", addr);
-		
+
 		String cellphone = orderCptVO.getCellPhone();
 		map.put("cellphone", cellphone);
-		
-		//mybatis select로 paynum 받기
+
+		// mybatis select로 paynum 받기
 		map.put("payNum", orderCptVO.getPayNum());
 		orderService.paymentProc(map);
-		
-		//주문현황에서 받을 리스트 list에 담아서 map에 담기
+
+		// 주문현황에서 받을 리스트 list에 담아서 map에 담기
 		List orderList = orderService.getOrder(orderCptVO);
 		Map<String, Object> orderMap = new HashMap<String, Object>();
-		orderMap.put("payInfo",orderCptVO);
-		orderMap.put("orderList",orderList);
+		orderMap.put("payInfo", orderCptVO);
+		orderMap.put("orderList", orderList);
 
-		//json -> string ->json
-		ObjectMapper objectMapper = new ObjectMapper();	
+		// json -> string ->json
+		ObjectMapper objectMapper = new ObjectMapper();
 		MessageVO msg = new MessageVO();
 		msg.setCmd("orderInsert");
-		//주문정보 string에 담기
-	    String msgJson = objectMapper.writeValueAsString(orderMap);
-	    //msg의 msg에 주문내역 담기
-	    msg.setMsg(msgJson);
-	    //소켓으로 storeId찾아서 sendMessage 하기
-	    if(EchoHandler.map.get(storeId) != null) { 	
-	    	EchoHandler.map.get(storeId).sendMessage(new TextMessage( objectMapper.writeValueAsString(msg) ));
-	    	path = "redirect:orderConfirm";
-	    } else if(EchoHandler.map.get(storeId) == null ) {
-	    	PrintWriter out= response.getWriter();
-	    	response.setContentType("text/html; charset=utf-8");
-	    	out.println("<script language='javascript'>");
-	    	out.println("alert('현재 가게가 오픈하지 않았습니다.');");
-	    	out.println("</script>");  
-	    	out.flush();
-	    	path = "redirect:home";
-	    }
-		return path;
-			
+		// 주문정보 string에 담기
+		String msgJson = objectMapper.writeValueAsString(orderMap);
+		// msg의 msg에 주문내역 담기
+		msg.setMsg(msgJson);
+		// 소켓으로 storeId찾아서 sendMessage 하기
+		if (EchoHandler.map.get(storeId) != null) {
+			EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
+			path = "redirect:orderConfirm";
+		} else if (EchoHandler.map.get(storeId) == null) {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script language='javascript'>");
+			out.println("alert('현재 가게가 오픈하지 않았습니다.');");
+			out.println("</script>");
+			out.flush();
+			path = "redirect:home";
 		}
-	
+		return path;
+
+	}
 
 	@RequestMapping("/orderConfirm")
-	public String orderConfirm(Model model, OrderCptVO orderCptVO,HttpServletRequest request, HttpSession session) {
+	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
 		
-		/* model.addAttribute("admin", adminService.getAdmin(adminVO)); */
+		 String payNum = (String) session.getAttribute("payNum");
+		 orderCptVO.setPayNum(payNum); model.addAttribute("oderList",
+		 orderService.getOrder(orderCptVO));
+		 
+
 		return "order/orderConfirm";
 
 	}
@@ -192,9 +194,9 @@ public class OrderController {
 
 		} else {
 			session.setAttribute("phone", memberVO.getPhone());
-		    path= "redirect:showPoint";
-		    orderService.insertPo(orderCptVO);
-		    model.addAttribute("pList", orderService.showPoint(orderCptVO));
+			path = "redirect:showPoint";
+			orderService.insertPo(orderCptVO);
+			model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		}
 		return path;
 	}
@@ -207,10 +209,9 @@ public class OrderController {
 		orderCptVO.setStoreId(storeId);
 
 		orderService.insertMem(memberVO, orderCptVO);
-		
+
 		session.setAttribute("phone", memberVO.getPhone());
-		
-		
+
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		return "redirect:showPoint";
 	}

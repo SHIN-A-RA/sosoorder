@@ -214,4 +214,10 @@ SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
 			select sum(point*pointCheck) "point" from point where memberNum ='1'
 			
 			select accountNum from admin where storeId = 'test'
+			
+			select addr
+ from delivery 
+		 WHERE DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
+		
+			And memberNum = (SELECT memberNum FROM member WHERE phone = '123')
     

@@ -149,21 +149,23 @@ function removeChar(event) {
 			e.preventDefault();
 			wrapWindowByMask();
 		});
-	});
-	
-	
+	});	
 </script>
-   <!-- 컨텐츠영역 -->
 
-   <div class="div-tt">
+<!-- 컨텐츠영역 -->
+<div class="row">
+   <div class="col-xl-12 div-tt">
       <h2>주문/결제 </h2>  
       <!-- 가게 계좌번호 받아오기 -->
       <c:forEach items="${admin}" var="admin">
       	<input id="account" name="account" type="hidden"  value="${admin.accountNum}"> 
       </c:forEach>
    </div>
-  
-    <div class="basic">
+ </div>
+ 
+<!-- 좌석 셀렉트 박스 -->
+ <div calss="row">
+    <div class="col-xl-4 basic">
     	<span>좌석번호
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">
     				<c:if test="${param.seat != 0 }">
@@ -180,8 +182,11 @@ function removeChar(event) {
    				 </select>
     	</span>
     </div>
-  <div class="basic">  
-		<table  class="basic_tb">		
+ </div>
+    
+ <!-- 주문메뉴목록 -->
+ <div class="row basic">  
+		<table  class="col-xl-12 basic_tb">		
 			<tr>
 			     <th class="basic_tb_th_up">주문메뉴</th>
 			     <th class="basic_tb_th_up">수량</th>
@@ -189,14 +194,14 @@ function removeChar(event) {
 			</tr>	
 		 <c:forEach items="${oderList}" var="order">		
 			<tr>
-			  <td class="basic_tb_tdd">${order.menuName}</td>
-			  <td class="basic_tb_tdd"> ${order.orderCount}</td> 
-			  <td class="basic_tb_tdd">${order.price}</td> 			      
+			  <td class="col-xl-3 basic_tb_tdd">${order.menuName}</td>
+			  <td class="col-xl-3 basic_tb_tdd"> ${order.orderCount}</td> 
+			  <td class="col-xl-3 basic_tb_tdd">${order.price}</td> 			      
 			</tr>
 			<c:set var= "totalPrice" value="${totalPrice +order.price}"/>
 		 </c:forEach>	
 			<tr>
-				<td class="basic_tb_td_down" colspan="3">총 주문금액:<span id="totalPrice">${totalPrice}</span>원
+				<td class="col-xl-3 basic_tb_td_down" colspan="3">총 주문금액:<span id="totalPrice">${totalPrice}</span>원
 				</td>
 			</tr>		
 		</table>
@@ -301,16 +306,16 @@ function removeChar(event) {
       </div>
     </div>
   </div>
-</div>              
-	
+</div>              	
 </div>
+
 <!-- 결제정보-->
-<div class="basic">
+<div class="row basic">
 	<h3 class="basic_h3">결제정보</h3>
-	<table class="basic_tb">
+	<table class="col-xl-12 basic_tb">
 		<tr>
-			<th class="basic_tb_th2" >총 주문금액</th>
-			<td class="basic_tb_td" >${totalPrice}</td>			
+			<th class="col-xl-4 basic_tb_th2" >총 주문금액</th>
+			<td class="col-xl-4basic_tb_td" >${totalPrice}</td>			
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
