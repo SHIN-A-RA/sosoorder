@@ -105,32 +105,32 @@ fullCalendar
 /*===============================================
 달 데이터 출력하기
 ===============================================*/
- 	function autoList(){
-		var empNumMonthDate = $("#frmEmp").serialize() ;
- 		$.ajax({
-			url:"getEmpSalAjax",
-			method: 'post',
-			data :empNumMonthDate,
-			dataType:'json' 
-			}).done(function(result){
-				  var table = document.getElementById("empSETable");
-				  table.innerHTML = "";
-				for(i=0; i<result.length; i++){
-					  var row = table.insertRow(0);
-					  var cell1 = row.insertCell(0);
-					  var cell2 = row.insertCell(1);
-					  var cell3 = row.insertCell(2);
-					  var cell4 = row.insertCell(3);
-					  var cell5 = row.insertCell(4);
-					  cell1.innerHTML = result[i].WEEK;
-					  cell2.innerHTML = result[i].MONTH;
-					  cell3.innerHTML = result[i].WORKSTART;
-					  cell4.innerHTML = result[i].WORKEND;
-					  cell5.innerHTML = result[i].SUMTIME+"시간";
-				}
-		})
- 		.fail(function(result){}) //서버 에러 발생시
-		.always(function(result){}); //정상이든 에러든 무조건 실행
+	function autoList(){
+	var empNumMonthDate = $("#frmEmp").serialize() ;
+		$.ajax({
+		url:"getEmpSalAjax",
+		method: 'post',
+		data :empNumMonthDate,
+		dataType:'json' 
+		}).done(function(result){
+			  var table = document.getElementById("empSETable");
+			  table.innerHTML = "";
+			for(i=0; i<result.length; i++){
+				  var row = table.insertRow(0);
+				  var cell1 = row.insertCell(0);
+				  var cell2 = row.insertCell(1);
+				  var cell3 = row.insertCell(2);
+				  var cell4 = row.insertCell(3);
+				  var cell5 = row.insertCell(4);
+				  cell1.innerHTML = result[i].WEEK;
+				  cell2.innerHTML = result[i].MONTH;
+				  cell3.innerHTML = result[i].WORKSTART;
+				  cell4.innerHTML = result[i].WORKEND;
+				  cell5.innerHTML = result[i].SUMTIME+"시간";
+			}
+	})
+		.fail(function(result){}) //서버 에러 발생시
+	.always(function(result){}); //정상이든 에러든 무조건 실행
 }; 
 
 	function autoSalry(){
@@ -198,13 +198,6 @@ fullCalendar
 Full Calender 출력
 ====================================== -->
 <script>
-/* 자바스크립트 현재 날짜 */
-var Now = new Date();
-var NowTime = Now.getFullYear();
-NowTime += '-' + (Now.getMonth() + 1) ;
-NowTime += '-' + Now.getDate();
-
-
 /*=====================================
 달력 출력에 출근한 날 표시 
 =======================================*/
@@ -249,7 +242,6 @@ $(function(){
 /*===============================================================================================
 **********************************이전,다음달로 이동 이벤트 제이쿼리***********************************
 =================================================================================================*/
-
 	$('.fc-prev-button,.fc-next-button').on(
 				'click',
 				function() {

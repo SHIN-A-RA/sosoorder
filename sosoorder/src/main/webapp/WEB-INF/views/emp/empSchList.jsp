@@ -46,7 +46,8 @@
 
 <script>
 var Now = new Date();
-var NowTime = Now.getFullYear();
+var NowTime ='';
+NowTime += Now.getFullYear();
 NowTime += '-' + (Now.getMonth() + 1) ;
 NowTime += '-' + Now.getDate();
 
@@ -90,8 +91,6 @@ $(function(){
 		})
 	});
 	
-	
-	//직원 출퇴근 시간 List
 	function autoList(selectDate){
 		$.ajax({
 			url: "getEmpAjax",
@@ -115,6 +114,8 @@ $(function(){
 			.fail(function(result){}) //서버 에러 발생시
 			.always(function(result){}); //정상이든 에러든 무조건 실행
 	}
+	
+
 	
 	function reloadTable(){
 		$('#reloadTalbe').load('reloadTable');
@@ -160,9 +161,32 @@ function workTimeData(){
     calendar.render(); //캘런더 그리는 함수
 		
 	} 
-
-
-
+</script>
+<script>
+//직원 출퇴근 시간 List
+function autoList(selectDate){
+	$.ajax({
+		url: "getEmpAjax",
+		method : 'post',
+		data : {selectDate:selectDate},
+		dataType: 'json'
+		}).done(function(result){
+		  var table = document.getElementById("empSETable");
+		  table.innerHTML = "";
+			for(i=0; i<result.length; i++){
+				  var row = table.insertRow(0);
+				  var cell1 = row.insertCell(0);
+				  var cell2 = row.insertCell(1);
+				  var cell3 = row.insertCell(2);
+				  cell1.innerHTML = result[i].EMPNAME;
+				  cell2.innerHTML = result[i].WORKSTART;
+				  cell3.innerHTML = result[i].WORKEND;
+				  
+			}
+		}) //정상실행		
+		.fail(function(result){}) //서버 에러 발생시
+		.always(function(result){}); //정상이든 에러든 무조건 실행
+}
 </script>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
@@ -178,11 +202,6 @@ function workTimeData(){
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
        <h6 class="m-0 font-weight-bold text-primary">직원 출/퇴근</h6>
-       <div class="dropdown no-arrow">
-         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-800"></i>
-         </a>
-       </div>
      </div>
      <!-- Card Body -->
      <div class="card-body">
@@ -217,12 +236,7 @@ function workTimeData(){
    <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-       <h6 class="m-0 font-weight-bold text-primary">출퇴근 시간</h6>
-       <div class="dropdown no-arrow">
-         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-800"></i>
-         </a>
-       </div>
+       <h6 class="m-0 font-weight-bold text-primary">출퇴근 시간 <span id="today"></span></h6>
      </div>
      <!-- Card Body -->
      <div class="card-body">
