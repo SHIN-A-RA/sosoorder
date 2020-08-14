@@ -35,9 +35,9 @@ public class GyurimApiController {
 			URL url = new URL(urlstr.toString());
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
-			BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
 			String returnLine;
-			result.append("<xmp>");
+			
 			while ((returnLine = br.readLine()) != null) {
 				result.append(returnLine + "\n");
 			}
@@ -46,7 +46,7 @@ public class GyurimApiController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		result.append("</xmp>");
+		
 		response.setContentType("text/xml;charset=UTF-8");
 		response.getWriter().print(result.toString());
 	}
@@ -71,9 +71,9 @@ public class GyurimApiController {
 			URL url = new URL(urlstr.toString());
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
-			BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
 			String returnLine;
-			result.append("<xmp>");
+			
 			while ((returnLine = br.readLine()) != null) {
 				result.append(returnLine + "\n");
 			}
@@ -82,7 +82,7 @@ public class GyurimApiController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		result.append("</xmp>");
+		
 		response.setContentType("text/xml;charset=UTF-8");
 		response.getWriter().print(result.toString());
 	}
