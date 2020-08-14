@@ -223,7 +223,7 @@ function removeChar(event) {
 	         <td class="basic_tb_td">
 	         <c:forEach var="list" items="${addr}">
 		         <c:if test="${sessionScope.phone != null}">	         
-		         	 <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value="${list.addr}"><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
+		         	 <input readonly class="basic_input" id="roadFullAddr"  name="roadFullAddr"  size="65" type="text" value="${list.deladdr}"><a onclick="goPopup()" class="btn_post">주소찾기</a><br>
 		         </c:if>
 	         </c:forEach>
 	         <c:if test="${sessionScope.phone == null}">	         
@@ -443,8 +443,6 @@ $(function(){
 		$(".seat").val($(this).val());
 	});
 });
-
-
 	
 /* 홀이냐 배달이냐 하나만*/	
 $(function(){
@@ -471,6 +469,5 @@ $(function(){
 	        }
 	    });
 });		
-
 		
 </script>

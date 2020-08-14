@@ -222,5 +222,5 @@ SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
 			And memberNum = (SELECT memberNum FROM member WHERE phone = '123')
 			
 			alter table admin drop column storemenu
-
+	select deladdr from member where phone='01056049466'
     

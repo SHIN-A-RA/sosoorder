@@ -38,4 +38,6 @@ public class OrderCptVO {
 	String addr;
 	String cellPhone;
 	String accountNum;
+	String deladdr;
+	
 }

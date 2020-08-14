@@ -168,20 +168,20 @@
 	
 	<!-- 주소뿌리기 -->
 	<select id="getAddr" parameterType="OrderCptVO" resultType="OrderCptVO">
-	select addr from delivery 
+	select deladdr from member 
 		<where>
-			DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
-		<if test="phone != null">
-			And memberNum = (SELECT memberNum FROM member WHERE phone = #{phone}) 
-		</if>	 
+			<if test="phone != null">
+				phone = #{phone} 
+			</if>	 
 		</where>
 	</select>
-	
+	  
 	<select id="getAccount" parameterType="OrderCptVO" resultType="OrderCptVO">
 		select accountNum from admin 
 		<where>	
-		storeId = #{storeId}
+			storeId = #{storeId}
 		</where>
 	</select>
+	  
 
 </mapper>

@@ -159,8 +159,7 @@ public class OrderController {
 	public String orderConfirm(Model model, OrderCptVO orderCptVO, HttpServletRequest request, HttpSession session) {
 		
 		 String payNum = (String) session.getAttribute("payNum");
-		 orderCptVO.setPayNum(payNum); model.addAttribute("oderList",
-		 orderService.getOrder(orderCptVO));
+		 orderCptVO.setPayNum(payNum); model.addAttribute("oderList", orderService.getOrder(orderCptVO));
 		 
 
 		return "order/orderConfirm";
