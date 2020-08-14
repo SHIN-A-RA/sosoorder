@@ -242,3 +242,12 @@ select * from admin
 		
 select * from admin;
 update admin set storepwd = 'test8' where storeid =  'test8';
+
+select addr from delivery 
+where
+DeliveryDay = (SELECT MAX(DeliveryDay)FROM delivery WHERE ADDR IS NOT NULL)		
+And memberNum = (SELECT memberNum FROM member WHERE phone = '123') 
+
+
+select * from delivery where memberNum = (SELECT memberNum FROM member WHERE phone = '123') 
+and ADDR IS NOT NULL	

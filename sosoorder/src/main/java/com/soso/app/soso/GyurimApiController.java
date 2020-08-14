@@ -55,7 +55,7 @@ public class GyurimApiController {
 
 	// 업종,상호명, 주소 가져오는.
 	
-	@RequestMapping("getDataApi")
+	@RequestMapping(value="getDataApi", produces = "application/text; charset=utf8")
 	public void getDataApi(HttpServletResponse response, @RequestParam String name) throws IOException {
 	
 		StringBuffer result = new StringBuffer();
