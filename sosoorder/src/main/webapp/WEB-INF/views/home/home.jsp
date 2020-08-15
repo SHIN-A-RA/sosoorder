@@ -10,6 +10,7 @@
 	alert('${loginMsg}');
 	</script>
 </c:if>
+<div id="toastAdd">장바구니에 추가되었습니다.</div>
 <script>
 //angularjs를 이용해서 storageSession에 메뉴정보를 저장한다.
 var myApp = angular.module("myApp",[]);
@@ -44,8 +45,8 @@ myApp.controller("myAppCtrl", function($scope){
 		
 		cartNum();
 		totalPay();
+		
 	}
-	
 	
 	/* delete버튼 클릭시 삭제 */
 	$scope.deleteItem = function(user){
@@ -149,6 +150,22 @@ myApp.controller("myAppCtrl", function($scope){
         	window.location.href = "/sosoroder/orderInsert?orderNum="+ ${menuOrderNum.orderNum+1}+"&seat="+${seat.seat} ;
         })
 	}); 
+	 toastAdd();
+	 function toastAdd() {
+        const toast = document.getElementById('toastAdd');  // id가 toast인 요소 div
+        let isToastShown = false;
+        // id가 toastButton인 요소를 클릭하면 아래 함수가 호출됨
+        $('.btn-add').on('click', function () {
+            if (isToastShown) return;   // 토스트 메시지가 띄어져 있다면 함수를 끝냄
+            isToastShown = true;
+            toast.classList.add('reveal');    // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
+            setTimeout(function () {
+                // 2700ms 후에 show 클래스를 제거함
+                toast.classList.remove('reveal');
+           isToastShown = false;
+            }, 2700);
+        });
+	}
 	
 });
 </script>

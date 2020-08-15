@@ -63,6 +63,7 @@
     <script type="text/javascript">
 
 		let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
+		//let sock = new SockJS("http://localhost/sosoroder/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
@@ -81,9 +82,11 @@
 				orderMap = JSON.parse(msg.msg);
 				orderInsert(orderMap);
 			} else if(msg.cmd == 'startCook'){
-				$("#cook").html(msg.msg)
+				$("#cook").addClass('show').html(msg.msg);
+				toast();
 			} else if(msg.cmd == 'endCook'){
-				$("#cook").html(msg.msg)
+				$("#cook").addClass('show').html(msg.msg);
+				toast();
 			} 
 			
 			
@@ -196,9 +199,23 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 			<div class="cookWrap">
-				<!-- <span class="ex"><i class="fa fa-times-circle" aria-hidden="true"></i></span> -->
-				<div id="cook">${payNum}</div>
+				<div id="cook"></div>
 			</div> 	
+			<script>
+			let removeToast;
+
+			function toast() {
+			    const toast = document.getElementById("cook");
+
+			    toast.classList.contains("show") ?
+			        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+			            document.getElementById("cook").classList.remove("show")
+			        }, 1000)) :
+			        removeToast = setTimeout(function () {
+			            document.getElementById("cook").classList.remove("show")
+			        }, 1000)
+			}
+			</script>
 			
 	       <!-- 컨텐츠 영역 -->
 	       	<tiles:insertAttribute name="content"/>
