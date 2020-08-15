@@ -172,43 +172,43 @@
 	 //}
 	 } */
 </script>
-<script>
-	/* 상호명, 업종,주소가져오는. */
-	function viewData() {
-		var data = $('#rdnmcounty1').val();
-		var sido = $('#rdnmcity1').val();
-		$.ajax({
-			url : 'getDataApi',
-			type : 'GET',
-			data : {
-				name : data
-			},
-			dataType : 'xml',
-			success : function(result) {
-				console.log(result);
-				$("#tbody").empty();
-				var sis = $(result).find('item');
-				console.log(sis);
-				$.each(sis, function(idx, item) {
-					if( data==$(item).children().eq(13).text()){
-						/* console.log($(item).children().eq(6).text())
-						console.log($(item).children().eq(1).text())
-						console.log($(item).children().eq(31).text()) */
-					
-					 $("<tr>").append($("<td>").text($(item).children().eq(6).text()))
-					.append($("<td>").text($(item).children().eq(1).text()))
-					.append($("<td>").text($(item).children().eq(31).text()))
-					.appendTo('#tbody')
-					} 
-				})
-				addrAdd();
-			},
-			error : function(xhr, status, message) {
-				alert(" status: " + status + " er:" + message);
-			}
-		});
-	}
-</script>
+	<script>
+		/* 상호명, 업종,주소가져오는. */
+		function viewData() {
+			var data = $('#rdnmcounty1').val();
+			var sido = $('#rdnmcity1').val();
+			$.ajax({
+				url : 'getDataApi',
+				type : 'GET',
+				data : {
+					name : data
+				},
+				dataType : 'xml',
+				success : function(result) {
+					console.log(result);
+					$("#tbody").empty();
+					var sis = $(result).find('item');
+					console.log(sis);
+					$.each(sis, function(idx, item) {
+						if( data==$(item).children().eq(13).text()){
+							/* console.log($(item).children().eq(6).text())
+							console.log($(item).children().eq(1).text())
+							console.log($(item).children().eq(31).text()) */
+						
+						 $("<tr>").append($("<td>").text($(item).children().eq(6).text()))
+						.append($("<td>").text($(item).children().eq(1).text()))
+						.append($("<td>").text($(item).children().eq(31).text()))
+						.appendTo('#tbody')
+						} 
+					})
+					addrAdd();
+				},
+				error : function(xhr, status, message) {
+					alert(" status: " + status + " er:" + message);
+				}
+			});
+		}
+	</script>
  
 
 <meta charset="UTF-8">
