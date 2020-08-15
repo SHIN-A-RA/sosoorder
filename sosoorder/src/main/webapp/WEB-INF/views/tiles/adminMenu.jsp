@@ -6,7 +6,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -39,7 +39,6 @@
 			<a class="collapse-item" href="/sosoroder/storePopupListForm">좌석 및 팝업관리</a>
 			<a class="collapse-item" href="/sosoroder/mailList">리오더관리</a>
 			<a class="collapse-item" href="/sosoroder/storeCouponListForm">쿠폰관리</a>
-			<a class="collapse-item" href="/sosoroder/storeOrderList">주문현황</a>
           </div>
         </div>
       </li>
@@ -58,6 +57,13 @@
 			<a class="collapse-item" href="/sosoroder/empSalaryList">급여관리</a>
           </div>
         </div>
+      </li>
+      
+      <!-- Nav Item - Tables -->
+      <li class="nav-item li_3">
+        <a class="nav-link" href="/sosoroder/storeOrderList">
+          <i class="fas fa-fw fa-table"></i>
+          <span>주문현황</span></a>
       </li>
 
 
