@@ -96,13 +96,13 @@
                   <mapping path="/**" /> 
                   <!--mvc 인터셉터를 거치지 않고 예외 시킬 URL 요청들 정의 -->
  				  <exclude-mapping path="/"/>
- 				  <exclude-mapping path="/homeSample"/>
- 				  <exclude-mapping path="/homeSample/*"/>
- 				  <exclude-mapping path="/memberLoginForm"/>
- 				  <exclude-mapping path="/memberInsertForm"/>
- 				  <exclude-mapping path="/adminInsertForm"/>
- 				  <exclude-mapping path="/storePopupListPro"/>
- 				  <exclude-mapping path="/jusoPopup"/>
+ 				  <exclude-mapping path="/homeSample"/> <!-- 메뉴창 -->
+ 				  <exclude-mapping path="/homeSample/*"/> <!-- 메뉴창 -->
+ 				  <exclude-mapping path="/memberLoginForm"/> <!-- 로그인창 -->
+ 				  <exclude-mapping path="/memberInsertForm"/> <!-- 고객 회원가입창 -->
+ 				  <exclude-mapping path="/adminInsertForm"/> <!-- 관리자 회원가입창 -->
+ 				  <exclude-mapping path="/storePopupListPro"/> <!-- 팝업 페이지(팝업) -->
+ 				  <exclude-mapping path="/jusoPopup"/> <!-- 주소 페이지(팝업) -->
                   <beans:bean class="com.soso.app.common.AuthInterceptor" />
          </interceptor>
 	</interceptors>

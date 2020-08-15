@@ -60,12 +60,7 @@ public class StoreMemberContoller {
 	// 회원이 회원정보 수정 페이지 이동(해당 메뉴탭을 누르면 해당메뉴 값을 가지고 수정페이지로 이동)
 	@RequestMapping("memberUpdateForm")
 	public String MemberUpdateForm(MemberVO vo, Model model, HttpSession session) {
-		String phone = (String) session.getAttribute("phone");
-		vo.setPhone(phone);
-
-		if (vo.getPhone() != null && !vo.getPhone().isEmpty()) {
-			model.addAttribute("oneSmm", storeMemberService.getMember(vo));// oneSm=단건조회
-		}
+		model.addAttribute("oneSmm", storeMemberService.getMember(vo));// oneSm=단건조회
 		return "member/memberUpdateForm";
 	}
 

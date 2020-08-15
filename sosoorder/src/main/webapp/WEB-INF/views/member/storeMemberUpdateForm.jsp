@@ -14,7 +14,7 @@
 <br>
 <br>
 <form action="storeMemberUpdate" method="post"
-	enctype="multipart/form-data" name="storeMemberUpdate"
+	name="storeMemberUpdate"
 	id="storeMemberUpdate">
 	<input type="hidden" name="memberNum" value="${oneSm.memberNum}" />
 	<div class="row">
@@ -33,7 +33,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">주소</span>
 				</div>
-				<input class="form-control selectmenu" name="delAddr" id="delAddr"
+				<input class="form-control selectmenu" name="delAddr"
 					style="text-align: center;" value="${oneSm.delAddr}">
 
 			</div>
@@ -44,7 +44,7 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text">적립금</span>
 			</div>
-			<input class="form-control selectmenu" name="point" id="point"
+			<input class="form-control selectmenu" name="point"
 				style="text-align: center;" value="${oneSm.point}">
 
 		</div>

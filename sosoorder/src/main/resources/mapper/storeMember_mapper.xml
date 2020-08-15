@@ -31,7 +31,7 @@
 	<!-- 개인 회원정보 수정 store지만 사업자가아니고 개인회원 수정임. 사업자는 수정이없음. -->
 	 <update id="storeMemberUpdate" parameterType="memberVO">
 		Update member
-		set phone = #{phone}, delAddr = #{delAddr}
+		set delAddr = #{delAddr}
 		where memberNum = #{memberNum}
 		
 	</update> 

@@ -42,64 +42,11 @@
     -------------------------------*/
     
     function getLocation() {
-    	var apiGeolocationSuccess = function(position) {
-    	    alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-    	};
-
-    	var tryAPIGeolocation = function() {
-    	    jQuery.post( "http://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M", function(success) {
-    	        apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
-    	    })
-    	    .fail(function(err) {
-    	        alert("API Geolocation error! \n\n"+err);
-    	    });
-    	};
-
-    	var browserGeolocationSuccess = function(position) {
-    	    //alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-    		$('.p_latitude').val(position.coords.latitude);
- 	        $('.p_longitude').val(position.coords.longitude); 
- 	       locationP();
-    	};
-
-    	var browserGeolocationFail = function(error) {
-    	    switch (error.code) {
-    	        case error.TIMEOUT:
-    	            alert("Browser geolocation error !\n\nTimeout.");
-    	            break;
-    	        case error.PERMISSION_DENIED:
-    	            if(error.message.indexOf("Only secure origins are allowed") == 0) {
-    	                tryAPIGeolocation();
-    	            }
-    	            break;
-    	        case error.POSITION_UNAVAILABLE:
-    	            alert("Browser geolocation error !\n\nPosition unavailable.");
-    	            break;
-    	    }
-    	};
-
-    	var tryGeolocation = function() {
-    	    if (navigator.geolocation) {
-    	        navigator.geolocation.getCurrentPosition(
-    	                browserGeolocationSuccess,
-    	                browserGeolocationFail,
-    	                {maximumAge: 50000, timeout: 20000, enableHighAccuracy: true});
-    	    }
-    	};
-
-    	tryGeolocation();
-
-
-    	
-    	
-    	
-    	
-    	
-    	/*  if (navigator.geolocation) { // GPS를 지원하면
+    	 if (navigator.geolocation) { // GPS를 지원하면
     	    navigator.geolocation.getCurrentPosition(function(position) {
     	      //alert(position.coords.latitude + ' ' + position.coords.longitude);
-    	     	$('.p_latitude').val(position.coords.latitude);
- 	      		$('.p_longitude').val(position.coords.longitude); 
+    	     $('.p_latitude').val(position.coords.latitude);
+    	       $('.p_longitude').val(position.coords.longitude); 
     	       locationP();
     	    }, function(error) {
     	      console.error(error);
@@ -110,7 +57,7 @@
     	    });
     	 } else {
     	    alert('GPS를 지원하지 않습니다');
-    	 } */
+    	 }
     }
     
     

@@ -1,7 +1,5 @@
 package com.soso.app.common;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,11 +24,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		//스토어아이디
+		//세션에 저장된 값을 받는다.
 		HttpSession session = request.getSession();
 		String storeId = (String)session.getAttribute("storeId");
 		String phone = (String)session.getAttribute("phone");
-		String requestURI = request.getRequestURI(); //페이지의 uri를 가져옴
+		//페이지의 uri를 가져옴
+		String requestURI = request.getRequestURI();
 		
 		if(	requestURI.contains("store") || 
 			requestURI.contains("emp") ||
@@ -39,17 +38,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			) { //해당 페이지에서
 			if(storeId == null) {	//session에 storeId가 없을 경우
 				 ModelAndView mav = new ModelAndView("redirect:/memberLoginForm"); //로그인페이지로 이동한다.
-                 mav.addObject("msgCode", "관리자 로그인이 필요한 서비스입니다.");
+                 mav.addObject("msgCode", "관리자 로그인이 필요한 서비스입니다."); //로그인페이지에 팝업으로 띄울 정보를 보낸다.
                  mav.addObject("msgCheck", "true");
                  throw new ModelAndViewDefiningException(mav);
 			}
 		}else if(requestURI.contains("myPointsList") || 
 			  	 requestURI.contains("myCouponList") ||
 				 requestURI.contains("myOrderList")
-				) {
-			if(phone == null) {	//session에 storeId가 없을 경우
+				) { //해당 페이지에서
+			if(phone == null) {	//session에 phone이 없을 경우
 				ModelAndView mav = new ModelAndView("redirect:/memberLoginForm"); //로그인페이지로 이동한다.
-				mav.addObject("msgCode", "회원 로그인이 필요한 서비스입니다.");
+				mav.addObject("msgCode", "회원 로그인이 필요한 서비스입니다."); //로그인페이지에 팝업으로 띄울 정보를 보낸다.
 				mav.addObject("msgCheck", "true");
                 throw new ModelAndViewDefiningException(mav);
 			}
