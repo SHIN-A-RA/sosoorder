@@ -62,7 +62,7 @@
     
     <script type="text/javascript">
 
-		let sock = new SockJS("http://localhost/sosoroder/echo/");
+		let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
@@ -102,6 +102,9 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+  	<c:if test="${sessionScope.storeId != null}">
+  		<tiles:insertAttribute name="adminMenu"/>
+  	</c:if>
 
 
     <!-- Content Wrapper -->
@@ -113,9 +116,9 @@
 		<header id="hd_wrap" class="over hd-up">
 			
 			<div id="hd_gnb" class="gnb_pc">
-				<div id="gnb_menu" class="hd_gnb_menu">
+				<%-- <div id="gnb_menu" class="hd_gnb_menu">
 					<c:if test="${sessionScope.storeId != null}"><span></span></c:if>	
-				</div>
+				</div> --%>
 				<tiles:insertAttribute name="menu"/>
 				<script>
 				function removeSession(){
@@ -185,9 +188,9 @@
 			<div class="hd_bg"></div>
 		</header>
 		
-		<div id="gnb_menu_box" class="gnb_mo_menu">
+		<%-- <div id="gnb_menu_box" class="gnb_mo_menu">
 			<tiles:insertAttribute name="adminMenu"/>
-		</div>
+		</div> --%>
 		<!-- top End-->
 		
         <!-- Begin Page Content -->

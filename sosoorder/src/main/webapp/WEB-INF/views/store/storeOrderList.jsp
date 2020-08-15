@@ -193,3 +193,13 @@ function orderUpdate2(p, e){
 	fade: false
 });   */
 </script>
+
+<script>
+	$(function(){
+		$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
+		$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
+		$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
+		$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(8)').css("backgroundColor", "#eaecf4")
+		
+	});
+</script>
