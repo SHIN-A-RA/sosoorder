@@ -164,7 +164,7 @@ function removeChar(event) {
  </div>
  
 <!-- 좌석 셀렉트 박스 -->
- <div calss="row">
+ <div class="row">
     <div class="col-xl-4 basic">
     	<span>좌석번호
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">

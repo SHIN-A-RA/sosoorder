@@ -39,8 +39,15 @@
 		});
 	});
 </script>
-
+<div class="row" style="font-weight:bold;">
+<div class="col" align="center" >
+<h3>좌석</h3>
+</div>
+<div class="col" align="center">
+<h3>팝업목록</h3>
+</div></div>
 <div class="row">
+
 	<div class="col">
 		<div id="seatList">
 			<table id="table_idd" class="display tb_style"
@@ -60,10 +67,10 @@
 							<td>${List.seat}</td>
 							<c:choose>
 							<c:when test="${List.userCheck==1}">
-							<td>사용중</td>
+							<td>사용가능</td>
 							</c:when>
 							<c:otherwise>
-							<td>사용안함</td>
+							<td>사용불가</td>
 							</c:otherwise>
 							</c:choose>
 							
@@ -89,11 +96,11 @@
 			<table id="table_id" class="display" width="100%">
 				<thead>
 					<tr>
-						<th width="8%">NO.</th>
-						<th width="20%">제목</th>
+						<th width="10%">NO.</th>
+						<th width="15%">제목</th>
 						<th width="15%">시작일</th>
 						<th width="15%">종료일</th>
-						<th width="12%" class="center">사용유무</th>
+						<th width="15%" class="center">사용유무</th>
 						<th width="10%" class="center">삭제</th>
 					</tr>
 				</thead>
