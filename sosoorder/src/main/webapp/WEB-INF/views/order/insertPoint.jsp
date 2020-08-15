@@ -41,29 +41,29 @@ $(function() {
 	<button class="btn_a btn_b"  id="btn1">회원</button><button class="btn_a" id="btn2">비회원</button>
 </div>
 
-<div class="show1">
-	<div>${errorMsg}</div>
-	<form action="insertPo" class="frm_point" method="post">
-	<table style="width: 100%; text-align: center;" >
-		<tr>
+<div class="show1 row">
+	<div class="div_error">
+		${errorMsg}
+	</div>
+	<form action="insertPo"  method="post" class="frm_point">
+	<table style="width: 100%; text-align: center;">
+		<tr> 
 			<th class="tbp_th">Phone</th>
-			<td><input name="phone" id="phone" class="point_input" size="30" >
-			<input type="hidden" name="payNum" value="${payNum}">
-			</td>
+			<td><input name="phone" class="point_input" size="30" ></td>
 		</tr>
 		<tr>
 			<th class="tbp_th">pwd</th>
-			<td><input name="pwd" class="point_input" size="30" ></td>
+			<td><input name="pwd" class="point_input" size="30"></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="pointd_td"><button class="btn_point2" type="submit">적립</button></td>
+			<td colspan="2" style="padding-top: 20px;"><button onclick="goPointList()" class="btn_point2" type="submit">적립</button></td>
 		</tr>
-	</table>
-	</form>
+	</table>		
+		</form>
 </div>
 	
 <div class="show2" style="display:none">
-	<form action="insertMem" class="frm_point" method="post" >
+	<form action="insertMem" style="padding: 100px 100px 0px 100px; margin: auto;" method="post" >
 	<input type="hidden" name="payNum" value="${payNum}">
 	<table style="width: 100%; text-align: center;">
 		<tr> 
@@ -79,9 +79,10 @@ $(function() {
 			<td><input name="email" class="point_input" size="30"></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="pointd_td"><button onclick="goPointList()" class="btn_point2" type="submit">적립</button></td>
+			<td colspan="2" style="padding-top: 20px;"><button onclick="goPointList()" class="btn_point2" type="submit">적립</button></td>
 		</tr>
 	</table>
 	</form>
 </div>
+
 

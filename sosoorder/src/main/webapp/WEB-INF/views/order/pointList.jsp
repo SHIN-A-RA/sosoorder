@@ -16,7 +16,7 @@ function doRedirectOpener(){
 
 <div class="div_f">
 	<div class="div_list">
-		<h3 class="list_h3">적립이 완료되었습니다!</h3>
+		<h3 class="list_h3" style="font-weight: bold;">적립이 완료되었습니다!</h3>
 	</div>
 	
 	<div>

@@ -44,12 +44,10 @@
     function getLocation() {
     	var apiGeolocationSuccess = function(position) {
     	    alert("API geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
-    	    $('.p_latitude').val(position.coords.latitude);
- 	      	$('.p_longitude').val(position.coords.longitude); 
     	};
 
     	var tryAPIGeolocation = function() {
-    	    jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDCa1LUe1vOczX1hO_iGYgyo8p_jYuGOPU", function(success) {
+    	    jQuery.post( "http://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M", function(success) {
     	        apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
     	    })
     	    .fail(function(err) {
@@ -58,7 +56,10 @@
     	};
 
     	var browserGeolocationSuccess = function(position) {
-    	    alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+    	    //alert("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+    		$('.p_latitude').val(position.coords.latitude);
+ 	        $('.p_longitude').val(position.coords.longitude); 
+ 	       locationP();
     	};
 
     	var browserGeolocationFail = function(error) {
@@ -97,7 +98,8 @@
     	/*  if (navigator.geolocation) { // GPS를 지원하면
     	    navigator.geolocation.getCurrentPosition(function(position) {
     	      //alert(position.coords.latitude + ' ' + position.coords.longitude);
-    	     
+    	     	$('.p_latitude').val(position.coords.latitude);
+ 	      		$('.p_longitude').val(position.coords.longitude); 
     	       locationP();
     	    }, function(error) {
     	      console.error(error);
