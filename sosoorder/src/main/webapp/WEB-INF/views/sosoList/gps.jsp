@@ -47,7 +47,7 @@
     	};
 
     	var tryAPIGeolocation = function() {
-    	    jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate", function(success) {
+    	    jQuery.post( "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC7DI-uZiw7qkBTyXG-N-fKKEmwYes0s6M", function(success) {
     	        apiGeolocationSuccess({coords: {latitude: success.location.lat, longitude: success.location.lng}});
     	    })
     	    .fail(function(err) {
