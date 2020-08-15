@@ -21,12 +21,12 @@
 	<h1 class="h3 mb-0 text-gray-800">점포관리 - 리오더 전송목록</h1>
 </div>
 	
-	<table id="table_id" class="display">
+<table id="table_id" class="display">
           <thead>
               <tr>
                   <th>번호</th> 
                   <th>발송내역</th>
-                  <th>발송건수</th>
+                 <!--  <th>발송건수</th> -->
                   <th>날짜</th>
               </tr>
           </thead>
@@ -35,11 +35,10 @@
 		 	<tr>
 		 		<td>${reorder.reorderNum }</td> 
 		 		<td> ${reorder.title }</td>
-		 		<td> ${reorder.memberNum }</td>
+		 		<%-- <td> ${reorder.memberNum }</td> --%>
 		 		<td> ${reorder.reorderDate }</td>
 		 	</tr>	
 		 </c:forEach>
-		 
           </tbody>
       </table>
    
