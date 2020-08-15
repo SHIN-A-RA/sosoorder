@@ -179,6 +179,7 @@ to {
 		
 		<script>
 		var col1 = '';
+		var col2 = '';
 		//console.log(col2);  
 			function addrAdd() {
 				//데이터테이블
@@ -197,9 +198,14 @@ to {
 					$(this).css("background", "#f0f2fb");
 					
 					var data = otable.row(this).data();
+					
 					var col1 = data[1];
+					var col2 = data[2];
+					
 					
 					$('#SA').val(col1);
+					$('#SS').val(col2);
+					
 					//col2 = col1;
 				});
 			};
@@ -211,7 +217,8 @@ to {
 		<div class="complete_zone">
 			<!-- <h4>- 선택 된 상호 명 -</h4> -->
 			<input type="hidden" value="" name="SA" id="SA" readonly="readonly"
-				title="도로명 조회 결과">
+				title="상호명">
+				<input type="hidden" value="" name="SS" id="SS" readonly="readonly" title="주소">
 			<!-- <div id="menuExplain">※ 목록에서 상호명 클릭 후 선택버튼을 누르시면 회원가입 페이지(상호명)에
 				입력됩니다.</div> -->
 		</div>
@@ -220,7 +227,10 @@ to {
 <script>
  $('#sbn').on('click', function() {
 	 var col1 = $('#SA').val();
+	 var col2 = $('$SS').val();
 	$('#storeName').val(col1);
+	$('#storeAddr').val(col2);
+	
 	//modal.Close;
 	$('.close');
 }) 

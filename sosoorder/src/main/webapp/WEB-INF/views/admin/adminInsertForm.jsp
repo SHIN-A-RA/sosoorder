@@ -147,10 +147,10 @@
 			/* 			    contentType: 'application/json; charset=utf8',
 			 crossDomain:true,
 			 */success : function(result) {
-				console.log(result);
+				
 				$("#rdnmcounty1").empty();
 				var sis = $(result).find('item');
-				console.log(sis);
+				
 				$.each(sis, function(idx, item) {
 					//console.log($(item).children().eq(2).text());
 					$("#rdnmcounty1").append(
