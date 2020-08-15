@@ -78,3 +78,12 @@
 
 </div>
 <!-- end div_f -->
+
+<script>
+	$(function(){
+		$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
+		$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
+		$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
+		$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(2)').css("backgroundColor", "#eaecf4")
+	});
+</script>

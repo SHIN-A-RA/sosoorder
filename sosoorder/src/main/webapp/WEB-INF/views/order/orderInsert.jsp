@@ -155,7 +155,7 @@ function removeChar(event) {
 <!-- 컨텐츠영역 -->
 <div class="row">
    <div class="col-xl-12 div-tt">
-      <h2>주문/결제 </h2>  
+      <h2>주문/결제 ${storeInfo}</h2>  
       <!-- 가게 계좌번호 받아오기 -->
       <c:forEach items="${admin}" var="admin">
       	<input id="account" name="account" type="hidden"  value="${admin.accountNum}"> 

@@ -259,4 +259,11 @@
 	}
 	</script>
 	
+	<script>
+	$(function(){
+		$( '.menu2' ).addClass( 'active' );
+	});
+	
+</script>
+	
 	</div>

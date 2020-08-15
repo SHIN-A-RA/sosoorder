@@ -93,7 +93,7 @@
 		#{payNum}, 
 		 #{payCheck}, 
 		 sysdate, 
-		 NVL(#{pointUse},0), 
+		 NVL(#{pointUse},0),    
 		 NVL(#{couponUse},0),
 		 (SELECT seatNum FROM SEAT WHERE SEAT = #{seat} AND storeId = #{storeId} and usercheck='1'), 
 		 (SELECT memberNum FROM member WHERE phone = #{phone}), 

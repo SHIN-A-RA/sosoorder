@@ -223,4 +223,28 @@ SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
 			
 			alter table admin drop column storemenu
 	select deladdr from member where phone='01056049466'
+	
+	
+		INSERT INTO PAYMENT 
+		(PAYNUM, 
+		PAYCHECK, 
+		PAYDAY, 
+		POINTUSE, 
+		COUPONUSE, 
+		SEATNUM, 
+		MEMBERNUM, 
+		TOTALPAY, 
+		STATUS)
+	VALUES(
+		4, 
+		 0, 
+		 sysdate, 
+		 NVL(0,0), 
+		 NVL(0,0),
+		 (SELECT seatNum FROM SEAT WHERE SEAT = '' AND storeId = 'heon' and usercheck='1'), 
+		 (SELECT memberNum FROM member WHERE phone = '01021265370'), 
+		 1200, 
+		 '0')
+	
+	
     

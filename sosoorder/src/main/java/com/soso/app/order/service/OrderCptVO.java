@@ -15,6 +15,7 @@ public class OrderCptVO {
 	Integer memberNum;
 	String storeId;
 	String menuName;
+	String storeInfo;
 	
 	String pointNum;
 	String pointDate;

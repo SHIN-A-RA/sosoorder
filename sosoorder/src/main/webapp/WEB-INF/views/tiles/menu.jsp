@@ -16,5 +16,5 @@
 		</span>
 	</li>
 	<!-- 마이페이지 -->
-	<li class="gnb_dp1 menu2"><span><a href="/sosoroder/myPointsList"><i class="fa fa-id-card-o" aria-hidden="true"></i> 마이페이지</a></span></li>
+	<li class="gnb_dp1 menu4"><span><a href="/sosoroder/myPointsList"><i class="fa fa-id-card-o" aria-hidden="true"></i> 마이페이지</a></span></li>
 </ul>
