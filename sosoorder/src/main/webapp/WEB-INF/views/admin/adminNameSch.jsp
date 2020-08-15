@@ -227,7 +227,7 @@ to {
 <script>
  $('#sbn').on('click', function() {
 	 var col1 = $('#SA').val();
-	 var col2 = $('$SS').val();
+	 var col2 = $('#SS').val();
 	$('#storeName').val(col1);
 	$('#storeAddr').val(col2);
 	
