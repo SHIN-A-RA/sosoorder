@@ -5,7 +5,7 @@
 #container {position:relative; width:100%;}
 #footerWrap {position:relative; width:100%;}
 #wrapper{min-height:100%;}
-#wrapper #content-wrapper{min-height:100%;}
+#wrapper #content-wrapper{min-height:100%;position: relative;}
 .container-fluid{/* padding-top: 1.5rem; */ width:80% !important;padding-bottom: 2%; box-sizing: border-box; }
 
 

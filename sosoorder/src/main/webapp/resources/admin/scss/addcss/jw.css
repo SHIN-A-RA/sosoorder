@@ -35,7 +35,7 @@ margin: 5px;  border:1px solid #333; overflow:hidden;}
 .main_storeList .store_ul li a:hover{background-color: #ca1818; color:#fff}
 
 /* basic */
-div:hover, div:hover code, div:focus, div:focus code {
+div:hover, div:hover code, div:focus, div:focus code, i:hover {
     text-decoration: none;  transition-duration: 300ms;
     transition-property: color, border-color, background-color;
     transition-timing-function: ease;
@@ -362,4 +362,51 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0)
+}
+
+#callInsert{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    border: 3px solid #dcdcdf;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+    animation: fade 1s;
+   
+}
+#callInsert.disnon, .callInsrt_bg.disnon{visibility: hidden; opacity: 0;animation: fade 1s;
+-webkit-transition: opacity 600ms, visibility 600ms;
+            transition: opacity 600ms, visibility 600ms;
+ }
+ @keyframes fade {
+    0% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+#callInsert .insertTitle{width: 100%; line-height: 28px;}
+#callInsert .insertTitle i{float:right; cursor: pointer;}
+#callInsert .insertTitle i:hover{color: #4e73df;}
+.callInsert_wrap{padding: 25px; overflow: hidden;}
+.callInsert_wrap #seat{width:38%; height:45px;}
+.callInsert_wrap #message{width:60%; height:45px;}
+.callInsert_wrap #sendBtn{width:100%; height:45px; margin-top:10px}
+.callInsrt_bg{
+	width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.3;
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

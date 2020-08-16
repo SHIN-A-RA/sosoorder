@@ -10,7 +10,7 @@
 	<!-- 호출 -->
 	<li class="gnb_dp1 menu3">
 		<span>
-			<a href="/sosoroder/callInsertForm" onclick="window.open(this.href,'팝업창','width=400, height=200'); return false;">
+			<a class="call_insert_btn">
 				<i class="fa fa-bell" aria-hidden="true"></i> 호출
 			</a>
 		</span>
@@ -18,3 +18,17 @@
 	<!-- 마이페이지 -->
 	<li class="gnb_dp1 menu4"><span><a href="/sosoroder/myPointsList"><i class="fa fa-id-card-o" aria-hidden="true"></i> 마이페이지</a></span></li>
 </ul>
+
+<script>
+$(function(){
+	$('.call_insert_btn').on("click", function(){
+		$("#callInsert").removeClass("disnon");
+		$(".callInsrt_bg").removeClass("disnon");
+	})
+	
+	$('.insert_ex_dtn, .callInsrt_bg').on("click", function(){
+		$("#callInsert").addClass("disnon");
+		$(".callInsrt_bg").addClass("disnon");
+	})
+})
+</script>

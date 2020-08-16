@@ -62,8 +62,8 @@
     
     <script type="text/javascript">
 
-		let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
-		//let sock = new SockJS("http://localhost/sosoroder/echo/");
+		//let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
+		let sock = new SockJS("http://localhost/sosoroder/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
@@ -102,7 +102,10 @@
 </head>
 
 <body id="page-top">
-
+<div id="callInsert" class="disnon">
+ <jsp:include page="/WEB-INF/views/order/callInsert.jsp" flush="true"/>
+</div>
+<div class="callInsrt_bg disnon"></div>
   <!-- Page Wrapper -->
   <div id="wrapper">
   	<c:if test="${sessionScope.storeId != null}">
