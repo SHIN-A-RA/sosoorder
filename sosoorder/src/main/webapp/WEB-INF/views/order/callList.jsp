@@ -6,8 +6,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 
 <style>
-#callList{position: fixed; right: 0; bottom: 0; background: #fff;
-    height: 93%; width: 22%;}
+#callList{background: #fff;min-height: 100vh;}
 .callInsert_wrap{padding:30px; }
 .callInsert_wrap #messageArea ul{overflow:hidden;}
 .callInsert_wrap #messageArea ul li:nth-child(1){float:left; margin-right:30px;}

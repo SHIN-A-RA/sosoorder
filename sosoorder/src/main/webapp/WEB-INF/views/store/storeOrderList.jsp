@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-
-<div style="width: 100%; padding: 100px 0px 0px 0px;" class="slick_box order">
-	<div style="width: 100%; box-sizing: border-box; height: 600px;" class="orderwrap">
+<style>
+.container-fluid{width:100% !important; padding:0;}
+</style>
+<div id="callListWrap" class="col-3">
+<jsp:include page="/WEB-INF/views/order/callList.jsp"/>
+</div>
+<div class="slick_box order col-9">
+	<div class="orderwrap">
  <c:set var="payNum" value="0"/>		
  <c:forEach items="${orderList}" var="list" varStatus="st">
  		 				
@@ -23,7 +27,7 @@
 		</c:if> 
 		
 		<c:if test="${list.payNum != payNum}">
- 			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
+ 			<div class="listItem">
 	 			<div  style="border-bottom: 1px solid #c7bebe; padding: 20px; height: 20%;">
 	 			<p>결제번호 ${list.payNum}</p>
 	 				<c:if test="${list.seat != null}">
@@ -38,18 +42,18 @@
 	 			</div>
 	 	   <!-- 주문메뉴부분 -->			
 	 			<div class="menuList scrollbar style-4" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 60%;">
-	 				<div style="padding: 15px 60px 40px 60px;">
-		 				<div style="float: left; box-sizing: border-box;">
+		 			<div class="row">
+		 				<div class="fl col-6">
 		 				 	<h5>메뉴</h5>
 		 				</div>
-		 				<div style="float: right; box-sizing: border-box;">
+		 				<div class="fl col-6">
 		 					<h5>수량</h5>
 		 				</div>
-	 				</div> 				
+		 			</div>
 	 	</c:if>		
 	 				<div class="row">	 					
-		 					<span class="menuName">${list.menuName}</span>		 				
-		 					<span class="orderCount">${list.orderCount}</span>	
+		 				<span class="fl col-6 menuName">${list.menuName}</span>		 				
+		 				<span class="fl col-6 orderCount">${list.orderCount}</span>	
 					</div>	
 		 				
 		<c:if test="${fn:length(orderList) == st.count}">	 		 				
@@ -73,7 +77,7 @@
 </div>
 <!--주문탬플릿  -->
 <div id="orderTem" style=" display:none;">
- 			<div style="width: 30%;  margin:10px; height: 580px; display:inline-block; background: #ececec; padding: 25px; border: 1px solid;">
+ 			<div   class="listItem">
 	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
 	 					<p class="payNum"> </p>
 	 					<p class="seat"> </p>
@@ -96,7 +100,7 @@
 	 			</div>
  			</div>
  	</div>	
- 	<jsp:include page="/WEB-INF/views/order/callList.jsp"/>
+ 	
 
 <script>
 

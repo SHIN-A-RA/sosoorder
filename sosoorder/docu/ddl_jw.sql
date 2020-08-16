@@ -255,3 +255,5 @@ and ADDR IS NOT NULL
 select * from member;
 
  select * from seat WHERE userCheck = '0' and storeId = 'atistry' order by seatNum
+ 
+ select * from menu;

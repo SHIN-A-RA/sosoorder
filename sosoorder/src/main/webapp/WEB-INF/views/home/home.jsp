@@ -221,7 +221,7 @@ myApp.controller("myAppCtrl", function($scope){
 	           			<i class="fa fa-shopping-cart"></i> Add to cart
 	           		</div>
 	           	
-	               <p class="btn-details">
+	               <p class="btn-details" name="${menu.menuNum}">
 	                   <i class="fa fa-list"></i>
 	                   <a>More details</a>
 	               </p>
@@ -371,9 +371,39 @@ $(function(){
 			$('.shopping-cart').removeClass('cart-close');
 		}
 	});
+	menuOne();
 })
 
 
+</script>
+<script>
+
+function menuOne(){
+	//메뉴 조회
+	$('.btn-details').on('click', function() {
+		$('#detail').removeClass('disnone');
+		var menuNum = $(this).attr('name');
+		//특정 쿠폰 조회
+		$.ajax({
+			url:'/sosoroder/getMenuHome?menuNum=' + menuNum,
+			type:'GET',
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+			error:function(xhr,status,msg){
+				alert("상태값 :" + status + " Http에러메시지 :"+msg);
+			},
+			success:menuSelectResult
+		});
+	});//detail 버튼 클릭
+}//MenuOne
+
+//메뉴 조회 응답
+function menuSelectResult(menu) {
+	$('#detail .detail_photo img').attr('src','${pageContext.request.contextPath}/resources/download/'+menu.menuImage);
+	$('#detail .detail_title').html(menu.menuName);
+	$('#detail .detail_price').html(menu.menuPrice);
+	$('#detail .detail_contents').html(menu.menuContents);
+}//menuSelectResult
 </script>
 <script>
 $(function(){
@@ -382,9 +412,13 @@ $(function(){
 		category = $(this).html();
 		location.href = "/sosoroder/homeSample?menuCategory=" + category;
 	});
-	
-	
 })
 </script>
+<div id="detail" class="disnone">
+	 <div class="detail_title"> </div>
+	 <div class="detail_photo"><img></div>
+	 <div class="detail_price"> </div>
+	 <div class="detail_contents"> </div>
+</div>
 <%-- <jsp:include page="/WEB-INF/views/store/storePopup.jsp"/> --%>
 <%@include file="/WEB-INF/views/store/storePopup.jsp" %>
