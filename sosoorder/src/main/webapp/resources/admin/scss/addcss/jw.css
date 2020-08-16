@@ -437,7 +437,9 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
 }
 @media  (max-width:1280px) {
 	.listItem{width: calc(50% - 20px);}
+	.ci{font-size:20px}
 }
 @media  (max-width:800px) {
 	.listItem{width: calc(100% - 20px);}
+	.ci{font-size:18px}
 }

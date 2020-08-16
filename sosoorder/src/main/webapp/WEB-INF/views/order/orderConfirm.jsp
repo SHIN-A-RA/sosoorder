@@ -29,7 +29,7 @@ function goPointInsert() {
 
 <div class="row">
 	<div class="col-xl-12 div-tt">
-		<h2 style="text-align:center">주문이 완료되었습니다. 감사합니다!</h2>
+		<h2 style="text-align:center" class="ci">주문이 완료되었습니다. 감사합니다!</h2>
 	</div>
 </div>
 
