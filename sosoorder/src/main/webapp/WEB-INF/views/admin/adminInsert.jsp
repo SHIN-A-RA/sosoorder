@@ -157,8 +157,7 @@ input[type="submit"].login:focus{outline: none;}
 	<div id="formWrapper">
 <div id="form">
 <div class="logo">
-
-
+	<img src="${pageContext.request.contextPath}/resources/images/soso_icon.png" width="77%">
 </div>
 <form action="adminInsert" method="post" name="frm" >
 		<div class="form-item">

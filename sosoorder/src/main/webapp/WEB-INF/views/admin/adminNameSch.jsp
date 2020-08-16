@@ -184,11 +184,11 @@ to {
 			function addrAdd() {
 				//데이터테이블
 				var otable = $('#table_id').DataTable({
-					 searching: false,
+				/* 	 searching: false,
 		             paging: false,
 		             info: false,
 					 ordering:  false,
-					 responsive: true
+					 responsive: true */
 				});
 				//원하는 행을 클릭하면 상호명과 주소를 가져와 해당인풋태그에 전달
 				$('#table_id tbody').on('click', 'tr', function() {

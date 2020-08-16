@@ -197,7 +197,7 @@ myApp.controller("myAppCtrl", function($scope){
 	       </div>
 	       <div class="info">
 	           <div class="row">
-	               <div class="price col-md-6">
+	               <div class="price col-12">
 	                   <h5>${menu.menuName}</h5>
 	                   <h5 class="price-text-color">
 	                   <fmt:formatNumber value="${menu.menuPrice}" pattern="#,###"/></h5>
@@ -238,6 +238,7 @@ myApp.controller("myAppCtrl", function($scope){
 </div>
 
 <div class="shopping-cart cart-close">
+ <div class="shoping-cart-btn ex">x</div>
   <div class="shoping-cart-btn">
   	<div class="shoping-cart-cnt">
   		

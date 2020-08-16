@@ -442,4 +442,17 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
 @media  (max-width:800px) {
 	.listItem{width: calc(100% - 20px);}
 	.ci{font-size:18px}
+	.shopping-cart{width: 95%;height: 83%;}
+	.shopping-cart.cart-close {right: -95%;}
+	
+	.shoping-cart-btn.ex{left: 4%;
+    background: #131010;
+    color: #fff;
+    top: 18px;
+    font-size: 26px;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    border-radius: 50%;}
+    .shopping-cart .title{text-align:center}
 }
