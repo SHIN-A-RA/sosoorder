@@ -48,7 +48,7 @@ $(function(){
    var totalPay = parseInt($("#totalPay").text());
    var var1;
    
-   // 적립금사용금액 출력   
+   // 적립금 적용
    $("#pointDiscount").keyup(function(){ 
 	   $("#pointUse").text($("#pointDiscount").val());
 	   $(".pointUse").val($("#pointDiscount").val());

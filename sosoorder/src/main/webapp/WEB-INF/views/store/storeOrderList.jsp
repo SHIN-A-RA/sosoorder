@@ -17,10 +17,10 @@
 	 		</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
 		 			<c:if test="${status == 0}">
-			 			<button type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" data-paynum="${payNum}">조리시작</button>
+			 			<button type="button" class="btn_upt1" data-paynum="${payNum}">조리시작</button>
 		 			</c:if>
 		 			<c:if test="${status == 1}">
-		 				<button onclick="orderUpdate2(${payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료</button>
+		 				<button onclick="orderUpdate2(${payNum},this)" class="btn_upt2" >조리완료</button>
 		 			</c:if>
 	 			</div>
  			</div>
@@ -28,20 +28,27 @@
 		
 		<c:if test="${list.payNum != payNum}">
  			<div class="listItem">
-	 			<div  style="border-bottom: 1px solid #c7bebe; padding: 20px; height: 20%;">
-	 			<p>결제번호 ${list.payNum}</p>
+	 			<div  style="border-bottom: 1px solid #c7bebe; padding: 10px; height: 20%; ">
+	 			<p style="padding-botton:10px; font-size:20px; font-weight:bold;">주문번호 ${list.payNum}</p>
 	 				<c:if test="${list.seat != null}">
-	 					<p style="color:red;">Table ${list.seat}</p>
+	 					<p style="color:red; font-size: 18px;">Table ${list.seat}</p>
 	 				</c:if>
 	 				<c:if test="${list.addr != null}">
-	 					<p style="color:blue;">주소: ${list.addr}</p>
+	 					<p style="color:blue; font-size: 18px;">배달</p>
+	 					<%-- <p style="color:blue;">${list.addr}</p> --%>
+	 				</c:if>
+	 				<c:if test="${list.payCheck == 0}">
+	 					<p>※계좌이체※</p>
+	 				</c:if>
+	 				<c:if test="${list.payCheck == 1}">
+	 					<p>※카드결제※</p>
 	 				</c:if>
 	 				<c:if test="${list.payCheck == 2}">
-	 					<p style="color:red; ">※현금결제※</p>
+	 					<p>※현금결제※</p>
 	 				</c:if>
 	 			</div>
 	 	   <!-- 주문메뉴부분 -->			
-	 			<div class="menuList scrollbar style-4" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 60%;">
+	 			<div class="menuList" style="box-sizing: border-box; padding: 10px 10px;  height: 60%;">
 		 			<div class="row">
 		 				<div class="fl col-6">
 		 				 	<h5>메뉴</h5>
@@ -60,10 +67,10 @@
 	 		</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
 		 			<c:if test="${list.status == 0}">
-		 				<button type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" data-payNum="${list.payNum}">조리시작</button>
+		 				<button type="button" class="btn_upt1"data-payNum="${list.payNum}">조리시작</button>
 		 			</c:if>
 		 			<c:if test="${list.status == 1}">
-		 				<button onclick="orderUpdate2(${list.payNum},this)" style="padding: 10px; background:#c3c3c3;">조리완료</button>
+		 				<button onclick="orderUpdate2(${list.payNum},this)" class="btn_upt2" >조리완료</button>
 		 			</c:if>
 	 			</div>
  			</div>
@@ -77,26 +84,26 @@
 </div>
 <!--주문탬플릿  -->
 <div id="orderTem" style=" display:none;">
- 			<div   class="listItem">
-	 			<div style="border-bottom: 2px solid #1f1d1d; padding: 20px; height: 25%;">
-	 					<p class="payNum"> </p>
-	 					<p class="seat"> </p>
-	 					<p class="addr"> </p>
+ 			<div class="listItem">
+	 			<div style="border-bottom: 1px solid #c7bebe; padding: 10px; height: 20%; ">
+	 					<p class="payNum" style="padding-botton:10px; font-size:20px; font-weight:bold;"> </p>
+	 					<p class="seat" style="color:red; font-size: 18px;"> </p>
+	 					<p class="addr" style="color:blue; font-size: 18px;"> 
 	 				<p class="payCheck"> </p>
 	 			</div>
-	 			<div class="menuList" style="border-bottom: 2px solid #1f1d1d; box-sizing: border-box; padding: 10px 10px;  height: 55%; overflow-y: scroll;">
-	 				<div style="padding: 15px 60px 40px 60px;">
-		 				<div style="float: left; box-sizing: border-box;">
+	 			<div class="menuList" style="box-sizing: border-box; padding: 10px 10px;  height: 60%;"">
+	 				<div class="row">
+		 				<div class="fl col-6">
 		 				 	<h5>메뉴</h5>
 		 				</div>
-		 				<div style="float: right; box-sizing: border-box;">
+		 				<div class="fl col-4">
 		 					<h5>수량</h5>
 		 				</div>
 	 				</div>
 	 	
 	 			</div>
 	 			<div style="padding: 30px; height: 20%; text-align: -webkit-center;">
-	 				<button  type="button" class="btn_upt1" style="background:#ff5722; padding: 10px;" >조리시작</button>
+	 				<button  type="button" class="btn_upt1">조리시작</button>
 	 			</div>
  			</div>
  	</div>	
@@ -111,8 +118,8 @@ function orderInsert(orderMap){
 	
 	for(i=0; i<orderMap.orderList.length; i++){
 		var menu =	'<div class="row">'+					
-					'<span class="menuName" style="display:inline-block; width:100px;">'+ orderMap.orderList[i].menuName +'</span>'+		 				
-					'<span class="orderCount" style="display:inline-block; width:100px;">'+ orderMap.orderList[i].orderCount +'</span>'	
+					'<span class="fl col-6 menuName">'+ orderMap.orderList[i].menuName +'</span>'+		 				
+					'<span class="fl col-6 orderCount">'+ orderMap.orderList[i].orderCount +'</span>'	
 		+'</div>';
 	
 		//메뉴리스트 뿌리기
@@ -127,15 +134,16 @@ function orderInsert(orderMap){
 	 if(orderMap.payInfo.seat > 0){
 		empty.find(".seat").text("Table:"+orderMap.payInfo.seat);		 
 	 } else if(orderMap.payInfo.addr != null){
-		empty.find(".addr").text("주소:"+orderMap.payInfo.addr);
+	/* 	empty.find(".addr").text("주소:"+orderMap.payInfo.addr); */
+		empty.find(".addr").text("배달");
 	 } 
 	 
 	 if(orderMap.payInfo.payCheck == 0){
-		empty.find(".payCheck").text("계좌이체"); 
+		empty.find(".payCheck").text("※계좌이체※"); 
 	 } else if(orderMap.payInfo.payCheck == 1) {
-		 empty.find(".payCheck").text("카드결제"); 
+		 empty.find(".payCheck").text("※카드결제※"); 
 	 } else if(orderMap.payInfo.payCheck == 2) {
-		 empty.find(".payCheck").text("현금결제"); 
+		 empty.find(".payCheck").text("※현금결제※"); 
 	 }
 
 	
@@ -145,7 +153,7 @@ function orderInsert(orderMap){
 $(".orderwrap").on("click",".btn_upt1", function(){
 	var p = $(this).data("paynum")
 	//couponUpdate 요청
-	$(this).text("조리완료").css("background",'#c3c3c3').attr("onclick", "orderUpdate2("+p+",this)");
+	$(this).text("조리완료").addClass("btn_upt2").attr("onclick", "orderUpdate2("+p+",this)");
 
 	$.ajax({ 
 	    url: "orderUpdate1",  

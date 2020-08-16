@@ -34,21 +34,16 @@ public class EchoHandler extends TextWebSocketHandler{
 	        	map.put(id,session);
 	        }       	
         }
-        System.out.println("==============================");
         logger.info("{} 연결됨", session.getId());
-        System.out.println(sessionList);
     }
 
     //클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        logger.info("========================{}로 부터 {} 받음", session.getId(), message.getPayload());
-        System.out.println(message.getPayload()+"====================");
-        System.out.println(map);
+        logger.info("{}로 부터 {} 받음", session.getId(), message.getPayload());
       //JSON from String to Object
         ObjectMapper mapper = new ObjectMapper();
-        MessageVO msgVO = mapper.readValue(message.getPayload(), MessageVO.class);
-        
+        MessageVO msgVO = mapper.readValue(message.getPayload(), MessageVO.class);      
         try {   	
         	if(msgVO.getCmd().equals("callInsert")) {
         		map.get(msgVO.getStore()).sendMessage(new TextMessage(message.getPayload()));
@@ -61,8 +56,7 @@ public class EchoHandler extends TextWebSocketHandler{
         	}      	
         }catch(Exception e) {
         	e.printStackTrace();
-        }
-    
+        }  
     }
     
     public static void putMessage() throws Exception {
