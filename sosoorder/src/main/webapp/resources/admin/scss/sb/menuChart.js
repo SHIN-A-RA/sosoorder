@@ -1,4 +1,7 @@
 	$(function(){
+		
+		var w = $('#menuChart').width()-2;
+		
 		var container = document.getElementById('menuChart');
 		var series =[];		
 		 $.ajax({
@@ -18,7 +21,7 @@
 		};
 		var options = {
 		    chart: {
-		        width: 600,
+		        width: w,
 		        height: 600,
 		        title: '총 판매량',
 		        format: function(value, chartType, areaType, valuetype, legendName) {
@@ -60,6 +63,14 @@
 		tui.chart.registerTheme('myTheme', theme);
 		options.theme = 'myTheme';
 		
-		tui.chart.pieChart(container, data, options);
+		var chart1 = tui.chart.pieChart(container, data, options);
+		
+		$(window).bind('resize', function(e) {
+			chart1.resize({
+				width: $('#menuChart').width()-2,
+				height : 600
+			});
+		}); 
+		
 		
 	});

@@ -16,9 +16,11 @@
 		});
 	});
 </script>
-<div class="div-tt">
-   <h2>직원목록</h2>
-</div><br>
+ <!-- Page Heading -->
+   <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15 mt30" style="border-bottom:1px solid #d2d2d2">
+      <h1 class="h3 mb-0 text-gray-800">점포관리 - 직원 목록</h1>
+    </div>
+    
 	<div class="row">
 		<div class="col">
 			<table class="display" id="empList">
@@ -71,19 +73,20 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<input type="button" class="btn btn-primary"
+			<input type="button" class="btn btn-primary fl"
 				onClick="location.href='empInsertForm'" value="등록" />
 		</div>
 	</div>
 
-</div>
 <!-- end div_f -->
 
 <script>
 	$(function(){
-		$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
-		$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
-		$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
-		$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(2)').css("backgroundColor", "#eaecf4")
+		if($(window).width() >768) {
+			$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
+			$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(2)').css("backgroundColor", "#eaecf4")
+		}
 	});
 </script>

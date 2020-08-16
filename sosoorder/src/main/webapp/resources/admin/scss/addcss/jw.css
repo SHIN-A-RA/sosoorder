@@ -1,20 +1,5 @@
 @charset "UTF-8";
 .sidebar {z-index:9;}
-/* .cookWrap{
-	position: absolute;
-    width: 300px;
-    height: 100px;
-    top: 50%;
-    left: 50%;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    background-color:#fff;
-    border-radius:10px;
-    border:2px solid #333;
-}
-.cookWrap .ex{width:100%; text-align:right; display: inline-block; padding:13px 18px;}
-.cookWrap .ex i{cursor: pointer; font-size:30px}
-.cookWrap #cook{} */
 /*head*/
 .gd_bg1 {
   background-color: red; /* For browsers that do not support gradients */
@@ -58,6 +43,7 @@ div:hover, div:hover code, div:focus, div:focus code {
 .none{display: none !important; }
 .mb11{margin-bottom: 11px;}
 .mt11{margin-top: 11px;}
+.mt30{margin-top: 30px;}
 .pd30{padding : 30px;}
 .pd15{padding : 15px;}
 .pd_b0{padding-bottom:0;}
@@ -80,7 +66,6 @@ div:hover, div:hover code, div:focus, div:focus code {
 .slick_box.menu_list_wrap .next{right:0; margin-right:-5%;}
 .slick_box.menu_category{width:100%;position: absolute;z-index: 6; top: 60px;left: 0; 
 			background: #fff;    padding: 0 10%;}
-
 .menu_bar{width:100%;
 			text-align: center; }
 .menu_bar > div a{font-size: 20px; color: #292828; font-weight: 600; line-height: 70px;
@@ -96,6 +81,14 @@ div:hover, div:hover code, div:focus, div:focus code {
 .menu_list > div .info div.detail:hover{color:#ca1818}
 .menu_list > div .info .title_dc{}
 
+.slick_box.menu_category2{width: 100%; z-index: 6;left: 0; margin-bottom: 25px;}
+.slick_box.menu_category2 .menu_bar{width:100%; text-align: center; }
+.slick_box.menu_category2 .menu_bar > div a{font-size: 20px; color: #292828; font-weight: 600; line-height: 70px;
+			display: inline-block; width: 100%; height: 100%;}
+.slick_box.menu_category2 .menu_bar > div a:hover{color:#ca1818}
+.slick_box.menu_category2 .menu_bar > div a.active{color:#ca1818}
+.slick_box.menu_category2 .prev{left:0;}
+.slick_box.menu_category2 .next{right:0;}
 
 
 

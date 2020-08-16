@@ -16,30 +16,29 @@
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
+<!-- Page Heading -->
+<div
+	class="d-sm-flex align-items-center justify-content-between mb-4 pd15 mt30"
+	style="border-bottom: 1px solid #d2d2d2">
+	<h1 class="h3 mb-0 text-gray-800">점포관리 - 메뉴 관리</h1>
+</div>
+
 <!-- 메뉴 구분-->
-<div class="slick_box menu_category">
-	<div class="menu_bar"></div>
+<div class="slick_box menu_category2">
+	<div class="menu_bar">
+		<div><a class='MCategory all'>전체</a></div>
+	</div>
 	<script>
 		var jbString = "${menuCategory.storeMenu}";
 		var jbSplit = jbString.split("|");
 		for ( var i in jbSplit) {
 			$(".menu_bar").append(
-					"<div><a class='MCategory'>" + jbSplit[i] + "</a></div>");
+					"<div><a class='MCategory m_"+ jbSplit[i] +"'>" + jbSplit[i] + "</a></div>");
 		}
 	</script>
 	<span class="prev" id="aro_prev1"><i class="fas fa-caret-left"
 		aria-hidden="true"></i> </span> <span class="next" id="aro_next1"><i
 		class="fa fa-caret-right" aria-hidden="true"></i></span>
-</div>
-<br><br><br><br>
-<!-- Page Heading -->
-<div
-	class="d-sm-flex align-items-center justify-content-between mb-4 pd15"
-	style="border-bottom: 1px solid #d2d2d2">
-	<h1 class="h3 mb-0 text-gray-800">점포관리 - 메뉴 관리</h1>
-</div>
-<div>
-	<h3 align="center">메뉴목록</h3>
 </div>
 
 <div class="row">
@@ -106,23 +105,47 @@
 		arrows : true,
 		slidesToShow : 5,
 		slidesToScroll : 5,
-		fade : false
+		fade : false,
+		responsive: [ // 반응형 웹 구현 옵션
+			{  
+				breakpoint: 800, 
+				settings: {
+					slidesToShow:3 
+				} 
+			}
+		]
 	});
 </script>
 <script>
 	$(function() {
 		$('.MCategory').on('click', function() {
 			category = $(this).html();
-			location.href = "storeMenuList?menuCategory=" + category;
+			if(category != '전체'){
+				location.href = "storeMenuList?menuCategory=" + category;
+			}else{
+				location.href = "storeMenuList";
+			}
 		});
+		
+		categoryCss();
+		function categoryCss(){
+			if('${param.menuCategory}' == ''){
+				$('.all').addClass('active');	
+			}
+			$('.m_${param.menuCategory}').addClass('active');
+		}
+		
 	})
 </script>
 <script>
 	$(function(){
-		$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
-		$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
-		$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
-		$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(3)').css("backgroundColor", "#eaecf4")
+		
+		if($(window).width() >768) { 
+			$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
+			$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(3)').css("backgroundColor", "#eaecf4")
+		}
 		
 	});
 </script>

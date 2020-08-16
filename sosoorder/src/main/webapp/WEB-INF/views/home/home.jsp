@@ -309,8 +309,8 @@ myApp.controller("myAppCtrl", function($scope){
 			autoplaySpeed: 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
 			prevArrow: $('#aro_prev2'),
 			nextArrow: $('#aro_next2'),
-			slidesToShow: 4,
-			slidesToScroll: 4,
+			slidesToShow: 5,
+			slidesToScroll: 5,
 			arrows: true,
 			fade: false,
 			responsive: [ // 반응형 웹 구현 옵션
