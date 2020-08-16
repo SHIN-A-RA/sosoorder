@@ -298,7 +298,15 @@ myApp.controller("myAppCtrl", function($scope){
 		arrows: true,
 		slidesToShow: 5,
 		slidesToScroll: 5,
-		fade: false
+		fade: false,
+		responsive: [ // 반응형 웹 구현 옵션
+			{ 
+				breakpoint: 800,
+				settings: {	
+					slidesToShow:3 
+				} 
+			}
+		]
 	}); 
 	 
 	 $('.menu_list').slick({

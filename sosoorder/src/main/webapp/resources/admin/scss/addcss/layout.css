@@ -146,6 +146,9 @@ display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transiti
 	#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover a {}
 	#hd_gnb .gnb_dp1_wrap li.gnb_dp1.menu0:hover{background:#fff; color:#e8e8e8}
 	#hd_gnb .gnb_dp1_wrap li.gnb_dp1 span:after {display:none}
+	.menu_list .col-item .photo {height: 270px !important;}
+	.container-fluid {width: 94% !important;}
+    
 }
 @media all and (max-width:550px) {
 	#hd_gnb .hd_gnb_logo img{height:40px;}

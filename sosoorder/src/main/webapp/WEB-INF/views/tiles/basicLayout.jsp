@@ -164,7 +164,16 @@
 			               	  </script>
 	             			<span class="mr-2 d-none d-lg-inline mr-storeId" style="font-size: 21px;"></span>
 	             		</c:if>
-	               <i class="fa fa-user-circle-o gb_click" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	             		<c:if test="${empty sessionScope.phone && empty sessionScope.storeId}">
+			               <i class="fa fa-user-circle-o gb_click" 
+			               onclick="location.href='/sosoroder/memberLoginForm'"
+			               aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	              		</c:if>
+	              		<c:if test="${not empty sessionScope.phone || not empty sessionScope.storeId}">
+			               <i class="fa fa-user-circle-o gb_click" 
+			               onclick="location.href='/sosoroder/memberLoginForm'"
+			               aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	              		</c:if>
 	               
 	              </a>
               </div>
