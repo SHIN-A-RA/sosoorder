@@ -264,6 +264,7 @@
 	<script>
 	$(function(){
 		$( '.menu2' ).addClass( 'active' );
+		$('.menu0 span a').html($('.active').attr('name'));
 	});
 	
 </script>

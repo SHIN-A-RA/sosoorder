@@ -134,10 +134,24 @@ display:block; position:absolute; bottom:0; left:50%; margin-left:-40%; transiti
 	
 	
 }
-
+.menu0{display:none}
+@media all and (max-width:800px) {
+	.menu0{display:block; height:60px;border-bottom:none;}
+	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap {    width: 100%;  margin: 0; height:58px}
+	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span { width: 100%; height: 100%;}
+	#hd_wrap.hd-up #hd_gnb .gnb_dp1_wrap li.gnb_dp1 span a{ width: 100%; height: 100%; display:inline-block}
+	#hd_gnb .gnb_dp1_wrap li.gnb_dp1 { width: 100%; float: none; background: #fff; 
+										border-top: 1px solid #e8e8e8;}
+	#hd_gnb .gnb_dp1_wrap li.gnb_dp1:hover{background:#ddd;}
+	#hd_wrap.hd-up .gnb_dp1_wrap li.gnb_dp1:hover a {}
+	#hd_gnb .gnb_dp1_wrap li.gnb_dp1.menu0:hover{background:#fff; color:#e8e8e8}
+	#hd_gnb .gnb_dp1_wrap li.gnb_dp1 span:after {display:none}
+}
 @media all and (max-width:550px) {
 	#hd_gnb .hd_gnb_logo img{height:40px;}
 	#hd_gnb .hd_gnb_logo{top:10px; margin-left:-60px;}
 	#hd_wrap.hd-up .hd_gnb_logo{top:10px; margin-left:-60px;}
+	
+	
 }
 

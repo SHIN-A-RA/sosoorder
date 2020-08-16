@@ -346,6 +346,7 @@ myApp.controller("myAppCtrl", function($scope){
 <script>
 	$(function(){
 		$( '.menu1' ).addClass( 'active' );
+		$('.menu0 span a').html($('.active').attr('name'));
 	});
 	
 </script>

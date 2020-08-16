@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div
-	class="d-sm-flex align-items-center justify-content-between mb-4 pd15"
+	class="d-sm-flex align-items-center justify-content-between mb-4 pd15 mt30"
 	style="border-bottom: 1px solid #d2d2d2">
 	<h1 class="h3 mb-0 text-gray-800">좌석 및 팝업관리</h1>
 </div>
@@ -18,7 +18,13 @@
 	// 테이클 칸을 클릭하면 인풋태그로 값 가져가는 거.
 	$(function() {
 		//목록
-		var otable = $('#table_idd').DataTable({});
+		var otable = $('#table_idd').DataTable({
+			searching: false,
+            paging: false,
+            info: false,
+			ordering:  false,
+			responsive: true
+		});
 		$('#table_idd').on('click', 'tr', function() {
 			
 			$(this).children().eq(0).text();
@@ -39,59 +45,68 @@
 		});
 	});
 </script>
-<div class="row" style="font-weight:bold;">
-<div class="col" align="center" >
-<h3>좌석</h3>
-</div>
-<div class="col" align="center">
-<h3>팝업목록</h3>
-</div></div>
+
 <div class="row">
 
-	<div class="col">
+	<div class="col-12">
+		<div class="mb-4 pd15">
+			<h1 class="h4 mb-0">좌석 관리</h1>
+		</div>
 		<div id="seatList">
-			<table id="table_idd" class="display tb_style"
-				style="width: 95%">
-				<thead align="center">
-					<tr>
-						<th style="display: none">seatNum</th>
-						<th>테이블 번호</th>
-						<th>사용 유/무</th>
-						<th>사용 변경</th>
-					</tr>
-				</thead>
-				<tbody align="center">
-					<c:forEach items="${SeatList}" var="List">
+			<div class="col-6 fl">
+				<table id="table_idd" class="display tb_style" style="width: 100%">
+					<thead align="center">
 						<tr>
-							<td style="display: none">${List.seatNum}</td>
-							<td>${List.seat}</td>
-							<c:choose>
-							<c:when test="${List.userCheck==1}">
-							<td>사용가능</td>
-							</c:when>
-							<c:otherwise>
-							<td>사용불가</td>
-							</c:otherwise>
-							</c:choose>
-							
-							<c:choose>
-							<c:when test="${List.userCheck==1}">
-							<td><div class="btn btn-outline-danger seatDelete" ><input type="hidden" value="${List.seatNum}" class="seatNum">사용 안함</div></td>
-							</c:when>
-							<c:otherwise>
-							<td><div class="btn btn-outline-danger seatUpdate" ><input type="hidden" value="${List.seatNum}" class="seatNum">좌석 배정</div></td>
-							</c:otherwise>
-							</c:choose>
-							
-							
+							<th style="display: none">seatNum</th>
+							<th>테이블 번호</th>
+							<th>사용 유/무</th>
+							<th>사용 변경</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody align="center">
+						<c:forEach items="${SeatList}" var="List">
+							<tr>
+								<td style="display: none">${List.seatNum}</td>
+								<td>${List.seat}</td>
+								<c:choose>
+								<c:when test="${List.userCheck==1}">
+								<td>사용가능</td>
+								</c:when>
+								<c:otherwise>
+								<td>사용불가</td>
+								</c:otherwise>
+								</c:choose>
+								
+								<c:choose>
+								<c:when test="${List.userCheck==1}">
+								<td><div class="btn btn-outline-danger seatDelete" ><input type="hidden" value="${List.seatNum}" class="seatNum">사용 안함</div></td>
+								</c:when>
+								<c:otherwise>
+								<td><div class="btn btn-outline-danger seatUpdate" ><input type="hidden" value="${List.seatNum}" class="seatNum">좌석 배정</div></td>
+								</c:otherwise>
+								</c:choose>
+								
+								
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<form action="seatInsert" method="post" class="col-6 fr">
+				<div>
+					<p class="mb11">등록하고자 하는 좌석 번호를 입력하고<br>등록 버튼을 눌러주세요</p>
+					<input type="hidden" class="seatNum mt11" name="seatNum" placeholder="seatNum">
+					<input type="text" id="seat" name="seat" class="form-control" placeholder="테이블 번호">
+					<input type="submit" class="btn btn-success col mt11" value="새 테이블 등록">
+				</div>
+			</form>
 		</div>
 		
 	</div>
-	<div class="col">
+	<div class="col-12" style="border-top: 1px solid #d2d2d2;margin-top: 50px; ">
+		<div class="mb-4 pd15 mt30">
+			<h1 class="h4 mb-0">팝업 관리</h1>
+		</div>
 		<div>
 			<table id="table_id" class="display" width="100%">
 				<thead>
@@ -108,47 +123,12 @@
 				</tbody>
 			</table>
 		</div>
-		<br>
-		<div align="right">
-			<input type="button" class="btn btn-danger btn-lg btn-block"
-				onClick="location.href='storePopupInsertForm'" value="등록" />
+		
+		<div class="fr">
+			<input type="button" class="btn btn-danger mt11"
+				onClick="location.href='storePopupInsertForm'" value="팝업등록" />
 		</div>
-		<br><br>
-		<div>
-			<form action="seatInsert" method="post" enctype="multipart/form-data">
-				<div>
-					<div align="center">
-						<h3>좌석등록/변경</h3>
-					</div>
-					<br> <br>
-					<div align="center">
-						<p></p>
-						<span> <span> <input type="hidden" class="seatNum"
-								name="seatNum" placeholder="seatNum"></span> 
-								<input type="text"
-							id="seat" name="seat" placeholder="테이블 번호"></span> 
-							<span>
-							<input
-							type="submit" class="btn btn-success" value="새 테이블 등록"/></span>
-							
-							<br><br>
-							<p><h5><-등록하고자 하는 테이블 번호를 입력하고 등록 버튼을 눌러주세요-></h5></p>
-							
-							
-							
-							<!-- <p></p><br><span> <input type="hidden" id="seatNum"
-								name="seatNum" placeholder="seatNum"></span>
-							<span><input type="text"
-							id="seat" name="seat" placeholder="테이블 번호"></span>
-							 <span>
-							<input type="button" class="btn btn-danger" id="seatDelete"
-							value="빈 좌석으로 변경" />
-						</span><span><input type="button" class="btn btn-primary" id="seatBack"
-							value="사용 좌석으로 변경" /> </span> -->
-					</div>
-				</div>
-			</form>
-		</div>
+
 	</div>
 </div>
 
@@ -159,6 +139,7 @@
 		popOne();
 	});
 	//목록
+
 	function popList() {
 		var otable = $('#table_id')
 				.DataTable(
@@ -188,7 +169,12 @@
 										render : function(data, type, row) {
 											return "<a class=\'btnDelete\' name=\'" + data.popNum + "\'><i class=\'fa fa-trash\' aria-hidden=\'true\'></i></a>";
 										}
-									} ]
+									} ],
+									searching: false,
+						             paging: false,
+						             info: false,
+									 ordering:  false,
+									 responsive: true
 						});
 	}
 
@@ -227,10 +213,11 @@
 
 <script>
 	$(function(){
-		$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
-		$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
-		$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
-		$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(5)').css("backgroundColor", "#eaecf4")
-		
+		if($(window).width() >768) { 
+			$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
+			$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(5)').css("backgroundColor", "#eaecf4")
+		}
 	});
 </script>

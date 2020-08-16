@@ -6,20 +6,14 @@
     <div class="d-sm-flex align-items-center justify-content-between pd15" style="border-bottom:1px solid #d2d2d2">
       <h1 class="h3 mb-0 text-gray-800 insertTitle">호출 <i class="fa fa-times insert_ex_dtn" aria-hidden="true"></i></h1>
     </div>
- <div class="callInsert_wrap">   
-	<select name="seat" id="seat" class="input-group fl">
-    	<option value="">테이블 선택</option>
-    	<c:forEach items="${seatListCall}" var="seat">
-    			<option value="${seat.seat}"
-    			<c:if test="${seat.seat == seatCheck.seat}">selected="selected"</c:if>
-    			>테이블번호 : ${seat.seat}</option>
-    		
-    	</c:forEach>
+ <div class="callInsert_wrap row">   
+	<select name="seat" id="seat" class="input-group fl col-12">
+    	<option value="" class="fi">테이블 선택</option>
 	</select>
-	<input type="text" id="message" class="input-group fr" placeholder="요청사항을 입력하세요"/>
-	<input type="button" id="sendBtn" class="btn btn-primary fr" value="요청"/>
+	<input type="text" id="message" class="input-group fr col-12" placeholder="요청사항을 입력하세요"/>
+	<input type="button" id="sendBtn" class="btn btn-primary fr col-12 " value="요청"/>
 	
-	<input type="hidden" id="msg" class="input-group "/>
+	<input type="hidden" id="msg" class="input-group"/>
 	<!-- <div id="messageArea"></div> -->
 
 </div>
@@ -60,4 +54,36 @@
 		    } 
 		 });  
 	}//dbInsert
+	
+	// 좌석
+	$(function(){
+		seatList();
+	})
+	
+	function seatList(){
+		$.ajax({ 
+		    url: "/sosoroder/seatList",  
+		    type:'GET',
+			contentType:'application/json',
+			dataType:'json',
+		    success:seatListResult,
+		    error:function(xhr, status, message) { 
+		        alert(" status: "+status+" er:"+message);
+		    } 
+		 });  
+	}//seatList
+	//call 목록 조회 응답
+    			
+    			
+	function seatListResult(data) {
+		$.each(data,function(idx,item){
+			$('#seat').find('.fi')
+			.after('<option class="seat_' + item.seat + '" value="' + item.seat + '"' +
+						'<c:if test="${param.seat==' + item.seat + '}">selected="selected"</c:if>>' +
+					    '테이블번호 :'+ item.seat + '</option>');
+			
+			$('#seat .seat_${sessionScope.seat}').attr('selected', 'selected');
+			
+		});//each
+	}//seatListResult
 </script>

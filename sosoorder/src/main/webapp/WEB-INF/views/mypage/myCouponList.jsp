@@ -44,6 +44,7 @@ function myCouponDelete() {
 <script>
 	$(function(){
 		$( '.menu4' ).addClass( 'active' );
+		$('.menu0 span a').html($('.active').attr('name'));
 	});
 	
 </script>
