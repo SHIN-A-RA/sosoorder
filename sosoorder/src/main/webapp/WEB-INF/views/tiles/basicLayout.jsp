@@ -222,10 +222,10 @@
 			    toast.classList.contains("show") ?
 			        (clearTimeout(removeToast), removeToast = setTimeout(function () {
 			            document.getElementById("cook").classList.remove("show")
-			        }, 1000)) :
+			        }, 3000)) :
 			        removeToast = setTimeout(function () {
 			            document.getElementById("cook").classList.remove("show")
-			        }, 1000)
+			        }, 3000)
 			}
 			</script>
 			
