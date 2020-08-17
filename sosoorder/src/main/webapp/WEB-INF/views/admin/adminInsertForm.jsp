@@ -25,7 +25,7 @@
 <script
 	src="//cdn.jsdelivr.net/gh/stove99/jquery-modal-sample@v1.4/js/modal.js"></script>
 
-<!-- <script>
+ <script>
 	//필수 입력 체크, 정규식
 	function validCheck() {
 
@@ -40,14 +40,14 @@
 
 		//비밀번호
 		var passwdCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
-		var storePwd = userIdCheck.test(window.document.frm.storePwd.value);
+		var storePwd = passwdCheck.test(window.document.frm.storePwd.value);
 		if (window.document.frm.storePwd.value == "" || storePwd == false) {
 			alert("비밀번호는 영문 대문자와 소문자, 숫자, 특수문자를 하나 이상 포함하여야 생성가능합니다.(8~16자)");
 			frm.storeId.focus();
 			return;
 		}
 
-		//계좌번호(숫자) + replace로 - 제거 해줘야함
+/* 		//계좌번호(숫자) + replace로 - 제거 해줘야함
 		var regexp = /^[0-9]*$/;
 		var accountNum = regexp.test(window.document.frm.accountNum.value);
 		if (window.document.frm.accountNum.value == "" || accountNum == false) {
@@ -55,7 +55,7 @@
 			frm.accountNum.focus();
 			return;
 		}
-		;
+		; */
 
 		//상호명(null체크만)
 		if (window.document.frm.storeName.value == "") {
@@ -304,7 +304,7 @@
 			<div class="form-item">
 				<p class="formLabel">계좌번호</p>
 				<input type="text" name="accountNum" id="accountNum"
-					class="form-style" autocomplete="off" />
+					class="form-style" autocomplete="off"/>
 			</div>
 			<p></p>
 			<button type="button" class="btn btn-success" onclick="validCheck()">가입완료</button>
