@@ -7,14 +7,14 @@
 	float: right;
 }
 </style>
-<div>
-	<h3 id="un">회원정보 수정</h3>
+<!-- Page Heading -->
+<div
+	class="d-sm-flex align-items-center justify-content-between mb-4 pd15 mt30"
+	style="border-bottom: 1px solid #d2d2d2">
+	<h1 class="h3 mb-0 text-gray-800">점포관리 - 회원정보 수정</h1>
 </div>
-<br>
-<br>
-<br>
 <form action="storeMemberUpdate" method="post"
-	enctype="multipart/form-data" name="storeMemberUpdate"
+	name="storeMemberUpdate"
 	id="storeMemberUpdate">
 	<input type="hidden" name="memberNum" value="${oneSm.memberNum}" />
 	<div class="row">
@@ -33,7 +33,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">주소</span>
 				</div>
-				<input class="form-control selectmenu" name="delAddr" id="delAddr"
+				<input class="form-control selectmenu" name="delAddr"
 					style="text-align: center;" value="${oneSm.delAddr}">
 
 			</div>
@@ -44,7 +44,7 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text">적립금</span>
 			</div>
-			<input class="form-control selectmenu" name="point" id="point"
+			<input class="form-control selectmenu" name="point"
 				style="text-align: center;" value="${oneSm.point}">
 
 		</div>
@@ -58,3 +58,14 @@
 			value="회원정보삭제" />
 	</div>
 </form>
+
+<script>
+	$(function(){
+		if($(window).width() >768) { 
+			$( '.navbar-nav li.li_1 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_1 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_1 #collapseTwo' ).addClass("show");
+			$('.navbar-nav li.li_1 #collapseTwo .collapse-item:nth-child(4)').css("backgroundColor", "#eaecf4")
+		}
+	});
+</script>

@@ -74,7 +74,7 @@ fullCalendar
 
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2; margin-top: 85px;">
+<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15  mt30" style="border-bottom:1px solid #d2d2d2; margin-top: 85px;">
   <h1 class="h3 mb-0 text-gray-800">급여관리</h1>
 </div>	
 
@@ -285,68 +285,132 @@ $(function(){
 <!--====================================
  받아온 데이터 출력 출근기록 및 근무시간
 =====================================-->
-<div class="col-xl-4 fl mb-4" style="">
-	<h3 class="basic_tb_th_up">
-		직원출근현황<span id="today"></span>
-	</h3>
-	<div style="height: 300px; overflow-y: auto; overflow-x: hidden;">
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>근무요일</th>
-					<th>근무날짜</th>
-					<th>출근시간</th>
-					<th>퇴근시간</th>
-					<th>합계</th>
-				</tr>
-			</thead>
-			<tbody id="empSETable">
-			</tbody>
-		</table>
-	</div>
-</div>
+ <div class="col-xl-4 col-lg-7 fr">
+   <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+       <h6 class="m-0 font-weight-bold text-primary">직원출근현황 <span id="today"></span></h6>
+     </div>
+     <!-- Card Body -->
+     <div class="card-body">
+       <div class="chart-area2">
+		<div class="table-responsive">
+  <!--Table-->
+  <table class="table">
+
+    <!--Table head-->
+    <thead>
+      <tr>
+        <th class="th-lg">근무요일</th>
+		<th class="th-lg">근무날짜</th>
+		<th class="th-lg">출근시간</th>
+		<th class="th-lg">퇴근시간</th>
+		<th class="th-lg">합계</th>
+      </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody id="empSETable">
+    </tbody>
+    <!--Table body-->
+
+  </table>
+  <!--Table-->
+
+</div>  
+       </div>
+     </div>
+   </div>
+ </div>
+ 
 <!--====================================
  전직원 월급
 =====================================-->
-<div class="col-xl-4 fl mb-4">
-	<h3 class="basic_tb_th_up">
-		지난달 월급<span id="today"></span>
-	</h3>
-	<div style="height: 230px; overflow-y: auto; overflow-x: hidden;">
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>직원 이름</th>
-					<th>급여</th>
-				</tr>
-			</thead>
-			<tbody id="allEmpSal">
-			</tbody>
-		</table>
-	</div>
-</div>
 
+ <div class="col-xl-4 col-lg-7 fr">
+   <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+       <h6 class="m-0 font-weight-bold text-primary">지난달 월급 <span id="today"></span></h6>
+     </div>
+     <!-- Card Body -->
+     <div class="card-body">
+       <div class="chart-area2">
+		<div class="table-responsive">
+  <!--Table-->
+  <table class="table">
+
+    <!--Table head-->
+    <thead>
+      <tr>
+        <th class="th-lg">직원 이름</th>
+		<th class="th-lg">급여</th>
+      </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody id="allEmpSal">
+    </tbody>
+    <!--Table body-->
+
+  </table>
+  <!--Table-->
+
+</div>  
+       </div>
+     </div>
+   </div>
+ </div>
 <!--====================================
 시급 계산
 =====================================-->
-<div class="col-xl-4 fl mb-4">
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th>근무 총시간</th>
-				<th>총 급여</th>
-			</tr>
-		</thead>
-		<tbody id="totalSalary">
-		</tbody>
-	</table>
-</div>
+ <div class="col-xl-4 col-lg-7 fr">
+   <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+       <h6 class="m-0 font-weight-bold text-primary">시급계산 <span id="today"></span></h6>
+     </div>
+     <!-- Card Body -->
+     <div class="card-body">
+       <div class="chart-area2">
+		<div class="table-responsive">
+  <!--Table-->
+  <table class="table">
+
+    <!--Table head-->
+    <thead>
+      <tr>
+		<th class="th-lg">근무 총시간</th>
+		<th class="th-lg">총 급여</th>
+      </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody id="totalSalary">
+    </tbody>
+    <!--Table body-->
+
+  </table>
+  <!--Table-->
+
+</div>  
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+
 
 <script>
 	$(function(){
-		$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
-		$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
-		$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
-		$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(4)').css("backgroundColor", "#eaecf4")
+		if($(window).width() >768) {
+			$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
+			$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(4)').css("backgroundColor", "#eaecf4")
+		}
 	});
 </script>

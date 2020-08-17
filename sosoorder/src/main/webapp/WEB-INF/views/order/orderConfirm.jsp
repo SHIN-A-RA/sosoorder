@@ -29,7 +29,7 @@ function goPointInsert() {
 
 <div class="row">
 	<div class="col-xl-12 div-tt">
-		<h2 style="text-align:center">주문이 완료되었습니다. 감사합니다!</h2>
+		<h2 style="text-align:center" class="ci">주문이 완료되었습니다. 감사합니다!</h2>
 	</div>
 </div>
 
@@ -38,11 +38,11 @@ function goPointInsert() {
 	<div class="col-xl-12" style="background: black; border-bottom: 1px solid #e0e0e0;">
 		<h2 style="text-align: center; padding: 15px; color:white;">주문정보</h2>
 	</div>
-	<div class="col-xl-8" style="padding: 15px; background: white; font-weight: bold;">주문메뉴</div>
-	<div class="col-xl-4" style="padding: 15px; background: white; font-weight: bold;">수량</div>
+	<div class="col-8" style="padding: 15px; background: white; font-weight: bold;">주문메뉴</div>
+	<div class="col-4" style="padding: 15px; background: white; font-weight: bold;">수량</div>
 	 <c:forEach items="${oderList}" var="order">
-		<div class="scroll1 col-xl-8 div_menu1">${order.menuName}</div>
-		<div class="scroll1 col-xl-4 div_menu1">${order.orderCount}</div>		
+		<div class="scroll1 col-8 div_menu1">${order.menuName}</div>
+		<div class="scroll1 col-4 div_menu1">${order.orderCount}</div>		
 	 </c:forEach>
 </div> 
 

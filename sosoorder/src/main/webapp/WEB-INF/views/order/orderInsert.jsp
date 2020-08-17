@@ -48,7 +48,7 @@ $(function(){
    var totalPay = parseInt($("#totalPay").text());
    var var1;
    
-   // 적립금사용금액 출력   
+   // 적립금 적용
    $("#pointDiscount").keyup(function(){ 
 	   $("#pointUse").text($("#pointDiscount").val());
 	   $(".pointUse").val($("#pointDiscount").val());
@@ -164,7 +164,7 @@ function removeChar(event) {
  </div>
  
 <!-- 좌석 셀렉트 박스 -->
- <div calss="row">
+ <div class="row">
     <div class="col-xl-4 basic">
     	<span>좌석번호
    				 <select name="selectSeat" id="selectSeat" style="width: 100px; height: 30px;">

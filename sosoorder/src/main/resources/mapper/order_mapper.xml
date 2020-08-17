@@ -75,8 +75,8 @@
 		</where>
 	</select>
 	
-	<insert id="payInsert" parameterType="OrderCptVO">  
-	 <selectKey resultType="string" keyProperty="payNum" order="BEFORE">
+<insert id="payInsert" parameterType="OrderCptVO">  
+	<selectKey resultType="string" keyProperty="payNum" order="BEFORE">
         SELECT NVL(max(PAYNUM), 0)+1 FROM PAYMENT       
     </selectKey>  
 	INSERT INTO PAYMENT 
@@ -99,19 +99,19 @@
 		 (SELECT memberNum FROM member WHERE phone = #{phone}), 
 		 #{totalPay}, 
 		 '0')
-   </insert>
+ </insert>
 
-	<select id="paymentProc"  statementType="CALLABLE"  parameterType="hashmap">
-    { CALL PAYMENT_PROC (
-		    #{serialNum},
-		    #{pointUse},
-		    #{storeId},
-		    #{phone},
-		    #{addr},
-		    #{cellphone},
-		    #{payNum}
-    ) }
-	</select>
+<select id="paymentProc"  statementType="CALLABLE"  parameterType="hashmap">
+   { CALL PAYMENT_PROC (
+	    #{serialNum},
+	    #{pointUse},
+	    #{storeId},
+	    #{phone},
+	    #{addr},
+	    #{cellphone},
+	    #{payNum}
+   ) }
+</select>
 	
 	<insert id="insertPo" parameterType="OrderCptVO">  
 	insert into POINT 

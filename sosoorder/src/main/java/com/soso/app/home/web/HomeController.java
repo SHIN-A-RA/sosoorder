@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ import com.soso.app.menu.service.MenuVO;
 import com.soso.app.order.call.EchoHandler;
 import com.soso.app.order.service.OrderCptVO;
 import com.soso.app.seat.service.SeatVO;
+import com.soso.app.store.service.StoreCouponVO;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -150,6 +152,12 @@ public class HomeController {
 		return "pdfView";
 	}
 	
+	@RequestMapping(value="/getMenuHome", method=RequestMethod.GET, 
+			   headers = {"Content-type=application/json"})
+	@ResponseBody
+	public Map getMenuHome(MenuVO menuVO, Model model,HttpSession session) {
+		return menuService.getMenu(menuVO);
+	}
 	
 
 }

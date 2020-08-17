@@ -62,7 +62,8 @@
     
     <script type="text/javascript">
 
-		let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
+		//let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
+		let sock = new SockJS("http://localhost/sosoroder/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
@@ -81,9 +82,11 @@
 				orderMap = JSON.parse(msg.msg);
 				orderInsert(orderMap);
 			} else if(msg.cmd == 'startCook'){
-				$("#cook").html(msg.msg)
+				$("#cook").addClass('show').html(msg.msg);
+				toast();
 			} else if(msg.cmd == 'endCook'){
-				$("#cook").html(msg.msg)
+				$("#cook").addClass('show').html(msg.msg);
+				toast();
 			} 
 			
 			
@@ -99,7 +102,10 @@
 </head>
 
 <body id="page-top">
-
+<div id="callInsert" class="disnon">
+ <jsp:include page="/WEB-INF/views/order/callInsert.jsp" flush="true"/>
+</div>
+<div class="callInsrt_bg disnon"></div>
   <!-- Page Wrapper -->
   <div id="wrapper">
   	<c:if test="${sessionScope.storeId != null}">
@@ -158,7 +164,16 @@
 			               	  </script>
 	             			<span class="mr-2 d-none d-lg-inline mr-storeId" style="font-size: 21px;"></span>
 	             		</c:if>
-	               <i class="fa fa-user-circle-o gb_click" aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	             		<c:if test="${empty sessionScope.phone && empty sessionScope.storeId}">
+			               <i class="fa fa-user-circle-o gb_click" 
+			               onclick="location.href='/sosoroder/memberLoginForm'"
+			               aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	              		</c:if>
+	              		<c:if test="${not empty sessionScope.phone || not empty sessionScope.storeId}">
+			               <i class="fa fa-user-circle-o gb_click" 
+			               onclick="location.href='/sosoroder/memberLoginForm'"
+			               aria-hidden="true" style="font-size: 47px; vertical-align: middle;"></i>
+	              		</c:if>
 	               
 	              </a>
               </div>
@@ -196,9 +211,23 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 			<div class="cookWrap">
-				<!-- <span class="ex"><i class="fa fa-times-circle" aria-hidden="true"></i></span> -->
-				<div id="cook">${payNum}</div>
+				<div id="cook"></div>
 			</div> 	
+			<script>
+			let removeToast;
+
+			function toast() {
+			    const toast = document.getElementById("cook");
+
+			    toast.classList.contains("show") ?
+			        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+			            document.getElementById("cook").classList.remove("show")
+			        }, 1000)) :
+			        removeToast = setTimeout(function () {
+			            document.getElementById("cook").classList.remove("show")
+			        }, 1000)
+			}
+			</script>
 			
 	       <!-- 컨텐츠 영역 -->
 	       	<tiles:insertAttribute name="content"/>

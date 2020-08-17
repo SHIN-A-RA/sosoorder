@@ -32,16 +32,12 @@ public class callController {
 	@Autowired
 	CallService callService;
 	
-	@RequestMapping("callInsertForm")
-	public String callInsertForm(Model model, SeatVO seatVO, HttpSession session) {
+	@RequestMapping(value="/seatList", method=RequestMethod.GET, consumes="application/json")
+	@ResponseBody
+	public List<SeatVO> callInsertForm(Model model, SeatVO seatVO, HttpSession session) {
 		String storeId = (String)session.getAttribute("storeInfo");
 		seatVO.setStoreId(storeId);
-		model.addAttribute("seatListCall", homeService.seatListHome(seatVO));
-		
-		String seat = (String)session.getAttribute("seat");
-		seatVO.setSeat(seat);
-		model.addAttribute("seatCheck", seatVO);
-		return "empty/order/callInsert";
+		return homeService.seatListHome(seatVO);
 	}
 	
 	@RequestMapping(value="/callInsert", method=RequestMethod.POST, consumes="application/json")

@@ -10,6 +10,7 @@
 	alert('${loginMsg}');
 	</script>
 </c:if>
+<div id="toastAdd">장바구니에 추가되었습니다.</div>
 <script>
 //angularjs를 이용해서 storageSession에 메뉴정보를 저장한다.
 var myApp = angular.module("myApp",[]);
@@ -44,8 +45,8 @@ myApp.controller("myAppCtrl", function($scope){
 		
 		cartNum();
 		totalPay();
+		
 	}
-	
 	
 	/* delete버튼 클릭시 삭제 */
 	$scope.deleteItem = function(user){
@@ -149,6 +150,22 @@ myApp.controller("myAppCtrl", function($scope){
         	window.location.href = "/sosoroder/orderInsert?orderNum="+ ${menuOrderNum.orderNum+1}+"&seat="+${seat.seat} ;
         })
 	}); 
+	 toastAdd();
+	 function toastAdd() {
+        const toast = document.getElementById('toastAdd');  // id가 toast인 요소 div
+        let isToastShown = false;
+        // id가 toastButton인 요소를 클릭하면 아래 함수가 호출됨
+        $('.btn-add').on('click', function () {
+            if (isToastShown) return;   // 토스트 메시지가 띄어져 있다면 함수를 끝냄
+            isToastShown = true;
+            toast.classList.add('reveal');    // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
+            setTimeout(function () {
+                // 2700ms 후에 show 클래스를 제거함
+                toast.classList.remove('reveal');
+           isToastShown = false;
+            }, 2700);
+        });
+	}
 	
 });
 </script>
@@ -180,7 +197,7 @@ myApp.controller("myAppCtrl", function($scope){
 	       </div>
 	       <div class="info">
 	           <div class="row">
-	               <div class="price col-md-6">
+	               <div class="price col-12">
 	                   <h5>${menu.menuName}</h5>
 	                   <h5 class="price-text-color">
 	                   <fmt:formatNumber value="${menu.menuPrice}" pattern="#,###"/></h5>
@@ -204,7 +221,7 @@ myApp.controller("myAppCtrl", function($scope){
 	           			<i class="fa fa-shopping-cart"></i> Add to cart
 	           		</div>
 	           	
-	               <p class="btn-details">
+	               <p class="btn-details" name="${menu.menuNum}">
 	                   <i class="fa fa-list"></i>
 	                   <a>More details</a>
 	               </p>
@@ -221,6 +238,7 @@ myApp.controller("myAppCtrl", function($scope){
 </div>
 
 <div class="shopping-cart cart-close">
+ <div class="shoping-cart-btn ex">x</div>
   <div class="shoping-cart-btn">
   	<div class="shoping-cart-cnt">
   		
@@ -281,7 +299,15 @@ myApp.controller("myAppCtrl", function($scope){
 		arrows: true,
 		slidesToShow: 5,
 		slidesToScroll: 5,
-		fade: false
+		fade: false,
+		responsive: [ // 반응형 웹 구현 옵션
+			{ 
+				breakpoint: 800,
+				settings: {	
+					slidesToShow:3 
+				} 
+			}
+		]
 	}); 
 	 
 	 $('.menu_list').slick({
@@ -292,8 +318,8 @@ myApp.controller("myAppCtrl", function($scope){
 			autoplaySpeed: 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
 			prevArrow: $('#aro_prev2'),
 			nextArrow: $('#aro_next2'),
-			slidesToShow: 4,
-			slidesToScroll: 4,
+			slidesToShow: 5,
+			slidesToScroll: 5,
 			arrows: true,
 			fade: false,
 			responsive: [ // 반응형 웹 구현 옵션
@@ -329,6 +355,7 @@ myApp.controller("myAppCtrl", function($scope){
 <script>
 	$(function(){
 		$( '.menu1' ).addClass( 'active' );
+		$('.menu0 span a').html($('.active').attr('name'));
 	});
 	
 </script>
@@ -345,9 +372,39 @@ $(function(){
 			$('.shopping-cart').removeClass('cart-close');
 		}
 	});
+	menuOne();
 })
 
 
+</script>
+<script>
+
+function menuOne(){
+	//메뉴 조회
+	$('.btn-details').on('click', function() {
+		$('#detail').removeClass('disnone');
+		var menuNum = $(this).attr('name');
+		//특정 쿠폰 조회
+		$.ajax({
+			url:'/sosoroder/getMenuHome?menuNum=' + menuNum,
+			type:'GET',
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+			error:function(xhr,status,msg){
+				alert("상태값 :" + status + " Http에러메시지 :"+msg);
+			},
+			success:menuSelectResult
+		});
+	});//detail 버튼 클릭
+}//MenuOne
+
+//메뉴 조회 응답
+function menuSelectResult(menu) {
+	$('#detail .detail_photo img').attr('src','${pageContext.request.contextPath}/resources/download/'+menu.menuImage);
+	$('#detail .detail_title').html(menu.menuName);
+	$('#detail .detail_price').html(menu.menuPrice);
+	$('#detail .detail_contents').html(menu.menuContents);
+}//menuSelectResult
 </script>
 <script>
 $(function(){
@@ -356,9 +413,13 @@ $(function(){
 		category = $(this).html();
 		location.href = "/sosoroder/homeSample?menuCategory=" + category;
 	});
-	
-	
 })
 </script>
+<div id="detail" class="disnone">
+	 <div class="detail_title"> </div>
+	 <div class="detail_photo"><img></div>
+	 <div class="detail_price"> </div>
+	 <div class="detail_contents"> </div>
+</div>
 <%-- <jsp:include page="/WEB-INF/views/store/storePopup.jsp"/> --%>
 <%@include file="/WEB-INF/views/store/storePopup.jsp" %>

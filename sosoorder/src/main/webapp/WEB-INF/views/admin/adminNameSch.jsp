@@ -184,12 +184,13 @@ to {
 			function addrAdd() {
 				//데이터테이블
 				var otable = $('#table_id').DataTable({
-					 searching: false,
+				/* 	 searching: false,
 		             paging: false,
 		             info: false,
 					 ordering:  false,
-					 responsive: true
+					 responsive: true */
 				});
+				//원하는 행을 클릭하면 상호명과 주소를 가져와 해당인풋태그에 전달
 				$('#table_id tbody').on('click', 'tr', function() {
 					$().val($(this).find('td').eq(1).text());
 					var col1 = $(this).find('td').eq(1).text();
@@ -225,6 +226,7 @@ to {
 	</div>
 </div>
 <script>
+//버튼을 누르면 인풋에 있는 값을 adminInsertForm.java 페이지 인풋태그에 값 전달
  $('#sbn').on('click', function() {
 	 var col1 = $('#SA').val();
 	 var col2 = $('#SS').val();

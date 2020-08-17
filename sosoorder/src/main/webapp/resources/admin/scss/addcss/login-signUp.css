@@ -11,7 +11,7 @@ a:hover{color:#aaa; }
 .pull-right{float: right;}
 .pull-left{float: left;}
 .clear-fix{clear:both;}
-div.logo{text-align: center; margin: 20px 20px 30px 20px; fill: #566375;}
+div.logo{text-align: center; margin: 10px 10px 20px 10px; fill: #566375;}
 div.logo svg{
 	width:180px;
 	height:100px;

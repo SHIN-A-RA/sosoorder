@@ -1,34 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 
-<style>
-.callInsert_wrap{padding:30px}
-.callInsert_wrap #seat{width:25%; height:45px;}
-.callInsert_wrap #message{width:58%; height:45px;}
-.callInsert_wrap #sendBtn{width:15%; height:45px;}
-</style>
 	 <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
-      <h1 class="h3 mb-0 text-gray-800">È£Ãâ</h1>
+    <div class="d-sm-flex align-items-center justify-content-between pd15" style="border-bottom:1px solid #d2d2d2">
+      <h1 class="h3 mb-0 text-gray-800 insertTitle">í˜¸ì¶œ <i class="fa fa-times insert_ex_dtn" aria-hidden="true"></i></h1>
     </div>
- <div class="callInsert_wrap">   
-	<select name="seat" id="seat">
-    	<option value="">Å×ÀÌºí ¼±ÅÃ</option>
-    	<c:forEach items="${seatListCall}" var="seat">
-    			<option value="${seat.seat}"
-    			<c:if test="${seat.seat == seatCheck.seat}">selected="selected"</c:if>
-    			>Å×ÀÌºí¹øÈ£ : ${seat.seat}</option>
-    		
-    	</c:forEach>
+ <div class="callInsert_wrap row">   
+	<select name="seat" id="seat" class="input-group fl col-12">
+    	<option value="" class="fi">í…Œì´ë¸” ì„ íƒ</option>
 	</select>
-	<input type="text" id="message" placeholder="¿äÃ»»çÇ×À» ÀÔ·ÂÇÏ¼¼¿ä"/>
-	<input type="button" id="sendBtn" value="¿äÃ»ÇÏ±â"/>
-	<input type="hidden" id="msg"/>
-	<div id="messageArea"></div>
+	<input type="text" id="message" class="input-group fr col-12" placeholder="ìš”ì²­ì‚¬í•­ì„ ì…ë ¥í•˜ì„¸ìš”"/>
+	<input type="button" id="sendBtn" class="btn btn-primary fr col-12 " value="ìš”ì²­"/>
+	
+	<input type="hidden" id="msg" class="input-group"/>
+	<!-- <div id="messageArea"></div> -->
 
 </div>
 
@@ -44,21 +30,10 @@
 		$('#message').val('')
 	});
 
-	let sock = new SockJS("http://localhost/sosoroder/echo/");
-	sock.onclose = onClose;
-	// ¸Ş½ÃÁö Àü¼Û
-	function sendMessage(msg) {
-		sock.send(JSON.stringify(msg)); 
-	}
-	// ¼­¹ö¿Í ¿¬°áÀ» ²÷¾úÀ» ¶§
-	function onClose(evt) {
-		$("#messageArea").append("¿¬°á ²÷±è");
-
-	}
 	
-	// ¸Ş¼¼Áö db¿¡ ÀúÀå
+	// ë©”ì„¸ì§€ dbì— ì €ì¥
 	function dbInsert(){
-		//µî·Ï ¹öÆ° Å¬¸¯
+		//ë“±ë¡ ë²„íŠ¼ í´ë¦­
 		var msg = $('#msg').val();
 		console.log(msg);
 		$.ajax({ 
@@ -79,4 +54,36 @@
 		    } 
 		 });  
 	}//dbInsert
+	
+	// ì¢Œì„
+	$(function(){
+		seatList();
+	})
+	
+	function seatList(){
+		$.ajax({ 
+		    url: "/sosoroder/seatList",  
+		    type:'GET',
+			contentType:'application/json',
+			dataType:'json',
+		    success:seatListResult,
+		    error:function(xhr, status, message) { 
+		        alert(" status: "+status+" er:"+message);
+		    } 
+		 });  
+	}//seatList
+	//call ëª©ë¡ ì¡°íšŒ ì‘ë‹µ
+    			
+    			
+	function seatListResult(data) {
+		$.each(data,function(idx,item){
+			$('#seat').find('.fi')
+			.after('<option class="seat_' + item.seat + '" value="' + item.seat + '"' +
+						'<c:if test="${param.seat==' + item.seat + '}">selected="selected"</c:if>>' +
+					    'í…Œì´ë¸”ë²ˆí˜¸ :'+ item.seat + '</option>');
+			
+			$('#seat .seat_${sessionScope.seat}').attr('selected', 'selected');
+			
+		});//each
+	}//seatListResult
 </script>

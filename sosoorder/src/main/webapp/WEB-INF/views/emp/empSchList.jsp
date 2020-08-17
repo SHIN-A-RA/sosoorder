@@ -189,7 +189,7 @@ function autoList(selectDate){
 }
 </script>
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15" style="border-bottom:1px solid #d2d2d2">
+<div class="d-sm-flex align-items-center justify-content-between mb-4 pd15 mt30" style="border-bottom:1px solid #d2d2d2">
   <h1 class="h3 mb-0 text-gray-800">근태관리</h1>
 </div>
 
@@ -271,9 +271,11 @@ function autoList(selectDate){
 
 <script>
 	$(function(){
-		$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
-		$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
-		$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
-		$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(3)').css("backgroundColor", "#eaecf4")
+		if($(window).width() >768) {
+			$( '.navbar-nav li.li_2 a.nav-link' ).removeClass( 'collapsed' );
+			$( '.navbar-nav li.li_2 a.nav-link' ).attr("aria-expanded", "true");
+			$( '.navbar-nav li.li_2 #collapsePages' ).addClass("show");
+			$('.navbar-nav li.li_2 #collapsePages .collapse-item:nth-child(3)').css("backgroundColor", "#eaecf4")
+		}
 	});
 </script>

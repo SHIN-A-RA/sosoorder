@@ -62,10 +62,8 @@ function adminValidCheck() {
 <div id="formWrapper">
 	<div id="form">
 		<div class="logo">
-	<!--======================================== 여기가 로고 넣는 곳입니다. =============================================-->
-
+			<img src="${pageContext.request.contextPath}/resources/images/soso_icon.png" width="77%">
 		</div>
-	
 
 <div class='toggleBG' onclick="getToggleBtnState('buttonID');">
     <button id='buttonID' class='toggleFG' ></button>

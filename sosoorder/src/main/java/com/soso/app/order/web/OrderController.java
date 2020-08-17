@@ -130,7 +130,7 @@ public class OrderController {
 		orderMap.put("payInfo", orderCptVO);
 		orderMap.put("orderList", orderList);
 
-		// json -> string ->json
+		// 주문내역 JSON파일 String에 담아서 msg.msg에 담아서 소켓 sendMessage로 보내기 
 		ObjectMapper objectMapper = new ObjectMapper();
 		MessageVO msg = new MessageVO();
 		msg.setCmd("orderInsert");
@@ -202,7 +202,6 @@ public class OrderController {
 		orderService.insertMem(memberVO, orderCptVO);
 
 		session.setAttribute("phone", memberVO.getPhone());
-
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		return "redirect:showPoint";
 	}
@@ -210,19 +209,15 @@ public class OrderController {
 	// 적립금리스트보여주기
 	@RequestMapping("/showPoint")
 	public String showPoint(Model model, OrderCptVO orderCptVO, HttpSession session) {
-
 		String phone = (String) session.getAttribute("phone");
 		orderCptVO.setPhone(phone);
-
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
-
 		return "empty/order/pointList";
 	}
 
 	// 영수증
 	@RequestMapping("/receipt")
 	public String receipt(Model model, OrderCptVO orderCptVO) {
-
 		return "order/receipt";
 	}
 

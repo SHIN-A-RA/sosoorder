@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soso.app.openClose.mapper.OpenCloseMapper">
+
+ 
+	
+	<!-- 준비금 조회 -->
+	<select id ="afterCash" parameterType="OpenCloseVO">
+	 select (replace(storeStartCash , ',' , '')- #{closeCash}) "afterCash" from openClose where storeEndCash is null
+	 AND storeId=#{storeId}
+	</select>
+	
+	
+<!-- 개점시 storeOpen시간 입력, 개점 시작 금액 입력 -->
+   <insert id="openInfoInsert" parameterType="OpenCloseVO">
+	INSERT INTO openClose
+	(storeOpen,
+	storeStartCash,
+	storeId)
+	VALUES
+	(sysdate, #{storeStartCash}, #{storeId})
+   </insert>
+   
+  <!--  <select id="openTime" resultType="OpenCloseVO" >
+		select count(*) AS openTime from openclose where to_char(storeOpen,'yy/mm/dd') = #{today}
+   </select> -->
+
+    <select id="closeTotalSales" resultType="String">
+	 select sum(p.totalpay) from payment p, admin a , seat s
+	  where to_char(p.payday,'yyyy/fmmm/dd')= #{storeDayData}
+	  	and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	  AND a.storeId = #{storeId}
+	</select>
+	
+	<!-- 계좌이체 -->
+	<select id="closeAccount" resultType="String">
+	 select NVL(sum(p.totalpay),0) "closeAccount" from payment p, admin a , seat s  
+	 where to_char(p.payday,'yyyy/fmmm/dd')=#{storeDayData} and paycheck = 0
+		  and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	   AND a.storeId = #{storeId}
+	</select>
+	<!-- 카드 -->
+	<select id="closeCard" resultType="String">
+	 select NVL(sum(p.totalpay),0) "closeCard" from payment p, admin a , seat s  
+	 where to_char(p.payday,'yyyy/fmmm/dd')=#{storeDayData} and paycheck = 1
+		  and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	   AND a.storeId = #{storeId}
+	</select>
+	<!-- 현금 -->
+	<select id="closeCash" resultType="String">
+	 select NVL(sum(p.totalpay),0)  "closeCash" from payment p, admin a , seat s  
+	 where to_char(p.payday,'yyyy/fmmm/dd')=#{storeDayData} and paycheck = 2
+	 	  and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	   AND a.storeId = #{storeId}
+	</select>
+	
+	<!-- 과세매출액 -->
+<!-- 	<select id="" parameterType="map">
+	 select sum(totalpay) from payment where to_char(payday,'yy/mm/dd')='20/08/15';
+	</select> -->
+	
+	<!-- 부가세액  -->
+	<select id="VAT" resultType="String">
+	 select round(sum(p.totalpay)/11,0) "vat" from payment p, admin a , seat s 
+	 where to_char(p.payday,'yyyy/fmmm/dd')=#{storeDayData}
+	  and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	   AND a.storeId = #{storeId}
+	</select>
+	
+	<!-- 순 매출액  -->
+	<select id="netSales" resultType="String">
+	  select (sum(p.totalpay) - round(sum(p.totalpay)/11,0)) "netSales" from payment p, admin a , seat s 
+	   where to_char(p.payday,'yyyy/fmmm/dd')= #{storeDayData}
+	   and  p.seatnum = s.seatNum
+       and s.storeId = a.storeId
+	   AND a.storeId = #{storeId}
+	</select>
+	
+	
+ 	<!-- 마감 -->
+	<update id="closeInfoUpdate" parameterType="OpenCloseVO">
+	      	UPDATE openClose 
+        	SET
+			storeClose=sysdate,
+			storeEndCash=#{closeTotalSales}
+			WHERE storeClose is null
+	</update>
+	
+	 	<!-- 매출관리 리스트 출력부(순위포함)    -->
+ 	<select id ="closeMenu" resultType = "map">
+	 		SELECT
+			m.menuName AS menuName,
+    NVL(sum(o.orderCount),0) AS AllAcount
+		FROM MENU m, OrderCpt o, payment p
+		WHERE
+			m.menuNum = o.menuNum
+      AND
+      o.paynum = p.paynum
+		AND m.storeId = #{storeId}
+    AND to_char(p.PAYDAY,'yyyy/fmmm/dd') = #{storeDayData}
+    	GROUP BY m.menuNum ,m.menuName,m.menuPrice, m.storeId
+	</select>
+	
+	
+</mapper>
+
