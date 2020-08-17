@@ -307,7 +307,7 @@ function removeChar(event) {
     </div>
   </div>
 </div>              	
-</div>
+</div>  
 
 <!-- 결제정보-->
 <div class="row basic">
