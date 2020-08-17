@@ -391,6 +391,7 @@ function removeChar(event) {
 var IMP = window.IMP; 
 IMP.init("iamport");
 var totalPrice = $(".total").val();
+var storeName = $("#storeName").val();
 // 결제
 $(function(){
 	$(".btn_pay").on("click",function(){
@@ -406,7 +407,7 @@ $(function(){
 			    pg : 'inicis', // version 1.1.0부터 지원.
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명:결제테스트',
+			    name : 'Atistry',
 			    amount : totalPrice,
 			    buyer_email : 'iamport@siot.do',
 			    buyer_name : '구매자이름',
