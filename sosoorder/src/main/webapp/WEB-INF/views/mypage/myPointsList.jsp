@@ -56,7 +56,7 @@
 		<tr>
 			<th scope="col">상호명</th>
 			<th scope="col">적립일</th>
-			<th scope="col">결제금액</th>
+			<th scope="col">적립금액</th>
 			<th scope="col">사용금액</th>
 		</tr>
 	</thead>

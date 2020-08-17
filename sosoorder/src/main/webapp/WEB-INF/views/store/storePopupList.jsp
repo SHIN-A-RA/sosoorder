@@ -141,6 +141,7 @@
 	//목록
 
 	function popList() {
+		
 		var otable = $('#table_id')
 				.DataTable(
 						{
@@ -162,7 +163,12 @@
 										data : "endDay"
 									},
 									{
-										data : "popCheck"
+										data : 
+									 		if( "popCheck" == 1){
+												"사용가능" 									 			
+									 		}
+											
+											/*  "popCheck"  */
 									},
 									{
 										data : null,
