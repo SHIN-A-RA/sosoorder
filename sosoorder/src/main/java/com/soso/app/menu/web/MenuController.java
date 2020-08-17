@@ -95,7 +95,7 @@ public class MenuController {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(path);//톰캣 아래 이미지가 업로드 되는장소. 여기에서 이클립스 이미지폴더에 다시 복붙해줘야한다. 그리고 커밋
+		System.out.println(path);//톰캣 아래 이미지가 업로드 되는장소. 여기에서 이클립스 이미지폴더에 다시 복붙해줘야한다. 그리고 커밋 C:\dev\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\sosoorder\resources\download
 //		vo.setStoreId("test");
 		String storeId = (String) session.getAttribute("storeId");
 		vo.setStoreId(storeId);
