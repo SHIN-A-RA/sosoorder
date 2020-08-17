@@ -83,16 +83,8 @@ public class ActualDealController {
             List<Map<String, Object>> itemList;
             items = (Map<String, Object>) body.get("items");
             itemList = (List<Map<String, Object>>) items.get("item");
-            System.out.println("### map="+map);
-            System.out.println("### dataResponse="+dataResponse);
-            System.out.println("### body="+body);
-            System.out.println("### items="+items);
-            System.out.println("### itemList="+itemList);
  
             resultMap.put("Result", "0000");
-            //resultMap.put("numOfRows", body.get("numOfRows"));
-            //resultMap.put("pageNo", body.get("pageNo"));
-            //resultMap.put("totalCount", body.get("totalCount"));
             resultMap.put("data", itemList);
             
             List<AdminVO> sosoList =  sosoListService.sosoList(adminVO);
@@ -102,7 +94,7 @@ public class ActualDealController {
             	sosoMap.put(list.getStoreName(), list);
             }
             
-            resultMap.put("sosoList", sosoMap);
+            resultMap.put("sosoList", sosoMap.toString());
  
         } catch (Exception e) {
             e.printStackTrace();
