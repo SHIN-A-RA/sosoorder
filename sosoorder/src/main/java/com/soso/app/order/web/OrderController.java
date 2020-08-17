@@ -86,7 +86,6 @@ public class OrderController {
 
 		String storeId = (String) session.getAttribute("storeInfo");
 		String phone = (String) session.getAttribute("phone");
-		String path = null;
 		orderCptVO.setStoreId(storeId);
 
 		if (phone == null) {
@@ -130,7 +129,7 @@ public class OrderController {
 		orderMap.put("payInfo", orderCptVO);
 		orderMap.put("orderList", orderList);
 
-		// 주문내역 JSON파일 String에 담아서 msg.msg에 담아서 소켓 sendMessage로 보내기 
+		// json -> string ->json
 		ObjectMapper objectMapper = new ObjectMapper();
 		MessageVO msg = new MessageVO();
 		msg.setCmd("orderInsert");
@@ -139,20 +138,10 @@ public class OrderController {
 		// msg의 msg에 주문내역 담기
 		msg.setMsg(msgJson);
 		// 소켓으로 storeId찾아서 sendMessage 하기
-		if (EchoHandler.map.get(storeId) != null) {
-			EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
-			path = "redirect:orderConfirm";
-		} else if (EchoHandler.map.get(storeId) == null) {
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<script language='javascript'>");
-			out.println("alert('현재 가게가 오픈하지 않았습니다.');");
-			out.println("</script>");
-			out.flush();
-			path = "redirect:home";
-		}
-		return path;
 
+		EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
+
+		return "redirect:orderConfirm";
 	}
 
 	@RequestMapping("/orderConfirm")
@@ -210,6 +199,7 @@ public class OrderController {
 		orderService.insertMem(memberVO, orderCptVO);
 
 		session.setAttribute("phone", memberVO.getPhone());
+
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
 		return "redirect:showPoint";
 	}
@@ -217,15 +207,19 @@ public class OrderController {
 	// 적립금리스트보여주기
 	@RequestMapping("/showPoint")
 	public String showPoint(Model model, OrderCptVO orderCptVO, HttpSession session) {
+
 		String phone = (String) session.getAttribute("phone");
 		orderCptVO.setPhone(phone);
+
 		model.addAttribute("pList", orderService.showPoint(orderCptVO));
+
 		return "empty/order/pointList";
 	}
 
 	// 영수증
 	@RequestMapping("/receipt")
 	public String receipt(Model model, OrderCptVO orderCptVO) {
+
 		return "order/receipt";
 	}
 
