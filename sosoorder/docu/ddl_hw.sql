@@ -245,6 +245,9 @@ SELECT seatNum FROM SEAT WHERE SEAT = '7' AND storeId = 'test'
 		 (SELECT memberNum FROM member WHERE phone = '01021265370'), 
 		 1200, 
 		 '0')
+		 commit;
 	
+	delete from payment    
+	delete from delivery
 	
-    
+	commit
