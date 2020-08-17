@@ -139,18 +139,10 @@ public class OrderController {
 		// msg의 msg에 주문내역 담기
 		msg.setMsg(msgJson);
 		// 소켓으로 storeId찾아서 sendMessage 하기
-		if (EchoHandler.map.get(storeId) != null) {
+
 			EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
 			path = "redirect:orderConfirm";
-		} else if (EchoHandler.map.get(storeId) == null) {
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<script language='javascript'>");
-			out.println("alert('현재 가게가 오픈하지 않았습니다.');");
-			out.println("</script>");
-			out.flush();
-			path = "redirect:home";
-		}
+
 		return path;
 
 	}
