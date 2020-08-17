@@ -315,7 +315,7 @@ function removeChar(event) {
 	<table class="col-xl-12 basic_tb">
 		<tr>
 			<th class="col-xl-4 basic_tb_th2" >총 주문금액</th>
-			<td class="col-xl-4basic_tb_td" >${totalPrice}</td>			
+			<td class="col-xl-4 basic_tb_td" >${totalPrice}</td>			
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
