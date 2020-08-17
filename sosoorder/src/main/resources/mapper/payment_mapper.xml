@@ -36,11 +36,6 @@ SELECT to_char(payday, 'fmmm') AS month,
  ORDER BY to_char(payday,'fmmm') ASC
    </select>   
    
-   
-   
-   
-   
-   
    <!-- 월 평균과 년수입 비교 자료 -->
  	<select id ="salesData" resultType ="map">
   	 <if test="daySales == ''">

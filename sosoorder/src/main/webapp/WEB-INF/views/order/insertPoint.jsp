@@ -54,7 +54,7 @@ $(function() {
 		</tr>
 		<tr>
 			<th class="tbp_th">pwd</th>
-			<td><input name="pwd" class="point_input" size="30"></td>
+			<td><input name="pwd" type="password" class="point_input" size="30"></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding-top: 20px;"><button onclick="goPointList()" class="btn_point2" type="submit">Àû¸³</button></td>
@@ -73,7 +73,7 @@ $(function() {
 		</tr>
 		<tr>
 			<th class="tbp_th">pwd</th>
-			<td><input name="pwd" class="point_input" size="30"></td>
+			<td><input name="pwd" type="password" class="point_input" size="30"></td>
 		</tr>
 		<tr>
 			<th class="tbp_th">email</th>
