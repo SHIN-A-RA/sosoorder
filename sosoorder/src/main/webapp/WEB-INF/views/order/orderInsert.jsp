@@ -155,7 +155,7 @@ function removeChar(event) {
 <!-- 컨텐츠영역 -->
 <div class="row">
    <div class="col-xl-12 div-tt">
-      <h2>주문/결제 ${storeInfo}</h2>  
+      <h2>주문/결제 </h2>  
       <!-- 가게 계좌번호 받아오기 -->
       <c:forEach items="${admin}" var="admin">
       	<input id="account" name="account" type="hidden"  value="${admin.accountNum}"> 
@@ -306,8 +306,8 @@ function removeChar(event) {
       </div>
     </div>
   </div>
-</div>              	
-</div>
+</div>              	  
+</div>  
 
 <!-- 결제정보-->
 <div class="row basic">
@@ -315,7 +315,7 @@ function removeChar(event) {
 	<table class="col-xl-12 basic_tb">
 		<tr>
 			<th class="col-xl-4 basic_tb_th2" >총 주문금액</th>
-			<td class="col-xl-4basic_tb_td" >${totalPrice}</td>			
+			<td class="col-xl-4 basic_tb_td" >${totalPrice}</td>			
 		<tr>
 		<tr>
 			<th class="basic_tb_th2" >쿠폰 할인금액</th>
