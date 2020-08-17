@@ -63,7 +63,7 @@ group by e.empClass, e.salary, e.empName
 
 <!--work 시작-->
    <insert id="workStart" parameterType="String">
-	INSERT INTO work(workNum,empNum,workStart) values(work_seq.nextval,#{empNum},SYSDATE) 
+	INSERT INTO work(workNum,empNum,workStart) values((select max(workNum) from work)+1,#{empNum},SYSDATE) 
    </insert>
    
    

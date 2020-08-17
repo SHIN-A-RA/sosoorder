@@ -11,7 +11,7 @@
 	  if(checkValue == 1){//정직원
 		  $("#checkClassRst").css("color","black");
 		  $("#checkClassRst").html("만원");
-		  $("#salary").attr("value",null);
+		  $("#salary").attr("value",0);
 		
 	  }else if(checkValue == 2){//아르바이트
 		  $("#checkClassRst").css("color","black");
@@ -161,7 +161,7 @@
 		</div>
 			<div class="fr"  style="padding-right: .75rem; padding-left: .75rem;">
 			<c:if test="${one.empNum ne null}">
-				<input type="button" class="btn btn-danger" onclick="location.href='getEmpDelete?empNum=${one.empNum}'" value="메뉴삭제" />	
+				<input type="button" class="btn btn-danger" onclick="location.href='getEmpDelete?empNum=${one.empNum}'" value="삭제" />	
 			</c:if>
 			<!-- 수정(등록) 기능 -->
 			<input type="submit" class="btn btn-primary" value="완료">
