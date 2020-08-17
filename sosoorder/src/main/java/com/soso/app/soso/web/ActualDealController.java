@@ -28,7 +28,7 @@ public class ActualDealController {
 
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
-    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET, produces = "text/xml;charset=UTF-8")
+    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getActualDealPrice(SosoVO sosoVO, AdminVO adminVO) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
@@ -53,7 +53,7 @@ public class ActualDealController {
  
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
            // System.out.println("Response Code:"+conn.getResponseCode());
  
             BufferedReader rd;
@@ -83,8 +83,16 @@ public class ActualDealController {
             List<Map<String, Object>> itemList;
             items = (Map<String, Object>) body.get("items");
             itemList = (List<Map<String, Object>>) items.get("item");
+            System.out.println("### map="+map);
+            System.out.println("### dataResponse="+dataResponse);
+            System.out.println("### body="+body);
+            System.out.println("### items="+items);
+            System.out.println("### itemList="+itemList);
  
             resultMap.put("Result", "0000");
+            //resultMap.put("numOfRows", body.get("numOfRows"));
+            //resultMap.put("pageNo", body.get("pageNo"));
+            //resultMap.put("totalCount", body.get("totalCount"));
             resultMap.put("data", itemList);
             
             List<AdminVO> sosoList =  sosoListService.sosoList(adminVO);
@@ -94,7 +102,7 @@ public class ActualDealController {
             	sosoMap.put(list.getStoreName(), list);
             }
             
-            resultMap.put("sosoList", sosoMap.toString());
+            resultMap.put("sosoList", sosoMap);
  
         } catch (Exception e) {
             e.printStackTrace();
