@@ -163,12 +163,7 @@
 										data : "endDay"
 									},
 									{
-										data : 
-									 		if( "popCheck" == 1){
-												"사용가능" 									 			
-									 		}
-											
-											/*  "popCheck"  */
+										data : 	"popCheck"  
 									},
 									{
 										data : null,
