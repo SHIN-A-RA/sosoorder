@@ -28,7 +28,7 @@ public class ActualDealController {
 
 //  api 통해 내위치 주변 정보 가져오기
 //  https://aramk.tistory.com/46
-    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET)
+    @RequestMapping(value="/sosoOrder", method=RequestMethod.GET, produces = "text/xml;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> getActualDealPrice(SosoVO sosoVO, AdminVO adminVO) throws Exception {
         //System.out.println("### getActualDealPrice paramMap=>"+paramMap);
