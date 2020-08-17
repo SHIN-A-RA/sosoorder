@@ -304,7 +304,8 @@ myApp.controller("myAppCtrl", function($scope){
 			{ 
 				breakpoint: 800,
 				settings: {	
-					slidesToShow:3 
+					slidesToShow:3,
+					slidesToScroll: 3
 				} 
 			}
 		]
@@ -326,25 +327,29 @@ myApp.controller("myAppCtrl", function($scope){
 				{  
 					breakpoint: 1660, 
 					settings: {
-						slidesToShow:3 
+						slidesToShow:3, 
+						slidesToScroll: 3
 					} 
 				},
 				{ 
-					breakpoint: 1028,
+					breakpoint: 1060,
 					settings: {	
-						slidesToShow:2 
+						slidesToShow:2 , 
+						slidesToScroll: 2
 					} 
 				},
 				{ 
 					breakpoint: 800,
 					settings: {	
-						slidesToShow:1 
+						slidesToShow:1 , 
+						slidesToScroll: 1
 					} 
 				},
 				{ 
 					breakpoint: 100,
 					settings: {	
-						slidesToShow:1 
+						slidesToShow:1 , 
+						slidesToScroll: 1
 					} 
 				}
 			]

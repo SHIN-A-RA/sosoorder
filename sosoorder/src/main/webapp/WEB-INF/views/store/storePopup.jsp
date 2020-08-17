@@ -8,7 +8,12 @@
     border: 1px solid #c5c5c5; border-radius: 9px; transform:translate(-50%, -50%); z-index: 9;}
     .pop_box.popcheck_0{display:none !important;}
 	@media all and (max-width:600px) {
-		.pop_box{width:90%; margin:0 auto; left:5% !important; top: 50px !important}
+		.pop_box{
+		width: 90%;
+	    margin: 0 auto;
+   	 	left: 50% !important;
+    	top: 50% !important;
+		}
 		.pop_box img{width:100% !important}
 	}
 	.btnPopup{width:100%; height:45px; line-height:45px; background:#333;}
