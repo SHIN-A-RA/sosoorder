@@ -62,8 +62,8 @@
     
     <script type="text/javascript">
 
-		//let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
-		let sock = new SockJS("http://localhost/sosoroder/echo/");
+		let sock = new SockJS("http://39.116.34.40/sosoroder/echo/");
+		//let sock = new SockJS("http://localhost/sosoroder/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
