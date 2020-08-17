@@ -96,7 +96,7 @@ function adminValidCheck() {
 				<input type="password" name="pwd" id="pwd" class="form-style" />
 				<p></p>
 			</div>
-			<button type="button" class="btn btn-success btn-block" onclick="memberValidCheck()">개인 로그인</button>
+			<button type="button" class="btn btn-success btn-block" onclick="memberValidCheck()">일반로그인</button>
 			
 </form>
 			<button type="button" class="btn btn-primary btn-block" onclick="location.href='memberInsertForm'">일반가입</button>

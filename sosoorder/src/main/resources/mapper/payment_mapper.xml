@@ -98,6 +98,7 @@ SELECT to_char(payday, 'fmmm') AS month,
 			FROM MENU m, OrderCpt o
 			WHERE m.menuNum = o.menuNum(+)
 			AND m.storeId = #{storeId}
+			AND m.menucheck = 1
 				GROUP BY m.menuNum ,m.menuName,m.menuPrice, m.storeId
 	</select>  	
 </mapper>
