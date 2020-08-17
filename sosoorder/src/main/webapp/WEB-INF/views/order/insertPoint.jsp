@@ -46,6 +46,7 @@ $(function() {
 		${errorMsg}
 	</div>
 	<form action="insertPo"  method="post" class="frm_point">
+	<input type="hidden" name="payNum" value="${payNum}">
 	<table style="width: 100%; text-align: center;">
 		<tr> 
 			<th class="tbp_th">Phone</th>
