@@ -154,7 +154,7 @@
 										data : "popNum"
 									},
 									{
-										data : "popTitle"
+										data : "popTitle"  
 									},
 									{
 										data : "startDay"
