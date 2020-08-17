@@ -138,8 +138,11 @@ public class OrderController {
 		// msg의 msg에 주문내역 담기
 		msg.setMsg(msgJson);
 		// 소켓으로 storeId찾아서 sendMessage 하기
-
-		EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
+		try{
+			EchoHandler.map.get(storeId).sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
+		}catch(Exception e) {
+        	e.printStackTrace();
+        }  
 
 		return "redirect:orderConfirm";
 	}
