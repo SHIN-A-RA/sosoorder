@@ -42,8 +42,8 @@ public class ActualDealController {
         	
         	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius"); /*URL*/
         	urlBuilder.append("?"+URLEncoder.encode("radius", "UTF-8")+"=500");
-        	urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"="+b);
-            urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"="+a);
+        	urlBuilder.append("&"+URLEncoder.encode("cx", "UTF-8")+"="+35.8705679);
+            urlBuilder.append("&"+URLEncoder.encode("cy", "UTF-8")+"="+128.5872331);
             urlBuilder.append("&"+URLEncoder.encode("indsLclsCd", "UTF-8")+"=Q");	
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=VwbBoXQgv%2B5U%2FxwjpiRV7TkZgK461se9253O5m%2Fg7s%2F7eVxbqfJZg5ECYk4g4XvqmPoXeYemAPFzG7Ndk9uetw%3D%3D"); /*Service Key*/
 
@@ -58,9 +58,9 @@ public class ActualDealController {
  
             BufferedReader rd;
             if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } else {
-                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
             }
  
             StringBuilder sb = new StringBuilder();

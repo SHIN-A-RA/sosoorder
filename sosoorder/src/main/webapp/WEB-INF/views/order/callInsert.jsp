@@ -37,7 +37,7 @@
 		var msg = $('#msg').val();
 		console.log(msg);
 		$.ajax({ 
-		    url: "callInsert",  
+		    url: "/sosoroder/callInsert",  
 		    type: 'POST',  
 		    dataType: 'json', 
 		    data: msg,
