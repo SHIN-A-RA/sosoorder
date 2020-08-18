@@ -455,4 +455,5 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
     line-height: 30px;
     border-radius: 50%;}
     .shopping-cart .title{text-align:center}
+    #callList .callInsert_wrap { padding: 12px !important;}
 }
