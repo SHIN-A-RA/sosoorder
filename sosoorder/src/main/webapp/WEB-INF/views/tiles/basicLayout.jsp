@@ -158,8 +158,8 @@
 	               		<c:if test="${sessionScope.storeId != null}">
 	               			  <script>
 				               	$(function(){
-					                $('.mr-storeId').html("${sessionScope.storeId} 사장님");
-					                $('.gb_ub').html("${sessionScope.storeId} 사장님");
+					                $('.mr-storeId').html("${sessionScope.storeId}");
+					                $('.gb_ub').html("${sessionScope.storeId}");
 								});		               	
 			               	  </script>
 	             			<span class="mr-2 d-none d-lg-inline mr-storeId" style="font-size: 21px;"></span>
