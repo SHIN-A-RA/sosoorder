@@ -387,7 +387,8 @@ $(function(){
 function menuOne(){
 	//메뉴 조회
 	$('.btn-details').on('click', function() {
-		$('#detail').removeClass('disnone');
+		$('#detail').removeClass('disnon');
+		$(".callInsrt_bg").removeClass("disnon");
 		var menuNum = $(this).attr('name');
 		//특정 쿠폰 조회
 		$.ajax({
@@ -401,6 +402,11 @@ function menuOne(){
 			success:menuSelectResult
 		});
 	});//detail 버튼 클릭
+	
+	$('.detail_x, .callInsrt_bg').on("click", function(){
+		$("#detail").addClass("disnon");
+		$(".callInsrt_bg").addClass("disnon");
+	})
 }//MenuOne
 
 //메뉴 조회 응답
@@ -420,11 +426,12 @@ $(function(){
 	});
 })
 </script>
-<div id="detail" class="disnone">
+<div id="detail" class="disnon">
+	<div class="detail_x fr"><i class="fa fa-times" aria-hidden="true"></i></div>
 	 <div class="detail_title"> </div>
 	 <div class="detail_photo"><img></div>
-	 <div class="detail_price"> </div>
 	 <div class="detail_contents"> </div>
+	 <div class="price_wrap"><div class="detail_price"> </div> 원</div>
 </div>
 <%-- <jsp:include page="/WEB-INF/views/store/storePopup.jsp"/> --%>
 <%@include file="/WEB-INF/views/store/storePopup.jsp" %>

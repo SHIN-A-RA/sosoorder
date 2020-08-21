@@ -341,7 +341,7 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
   to {bottom: 0; opacity: 0;}
 }
 
-#toastAdd {
+#toastAdd, #toastCall {
     position: fixed;
     bottom: 50%;
     left: 50%;
@@ -358,7 +358,7 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
     z-index: 10000;
 }
 
-#toastAdd.reveal {
+#toastAdd.reveal, #toastCall.reveal {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0)
@@ -403,25 +403,42 @@ table.tb_style_jw tr:nth-child(2n-1) td:nth-child(3) button{background: 0;
 .callInsrt_bg{width: 100%; height: 100%; background: #000;
     opacity: 0.3;  z-index: 99;  position: fixed;  top: 0;  left: 0;}
     
-#detail.disnone{display:none;}
+#detail.disnon{display:none;}
 #detail{
-	width: 80%;
+	width: 30%;
     overflow: hidden;
     position: absolute;
-    z-index: 9;
+    z-index: 100;
     top: 50%;
     left: 50%;
     background: #fff;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 5%;
+    padding: 2%;
+    border: 6px solid #333;
+    border-radius: 10px;
+
+}
+@media  (max-width:800px) {
+	#detail{
+	width: 80%;}
 }
 .detail_photo{
-	width: 50%;
-    float: left;
+	width: 100%;
+    margin-right: 18px;
 }
 .detail_photo img{width:100%}
-.detail_title{font-size:1.8em; font-weight:bold;}
+.detail_title{font-size:1.8em; font-weight:bold;margin-bottom: 10px;}
+.detail_x{font-size:1.8em; cursor: pointer;}
+.detail_price{float:left}
+.price_wrap{
+	font-size: 1.3em;
+    font-weight: bold;
+    color: #dd4a4a;
+    float: right;
+    margin-right: 16px;
+    margin-top: 5px;
+}
 
 #callListWrap{float:right}
 .slick_box.order{float:left;padding: 30px;}

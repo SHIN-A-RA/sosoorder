@@ -15,7 +15,7 @@
 	
 	<input type="hidden" id="msg" class="input-group"/>
 	<!-- <div id="messageArea"></div> -->
-
+	<div id="toastCall">요청이 전송되었습니다.</div>
 </div>
 
 <script type="text/javascript">
@@ -31,6 +31,20 @@
 	});
 
 	
+	 function toastCall() {
+        const toast = document.getElementById('toastCall');  // id가 toast인 요소 div
+        let isToastShown = false;
+       
+            if (isToastShown) return;   // 토스트 메시지가 띄어져 있다면 함수를 끝냄
+            isToastShown = true;
+            toast.classList.add('reveal');    // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
+            setTimeout(function () {
+                // 2700ms 후에 show 클래스를 제거함
+                toast.classList.remove('reveal');
+           isToastShown = false;
+            }, 2700);
+      
+	}
 	// 메세지 db에 저장
 	function dbInsert(){
 		//등록 버튼 클릭
@@ -43,14 +57,15 @@
 		    data: msg,
 		    contentType:'application/json',
 		    success: function(data) { 
+		    	toastCall();
 		    	msg = { cmd :'callInsert', 
 					    seatNum : $("#seat").val(),
 						msg : $("#message").val(), 
 						store: '${sessionScope.storeInfo}'}
 		    	sendMessage(msg);
 		    },
-		    error:function(xhr, status, message) { 
-		        alert(" status: "+status+" er:"+message);
+		    error:function(xhr, status, message) {
+		        alert("전송이 실패했습니다. 관리자에게 문의하세요");
 		    } 
 		 });  
 	}//dbInsert
